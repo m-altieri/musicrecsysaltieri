@@ -2,7 +2,7 @@
 // Load composer
 require __DIR__ . '/vendor/autoload.php';
 
-$commands_path = __DIR__ . '/commands/';
+$commands_path = __DIR__ . '/Commands/';
 $telegram->addCommandsPath($commands_path);
 
 $API_KEY = '297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM';
@@ -19,5 +19,5 @@ try {
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // Silence is golden!
     // log telegram errors
-    // echo $e;
+    echo $e;
 }
