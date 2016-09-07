@@ -20,7 +20,7 @@ class TestCommand extends UserCommand
 
         $data = [];                               // Set up the new message data
         $data['chat_id'] = $chat_id;              // Set Chat ID to send the message to
-        $data['text'] = 'This is just a Test...'; // Set message to send
+        $data['text'] = 'This is just a Test..'; // Set message to send
 
         return Request::sendMessage($data);       // Send message!
     }
