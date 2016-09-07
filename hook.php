@@ -13,6 +13,9 @@ try {
 
     // Handle telegram webhook request
     $telegram->handle();
+
+
+
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // Silence is golden!
     // log telegram errors
