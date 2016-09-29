@@ -9,7 +9,7 @@ foreach(glob("vendor/recsysbot/replies/*.php") as $file){
 //require 'vendor/recsysbot/replies/fullMenuReply.php';
 
 
-
+use GuzzleHttp\Client;
 use Telegram\Bot\Api;
 $telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
