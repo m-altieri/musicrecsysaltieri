@@ -76,6 +76,13 @@ class ComposerStaticInitc80720e1fd2889fd5619301d6e4249d1
     );
 
     public static $prefixesPsr0 = array (
+        'r' => 
+        array (
+            'recsysbot\\' => 
+            array (
+                0 => 'D:\\Dropbox\\Applicazioni\\Heroku\\movierecsysbot\\vendor',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Inflector\\' => 
