@@ -50,6 +50,12 @@ switch ($text) {
    case "/start": case "/help": case "/info":            
       $telegram->commandsHandler(true);
       break;
+   case "menu": case "/yes": case "yes": case "<-":         
+      menuReply($telegram, $chatId);
+      break;
+   case "->":   
+      fullMenuReply($telegram, $chatId);
+      break;
    default:
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
       break;
