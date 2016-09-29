@@ -1,5 +1,7 @@
 <?php 
 
+use GuzzleHttp\Client;
+
 function getKeyboardProperty($chatId, $propertyType){
    $userID = 8;
    //$client = new Client(['base_uri'=>'http://lodrecsysrestful.herokuapp.com']);
