@@ -44,10 +44,10 @@ try {
     //$telegram->setCommandConfig('date', ['google_api_key' => 'your_google_api_key_here']);
 
     //// Logging
-    //\Longman\TelegramBot\TelegramLog::initialize($your_external_monolog_instance);
-    //\Longman\TelegramBot\TelegramLog::initErrorLog($path . '/' . $BOT_NAME . '_error.log');
-    //\Longman\TelegramBot\TelegramLog::initDebugLog($path . '/' . $BOT_NAME . '_debug.log');
-    //\Longman\TelegramBot\TelegramLog::initUpdateLog($path . '/' . $BOT_NAME . '_update.log');
+    \Longman\TelegramBot\TelegramLog::initialize($your_external_monolog_instance);
+    \Longman\TelegramBot\TelegramLog::initErrorLog($path . '/' . $BOT_NAME . '_error.log');
+    \Longman\TelegramBot\TelegramLog::initDebugLog($path . '/' . $BOT_NAME . '_debug.log');
+    \Longman\TelegramBot\TelegramLog::initUpdateLog($path . '/' . $BOT_NAME . '_update.log');
 
     //// Set custom Upload and Download path
     //$telegram->setDownloadPath('../Download');
