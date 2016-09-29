@@ -1,10 +1,8 @@
 <?php 
 
 function getFilmsToReply($telegram, $chatId, $propertyType, $msg ){
-   $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
-   $text = "Well ;)";
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
 
+   $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
    $name = substr($msg,5);
    //$name = substr($msg,4);
    $propertyName = str_replace(' ', '_', $name); // Replaces all spaces with underscore.

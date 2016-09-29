@@ -34,6 +34,9 @@ function getFilmExplanation($telegram, $chatId, $movie){
                   $property = str_replace("Category:", "", $property);
                   $categories[] = $property;
                   break;
+               case "/genres": case "genres": case "genre":
+                   $genres[] = $property;
+                  break;
                case "/runtime": case "runtime":       
                   $runtime = $property;
                   break;
@@ -84,11 +87,11 @@ function getFilmExplanation($telegram, $chatId, $movie){
    $basedOn = implode(", ", array_reverse($based));
    $category = implode(", ", array_reverse($categories));
 
-   $img = '../src/RS/RecSysBot/Images/poster.jpg';
+/*   $img = 'vendor/images/poster.jpg';
    file_put_contents($img, file_get_contents($poster));
 
    if ($poster != '' AND $poster != "N/A" ) {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
-   $telegram->sendPhoto(['chat_id' => $chatId,'photo' => '../src/RS/RecSysBot/Images/poster.jpg']);}
+   $telegram->sendPhoto(['chat_id' => $chatId,'photo' => 'vendor/images/poster.jpg']);}*/
 
    if ($title != '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Title: ".$title]);}
@@ -108,17 +111,17 @@ function getFilmExplanation($telegram, $chatId, $movie){
    if ($musicComposer !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Music by ".$musicComposer]);}
 
-   if ($cinematography !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Cinematography: ".$cinematography]);}
+/*   if ($cinematography !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Cinematography: ".$cinematography]);}*/
       
-   if ($editing !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Edited by ".$editing]);}
+/*   if ($editing !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Edited by ".$editing]);}*/
 
    if ($distributor !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Distributed by ".$distributor]);}
 
-   if ($basedOn !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Based on: ".$basedOn]);}
+/*   if ($basedOn !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Based on: ".$basedOn]);}*/
 
    if ($category !== '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Category: ".$category]);}

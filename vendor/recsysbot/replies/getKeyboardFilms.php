@@ -29,7 +29,7 @@ function getKeyboardFilms($chatId, $propertyName, $propertyType){
         $keyboard[] = $result[$i];
       }
    }
-   $keyboard[] = array("🔙", "why ❔", "detail 💬");
+   //$keyboard[] = array("🔙", "why ❔", "detail 💬");
    $keyboard[] = array("Menu");
 
    return $keyboard;

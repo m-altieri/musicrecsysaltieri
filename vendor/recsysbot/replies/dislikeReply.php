@@ -1,7 +1,5 @@
 <?php
 
-namespace RS\RecSysBot\Replies;
-
 function dislikeReply($telegram, $chatId){
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
 

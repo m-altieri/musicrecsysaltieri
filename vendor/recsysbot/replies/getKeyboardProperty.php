@@ -26,12 +26,15 @@ function getKeyboardProperty($chatId, $propertyType){
                case "/categories": case "categories": case "category":
                   $result[] = array("🗒"." ".$property);
                   break;
+               case "/genres": case "genres": case "genre":
+                  $result[] = array("🎬"." ".$property);
+                  break;
                case "/runtime": case "runtime":
                   //no
-                  $result[] = array("⏳"." ".$property);
+                  $result[] = array("⏳ "." ".$property);
                   break;
                case "/writers": case "writers": case "writer":
-                   $result[] = array("✍"." ".$property);
+                   $result[] = array("✍ "." ".$property);
                   break;
                case "/producers": case "producers": case "producer":
                    $result[] = array("💰"." ".$property);
