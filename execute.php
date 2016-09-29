@@ -90,9 +90,9 @@ switch ($text) {
       $propertyType = "distributor";
       propertyReply($telegram, $chatId, $propertyType);
       break;
-   case strpos($msg, '📽'):
+   case strpos($text, '📽'):
       $propertyType = "director";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
    case "/no": case "no":            
       noReply($telegram, $chatId);
@@ -119,69 +119,69 @@ switch ($text) {
       $propertyType = "genre";
       propertyReply($telegram, $chatId, $propertyType);
       break;
-   case strpos($msg, '🕴'):
+   case strpos($text, '🕴'):
       $propertyType = "starring";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '🗒'):
+   case strpos($text, '🗒'):
       $propertyType = "category";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '🎬'):
+   case strpos($text, '🎬'):
       $propertyType = "genre";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '⏳'):
+   case strpos($text, '⏳'):
       $propertyType = "runtime";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );         
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );         
       break;
-   case strpos($msg, '✍'):
+   case strpos($text, '✍'):
       $propertyType = "writer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '💰'):
+   case strpos($text, '💰'):
       $propertyType = "producer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '🗓'):
+   case strpos($text, '🗓'):
       $propertyType = "releaseDate";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '🎼'):
+   case strpos($text, '🎼'):
       $propertyType = "musicComposer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '📷'):
+   case strpos($text, '📷'):
       $propertyType = "cinematography";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '📔'):
+   case strpos($text, '📔'):
       $propertyType = "basedOn";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '💼'):
+   case strpos($text, '💼'):
       $propertyType = "editing";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($msg, '🏢'):🏢���:
+   case strpos($text, '🏢'):🏢���:
       $propertyType = "distributor";
-      getFilmsToReply($telegram, $chatId, $propertyType, $msg );
+      getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
- case strpos($msg, '👍'):
+ case strpos($text, '👍'):
       likeReply($telegram, $chatId);
       menuReply($telegram, $chatId);
       break;
-   case strpos($msg, '👎'):
+   case strpos($text, '👎'):
       dislikeReply($telegram, $chatId);
       menuReply($telegram, $chatId);
       break;
-   case strpos($msg, '⏭'):
+   case strpos($text, '⏭'):
       skipReply($telegram, $chatId);
       menuReply($telegram, $chatId);
       break;
-   case ($msg[0] != "/"):
+   case ($text[0] != "/"):
       //$telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
-      getFilmExplanation($telegram, $chatId, $msg);
+      getFilmExplanation($telegram, $chatId, $text);
       break;
    default:
       $telegram->commandsHandler(true);
