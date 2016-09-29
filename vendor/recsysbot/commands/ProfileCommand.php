@@ -80,7 +80,7 @@ class ProfileCommand extends Command
 
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
-             'photo' => 'vendor/images/poster.jpg', 
+             'photo' => '../images/poster.jpg', 
              'caption' => $title
             ]);
 
@@ -171,7 +171,7 @@ class ProfileCommand extends Command
          }
       }
 
-      $img = 'vendor/images/poster.jpg';
+      $img = '../images/poster.jpg';
       file_put_contents($img, file_get_contents($poster));
 
       return $title;
