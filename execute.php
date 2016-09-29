@@ -1,5 +1,18 @@
 <?php
-$content = file_get_contents("php://input");
+
+require __DIR__ .'vendor/autoload.php';
+
+use Telegram\Bot\Api;
+$telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
+
+
+$response = $telegram->getMe();
+
+$botId = $response->getId();
+$firstName = $response->getFirstName();
+$username = $response->getUsername();
+
+/*$content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
 if(!$update)
@@ -22,4 +35,4 @@ $text = strtolower($text);
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
-echo json_encode($parameters);
+echo json_encode($parameters);*/
