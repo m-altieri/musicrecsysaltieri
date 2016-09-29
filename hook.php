@@ -21,9 +21,9 @@ try {
 
     // Error, Debug and Raw Update logging
     //Longman\TelegramBot\TelegramLog::initialize($your_external_monolog_instance);
-    //Longman\TelegramBot\TelegramLog::initErrorLog($path . '/' . $BOT_NAME . '_error.log');
-    //Longman\TelegramBot\TelegramLog::initDebugLog($path . '/' . $BOT_NAME . '_debug.log');
-    //Longman\TelegramBot\TelegramLog::initUpdateLog($path . '/' . $BOT_NAME . '_update.log');
+    Longman\TelegramBot\TelegramLog::initErrorLog($path . '/' . $BOT_NAME . '_error.log');
+    Longman\TelegramBot\TelegramLog::initDebugLog($path . '/' . $BOT_NAME . '_debug.log');
+    Longman\TelegramBot\TelegramLog::initUpdateLog($path . '/' . $BOT_NAME . '_update.log');
 
     // Enable MySQL
     //$telegram->enableMySql($mysql_credentials);
@@ -56,11 +56,11 @@ try {
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // Silence is golden!
-    //echo $e;
+    echo $e;
     // Log telegram errors
     Longman\TelegramBot\TelegramLog::error($e);
 } catch (Longman\TelegramBot\Exception\TelegramLogException $e) {
     // Silence is golden!
     // Uncomment this to catch log initilization errors
-    //echo $e;
+    echo $e;
 }
