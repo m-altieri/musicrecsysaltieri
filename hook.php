@@ -32,7 +32,7 @@ try {
     //$telegram->enableMySql($mysql_credentials, $BOT_NAME . '_');
 
     // Add an additional commands path
-    //$telegram->addCommandsPath($commands_path);
+    $telegram->addCommandsPath($commands_path);
 
     // Enable admin user(s)
     //$telegram->enableAdmin(your_telegram_id);
