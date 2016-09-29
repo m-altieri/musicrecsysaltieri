@@ -175,7 +175,6 @@ class ProfileCommand extends Command
       file_put_contents($img, file_get_contents($poster));
 
       return $title;
-
    }
 
 }
