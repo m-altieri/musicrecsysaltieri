@@ -8,17 +8,19 @@ require 'vendor/autoload.php';
 use Telegram\Bot\Api;
 $telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
-
+// recupero il contenuto inviato da Telegram
 $content = $telegram->getWebhookUpdates();
 
+// converto il contenuto da JSON ad array PHP
 //$content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
+// se la richiesta è null interrompo lo script
 if(!$update)
 {
   exit;
 }
-
+// assegno alle seguenti variabili il contenuto ricevuto da Telegram
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
 $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
@@ -28,7 +30,25 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
+// pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
 $text = trim($text);
+// converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 
 $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+
+
+// mi preparo a restitutire al chiamante la mia risposta che è un oggetto JSON
+// imposto l'header della risposta
+header("Content-Type: application/json");
+// la mia risposta è un array JSON composto da chat_id, text, method
+// chat_id mi consente di rispondere allo specifico utente che ha scritto al bot
+// text è il testo della risposta
+$parameters = array('chat_id' => $chatId, "text" => $text);
+// method è il metodo per l'invio di un messaggio (cfr. API di Telegram)
+$parameters["method"] = "sendMessage";
+// imposto la inline keyboard
+$keyboard = ['inline_keyboard' => [[['text' =>  'myText', 'callback_data' => 'myCallbackText']]]];
+$parameters["reply_markup"] = json_encode($keyboard, true);
+// converto e stampo l'array JSON sulla response
+echo json_encode($parameters);
