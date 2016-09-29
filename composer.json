@@ -1,6 +1,8 @@
 {
+    "name": "movierecsusbot/movierecsysbot",
+    "type": "project",
     "require": {
-        "longman/telegram-bot": "^0.35.0",
-        "aws/aws-sdk-php": "*"
+        "php": ">=5.5.0",
+        "longman/telegram-bot": "*"
     }
 }
