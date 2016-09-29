@@ -1,8 +1,1 @@
-{
-    "name": "movierecsusbot/movierecsysbot",
-    "type": "project",
-    "require": {
-        "php": ">=5.5.0",
-        "longman/telegram-bot": "*"
-    }
-}
+{}
