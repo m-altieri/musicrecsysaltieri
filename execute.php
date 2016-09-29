@@ -1,7 +1,8 @@
 <?php
 
 require 'vendor/autoload.php';
-
+require 'vendor/recsysbot/replies/menuReply.php';
+require 'vendor/recsysbot/replies/fullMenuReply.php';
 
 
 
