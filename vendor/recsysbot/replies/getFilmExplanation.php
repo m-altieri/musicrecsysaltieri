@@ -1,4 +1,6 @@
 <?php 
+ 
+use GuzzleHttp\Client;
 
 function getFilmExplanation($telegram, $chatId, $movie){
    $movieName = str_replace(' ', '_', $movie); 
