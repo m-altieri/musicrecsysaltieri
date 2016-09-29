@@ -8,6 +8,8 @@ require 'vendor/autoload.php';
 use Telegram\Bot\Api;
 $telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
+
+
 // recupero il contenuto inviato da Telegram
 $content = $telegram->getWebhookUpdates();
 
@@ -20,6 +22,15 @@ if(!$update)
 {
   exit;
 }
+
+$telegram->addCommand(Vendor\Recsysbot\Commands\HelpCommand::class);
+$telegram->addCommand(Vendor\Recsysbot\Commands\InfoCommand::class);
+$telegram->addCommand(Vendor\Recsysbot\Commands\RatingCommand::class);
+$telegram->addCommand(Vendor\Recsysbot\Commands\StartCommand::class);
+
+
+
+
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
@@ -35,20 +46,16 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 
-$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+switch ($text) {
+   case "/start": case "/help": case "/info":            
+      $telegram->commandsHandler(true);
+      break;
+   default:
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+      break;
+}
 
 
-// mi preparo a restitutire al chiamante la mia risposta che è un oggetto JSON
-// imposto l'header della risposta
-header("Content-Type: application/json");
-// la mia risposta è un array JSON composto da chat_id, text, method
-// chat_id mi consente di rispondere allo specifico utente che ha scritto al bot
-// text è il testo della risposta
-$parameters = array('chat_id' => $chatId, "text" => $text);
-// method è il metodo per l'invio di un messaggio (cfr. API di Telegram)
-$parameters["method"] = "sendMessage";
-// imposto la inline keyboard
-$keyboard = ['inline_keyboard' => [[['text' =>  'myText', 'callback_data' => 'myCallbackText']]]];
-$parameters["reply_markup"] = json_encode($keyboard, true);
-// converto e stampo l'array JSON sulla response
-echo json_encode($parameters);
+
+
+
