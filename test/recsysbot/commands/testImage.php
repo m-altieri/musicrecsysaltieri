@@ -1,6 +1,6 @@
 <?php 
 
-$external_link = './../images/poster.jpg';
+$external_link = './../../../../images/poster.jpg';
 if (@getimagesize($external_link)) {
 echo  "image exists";
 } else {
