@@ -89,11 +89,18 @@ function getFilmExplanation($telegram, $chatId, $movie){
    $basedOn = implode(", ", array_reverse($based));
    $category = implode(", ", array_reverse($categories));
 
-   $img = './images/poster.jpg';
+
+   
+   //$img = './images/poster.jpg';
    //file_put_contents($img, file_get_contents($poster));
 
-   if ($poster != '' AND $poster != "N/A" ) {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
-   $telegram->sendPhoto(['chat_id' => $chatId,'photo' => './images/poster.jpg']);}
+   if ($poster != '' AND $poster != "N/A" ) {
+      $remoteImage = $poster;
+      $img = './images/poster.jpg';
+
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+      $telegram->sendPhoto(['chat_id' => $chatId,'photo' => InputFile::create($remoteImage, $img)]);
+   }
 
    if ($title != '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => "Title: ".$title]);}
