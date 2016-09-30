@@ -80,7 +80,7 @@ class ProfileCommand extends Command
 
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
-             'photo' => '../images/poster.jpg', 
+             'photo' => './images/poster.jpg', 
              'caption' => $title
             ]);
 
