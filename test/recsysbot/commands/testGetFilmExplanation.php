@@ -111,7 +111,7 @@ use GuzzleHttp\Client;
    print_r("Poster:".$poster);echo '<br/>';
 
    if ($poster != '' AND $poster != "N/A" ) {   
-      $img = './../../../images/poster.jpg';
+      $img = './../../../vendor/images/poster.jpg';
       file_put_contents($img, file_get_contents($poster));
       
    }
