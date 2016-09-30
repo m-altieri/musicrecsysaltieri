@@ -172,7 +172,7 @@ class ProfileCommand extends Command
       }
 
       $img = './images/poster.jpg';
-      file_put_contents($img, file_get_contents($poster));
+      //file_put_contents($img, file_get_contents($poster));
 
       return $title;
    }
