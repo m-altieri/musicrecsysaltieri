@@ -98,7 +98,7 @@ function getFilmExplanation($telegram, $chatId, $movie){
 
    if ($poster != '' AND $poster != "N/A" ) {   
       $img = './images/poster.jpg';
-      file_put_contents($img, curl_get_contents($poster));
+      file_put_contents($img, file_get_contents(urlencode($poster)));
 
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
       $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
@@ -147,14 +147,3 @@ function getFilmExplanation($telegram, $chatId, $movie){
 
 }
    
-function curl_get_contents($url)
-{
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-  $data = curl_exec($ch);
-  curl_close($ch);
-  return $data;
-}
