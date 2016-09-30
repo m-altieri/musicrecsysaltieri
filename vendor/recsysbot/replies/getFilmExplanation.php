@@ -101,7 +101,7 @@ function getFilmExplanation($telegram, $chatId, $movie){
       file_put_contents($img, file_get_contents($poster));
 
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
-      $telegram->sendPhoto(['chat_id' => $chatId,'photo' => './images/poster.jpg']);
+      $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
    }
 
    if ($title != '') {$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
