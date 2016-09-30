@@ -1,6 +1,7 @@
 <?php 
  
 use GuzzleHttp\Client;
+use Telegram\Bot\FileUpload\InputFile; 
 
 function getFilmExplanation($telegram, $chatId, $movie){
    $movieName = str_replace(' ', '_', $movie); 
