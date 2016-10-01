@@ -83,7 +83,8 @@ class ProfileCommand extends Command
              'photo' => './images/poster.jpg', 
              'caption' => $title
             ]);
-
+      copy('./images/default.jpg', './images/poster.jpg');
+      
       $text = "Skip, if you don\'t watch";
       $this->replyWithChatAction(['action' => Actions::TYPING]);
       $this->replyWithMessage([
@@ -171,8 +172,10 @@ class ProfileCommand extends Command
          }
       }
 
+    if ($poster != '' AND $poster != "N/A" ) {   
       $img = './images/poster.jpg';
-      file_put_contents($img, file_get_contents($poster));
+      copy($poster, $img);
+   }
 
       return $title;
    }
