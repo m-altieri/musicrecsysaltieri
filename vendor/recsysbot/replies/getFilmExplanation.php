@@ -98,8 +98,10 @@ function getFilmExplanation($telegram, $chatId, $movie){
 
    if ($poster != '' AND $poster != "N/A" ) {   
       $img = './images/poster.jpg';
-      file_put_contents($img, file_get_contents($poster));
-
+      //$img = curl_file_create('test.png','image/png');
+      //file_put_contents($img, file_get_contents($poster));
+      //copy('http://somedomain.com/file.jpeg', '/tmp/file.jpeg');
+      copy($poster, $img);
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
       $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
    }
