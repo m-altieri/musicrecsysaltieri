@@ -33,8 +33,8 @@ $telegram->addCommand(Vendor\Recsysbot\Commands\InfoCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\ProfileCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\StartCommand::class);
 
-$textSorry ="Sorry :) \nI don't understand \n Please enter a command (es.\"/start\") ";
-$textWorkInProgress = "Sorry :) \n We are developing this functionality, soon will be available ;)";
+$textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
+$textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
 
 
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
@@ -122,7 +122,8 @@ switch ($text) {
       break;
    case "/genres": case "genres": case "genre":
       $propertyType = "genre";
-      propertyReply($telegram, $chatId, $propertyType);
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
+      //propertyReply($telegram, $chatId, $propertyType);
       break;
    case strpos($text, '🕴'):
       $propertyType = "starring";
@@ -189,6 +190,5 @@ switch ($text) {
       getFilmExplanation($telegram, $chatId, $text);
       break;
    default:
-      $telegram->commandsHandler(true);
       break;
 }

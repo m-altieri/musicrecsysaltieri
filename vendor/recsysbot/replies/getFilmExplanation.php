@@ -80,7 +80,7 @@ function getFilmExplanation($telegram, $chatId, $movie){
                break;
             default:
                //test
-               $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
+               //$telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
                break;
          }
       }
