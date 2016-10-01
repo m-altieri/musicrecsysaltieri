@@ -4,7 +4,10 @@ use GuzzleHttp\Client;
 use Telegram\Bot\FileUpload\InputFile;
 
 function getFilmExplanation($telegram, $chatId, $movie){
+   
 
+   $textSorry ="Sorry :) \nI don't understand \n Please enter a command (es.\"/start\") ";
+   
    $movieName = str_replace(' ', '_', $movie); 
    $userID = 8;
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
@@ -76,6 +79,8 @@ function getFilmExplanation($telegram, $chatId, $movie){
                $title = $property;
                break;
             default:
+               //test
+               $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
                break;
          }
       }

@@ -33,7 +33,8 @@ $telegram->addCommand(Vendor\Recsysbot\Commands\InfoCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\ProfileCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\StartCommand::class);
 
-
+$textSorry ="Sorry :) \nI don't understand \n Please enter a command (es.\"/start\") ";
+$textWorkInProgress = "Sorry :) \n We are developing this functionality, soon will be available ;)";
 
 
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
@@ -56,7 +57,10 @@ switch ($text) {
       $telegram->commandsHandler(true);
       break;
    case "/runtime": case "runtime":
-      runtimeReply($telegram, $chatId);
+      $propertyType = "runtime";
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
+      //propertyReply($telegram, $chatId, $propertyType);
+      //runtimeReply($telegram, $chatId);
       break;
    case "/writers": case "writers": case "writer":
       $propertyType = "writer";
@@ -66,11 +70,12 @@ switch ($text) {
       $propertyType = "producer";
       propertyReply($telegram, $chatId, $propertyType);
       break;
-   case "/release date": case "release date": case "releaseDate":
+   case "/releasedate": case "release date": case "releasedate":
       $propertyType = "releaseDate";
-      propertyReply($telegram, $chatId, $propertyType);
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
+      //propertyReply($telegram, $chatId, $propertyType);
       break;
-   case "/music composers": case "music composers": case "music composer":
+   case "/musiccomposer": case "music composers": case "music composer": case "music":
       $propertyType = "musicComposer";
       propertyReply($telegram, $chatId, $propertyType);
       break;
