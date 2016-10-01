@@ -53,7 +53,7 @@ $text = trim($text);
 $text = strtolower($text);
 
 switch ($text) {
-   case "/start": case "/help": case "/info":            
+   case "/start": case "/help": case "/info": case "/profile":         
       $telegram->commandsHandler(true);
       break;
    case "/runtime": case "runtime":
