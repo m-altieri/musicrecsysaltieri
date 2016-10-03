@@ -4,9 +4,11 @@
  * @author Francesco Baccaro
  */
 
-$config = require __DIR__ . '/vendor/recsysbot/config/movierecsysbot-config.php';
+use GuzzleHttp\Client;
+use Telegram\Bot\Api;
 
 require 'vendor/autoload.php';
+$config = require __DIR__ . '/vendor/recsysbot/config/movierecsysbot-config.php';
 
 foreach(glob("vendor/recsysbot/replies/*.php") as $file){
     require $file;
@@ -15,9 +17,6 @@ foreach(glob("vendor/recsysbot/replies/*.php") as $file){
 //This is suggested from Guzzle
 date_default_timezone_set($config['timezone']);
 $token = $config['token'];
-
-use GuzzleHttp\Client;
-use Telegram\Bot\Api;
 $telegram = new Api($token);
 //$telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
