@@ -4,7 +4,7 @@
  * @author Francesco Baccaro
  */
 
-$config = require __DIR__ . '/vendor/config/movierecsysbot-config.php';
+$config = require 'vendor/config/movierecsysbot-config.php';
 
 require 'vendor/autoload.php';
 
