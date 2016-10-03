@@ -13,8 +13,8 @@ foreach(glob("vendor/recsysbot/replies/*.php") as $file){
 }
 
 //This is suggested from Guzzle
-//date_default_timezone_set($config['timezone']);
-//$token = $config['token'];
+date_default_timezone_set($config['timezone']);
+$token = $config['token'];
 
 use GuzzleHttp\Client;
 use Telegram\Bot\Api;
