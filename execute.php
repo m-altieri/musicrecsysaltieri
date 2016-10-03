@@ -4,7 +4,7 @@
  * @author Francesco Baccaro
  */
 
-//$config = require __DIR__ . 'vendor/config/movierecsysbot-config.php';
+$config = require __DIR__ . 'vendor/config/movierecsysbot-config.php';
 
 require 'vendor/autoload.php';
 
@@ -18,8 +18,8 @@ foreach(glob("vendor/recsysbot/replies/*.php") as $file){
 
 use GuzzleHttp\Client;
 use Telegram\Bot\Api;
-//$telegram = new Api($token);
-$telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
+$telegram = new Api($token);
+//$telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
 // recupero il contenuto inviato da Telegram
 //$content = file_get_contents("php://input");
