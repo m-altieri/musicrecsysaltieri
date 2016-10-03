@@ -1,25 +1,31 @@
 <?php
 
+/**
+ * @author Francesco Baccaro
+ */
+
+//$config = require __DIR__ . 'vendor/config/movierecsysbot-config.php';
+
 require 'vendor/autoload.php';
 
 foreach(glob("vendor/recsysbot/replies/*.php") as $file){
     require $file;
 }
-//require 'vendor/recsysbot/replies/menuReply.php';
-//require 'vendor/recsysbot/replies/fullMenuReply.php';
 
+//This is suggested from Guzzle
+//date_default_timezone_set($config['timezone']);
+//$token = $config['token'];
 
 use GuzzleHttp\Client;
 use Telegram\Bot\Api;
+//$telegram = new Api($token);
 $telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
-
-
 // recupero il contenuto inviato da Telegram
+//$content = file_get_contents("php://input");
 $content = $telegram->getWebhookUpdates();
 
 // converto il contenuto da JSON ad array PHP
-//$content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
 // se la richiesta è null interrompo lo script
@@ -52,6 +58,7 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 
+//considerare anche altri tipi di msg vedi vecchio codice
 switch ($text) {
    case "/start": case "/help": case "/info": case "/profile":         
       $telegram->commandsHandler(true);
@@ -169,7 +176,7 @@ switch ($text) {
       $propertyType = "editing";
       getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
-   case strpos($text, '🏢'):🏢���:
+   case strpos($text, '🏢'):
       $propertyType = "distributor";
       getFilmsToReply($telegram, $chatId, $propertyType, $text );
       break;
