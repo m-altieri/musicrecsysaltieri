@@ -114,14 +114,14 @@ function movieDetailReply($telegram, $chatId, $movie){
       $genre = implode(", ", array_reverse($genres));
 
       if ($poster != '' AND $poster != "N/A" ) {   
-         $img = './Images/poster.jpg';
+         $img = './images/poster.jpg';
          //$img = curl_file_create('test.png','image/png');
          //file_put_contents($img, file_get_contents($poster));
          //copy('http://somedomain.com/file.jpeg', '/tmp/file.jpeg');
          copy($poster, $img);
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
-         copy('./Images/default.jpg', './Images/poster.jpg');
+         copy('./images/default.jpg', './images/poster.jpg');
       }
 
       $text = "";

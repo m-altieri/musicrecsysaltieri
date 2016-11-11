@@ -68,10 +68,10 @@ class ProfileCommand extends Command
  
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
-             'photo' => './Images/poster.jpg', 
+             'photo' => './images/poster.jpg', 
              'caption' => $title
             ]);
-      copy('./Images/default.jpg', './Images/poster.jpg');
+      copy('./images/default.jpg', './images/poster.jpg');
  
       $keyboard = $this->getKeyboardFilms();
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
@@ -181,7 +181,7 @@ class ProfileCommand extends Command
       }
  
       if ($poster != '' AND $poster != "N/A" ) {   
-         $img = './Images/poster.jpg';
+         $img = './images/poster.jpg';
          copy($poster, $img);
       }
  
@@ -197,5 +197,5 @@ class ProfileCommand extends Command
       $data = json_decode($bodyMsg);
       return $data;
       }
- 
+
 }
