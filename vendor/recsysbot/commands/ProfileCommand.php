@@ -11,14 +11,14 @@ use GuzzleHttp\Client;
  */
 class ProfileCommand extends Command
 {
-    protected $name = "profile";
-    protected $description = "RecSysBot - create user profile command";
-    protected $client;
-    protected $movieToRating;
-    protected $userID;
-    protected $i;  
+   protected $name = "profile";
+   protected $description = "RecSysBot - create user profile command";
+   protected $client;
+   protected $movieToRating;
+   protected $userID;
+   protected $i;  
  
-    public function __construct(){      
+   public function __construct(){      
       $this->setClient();
       $this->setUserID();
       $this->setIndex(0);
@@ -64,12 +64,7 @@ class ProfileCommand extends Command
       $movieName = $this->getUserMovieToRating($userID); 
       $title = $this->getTitleAndPosterMovieToRating($movieName);
        
-      //bot
-      $this->replyWithChatAction(['action' => Actions::TYPING]);
-      $text = "Do you like this movie?";
-      $this->replyWithMessage([
-            'text' => $text
-            ]);      
+      //bot  
  
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
@@ -84,6 +79,12 @@ class ProfileCommand extends Command
                              'resize_keyboard' => true,
                              'one_time_keyboard' => false
                              ]);
+
+      $this->replyWithChatAction(['action' => Actions::TYPING]);
+      $text = "Do you like this movie?";
+      $this->replyWithMessage([
+            'text' => $text
+            ]);  
        
       $this->replyWithChatAction(['action' => Actions::TYPING]);
       $text = "Skip, if you don't watch";
@@ -104,7 +105,7 @@ class ProfileCommand extends Command
  
    public function getUserMovieToRating($userID){
       $client = $this->getClient();   
-      $stringGetRequest ='/lodrecsysrestful/restService/preference?userID='.$userID;
+      $stringGetRequest ='/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$userID;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $movieURI = json_decode($bodyMsg);
@@ -124,7 +125,7 @@ class ProfileCommand extends Command
          $movieURI .= $movieName;
  
          $client = $this->getClient();        
-         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/put?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating;
+         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/putMovieRating?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating;     
          $response = $client->request('GET', $stringGetRequest);
          $bodyMsg = $response->getBody()->getContents();
          $data = json_decode($bodyMsg);
@@ -153,7 +154,7 @@ class ProfileCommand extends Command
       $movieName = str_replace(' ', '_', $movieName);
        
       $client = $this->getClient();
-      $stringGetRequest ='/lodrecsysrestful/restService/explanation?movieName='.$movieName;      
+      $stringGetRequest ='/lodrecsysrestful/restService/movieDetail/getAllPropertyListFromMovie?movieName='.$movieName;      
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
@@ -190,7 +191,7 @@ class ProfileCommand extends Command
    public function getNumberOfRatedMovies($chatId){
       $userID = 6;
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-      $stringGetRequest ='/lodrecsysrestful/restService/preference/number?userID='.$userID;
+      $stringGetRequest ='/lodrecsysrestful/restService/movieRating/getNumberRatedMovies?userID='.$userID;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);

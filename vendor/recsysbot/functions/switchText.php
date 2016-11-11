@@ -2,7 +2,7 @@
 
 //use Vendor\Recsysbot\Commands\ProfileCommand;
 
-function switchText($telegram, $chatId, $text){
+function switchText($telegram, $chatId, $text, $firstname){
    $textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
    $textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
 
@@ -11,161 +11,231 @@ function switchText($telegram, $chatId, $text){
          $telegram->commandsHandler(true);
          break;
       case "menu": case "<-": case strpos($text, '🔴'):
-         menuReply($telegram, $chatId);
+         basePropertyTypeReply($telegram, $chatId);
          break;
       case "->":   case strpos($text, '🔎'):
-         fullMenuReply($telegram, $chatId);
+         allPropertyTypeReply($telegram, $chatId);
          break;
       case "/no": case "no":            
          noReply($telegram, $chatId);
          break;
+      case "/reset":         
+         resetPropertyValueRatingReply($telegram, $chatId, $firstname);
+         break;
 /*      case "/profile": case "profile":
          updateUserProfileReply($telegram, $chatId);
          break;*/
-      case "/directors": case "directors": case "director":            
+      case strpos($text, '/directors'): case strpos($text, 'directors'): case strpos($text, 'director'):            
          $propertyType = "director";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/starring": case "starring": case "actor":
+      case strpos($text, '/starring'): case strpos($text, 'starring'): case strpos($text, 'actor'): case strpos($text, 'actors'):
          $propertyType = "starring";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/categories": case "categories": case "category":
+      case strpos($text, '/categories'): case strpos($text, 'categories'): case strpos($text, 'category'):
          $propertyType = "category";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/genres": case "genres": case "genre":
+      case strpos($text, '/genres'): case strpos($text, 'genres'): case strpos($text, 'genre'):
          $propertyType = "genre";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/writers": case "writers": case "writer":
+      case strpos($text, '/writers'): case strpos($text, 'writers'): case strpos($text, 'writer'):
          $propertyType = "writer";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/producers": case "producers": case "producer":
+      case strpos($text, '/producers'): case strpos($text, 'producers'): case strpos($text, 'producer'):
          $propertyType = "producer";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/releaseYear": case "release year": case "releaseyear":
+      case strpos($text, '/releaseYear'): case strpos($text, 'release year'): case strpos($text, 'releaseyear'):
          $propertyType = "releaseYear";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/musiccomposer": case "music composers": case "music composer": case "music":
+      case strpos($text, '/musiccomposer'): case strpos($text, 'music composers'): case strpos($text, 'music composer'): case strpos($text, 'music'):
          $propertyType = "musicComposer";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/runtime": case "runtime": case "runtimeRange":
+      case strpos($text, '/runtime'): case strpos($text, 'runtime'): case strpos($text, 'runtimeRange'):
          $propertyType = "runtimeRange";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/cinematographies": case "cinematographies": case "cinematography":
+      case strpos($text, '/cinematographies'): case strpos($text, 'cinematographies'): case strpos($text, 'cinematography'):
          $propertyType = "cinematography";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/based on": case "based on": case "basedOn":
+      case strpos($text, '/based on'): case strpos($text, 'based on'): case strpos($text, 'basedOn'):
          $propertyType = "basedOn";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/editings": case "editings": case "editing":
+      case strpos($text, '/editings'): case strpos($text, 'editings'): case strpos($text, 'editing'):
          $propertyType = "editing";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case "/distributors": case "distributors": case "distributor":
+      case strpos($text, '/distributors'): case strpos($text, 'distributors'): case strpos($text, 'distributor'):
          $propertyType = "distributor";
-         propertyReply($telegram, $chatId, $propertyType);
+         propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
       case strpos($text, '📽'):
          $propertyType = "director";
          $propertyValue = $text;
-         //TODO questa modifica andrà fatta a tutti
-         otherPropertyReply($telegram, $chatId, $propertyType, $propertyValue);
-         //getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🕴'):
          $propertyType = "starring";
          $propertyValue = $text;
-         //TODO questa modifica andrà fatta a tutti
-         otherPropertyReply($telegram, $chatId, $propertyType, $propertyValue);
-         //getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '📼'):
          $propertyType = "category";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🎬'):
          $propertyType = "genre";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🖊'):
          $propertyType = "writer";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '💰'):
          $propertyType = "producer";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🗓'):
          $propertyType = "releaseYear";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🎼'):
          $propertyType = "musicComposer";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🕰'):
          $propertyType = "runtimeRange";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);         
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);         
          break;
       case strpos($text, '📷'):
          $propertyType = "cinematography";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '📔'):
          $propertyType = "basedOn";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '💼'):
          $propertyType = "editing";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🏢'):
          $propertyType = "distributor";
          $propertyValue = $text;
-         getFilmsToReply($telegram, $chatId, $propertyType, $propertyValue);
+         propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
       case strpos($text, '🔵'):
-         getFilmsToReplyTop5($telegram, $chatId);
+         movieListTop5Reply($telegram, $chatId);
          break;
       case strpos($text, '✔'):
-         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
+         movieListTop5Reply($telegram, $chatId);
+         break;
+      case strpos($text, '🔙'): 
+         //Return to the list of recommended movies
+         //Pensare a come non mandare sempre in esecuzione il pagerank per recuperare la lista
+         $reply = explode("\"", $text);
+         file_put_contents("php://stderr", "return ".$text.PHP_EOL);
+         file_put_contents("php://stderr", "0 return ".$reply[0].PHP_EOL); 
+         file_put_contents("php://stderr", "1 return propertyType: ".$reply[1].PHP_EOL); 
+         file_put_contents("php://stderr", "2 return ".$reply[2].PHP_EOL); 
+         file_put_contents("php://stderr", "3 return ".$reply[3].PHP_EOL); 
+         file_put_contents("php://stderr", "4 return ".$reply[4].PHP_EOL);           
+         
+         $propertyType = $reply[1];
+         if ($propertyType == "movies") {
+            movieListTop5Reply($telegram, $chatId);
+         }
+         elseif ($propertyType == "properties") {
+            allPropertyTypeReply($telegram, $chatId);
+         }
+         elseif ($propertyType == "property") {
+            $textRefine = "to \"".$reply[3]."\"";
+            file_put_contents("php://stderr", "return ".$textRefine.PHP_EOL); 
+            refineMoviePropertyReply($telegram, $chatId, $textRefine);
+         }
+         else{
+            $textRefine = null;
+            propertyValueReply($telegram, $chatId, $propertyType, $textRefine);
+         } 
          break;
       case strpos($text, '👍'):
          $rating = 1;
          profileReply($telegram, $chatId, $rating);
-         menuReply($telegram, $chatId);
+         basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '👎'):
          $rating = 0;
          profileReply($telegram, $chatId, $rating);
-         menuReply($telegram, $chatId);
+         basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '🗯'):
          $rating = 2;
          profileReply($telegram, $chatId, $rating);
-         menuReply($telegram, $chatId);
+         basePropertyTypeReply($telegram, $chatId);
+         break;
+      case strpos($text, '😃'):
+         $rating = 1;
+         $reply = explode("\"", $text);
+         $propertyName = $reply[1];
+         $propertyType = $reply[3];
+         file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
+         file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
+         file_put_contents("php://stderr", "propertyValue:".$propertyName.PHP_EOL);               
+         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating);
+         break;
+      case strpos($text, '😑'):
+         $rating = 0;
+         $reply = explode("\"", $text);
+         $propertyValue = $reply[1];
+         $propertyType = $reply[3];
+         file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
+         file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
+         file_put_contents("php://stderr", "propertyValue:".$propertyValue.PHP_EOL);              
+         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
+         break;
+      case strpos($text, '🤔'):
+         $rating = 2;   
+         $reply = explode("\"", $text);
+         $propertyValue = $reply[1];
+         $propertyType = $reply[3];
+         file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
+         file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
+         file_put_contents("php://stderr", "propertyValue:".$propertyValue.PHP_EOL);               
+         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
          break;
       case strpos($text, '🏁'):
-         acceptRecommendationReply($telegram, $chatId);
+         acceptRecommendationReply($telegram, $chatId, $firstname);
          break;
       case strpos($text, '💬'):
          //Why have I received this recommendation?
@@ -173,23 +243,16 @@ function switchText($telegram, $chatId, $text){
          break;
       case strpos($text, '🔍'):
          //I want to refine the recommendation
-         refineRecommendationReply($telegram, $chatId);
-         fullMenuReply($telegram, $chatId);
-         break;
-      case strpos($text, '🔙'):
-         //Return to the list of recommended movies
-         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
+         refineMoviePropertyReply($telegram, $chatId, $text);
          break;
       case ($text[0] != "/"):
          //$propertyType = isset($propertyType) ? $propertyType : "";
          //$propertyValue = isset($propertyValue) ? $propertyValue : "";
          //$telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
-         //getFilmDetail($telegram, $chatId, $propertyType, $propertyValue, $text);
-         getFilmDetail($telegram, $chatId, $text);
+         //movieDetailReply($telegram, $chatId, $propertyType, $propertyValue, $text);
+         movieDetailReply($telegram, $chatId, $text);
          break;
       default:
-         //$propertyTypeOld = $propertyType;
-         //$propertyValueOld = $propertyValue;
          break;
       }
    }

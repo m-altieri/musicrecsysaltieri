@@ -111,7 +111,7 @@ class userProfile extends Command
    public function getUserMovieToRating($chatId){
       //$userID = $chatId;
       $client = $this->getClient();   
-      $stringGetRequest ='/lodrecsysrestful/restService/preference?userID='.$chatId;
+      $stringGetRequest ='/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$chatId;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $movieURI = json_decode($bodyMsg);
@@ -133,10 +133,11 @@ class userProfile extends Command
          $movieURI .= $movieName;
 
          $client = $this->getClient();        
-         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/put?userID='.$chatId.'&movieURI='.$movieURI.'&rating='.$rating;
+         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/putMovieRating?userID='.$chatId.'&movieURI='.$movieURI.'&rating='.$rating;
          $response = $client->request('GET', $stringGetRequest);
          $bodyMsg = $response->getBody()->getContents();
          $data = json_decode($bodyMsg);
+         
       }
       else{
          $data = null;
@@ -149,7 +150,7 @@ class userProfile extends Command
       $movieName = str_replace(' ', '_', $movieName);
       
       $client = $this->getClient();
-      $stringGetRequest ='/lodrecsysrestful/restService/explanation?movieName='.$movieName;      
+      $stringGetRequest ='/lodrecsysrestful/restService/movieDetail/getAllPropertyListFromMovie?movieName='.$movieName;      
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
@@ -186,7 +187,7 @@ class userProfile extends Command
    public function getNumberOfRatedMovies($chatId){
       //$userID = $chatId;
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-      $stringGetRequest ='/lodrecsysrestful/restService/preference/number?userID='.$chatId;
+      $stringGetRequest ='/lodrecsysrestful/restService/movieRating/getNumberRatedMovies?userID='.$chatId;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);

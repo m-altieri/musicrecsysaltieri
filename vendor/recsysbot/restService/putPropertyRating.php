@@ -1,7 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 
-function putPropertyRating($userID, $propertyType, $propertyName, $rating){
+function putPropertyRating($chatId, $propertyType, $propertyName, $rating){
+
+	$userID = 6;
 	
 	switch ($propertyType) {
 		case "genre": case "releaseYear": case "runtimeRange":
@@ -16,8 +18,8 @@ function putPropertyRating($userID, $propertyType, $propertyName, $rating){
 	      }
 	      if ($propertyType != "null"){
 	         $propertyType = str_replace(' ', '_', $propertyType);
-	         $propertyTypeURI = "http://dbpedia.org/resource/";
-	         $propertyTypeURI .= $propertyName;
+	         $propertyTypeURI = "http://dbpedia.org/ontology/";
+	         $propertyTypeURI .= $propertyType;
 	      }
 			break;
 		case "category":
@@ -35,16 +37,17 @@ function putPropertyRating($userID, $propertyType, $propertyName, $rating){
 
    if ($propertyURI != "null" && $propertyTypeURI != "null" ){    	
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-      $stringGetRequest = '/lodrecsysrestful/restService/propertyRating/put?userID='.$userID.'&propertyTypeURI='.$propertyTypeURI.'&propertyURI='.$propertyURI.'&rating='.$rating;
+      $stringGetRequest = '/lodrecsysrestful/restService/propertyRating/putPropertyRating?userID='.$userID.'&propertyTypeURI='.$propertyTypeURI.'&propertyURI='.$propertyURI.'&rating='.$rating;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
+      file_put_contents("php://stderr", "putPropertyRating return:".$data.PHP_EOL);
    }
    else{
       $data = null;
    }
-
-   file_put_contents("php://stderr", "putPropertyRating return:".$bodyMsg.PHP_EOL);
+	//file_put_contents("php://stderr", "putPropertyRating stringGetRequest:".$stringGetRequest.PHP_EOL);
+   
 
    return $bodyMsg;
 }
