@@ -1,7 +1,8 @@
 <?php
 
-function noReply($telegram, $chatId){
-	$text = "So unfortunately I can not help you :(";
+function refineRecommendationReply($telegram, $chatId){
+
+	$text = "Which properties of the movie you want to change?";
 
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 

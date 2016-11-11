@@ -1,90 +1,96 @@
 <?php 
- 
-namespace Vendor\Recsysbot\Commands;
- 
+
+namespace Vendor\Recsysbot;
+
 use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 use GuzzleHttp\Client;
- 
+
 /**
  * @author Francesco Baccaro
  */
-class ProfileCommand extends Command
+class userProfile extends Command
 {
     protected $name = "profile";
     protected $description = "RecSysBot - create user profile command";
     protected $client;
     protected $movieToRating;
-    protected $userID;
-    protected $i;  
- 
+    protected $chatId; 
+
+
     public function __construct(){      
       $this->setClient();
-      $this->setUserID();
-      $this->setIndex(0);
     }
- 
+
    private function setClient(){
       //$this->client = new Client(['base_uri'=>'http://localhost:8080']);
       $this->client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
     }
- 
+
    public function getClient(){
       return $this->client;
     }
- 
+
    private function setMovieToRating($movieName){
       $this->movieToRating = $movieName;
     }
- 
+
     public function getMovieToRating(){
       return $this->movieToRating;
     }
- 
-   public function setUserID(){
-      $this->userID = 6;
+
+   public function setChatId($userId){
+      //$this->chatId = $userId;
+      $this->chatId = 129877748;
     }
- 
-   public function getUserID(){
-      return $this->userID;
+
+   public function getChatId(){
+      return $this->chatId;
     }
- 
-   public function setIndex($i){
-      $this->i = $i;
-   }
- 
-   public function getIndex(){
-      return $this->i;
-   }
- 
+
+
    public function handle($arguments){
- 
+
+
       //Get
-      $userID = $this->getUserID();
-      $movieName = $this->getUserMovieToRating($userID); 
+      //$userId = 129877748;
+      //$this->replyWithMessage(['text' => 'userId: '.$userId]);
+      //$userId = $this->getUpdate()->getMessage()->getChat()->getId();
+
+      //$this->setChatId($userId);
+      $chatId = $this->getChatId();
+      //$this->replyWithMessage(['text' => 'chatId: '.$chatId]);
+/*        $this->replyWithChatAction(['action' => Actions::TYPING]);
+        $arguments = $this->getTelegram()->getLastResponse()->getDecodedBody();
+        $argument_array = explode(' ',$arguments);
+        foreach ($argument_array as $key => $value) {
+            $this->replyWithMessage(['text' => 'Argument '.$key.': '.$value]);
+        }*/
+
+      $movieName = $this->getUserMovieToRating($chatId); 
       $title = $this->getTitleAndPosterMovieToRating($movieName);
-       
+      
       //bot
       $this->replyWithChatAction(['action' => Actions::TYPING]);
       $text = "Do you like this movie?";
       $this->replyWithMessage([
             'text' => $text
             ]);      
- 
+
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
              'photo' => './Images/poster.jpg', 
              'caption' => $title
             ]);
       copy('./Images/default.jpg', './Images/poster.jpg');
- 
+
       $keyboard = $this->getKeyboardFilms();
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
                              'keyboard' => $keyboard,
                              'resize_keyboard' => true,
                              'one_time_keyboard' => false
                              ]);
-       
+      
       $this->replyWithChatAction(['action' => Actions::TYPING]);
       $text = "Skip, if you don't watch";
       $this->replyWithMessage([
@@ -92,39 +98,42 @@ class ProfileCommand extends Command
             'reply_markup' => $reply_markup
             ]);
    }
- 
- 
+
+
   private function getKeyboardFilms(){
       $keyboard = [
-                      ['👍 Like','👎 Dislike','🗯 Skip']
+                      ['👍 Like','👎 Dislike','💬 Skip']
                    ];
- 
+
       return $keyboard;
    }
- 
-   public function getUserMovieToRating($userID){
+
+   public function getUserMovieToRating($chatId){
+      //$userID = $chatId;
       $client = $this->getClient();   
-      $stringGetRequest ='/lodrecsysrestful/restService/preference?userID='.$userID;
+      $stringGetRequest ='/lodrecsysrestful/restService/preference?userID='.$chatId;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $movieURI = json_decode($bodyMsg);
       $movieName = str_replace("http://dbpedia.org/resource/", "", $movieURI);
       $movieName = str_replace('_', ' ', $movieName); // Replaces all underscore with spaces.
-       
+      
       $this->setMovieToRating($movieName);
       echo $movieURI."<br>";
       return $movieName;
    }
- 
-  public function putUserMovieToRating($userID, $movieName, $rating){
- 
+
+  public function putUserMovieToRating($chatId, $movieName, $rating){
+
+      //$userID = $chatId;
+
       if ($movieName != "null"){
          $movieName = str_replace(' ', '_', $movieName);
          $movieURI = "http://dbpedia.org/resource/";
          $movieURI .= $movieName;
- 
+
          $client = $this->getClient();        
-         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/put?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating;
+         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/put?userID='.$chatId.'&movieURI='.$movieURI.'&rating='.$rating;
          $response = $client->request('GET', $stringGetRequest);
          $bodyMsg = $response->getBody()->getContents();
          $data = json_decode($bodyMsg);
@@ -132,40 +141,27 @@ class ProfileCommand extends Command
       else{
          $data = null;
       }
- 
-      print_r( $userID);
-      print_r("<br>");
-      print_r( $movieName);
-      print_r("<br>");
-      print_r( $movieURI);
-      print_r("<br>");
-      print_r( $rating);
-      print_r("<br>");
-      print_r($data);
-      print_r("<br>");
-      print_r($bodyMsg);
-      print_r("<br>");
- 
+
       return $bodyMsg;
    }
- 
+
    public function getTitleAndPosterMovieToRating($movieName){
       $movieName = str_replace(' ', '_', $movieName);
-       
+      
       $client = $this->getClient();
       $stringGetRequest ='/lodrecsysrestful/restService/explanation?movieName='.$movieName;      
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
- 
+
       $poster = $title = "";
- 
+
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
             $propertyType = str_replace("http://dbpedia.org/ontology/", "", $v[1]);
             $property = str_replace("http://dbpedia.org/resource/", "", $v[2]);
             $property = str_replace('_', ' ', $property); // Replaces all underscore with spaces.
- 
+
             switch ($propertyType) {
                case "poster":
                   $poster = $property;
@@ -178,23 +174,24 @@ class ProfileCommand extends Command
             }
          }
       }
- 
+
       if ($poster != '' AND $poster != "N/A" ) {   
          $img = './Images/poster.jpg';
          copy($poster, $img);
       }
- 
+
       return $title;
    }
- 
+
    public function getNumberOfRatedMovies($chatId){
-      $userID = 6;
+      //$userID = $chatId;
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-      $stringGetRequest ='/lodrecsysrestful/restService/preference/number?userID='.$userID;
+      $stringGetRequest ='/lodrecsysrestful/restService/preference/number?userID='.$chatId;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
       return $data;
       }
- 
+
 }
+

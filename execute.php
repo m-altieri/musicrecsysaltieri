@@ -3,22 +3,31 @@
 /**
  * @author Francesco Baccaro
  */
-
 use GuzzleHttp\Client;
 use Telegram\Bot\Api;
 
 require 'vendor/autoload.php';
 $config = require __DIR__ . '/vendor/recsysbot/config/movierecsysbot-config.php';
 
+
+foreach(glob("vendor/recsysbot/functions/*.php") as $file){
+    require $file;
+}
+
 foreach(glob("vendor/recsysbot/replies/*.php") as $file){
+    require $file;
+}
+
+foreach(glob("vendor/recsysbot/restService/*.php") as $file){
     require $file;
 }
 
 //This is suggested from Guzzle
 date_default_timezone_set($config['timezone']);
 $token = $config['token'];
+
+
 $telegram = new Api($token);
-//$telegram = new Api('297809022:AAHaM0c6-mE2PvrFlEnV7JeHnKXor7JCSgM');
 
 // recupero il contenuto inviato da Telegram
 //$content = file_get_contents("php://input");
@@ -38,10 +47,6 @@ $telegram->addCommand(Vendor\Recsysbot\Commands\InfoCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\ProfileCommand::class);
 $telegram->addCommand(Vendor\Recsysbot\Commands\StartCommand::class);
 
-$textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
-$textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
-
-
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
@@ -57,144 +62,57 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 
-//considerare anche altri tipi di msg vedi vecchio codice
-switch ($text) {
-   case "/start": case "/help": case "/info": case "/profile":         
-      $telegram->commandsHandler(true);
-      break;
-   case "/runtime": case "runtime":
-      $propertyType = "runtime";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
-      //propertyReply($telegram, $chatId, $propertyType);
-      //runtimeReply($telegram, $chatId);
-      break;
-   case "/writers": case "writers": case "writer":
-      $propertyType = "writer";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/producers": case "producers": case "producer":
-      $propertyType = "producer";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/releasedate": case "release date": case "releasedate":
-      $propertyType = "releaseDate";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
-      //propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/musiccomposer": case "music composers": case "music composer": case "music":
-      $propertyType = "musicComposer";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/cinematographies": case "cinematographies": case "cinematography":
-      $propertyType = "cinematography";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/based on": case "based on": case "basedOn":
-      $propertyType = "basedOn";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/editings": case "editings": case "editing":
-      $propertyType = "editing";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/distributors": case "distributors": case "distributor":
-      $propertyType = "distributor";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case strpos($text, '📽'):
-      $propertyType = "director";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case "/no": case "no":            
-      noReply($telegram, $chatId);
-      break;
-   case "menu": case "/yes": case "yes": case "<-":         
-      menuReply($telegram, $chatId);
-      break;
-   case "->":   
-      fullMenuReply($telegram, $chatId);
-      break;
-   case "/directors": case "directors": case "director":            
-      $propertyType = "director";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/starring": case "starring":
-      $propertyType = "starring";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/categories": case "categories": case "category":
-      $propertyType = "category";
-      propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case "/genres": case "genres": case "genre":
-      $propertyType = "genre";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
-      //propertyReply($telegram, $chatId, $propertyType);
-      break;
-   case strpos($text, '🕴'):
-      $propertyType = "starring";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '🗒'):
-      $propertyType = "category";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '🎬'):
-      $propertyType = "genre";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '⏳'):
-      $propertyType = "runtime";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );         
-      break;
-   case strpos($text, '✍'):
-      $propertyType = "writer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '💰'):
-      $propertyType = "producer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '🗓'):
-      $propertyType = "releaseDate";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '🎼'):
-      $propertyType = "musicComposer";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '📷'):
-      $propertyType = "cinematography";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '📔'):
-      $propertyType = "basedOn";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '💼'):
-      $propertyType = "editing";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
-   case strpos($text, '🏢'):
-      $propertyType = "distributor";
-      getFilmsToReply($telegram, $chatId, $propertyType, $text );
-      break;
- case strpos($text, '👍'):
-      likeReply($telegram, $chatId);
-      menuReply($telegram, $chatId);
-      break;
-   case strpos($text, '👎'):
-      dislikeReply($telegram, $chatId);
-      menuReply($telegram, $chatId);
-      break;
-   case strpos($text, '⏭'):
-      skipReply($telegram, $chatId);
-      menuReply($telegram, $chatId);
-      break;
-   case ($text[0] != "/"):
-      //$telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
-      getFilmExplanation($telegram, $chatId, $text);
-      break;
-   default:
-      break;
+if (isset ($message['text'])){
+   $numberRatedMovies = getNumeberRatedMovie($chatId); 
+   if (($text == "/start")) {
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
+      switchText($telegram, $chatId, $text);
+   } elseif ($text == "/help" || $text == "/info") {
+      switchText($telegram, $chatId, $text);      
+   } elseif ($numberRatedMovies >= 3) {
+      switchText($telegram, $chatId, $text);
+   }else {
+      $text = "/profile";
+      switchText($telegram, $chatId, $text);
+   }
+}
+elseif (isset ($message['audio'])){
+   $response = "I'm sorry. I received an audio message";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['document'])){
+   $response = "I'm sorry. I received a message document, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['photo'])){
+   $response = "I'm sorry. I received a message photo, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['sticker'])){
+   $response = "I'm sorry. I received a sticker message, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['video'])){
+   $response = "I'm sorry. I received a video message, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['voice'])){
+   $response = "I'm sorry. I received a voice message, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['contact'])){
+   $response = "I'm sorry. I received a message contact, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['location'])){
+   $response = "I'm sorry. I received a location message, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+elseif (isset ($message['venue'])){
+   $response = "I'm sorry. I received a venue, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+}
+else{
+   $response = "I'm sorry. I received a message, but i can't unswer";
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
 }

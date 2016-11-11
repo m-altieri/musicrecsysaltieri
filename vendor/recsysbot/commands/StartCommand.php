@@ -18,8 +18,8 @@ class StartCommand extends Command
 
         //$telegram->sendMessage(['chat_id' => $chatId, 'text' => 'start...']);
         $keyboard = [
-            ['Yes','No'],
-            ['/info']
+            ['🔴 I want to choose some movie properties'],
+            ['🔵 I want to choose some movies']
         ];
 
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
@@ -31,14 +31,13 @@ class StartCommand extends Command
         //$reply_markup = replyKeyboardMarkup($keyboard, true, true);
         //$reply_markup = $this->replyKeyboardMarkup($keyboard, true, true);
 
-        $text = "I can recommend a movie?";
-
+        $text = "Let me to recommend a movie.\nPlease, tell me something about you";
+        $this->replyWithChatAction(['action' => Actions::TYPING]);
         $this->replyWithMessage([
             'text' => $text, 
             'reply_markup' => $reply_markup
             ]);
-        $this->replyWithChatAction(['action' => Actions::TYPING]);
-
+        
     }
 }
 ?>

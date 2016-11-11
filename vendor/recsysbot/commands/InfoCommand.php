@@ -21,7 +21,7 @@ MovieRecSysBot (Alpha)
 Recommender System Bot
 
 A recommender System, built on 
-a bot, for movie raccomandation 
+a bot, for movie recommendation 
 in according to user profile
 
 Developer: Francesco Baccaro

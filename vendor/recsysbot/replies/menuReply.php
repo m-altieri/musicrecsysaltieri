@@ -1,26 +1,31 @@
 <?php
 
 function menuReply($telegram, $chatId){
-   $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
 
-   $text = "Well!";
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
-   
+   $fullMenuArray = getKeyboardFullMenu($chatId);
+
+   $keyboard = array();
+   foreach ($fullMenuArray as $key => $property) {
+       $result[] = array($property);
+   }    
    $keyboard = [
-      ['Directors','Starring'],
-      ['Categories','Genre'],
-      ['/profile','/help','->']
-   ];
+                  [$result[0][0], $result[1][0]],
+                  [$result[2][0], $result[3][0]],
+                  ["/profile", "/help", "->"]
+               ];
+   
+/* $keyboard = [
+                  ['Director','Starring'],
+                  ['Category','Genre'],
+                  ['/profile','/help','->']
+               ];*/
 
-   $reply_markup = $telegram->replyKeyboardMarkup([
-   'keyboard' => $keyboard,
-   'resize_keyboard' => true,
-   'one_time_keyboard' => false
-   ]);
 
+
+   $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+   $text = "Choose your favourite...";
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
-
-   $text = "Choose a property who you like, from this ;)";
    $telegram->sendMessage(['chat_id' => $chatId, 
                            'text' => $text,
                            'reply_markup' => $reply_markup]);
