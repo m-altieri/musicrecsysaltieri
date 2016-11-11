@@ -55,7 +55,7 @@ $text = trim($text);
 $text = strtolower($text);
 
 if (isset ($message['text'])){
-   //$numberRatedMovies = getNumberRatedMovie($chatId); 
+   $numberRatedMovies = getNumberRatedMovie($chatId); 
    if (($text == "/start")) {
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
       switchText($telegram, $chatId, $text, $firstname);
