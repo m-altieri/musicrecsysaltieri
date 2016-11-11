@@ -2,7 +2,7 @@
 //function menuReply($telegram, $chatId){
 function basePropertyTypeReply($telegram, $chatId){
    
-   $fullMenuArray = menuKeyboard($chatId);
+   $fullMenuArray = propertyValueKeyboard($chatId);
    //$fullMenuArray = getKeyboardFullMenu($chatId);
 
    $keyboard = array();
