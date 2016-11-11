@@ -9,23 +9,15 @@ use Telegram\Bot\Api;
 require 'vendor/autoload.php';
 $config = require __DIR__ . '/vendor/recsysbot/config/movierecsysbot-config.php';
 
-
-foreach(glob("vendor/recsysbot/functions/*.php") as $file){
-    require $file;
-}
-
-foreach(glob("vendor/recsysbot/replies/*.php") as $file){
-    require $file;
-}
-
-foreach(glob("vendor/recsysbot/restService/*.php") as $file){
-    require $file;
-}
+//richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
+foreach(glob("vendor/recsysbot/functions/*.php") as $file){require $file;}
+foreach(glob("vendor/recsysbot/keyboards/*.php") as $file){require $file;}
+foreach(glob("vendor/recsysbot/replies/*.php") as $file){require $file;}
+foreach(glob("vendor/recsysbot/restService/*.php") as $file){require $file;}
 
 //This is suggested from Guzzle
 date_default_timezone_set($config['timezone']);
 $token = $config['token'];
-
 
 $telegram = new Api($token);
 
@@ -63,17 +55,17 @@ $text = trim($text);
 $text = strtolower($text);
 
 if (isset ($message['text'])){
-   $numberRatedMovies = getNumeberRatedMovie($chatId); 
+   //$numberRatedMovies = getNumberRatedMovie($chatId); 
    if (($text == "/start")) {
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
-      switchText($telegram, $chatId, $text);
+      switchText($telegram, $chatId, $text, $firstname);
    } elseif ($text == "/help" || $text == "/info") {
-      switchText($telegram, $chatId, $text);      
+      switchText($telegram, $chatId, $text, $firstname);    
    } elseif ($numberRatedMovies >= 3) {
-      switchText($telegram, $chatId, $text);
+      switchText($telegram, $chatId, $text, $firstname);
    }else {
       $text = "/profile";
-      switchText($telegram, $chatId, $text);
+      switchText($telegram, $chatId, $text, $firstname);
    }
 }
 elseif (isset ($message['audio'])){
