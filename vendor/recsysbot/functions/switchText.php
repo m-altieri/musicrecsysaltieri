@@ -1,6 +1,6 @@
 <?php
 
-//use Vendor\Recsysbot\Commands\ProfileCommand;
+use Vendor\Recsysbot\Commands\ProfileCommand;
 
 function switchText($telegram, $chatId, $text, $firstname){
    $textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
