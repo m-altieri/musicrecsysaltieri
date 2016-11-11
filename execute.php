@@ -53,7 +53,6 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
-
 if (isset ($message['text'])){
    $numberRatedMovies = getNumberRatedMovie($chatId); 
    if (($text == "/start")) {

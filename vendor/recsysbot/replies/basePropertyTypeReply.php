@@ -22,7 +22,6 @@ function basePropertyTypeReply($telegram, $chatId){
                ];*/
 
 
-
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
    $text = "Choose your favourite...";
