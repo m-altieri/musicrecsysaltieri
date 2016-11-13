@@ -66,7 +66,6 @@ class userProfileAcquisitionByMovie
       $userID = 6;
       $telegram = $this->getTelegram();
       $chatId = $this->getChatId();
-      file_put_contents("php://stderr", "telegram: ".$telegram.PHP_EOL);
       file_put_contents("php://stderr", "chatId: ".$chatId.PHP_EOL);
 
       $movieName = $this->getUserMovieToRating($chatId); 
