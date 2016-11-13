@@ -116,11 +116,11 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
       }
 
       if ($poster != '' AND $poster != "N/A" ) {   
-         $img = './images/poster.jpg';
+         $img = '/recsysbot/images/poster.jpg';
          copy($poster, $img);
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $text]);
-         copy('./images/default.jpg', './images/poster.jpg');
+         copy('recsysbot/images/default.jpg', 'recsysbot/images/poster.jpg');
       }
    }
 }
