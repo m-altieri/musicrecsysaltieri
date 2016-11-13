@@ -117,7 +117,7 @@ class userProfileAcquisitionByMovie
       $movieName = str_replace('_', ' ', $movieName); // Replaces all underscore with spaces.
       
       $this->setMovieToRating($movieName);
-      echo $movieURI."<br>";
+      file_put_contents("php://stderr", "movieURI: ".$movieURI.PHP_EOL);
       return $movieName;
    }
 
