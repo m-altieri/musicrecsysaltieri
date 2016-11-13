@@ -23,6 +23,10 @@ class ComposerStaticInitc80720e1fd2889fd5619301d6e4249d1
         array (
             'Stringy\\' => 8,
         ),
+        'R' => 
+        array (
+            'Recsysbot\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -48,6 +52,10 @@ class ComposerStaticInitc80720e1fd2889fd5619301d6e4249d1
         'Stringy\\' => 
         array (
             0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
+        ),
+        'Recsysbot\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/recsysbot',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -76,13 +84,6 @@ class ComposerStaticInitc80720e1fd2889fd5619301d6e4249d1
     );
 
     public static $prefixesPsr0 = array (
-        'r' => 
-        array (
-            'recsysbot\\' => 
-            array (
-                0 => 'D:\\Dropbox\\Applicazioni\\Heroku\\movierecsysbot\\vendor',
-            ),
-        ),
         'D' => 
         array (
             'Doctrine\\Common\\Inflector\\' => 

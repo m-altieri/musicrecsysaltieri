@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Telegram\\Bot\\' => array($vendorDir . '/irazasyed/telegram-bot-sdk/src'),
     'Stringy\\' => array($vendorDir . '/danielstjules/stringy/src'),
+    'Recsysbot\\' => array($baseDir . '/recsysbot'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),

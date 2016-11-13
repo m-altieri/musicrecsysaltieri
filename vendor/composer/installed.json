@@ -392,17 +392,17 @@
     },
     {
         "name": "guzzlehttp/guzzle",
-        "version": "6.2.1",
-        "version_normalized": "6.2.1.0",
+        "version": "6.2.2",
+        "version_normalized": "6.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
+            "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
-            "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+            "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
             "shasum": ""
         },
         "require": {
@@ -415,7 +415,7 @@
             "phpunit/phpunit": "^4.0",
             "psr/log": "^1.0"
         },
-        "time": "2016-07-15 17:22:37",
+        "time": "2016-10-08 15:01:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -456,33 +456,33 @@
     },
     {
         "name": "irazasyed/telegram-bot-sdk",
-        "version": "v2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
-            "reference": "d51ecbe67de372a601dad5ca5b412995aecdc94d"
+            "reference": "cf885c61d36ffe5d79e1d0fec696e6ad32d9cfc9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/d51ecbe67de372a601dad5ca5b412995aecdc94d",
-            "reference": "d51ecbe67de372a601dad5ca5b412995aecdc94d",
+            "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/cf885c61d36ffe5d79e1d0fec696e6ad32d9cfc9",
+            "reference": "cf885c61d36ffe5d79e1d0fec696e6ad32d9cfc9",
             "shasum": ""
         },
         "require": {
             "guzzlehttp/guzzle": "~6.0",
-            "illuminate/support": "5.0.*|5.1.*|5.2.*",
+            "illuminate/support": "~5.0",
             "php": ">=5.5.0"
         },
         "require-dev": {
             "phpspec/prophecy": "^1.5",
-            "phpunit/phpunit": "^4.8|^5.0"
+            "phpunit/phpunit": "^4.8 || ^5.0"
         },
         "suggest": {
             "illuminate/container": "Hold dependencies to be injected in commands constructors",
             "irazasyed/larasupport": "Allows you to use any Laravel Package in Lumen by adding support!"
         },
-        "time": "2015-12-27 20:25:51",
+        "time": "2016-11-01 20:09:05",
         "type": "library",
         "extra": {
             "branch-alias": {

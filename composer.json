@@ -4,9 +4,9 @@
     "description": "A Movie Recommender System bot",
     "keyworkds": ["movie","film", "recommender system", "telegram", "bot", "php"],
     "autoload": {
-    		"functions": ["vendor/recsysbot/replies/menuReply.php"],
+    		"functions": ["recsysbot/replies/menuReply.php"],
         "psr-4": {
-            "Vendor\\Recsysbot\\": "vendor/"
+            "Recsysbot\\": "recsysbot/"
         }
     },
     "authors": [
