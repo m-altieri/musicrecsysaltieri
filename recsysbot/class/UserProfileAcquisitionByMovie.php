@@ -3,79 +3,80 @@
 namespace Recsysbot;
 
 use Telegram\Bot\Actions;
+use Telegram\Bot\Api;
 use Telegram\Bot\Commands\Command;
 use GuzzleHttp\Client;
 
 /**
  * @author Francesco Baccaro
  */
-class userProfile extends Command
+class userProfileAcquisitionByMovie
 {
-    protected $name = "profile";
-    protected $description = "RecSysBot - create user profile command";
-    protected $client;
-    protected $movieToRating;
-    protected $chatId; 
+   protected $name = "profile";
+   protected $description = "RecSysBot - create user profile command";
+   protected $telegram;
+   protected $chatId; 
+   protected $text;
+   protected $client;
+   protected $movieToRating;
 
-
-    public function __construct(){      
-      $this->setClient();
+   public function __construct($telegram, $chatId, $text){
+      $this->setTelegram($telegram);     
+      $this->setChatId($chatId);
+      $this->setText($text);
     }
+
+   private function setTelegram($telegram){
+      $this->telegram = $telegram;
+   } 
+   public function getTelegram(){
+      return $this->telegram;
+   }
+
+   public function setChatId($chatId){
+      $this->chatId = $chatId;
+   }
+   public function getChatId(){
+      return $this->chatId;
+   }
+
+   private function setText($text){
+      $this->text = $text;
+   } 
+   public function getText(){
+      return $this->text;
+   }
 
    private function setClient(){
-      //$this->client = new Client(['base_uri'=>'http://localhost:8080']);
       $this->client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-    }
-
+   }
    public function getClient(){
       return $this->client;
-    }
+   }
 
    private function setMovieToRating($movieName){
       $this->movieToRating = $movieName;
-    }
-
-    public function getMovieToRating(){
+   }
+   public function getMovieToRating(){
       return $this->movieToRating;
-    }
+   }
 
-   public function setChatId($userId){
-      //$this->chatId = $userId;
-      $this->chatId = 129877748;
-    }
+   public function handle(){
 
-   public function getChatId(){
-      return $this->chatId;
-    }
-
-
-   public function handle($arguments){
-
-
-      //Get
-      //$userId = 129877748;
-      //$this->replyWithMessage(['text' => 'userId: '.$userId]);
-      //$userId = $this->getUpdate()->getMessage()->getChat()->getId();
-
-      //$this->setChatId($userId);
+      $userID = 6;
+      $telegram = $this->getTelegram();
       $chatId = $this->getChatId();
-      //$this->replyWithMessage(['text' => 'chatId: '.$chatId]);
-/*        $this->replyWithChatAction(['action' => Actions::TYPING]);
-        $arguments = $this->getTelegram()->getLastResponse()->getDecodedBody();
-        $argument_array = explode(' ',$arguments);
-        foreach ($argument_array as $key => $value) {
-            $this->replyWithMessage(['text' => 'Argument '.$key.': '.$value]);
-        }*/
+      file_put_contents("php://stderr", "telegram: ".$telegram.PHP_EOL);
+      file_put_contents("php://stderr", "chatId: ".$chatId.PHP_EOL);
 
       $movieName = $this->getUserMovieToRating($chatId); 
       $title = $this->getTitleAndPosterMovieToRating($movieName);
       
+      
       //bot
-      $this->replyWithChatAction(['action' => Actions::TYPING]);
       $text = "Do you like this movie?";
-      $this->replyWithMessage([
-            'text' => $text
-            ]);      
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
 
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
@@ -85,16 +86,14 @@ class userProfile extends Command
       copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
 
       $keyboard = $this->getKeyboardFilms();
-      $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
-                             'keyboard' => $keyboard,
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                              'resize_keyboard' => true,
                              'one_time_keyboard' => false
                              ]);
       
-      $this->replyWithChatAction(['action' => Actions::TYPING]);
       $text = "Skip, if you don't watch";
-      $this->replyWithMessage([
-            'text' => $text,
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);        
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text,
             'reply_markup' => $reply_markup
             ]);
    }
@@ -109,9 +108,9 @@ class userProfile extends Command
    }
 
    public function getUserMovieToRating($chatId){
-      //$userID = $chatId;
+      $userID = 6;
       $client = $this->getClient();   
-      $stringGetRequest ='/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$chatId;
+      $stringGetRequest ='/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$userID;
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $movieURI = json_decode($bodyMsg);
@@ -125,7 +124,7 @@ class userProfile extends Command
 
   public function putUserMovieToRating($chatId, $movieName, $rating){
 
-      //$userID = $chatId;
+      $userID = 6;
 
       if ($movieName != "null"){
          $movieName = str_replace(' ', '_', $movieName);
@@ -133,7 +132,7 @@ class userProfile extends Command
          $movieURI .= $movieName;
 
          $client = $this->getClient();        
-         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/putMovieRating?userID='.$chatId.'&movieURI='.$movieURI.'&rating='.$rating;
+         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/putMovieRating?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating;
          $response = $client->request('GET', $stringGetRequest);
          $bodyMsg = $response->getBody()->getContents();
          $data = json_decode($bodyMsg);
@@ -185,7 +184,7 @@ class userProfile extends Command
    }
 
    public function getNumberOfRatedMovies($chatId){
-      //$userID = $chatId;
+      $userID = 6;
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
       $stringGetRequest ='/lodrecsysrestful/restService/movieRating/getNumberRatedMovies?userID='.$chatId;
       $response = $client->request('GET', $stringGetRequest);

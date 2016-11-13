@@ -10,6 +10,9 @@ function switchText($telegram, $chatId, $text, $firstname){
       case "/start": case "/help": case "/info": case "/profile":       
          $telegram->commandsHandler(true);
          break;
+      case "test":
+         $profile = new userProfileAcquisitionByMovie($telegram, $chatId, $text);
+         $profile->handle();
       case "menu": case "<-": case strpos($text, '🔴'):
          basePropertyTypeReply($telegram, $chatId);
          break;
