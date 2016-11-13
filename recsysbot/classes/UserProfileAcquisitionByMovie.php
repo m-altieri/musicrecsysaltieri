@@ -1,6 +1,6 @@
 <?php 
 
-namespace Recsysbot;
+namespace Recsysbot\Classes;
 
 use Telegram\Bot\Actions;
 use Telegram\Bot\Api;
