@@ -1,6 +1,6 @@
 <?php
 
-use Vendor\Recsysbot\Commands\ProfileCommand;
+use Recsysbot\Commands\ProfileCommand;
 
 function profileReply($telegram, $chatId, $rating){
    
