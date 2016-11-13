@@ -12,7 +12,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          $telegram->commandsHandler(true);
          break;
       case "test":
-         $profile = new userProfileAcquisitionByMovie($telegram, $chatId, $text);
+         $profile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
          $profile->handle();
          break;
       case "menu": case "<-": case strpos($text, '🔴'):
