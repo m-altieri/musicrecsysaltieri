@@ -44,5 +44,3 @@ class HelpCommand extends Command
     }
 }
 
-
-?>
