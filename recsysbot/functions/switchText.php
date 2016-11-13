@@ -1,6 +1,7 @@
 <?php
 
-use Vendor\Recsysbot\Commands\ProfileCommand;
+use Recsysbot\Commands\ProfileCommand;
+use Recsysbot\UserProfileAcquisitionByMovie;
 
 function switchText($telegram, $chatId, $text, $firstname){
    $textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
