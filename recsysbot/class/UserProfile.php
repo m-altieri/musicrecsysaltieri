@@ -79,10 +79,10 @@ class userProfile extends Command
 
       $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
       $this->replyWithPhoto([
-             'photo' => './images/poster.jpg', 
+             'photo' => './recsysbot/images/poster.jpg', 
              'caption' => $title
             ]);
-      copy('./images/default.jpg', './images/poster.jpg');
+      copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
 
       $keyboard = $this->getKeyboardFilms();
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
@@ -177,7 +177,7 @@ class userProfile extends Command
       }
 
       if ($poster != '' AND $poster != "N/A" ) {   
-         $img = './images/poster.jpg';
+         $img = './recsysbot/images/poster.jpg';
          copy($poster, $img);
       }
 
