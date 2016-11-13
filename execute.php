@@ -7,13 +7,13 @@ use GuzzleHttp\Client;
 use Telegram\Bot\Api;
 
 require 'vendor/autoload.php';
-$config = require __DIR__ . '/vendor/recsysbot/config/movierecsysbot-config.php';
+$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 
 //richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
-foreach(glob("vendor/recsysbot/functions/*.php") as $file){require $file;}
-foreach(glob("vendor/recsysbot/keyboards/*.php") as $file){require $file;}
-foreach(glob("vendor/recsysbot/replies/*.php") as $file){require $file;}
-foreach(glob("vendor/recsysbot/restService/*.php") as $file){require $file;}
+foreach(glob("recsysbot/functions/*.php") as $file){require $file;}
+foreach(glob("recsysbot/keyboards/*.php") as $file){require $file;}
+foreach(glob("recsysbot/replies/*.php") as $file){require $file;}
+foreach(glob("recsysbot/restService/*.php") as $file){require $file;}
 
 //This is suggested from Guzzle
 date_default_timezone_set($config['timezone']);
