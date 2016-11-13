@@ -2,9 +2,7 @@
 
 namespace Recsysbot\Classes;
 
-use Telegram\Bot\Actions;
 use Telegram\Bot\Api;
-use Telegram\Bot\Commands\Command;
 use GuzzleHttp\Client;
 
 /**
@@ -24,6 +22,7 @@ class userProfileAcquisitionByMovie
       $this->setTelegram($telegram);     
       $this->setChatId($chatId);
       $this->setText($text);
+      $this->setClient();
     }
 
    private function setTelegram($telegram){
