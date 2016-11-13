@@ -77,10 +77,10 @@ class userProfileAcquisitionByMovie
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
 
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
-      $this->replyWithPhoto([
-             'photo' => './recsysbot/images/poster.jpg', 
-             'caption' => $title
-            ]);
+
+      $img = './recsysbot/images/poster.jpg';
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+      $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $title]);
       copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
 
       $keyboard = $this->getKeyboardFilms();
