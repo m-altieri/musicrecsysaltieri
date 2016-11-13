@@ -76,7 +76,7 @@ class userProfileAcquisitionByMovie
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
 
-      $this->replyWithChatAction(['action' => Actions::UPLOAD_PHOTO]);
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
       $this->replyWithPhoto([
              'photo' => './recsysbot/images/poster.jpg', 
              'caption' => $title
