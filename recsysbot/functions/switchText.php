@@ -14,6 +14,7 @@ function switchText($telegram, $chatId, $text, $firstname){
       case "test":
          $profile = new userProfileAcquisitionByMovie($telegram, $chatId, $text);
          $profile->handle();
+         break;
       case "menu": case "<-": case strpos($text, '🔴'):
          basePropertyTypeReply($telegram, $chatId);
          break;
