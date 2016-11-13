@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 $config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 
 //richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
+foreach(glob("recsysbot/classes/*.php") as $file){require $file;}
 foreach(glob("recsysbot/functions/*.php") as $file){require $file;}
 foreach(glob("recsysbot/keyboards/*.php") as $file){require $file;}
 foreach(glob("recsysbot/replies/*.php") as $file){require $file;}
