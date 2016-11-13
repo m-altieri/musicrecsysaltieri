@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\Recsysbot\Commands;
+namespace Recsysbot\Commands;
 
 use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;

@@ -34,10 +34,10 @@ if(!$update)
   exit;
 }
 
-$telegram->addCommand(Vendor\Recsysbot\Commands\HelpCommand::class);
-$telegram->addCommand(Vendor\Recsysbot\Commands\InfoCommand::class);
-$telegram->addCommand(Vendor\Recsysbot\Commands\ProfileCommand::class);
-$telegram->addCommand(Vendor\Recsysbot\Commands\StartCommand::class);
+$telegram->addCommand(Recsysbot\Commands\HelpCommand::class);
+$telegram->addCommand(Recsysbot\Commands\InfoCommand::class);
+$telegram->addCommand(Recsysbot\Commands\ProfileCommand::class);
+$telegram->addCommand(Recsysbot\Commands\StartCommand::class);
 
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
 $message = isset($update['message']) ? $update['message'] : "";
