@@ -167,14 +167,8 @@ function switchText($telegram, $chatId, $text, $firstname){
          //Return to the list of recommended movies
          //Pensare a come non mandare sempre in esecuzione il pagerank per recuperare la lista
          $reply = explode("\"", $text);
-         file_put_contents("php://stderr", "return ".$text.PHP_EOL);
-         file_put_contents("php://stderr", "0 return ".$reply[0].PHP_EOL); 
-         file_put_contents("php://stderr", "1 return propertyType: ".$reply[1].PHP_EOL); 
-         file_put_contents("php://stderr", "2 return ".$reply[2].PHP_EOL); 
-         file_put_contents("php://stderr", "3 return ".$reply[3].PHP_EOL); 
-         file_put_contents("php://stderr", "4 return ".$reply[4].PHP_EOL);           
-         
          $propertyType = $reply[1];
+         file_put_contents("php://stderr", "propertyType: ".$propertyType.PHP_EOL);       
          if ($propertyType == "movies") {
             movieListTop5Reply($telegram, $chatId);
          }
