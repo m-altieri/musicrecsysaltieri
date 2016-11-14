@@ -6,9 +6,9 @@ function otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $prope
    if ($propertyType != "null" && $propertyName != "null" ) {
 
       $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
-      $result = putPropertyRating($chatId, $propertyType, $propertyName, $rating);
+      $data = putPropertyRating($chatId, $propertyType, $propertyName, $rating);
       
-      $newNumberOfRatedProperties = $result;
+      $newNumberOfRatedProperties = $data;
 
       if ($newNumberOfRatedProperties > $oldNumberOfRatedProperties) {
          $text = "You have rated \"".ucwords($propertyName)."\"\nProfile update with ".$newNumberOfRatedProperties." rated properties";

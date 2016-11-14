@@ -3,18 +3,14 @@
 use GuzzleHttp\Client;
 use Telegram\Bot\FileUpload\InputFile;
 
-function movieDetailReply($telegram, $chatId, $movie){   
+function movieDetailReply($telegram, $chatId, $movie){
 
-   $textSorry ="Sorry :)\nI don't understand \nPlease enter a command (es.\"/start\") ";
-   
-   $movieName = str_replace(' ', '_', $movie); 
    //$userID = $chatId;
-   $userID = 6;
-   $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest ='/lodrecsysrestful/restService/movieDetail/getAllPropertyListFromMovie?movieName='.$movieName;
-   $response = $client->request('GET', $stringGetRequest);
-   $bodyMsg = $response->getBody()->getContents();
-   $data = json_decode($bodyMsg);
+   $userID = 6; 
+
+   $textSorry ="Sorry :)\nI don't understand \nPlease enter a command (es.\"/start\") ";   
+   $movieName = str_replace(' ', '_', $movie); 
+   $data = getAllPropertyListFromMovie($movieName);
 
    $result = array();
    $keyboard = array();

@@ -22,7 +22,6 @@ class userProfileAcquisitionByMovie
       $this->setTelegram($telegram);     
       $this->setChatId($chatId);
       $this->setText($text);
-      $this->setClient();
     }
 
    private function setTelegram($telegram){
@@ -44,13 +43,6 @@ class userProfileAcquisitionByMovie
    } 
    public function getText(){
       return $this->text;
-   }
-
-   private function setClient(){
-      $this->client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   }
-   public function getClient(){
-      return $this->client;
    }
 
    private function setMovieToRating($movieName){
@@ -107,16 +99,14 @@ class userProfileAcquisitionByMovie
 
    public function getUserMovieToRating($chatId){
       $userID = 6;
-      $client = $this->getClient();   
-      $stringGetRequest ='/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$userID;
-      $response = $client->request('GET', $stringGetRequest);
-      $bodyMsg = $response->getBody()->getContents();
-      $movieURI = json_decode($bodyMsg);
+
+      $data = getMovieToRating($chatId);
+      $movieURI = $data;
       $movieName = str_replace("http://dbpedia.org/resource/", "", $movieURI);
       $movieName = str_replace('_', ' ', $movieName); // Replaces all underscore with spaces.
       
       $this->setMovieToRating($movieName);
-      file_put_contents("php://stderr", "movieURI: ".$movieURI.PHP_EOL);
+
       return $movieName;
    }
 
@@ -129,28 +119,20 @@ class userProfileAcquisitionByMovie
          $movieURI = "http://dbpedia.org/resource/";
          $movieURI .= $movieName;
 
-         $client = $this->getClient();        
-         $stringGetRequest ='/lodrecsysrestful/restService/movieRating/putMovieRating?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating;
-         $response = $client->request('GET', $stringGetRequest);
-         $bodyMsg = $response->getBody()->getContents();
-         $data = json_decode($bodyMsg);
+         $data = putMovieRating($chatId, $movieURI, $rating);
          
       }
       else{
          $data = null;
       }
 
-      return $bodyMsg;
+      return $data;
    }
 
    public function getTitleAndPosterMovieToRating($movieName){
-      $movieName = str_replace(' ', '_', $movieName);
-      
-      $client = $this->getClient();
-      $stringGetRequest ='/lodrecsysrestful/restService/movieDetail/getAllPropertyListFromMovie?movieName='.$movieName;      
-      $response = $client->request('GET', $stringGetRequest);
-      $bodyMsg = $response->getBody()->getContents();
-      $data = json_decode($bodyMsg);
+
+      $movieName = str_replace(' ', '_', $movieName);      
+      $data = getAllPropertyListFromMovie($movieName);
 
       $poster = $title = "";
 
@@ -180,16 +162,6 @@ class userProfileAcquisitionByMovie
 
       return $title;
    }
-
-   public function getNumberOfRatedMovies($chatId){
-      $userID = 6;
-      $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-      $stringGetRequest ='/lodrecsysrestful/restService/movieRating/getNumberRatedMovies?userID='.$chatId;
-      $response = $client->request('GET', $stringGetRequest);
-      $bodyMsg = $response->getBody()->getContents();
-      $data = json_decode($bodyMsg);
-      return $data;
-      }
 
 }
 

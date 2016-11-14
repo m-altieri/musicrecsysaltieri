@@ -41,13 +41,13 @@ function putPropertyRating($chatId, $propertyType, $propertyName, $rating){
       $response = $client->request('GET', $stringGetRequest);
       $bodyMsg = $response->getBody()->getContents();
       $data = json_decode($bodyMsg);
-      file_put_contents("php://stderr", "putPropertyRating return:".$data.PHP_EOL);
+      
    }
    else{
       $data = null;
    }
-	//file_put_contents("php://stderr", "putPropertyRating stringGetRequest:".$stringGetRequest.PHP_EOL);
    
+   file_put_contents("php://stderr", "putPropertyRating return:".$data.PHP_EOL);
 
-   return $bodyMsg;
+   return $data;
 }

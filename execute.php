@@ -37,7 +37,6 @@ if(!$update)
 
 $telegram->addCommand(Recsysbot\Commands\HelpCommand::class);
 $telegram->addCommand(Recsysbot\Commands\InfoCommand::class);
-$telegram->addCommand(Recsysbot\Commands\ProfileCommand::class);
 $telegram->addCommand(Recsysbot\Commands\StartCommand::class);
 
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
@@ -64,7 +63,7 @@ if (isset ($message['text'])){
    } elseif ($numberRatedMovies >= 3) {
       switchText($telegram, $chatId, $text, $firstname);
    }else {
-      $text = "/profile";
+      $text = "profile";
       switchText($telegram, $chatId, $text, $firstname);
    }
 }

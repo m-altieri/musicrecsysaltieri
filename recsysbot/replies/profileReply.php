@@ -4,20 +4,23 @@ use Recsysbot\Commands\ProfileCommand;
 
 function profileReply($telegram, $chatId, $rating){
    
-	$profile = new ProfileCommand();
-   //$profile->setChatId($chatId);
-	
-   
-   //$userID = $profile->getUserID();
-   //$userID = $chatId;
    $userID = 6;
-   $oldNumberOfRatedMovies = $profile->getNumberOfRatedMovies($userID);
-   $movieName = $profile->getUserMovieToRating($userID);
+   $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
+   $movieName = getUserMovieToRating($userID);
 
-   $result = $profile->putUserMovieToRating($userID, $movieName, $rating);
+   if ($movieName != "null"){
+      $movieName = str_replace(' ', '_', $movieName);
+      $movieURI = "http://dbpedia.org/resource/";
+      $movieURI .= $movieName;
 
-   $newNumberOfRatedMovies = $profile->getNumberOfRatedMovies($userID);
+      $data = putMovieRating($chatId, $movieURI, $rating);         
+   }
+   else{
+      $data = null;
+   }
 
+   $newNumberOfRatedMovies = getNumberRatedMovies($userID);
+   //manca il richiamo del profilo o la funzione, rivedere.
    $title = $profile->getTitleAndPosterMovieToRating($movieName);
    if ($newNumberOfRatedMovies > $oldNumberOfRatedMovies) {
    	$text = "You have rated \"".$title."\" movie \nProfile update with ".$newNumberOfRatedMovies." rated movies";

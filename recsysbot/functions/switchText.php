@@ -8,10 +8,10 @@ function switchText($telegram, $chatId, $text, $firstname){
    $textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
 
    switch ($text) { 
-      case "/start": case "/help": case "/info": case "/profile":       
+      case "/start": case "/help": case "/info":      
          $telegram->commandsHandler(true);
          break;
-      case "test":
+      case strpos($text, 'profile'): 
          $profile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
          $profile->handle();
          break;
@@ -27,9 +27,6 @@ function switchText($telegram, $chatId, $text, $firstname){
       case "/reset":         
          resetPropertyValueRatingReply($telegram, $chatId, $firstname);
          break;
-/*      case "/profile": case "profile":
-         updateUserProfileReply($telegram, $chatId);
-         break;*/
       case strpos($text, '/directors'): case strpos($text, 'directors'): case strpos($text, 'director'):            
          $propertyType = "director";
          propertyValueReply($telegram, $chatId, $propertyType, $text);

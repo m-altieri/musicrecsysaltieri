@@ -4,17 +4,24 @@ use Vendor\Recsysbot\Commands\ProfileCommand;
 
 function dislikeReply($telegram, $chatId){
    
-	$profile = new ProfileCommand();
-	$oldNumberOfRatedMovies = $profile->getNumberOfRatedMovies($chatId);
-   
-   $userID = $profile->getUserID();
-   $movieName = $profile->getUserMovieToRating($userID);
+   $userID = 6;
    $rating = "0";
+   $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
+   $movieName = getUserMovieToRating($userID);
 
-   $result = $profile->putUserMovieToRating($userID, $movieName, $rating);
+   if ($movieName != "null"){
+      $movieName = str_replace(' ', '_', $movieName);
+      $movieURI = "http://dbpedia.org/resource/";
+      $movieURI .= $movieName;
 
-   $newNumberOfRatedMovies = $profile->getNumberOfRatedMovies($chatId);
+      $data = putMovieRating($chatId, $movieURI, $rating);         
+   }
+   else{
+      $data = null;
+   }
 
+   $newNumberOfRatedMovies = getNumberRatedMovies($userID);
+   //manca il richiamo del profilo o la funzione, rivedere.
    $title = $profile->getTitleAndPosterMovieToRating($movieName);
    if ($newNumberOfRatedMovies > $oldNumberOfRatedMovies) {
    	$text = "You have rated \"".$title."\" movie \nProfile update with ".$newNumberOfRatedMovies." rated movies";

@@ -4,16 +4,23 @@ use Vendor\Recsysbot\Commands\ProfileCommand;
 
 function likeReply($telegram, $chatId){
    
-	$profile = new ProfileCommand();
-   $userID = $profile->getUserID();
-   $movieName = $profile->getUserMovieToRating($userID);
-   $title = $profile->getTitleAndPosterMovieToRating($movieName);
-   print_r ("Movie: ".$title."<br>");
+   $userID = 6;
    $rating = "1";
-   $result = $profile->putUserMovieToRating($userID, $movieName, $rating);
-   print_r ("Put Result: ".$result."<br>");
-   if ($result == "ok") {
-   	$text = "You like ".$title." movie \nProfile update ".$result;
+   $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
+   $movieName = getUserMovieToRating($userID);
+
+   if ($movieName != "null"){
+      $movieName = str_replace(' ', '_', $movieName);
+      $movieURI = "http://dbpedia.org/resource/";
+      $movieURI .= $movieName;
+
+      $data = putMovieRating($chatId, $movieURI, $rating);         
+   }
+   else{
+      $data = null;
+   }
+   if ($data == "ok") {
+   	$text = "You like ".$title." movie \nProfile update ".$data;
    } else {
    	$text = "Sorry, there was a problem to updating your profile";
    }
