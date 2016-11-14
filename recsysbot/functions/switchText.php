@@ -17,6 +17,10 @@ function switchText($telegram, $chatId, $text, $firstname){
       case "menu": case "<-": case strpos($text, '🔴'):
          basePropertyTypeReply($telegram, $chatId);
          break;
+      case strpos($text, '🔵'):
+         profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         //movieListTop5Reply($telegram, $chatId);
+         break;
       case "->":   case strpos($text, '🔎'):
          allPropertyTypeReply($telegram, $chatId);
          break;
@@ -156,9 +160,6 @@ function switchText($telegram, $chatId, $text, $firstname){
          propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue);
          // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
          break;
-      case strpos($text, '🔵'):
-         movieListTop5Reply($telegram, $chatId);
-         break;
       case strpos($text, '✔'):
          movieListTop5Reply($telegram, $chatId);
          break;
@@ -186,17 +187,17 @@ function switchText($telegram, $chatId, $text, $firstname){
          break;
       case strpos($text, '👍'):
          $rating = 1;
-         profileReply($telegram, $chatId, $rating);
+         profileReply($telegram, $chatId, $rating, $userMovieprofile);
          basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '👎'):
          $rating = 0;
-         profileReply($telegram, $chatId, $rating);
+         profileReply($telegram, $chatId, $rating, $userMovieprofile);
          basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '🗯'):
          $rating = 2;
-         profileReply($telegram, $chatId, $rating);
+         profileReply($telegram, $chatId, $rating, $userMovieprofile);
          basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '😃'):

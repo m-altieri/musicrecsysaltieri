@@ -2,7 +2,7 @@
 
 use Recsysbot\Classes\userProfileAcquisitionByMovie;
 
-function profileReply($telegram, $chatId, $rating){
+function profileReply($telegram, $chatId, $rating, $userMovieprofile){
    
    $userID = $chatId;
    $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
@@ -21,7 +21,7 @@ function profileReply($telegram, $chatId, $rating){
 
    $newNumberOfRatedMovies = getNumberRatedMovies($userID);
    //manca il richiamo del profilo o la funzione, rivedere.
-   $title = $profile->getTitleAndPosterMovieToRating($movieName);
+   $title = $userMovieprofile->getTitleAndPosterMovieToRating($movieName);
    if ($newNumberOfRatedMovies > $oldNumberOfRatedMovies) {
    	$text = "You have rated \"".$title."\" movie \nProfile update with ".$newNumberOfRatedMovies." rated movies";
    } else {
