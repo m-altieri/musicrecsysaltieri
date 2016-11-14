@@ -57,19 +57,29 @@ if (isset ($message['text'])){
    $numberRatedMovies = getNumberRatedMovies($chatId);
    $numberRatedProperties = getNumberRatedProperties($chatId); 
    if (($text == "/start")) {
-      file_put_contents("php://stderr", "text == start".PHP_EOL);
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
       switchText($telegram, $chatId, $text, $firstname);
-   } elseif ($text == "profile" || $text == "/help" || $text == "/info" || strpos($text, '🔴') !== false || strpos($text, '🔵') !== false ) {
-      file_put_contents("php://stderr", "text == help || text == info || strpos(text, '🔴') || strpos(text, '🔵')".PHP_EOL);
+      file_put_contents("php://stderr", "text == start".PHP_EOL);
+   } 
+   elseif ( $text == "profile" || 
+            $text == "/help" || 
+            $text == "/info" || 
+            strpos($text, '🔴') !== false || 
+            strpos($text, '🔵') !== false ||
+            strpos($text, '👍') !== false || 
+            strpos($text, '👎') !== false || 
+            strpos($text, '🗯') !== false ) {
       switchText($telegram, $chatId, $text, $firstname);    
-   } elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
+      file_put_contents("php://stderr", "help || info || movies || properties".PHP_EOL);
+   } 
+   elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
+      switchText($telegram, $chatId, $text, $firstname);
       file_put_contents("php://stderr", "numberRatedMovies >= 3 || numberRatedProperties >= 3".PHP_EOL);
+   }
+   else {
+      $text = "profile";
       switchText($telegram, $chatId, $text, $firstname);
-   }else {
-      $text = "start";
-      file_put_contents("php://stderr", "text = start".PHP_EOL);
-      switchText($telegram, $chatId, $text, $firstname);
+      file_put_contents("php://stderr", "profile".PHP_EOL);
    }
 }
 elseif (isset ($message['audio'])){
