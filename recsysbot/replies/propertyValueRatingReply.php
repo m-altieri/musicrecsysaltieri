@@ -3,7 +3,6 @@
 //function propertyRatingReply($telegram, $chatId, $propertyType, $propertyValue){   
 function propertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue){   
 
-   $userID = 6;
    $propertyName = substr($propertyValue,5);
 
    $keyboard = [

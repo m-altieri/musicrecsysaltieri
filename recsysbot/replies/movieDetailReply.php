@@ -5,9 +5,6 @@ use Telegram\Bot\FileUpload\InputFile;
 
 function movieDetailReply($telegram, $chatId, $movie){
 
-   //$userID = $chatId;
-   $userID = 6; 
-
    $textSorry ="Sorry :)\nI don't understand \nPlease enter a command (es.\"/start\") ";   
    $movieName = str_replace(' ', '_', $movie); 
    $data = getAllPropertyListFromMovie($movieName);

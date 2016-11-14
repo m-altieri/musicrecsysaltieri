@@ -1,9 +1,6 @@
 <?php
 
 function refineMoviePropertyKeyboard($chatId, $movie){
-
-   //$userID = $chatId;
-   $userID = 6;
    
    $movieName = str_replace(' ', '_', $movie);  
    $data = getAllPropertyListFromMovie($movieName);

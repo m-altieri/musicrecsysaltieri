@@ -3,7 +3,7 @@ use GuzzleHttp\Client;
 
 function putPropertyRating($chatId, $propertyType, $propertyName, $rating){
 
-	$userID = 6;
+	$userID = $chatId;
 	
 	switch ($propertyType) {
 		case "genre": case "releaseYear": case "runtimeRange":

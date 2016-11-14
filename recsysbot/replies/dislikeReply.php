@@ -4,7 +4,7 @@ use Vendor\Recsysbot\Commands\ProfileCommand;
 
 function dislikeReply($telegram, $chatId){
    
-   $userID = 6;
+   $userID = $chatId;
    $rating = "0";
    $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
    $movieName = getUserMovieToRating($userID);

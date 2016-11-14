@@ -3,8 +3,8 @@
 use GuzzleHttp\Client;
 
 function getMovieToRating($chatId){
-	//$userID = $chatId;
-	$userID = 6;
+
+	$userID = $chatId;
 
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
    $stringGetRequest = '/lodrecsysrestful/restService/movieToRating/getMovieToRating?userID='.$userID;

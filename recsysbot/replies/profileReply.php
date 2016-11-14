@@ -1,10 +1,10 @@
 <?php
 
-use Recsysbot\Commands\ProfileCommand;
+use Recsysbot\Classes\userProfileAcquisitionByMovie;
 
 function profileReply($telegram, $chatId, $rating){
    
-   $userID = 6;
+   $userID = $chatId;
    $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
    $movieName = getUserMovieToRating($userID);
 

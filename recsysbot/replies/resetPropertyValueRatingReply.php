@@ -2,7 +2,7 @@
 
 function resetPropertyValueRatingReply($telegram, $chatId, $firstname){
 
-	$userID = 6;  
+	$userID = $chatId;  
 
    $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
    $result = deletePropertyRating($chatId);

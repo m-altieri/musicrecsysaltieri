@@ -2,7 +2,6 @@
 
 function otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){   
 
-   $userID = 6;
    if ($propertyType != "null" && $propertyName != "null" ) {
 
       $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);

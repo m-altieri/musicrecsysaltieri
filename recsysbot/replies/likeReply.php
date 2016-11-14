@@ -4,7 +4,7 @@ use Vendor\Recsysbot\Commands\ProfileCommand;
 
 function likeReply($telegram, $chatId){
    
-   $userID = 6;
+   $userID = $chatId;
    $rating = "1";
    $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
    $movieName = getUserMovieToRating($userID);

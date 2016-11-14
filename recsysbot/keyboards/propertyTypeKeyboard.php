@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 
 function propertyTypeKeyboard($chatId){
 
-	$userID = 6;
+	$userID = $chatId;
 
 	$text = null;
 		

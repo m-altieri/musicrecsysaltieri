@@ -4,9 +4,6 @@ use GuzzleHttp\Client;
 use Telegram\Bot\FileUpload\InputFile;
 
 function movieDetailTop5Reply($telegram, $chatId, $movie){
-
-   //$userID = $chatId;
-   $userID = 6;
    
    $movieName = str_replace(' ', '_', $movie); 
 

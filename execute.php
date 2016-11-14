@@ -54,7 +54,7 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 if (isset ($message['text'])){
-   $numberRatedMovies = getNumberRatedMovie($chatId); 
+   $numberRatedMovies = getNumberRatedMovies($chatId); 
    if (($text == "/start")) {
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
       switchText($telegram, $chatId, $text, $firstname);

@@ -2,8 +2,6 @@
  
 function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyType){
    
-   //$userID = $chatId;
-   $userID = 6;
    $data = getMovieListFromProperty($chatId, $propertyName, $propertyType);
 
    $result = array();

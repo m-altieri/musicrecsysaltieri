@@ -2,16 +2,13 @@
 
 use GuzzleHttp\Client;
 
-function propertyValueKeyboard($chatId, $propertyType, $text){
-   
-   //$userID = $chatId;
-   $userID = 6;
+function propertyValueKeyboard($chatId, $propertyType, $text){   
 
    $reply = explode("\"", $text);
    $movieName = isset($reply[1])? $reply[1] : null;
    //$movieName = "cast away";   
 
-   $data = getPropertyValueListFromPropertyType($userID, $propertyType);
+   $data = getPropertyValueListFromPropertyType($chatId, $propertyType);
   
    $result = array();
    $keyboard = array();

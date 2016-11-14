@@ -3,7 +3,7 @@
 use GuzzleHttp\Client;
 
 function movieListTop5Keyboards($chatId){
-	$userID = 6;
+
    $propertyType = 'movie';
    //chiama il pagerank
    $data = getPropertyValueListFromPropertyType($chatId, $propertyType);

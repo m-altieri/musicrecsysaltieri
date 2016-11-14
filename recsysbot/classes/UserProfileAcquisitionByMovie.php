@@ -54,7 +54,6 @@ class userProfileAcquisitionByMovie
 
    public function handle(){
 
-      $userID = 6;
       $telegram = $this->getTelegram();
       $chatId = $this->getChatId();
       file_put_contents("php://stderr", "chatId: ".$chatId.PHP_EOL);
@@ -98,7 +97,6 @@ class userProfileAcquisitionByMovie
    }
 
    public function getUserMovieToRating($chatId){
-      $userID = 6;
 
       $data = getMovieToRating($chatId);
       $movieURI = $data;
@@ -111,8 +109,6 @@ class userProfileAcquisitionByMovie
    }
 
   public function putUserMovieToRating($chatId, $movieName, $rating){
-
-      $userID = 6;
 
       if ($movieName != "null"){
          $movieName = str_replace(' ', '_', $movieName);
