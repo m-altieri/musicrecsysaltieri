@@ -5,19 +5,13 @@ use Recsysbot\Classes\userProfileAcquisitionByMovie;
 function profileReply($telegram, $chatId, $rating, $userMovieprofile){
    
    $userID = $chatId;
+
    $oldNumberOfRatedMovies = getNumberRatedMovies($userID);
-   $movieName = getUserMovieToRating($userID);
 
-   if ($movieName != "null"){
-      $movieName = str_replace(' ', '_', $movieName);
-      $movieURI = "http://dbpedia.org/resource/";
-      $movieURI .= $movieName;
+   $movieName = $userMovieprofile->getUserMovieToRating($chatId);
 
-      $data = putMovieRating($chatId, $movieURI, $rating);         
-   }
-   else{
-      $data = null;
-   }
+   $data = $userMovieprofile->putUserMovieToRating($chatId, $movieName, $rating);
+
 
    $newNumberOfRatedMovies = getNumberRatedMovies($userID);
    //manca il richiamo del profilo o la funzione, rivedere.
