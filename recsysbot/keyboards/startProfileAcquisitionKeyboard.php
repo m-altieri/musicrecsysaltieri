@@ -7,6 +7,6 @@ function startProfileAcquisitionKeyboard(){
          ['🔵 I want to choose some movies']
      ];
 
-	return $keyboard
+	return $keyboard;
 
 }
