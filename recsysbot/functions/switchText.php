@@ -18,7 +18,8 @@ function switchText($telegram, $chatId, $text, $firstname){
          basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '🔵'):
-         profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         $userMovieprofile->handle();
+         //profileReply($telegram, $chatId, $rating, $userMovieprofile);
          //movieListTop5Reply($telegram, $chatId);
          break;
       case "->":   case strpos($text, '🔎'):
