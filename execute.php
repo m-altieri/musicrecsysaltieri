@@ -54,16 +54,17 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 if (isset ($message['text'])){
-   $numberRatedMovies = getNumberRatedMovies($chatId); 
+   $numberRatedMovies = getNumberRatedMovies($chatId);
+   $numberRatedProperties = getNumberRatedProperties($chatId); 
    if (($text == "/start")) {
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
       switchText($telegram, $chatId, $text, $firstname);
-   } elseif ($text == "/help" || $text == "/info") {
+   } elseif ($text == "/help" || $text == "/info" || strpos($text, '🔴') || strpos($text, '🔵')) {
       switchText($telegram, $chatId, $text, $firstname);    
    } elseif ($numberRatedMovies >= 3) {
       switchText($telegram, $chatId, $text, $firstname);
    }else {
-      $text = "profile";
+      $text = "/start";
       switchText($telegram, $chatId, $text, $firstname);
    }
 }
