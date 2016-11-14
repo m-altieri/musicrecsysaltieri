@@ -12,7 +12,7 @@ function getPropertyValueListFromPropertyType($chatId, $propertyType){
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);
 
-   file_put_contents("php://stderr", "getPropertyValueListFromPropertyType bodyMsg".PHP_EOL);
+   file_put_contents("php://stderr", "getPropertyValueListFromPropertyType?userID=".$userID."&propertyType=".$propertyType.PHP_EOL);
 
    return $data;
 }

@@ -12,7 +12,7 @@ function getMovieListFromProperty($chatId, $propertyName, $propertyType){
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);
    
-   file_put_contents("php://stderr", "getMovieListFromProperty return:".$data.PHP_EOL);
+   file_put_contents("php://stderr", 'getMovieListFromProperty?userID='.$userID.'&propertyName='.$propertyName.'&propertyType='.$propertyType.PHP_EOL);
 
    return $data;
    
