@@ -61,7 +61,7 @@ if (isset ($message['text'])){
       switchText($telegram, $chatId, $text, $firstname);
    } elseif ($text == "/help" || $text == "/info" || strpos($text, '🔴') || strpos($text, '🔵')) {
       switchText($telegram, $chatId, $text, $firstname);    
-   } elseif ($numberRatedMovies >= 3) {
+   } elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
       switchText($telegram, $chatId, $text, $firstname);
    }else {
       $text = "/start";

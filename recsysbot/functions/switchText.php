@@ -1,19 +1,18 @@
 <?php
 
-use Recsysbot\Commands\ProfileCommand;
 use Recsysbot\Classes\UserProfileAcquisitionByMovie;
 
 function switchText($telegram, $chatId, $text, $firstname){
    $textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
    $textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
+   $userMovieprofile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
 
    switch ($text) { 
       case "/start": case "/help": case "/info":      
          $telegram->commandsHandler(true);
          break;
-      case strpos($text, 'profile'): case strpos($text, '/profile'): 
-         $profile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
-         $profile->handle();
+      case strpos($text, 'profile'): case strpos($text, '/profile'):
+         startProfileAcquisitioReply($telegram, $chatId);        
          break;
       case "menu": case "<-": case strpos($text, '🔴'):
          basePropertyTypeReply($telegram, $chatId);

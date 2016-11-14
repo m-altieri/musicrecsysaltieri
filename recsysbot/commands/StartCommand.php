@@ -16,11 +16,9 @@ class StartCommand extends Command
     public function handle($arguments)
     {
 
-        //$telegram->sendMessage(['chat_id' => $chatId, 'text' => 'start...']);
-        $keyboard = [
-            ['🔴 I want to choose some movie properties'],
-            ['🔵 I want to choose some movies']
-        ];
+      //$telegram->sendMessage(['chat_id' => $chatId, 'text' => 'start...']);
+
+      $keyboard = startProfileAcquisitionKeyboard();
 
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
         'keyboard' => $keyboard,
