@@ -60,7 +60,7 @@ if (isset ($message['text'])){
       file_put_contents("php://stderr", "text == start".PHP_EOL);
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
       switchText($telegram, $chatId, $text, $firstname);
-   } elseif ($text == "/help" || $text == "/info" || strpos($text, '🔴') || strpos($text, '🔵')) {
+   } elseif ($text == "/help" || $text == "/info" || strpos($text, '🔴') === true || strpos($text, '🔵') === true ) {
       file_put_contents("php://stderr", "text == help || text == info || strpos(text, '🔴') || strpos(text, '🔵')".PHP_EOL);
       switchText($telegram, $chatId, $text, $firstname);    
    } elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
