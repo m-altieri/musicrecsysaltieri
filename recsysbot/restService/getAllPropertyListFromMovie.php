@@ -10,7 +10,7 @@ function getAllPropertyListFromMovie($movieName){
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);
 
-   file_put_contents("php://stderr", "getAllPropertyListFromMovie bodyMsg:".$bodyMsg.PHP_EOL);
+   file_put_contents("php://stderr", "getAllPropertyListFromMovie bodyMsg".PHP_EOL);
 
    return $data;
 }
