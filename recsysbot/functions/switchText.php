@@ -194,7 +194,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          $rating = 0;
          userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          break;
-      case strpos($text, '🗯'):
+      case strpos($text, '💬'):
          $rating = 2;
          userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          break;
