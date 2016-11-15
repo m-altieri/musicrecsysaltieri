@@ -74,7 +74,7 @@ class userProfileAcquisitionByMovie
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
 
-      $keyboard = $this->getKeyboardFilms();
+      $keyboard = $this->getUserRatedMovieKeyboard($chatId);
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
       $text = "💬 Skip, if you don't watch";
@@ -83,10 +83,14 @@ class userProfileAcquisitionByMovie
    }
 
 
-  private function getKeyboardFilms(){
-      $keyboard = [
-                      ['👍 Like','👎 Dislike','💬 Skip']
-                   ];
+  private function getUserRatedMovieKeyboard($chatId){
+      $numberRatedMovies = getNumberRatedMovies($chatId);
+
+      if ($numberRatedMovies >= 3)
+         $keyboard = ratedMovieOldUserKeyboard();
+      else
+         $keyboard = ratedMovieNewUserKeyboard();
+
 
       return $keyboard;
    }
