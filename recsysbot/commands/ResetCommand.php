@@ -53,6 +53,7 @@ class ResetCommand extends Command
 
         $this->replyWithChatAction(['action' => Actions::TYPING]);
         $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);
+        $this->triggerCommand('start');
         
     }
 
