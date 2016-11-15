@@ -189,17 +189,14 @@ function switchText($telegram, $chatId, $text, $firstname){
       case strpos($text, '👍'):
          $rating = 1;
          profileReply($telegram, $chatId, $rating, $userMovieprofile);
-         basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '👎'):
          $rating = 0;
          profileReply($telegram, $chatId, $rating, $userMovieprofile);
-         basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '🗯'):
          $rating = 2;
          profileReply($telegram, $chatId, $rating, $userMovieprofile);
-         basePropertyTypeReply($telegram, $chatId);
          break;
       case strpos($text, '😃'):
          $rating = 1;
