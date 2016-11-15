@@ -37,6 +37,7 @@ if(!$update)
 
 $telegram->addCommand(Recsysbot\Commands\HelpCommand::class);
 $telegram->addCommand(Recsysbot\Commands\InfoCommand::class);
+$telegram->addCommand(Recsysbot\Commands\ResetCommand::class);
 $telegram->addCommand(Recsysbot\Commands\StartCommand::class);
 
 // assegno alle seguenti variabili il contenuto ricevuto da Telegram
