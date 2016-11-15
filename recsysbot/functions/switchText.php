@@ -231,7 +231,7 @@ function switchText($telegram, $chatId, $text, $firstname){
       case strpos($text, '🏁'):
          acceptRecommendationReply($telegram, $chatId, $firstname);
          break;
-      case strpos($text, '💬'):
+      case strpos($text, '💭'):
          //Why have I received this recommendation?
          $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textWorkInProgress]);
          break;

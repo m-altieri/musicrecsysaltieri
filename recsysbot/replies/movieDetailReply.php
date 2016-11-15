@@ -140,7 +140,7 @@ function movieDetailReply($telegram, $chatId, $movie){
       $propertyType = "Movies";
       $keyboard = [
             ["🏁 I accept the recommendation"],
-            ["💬 Why have I received this recommendation?"],
+            ["💭 Why have I received this recommendation?"],
             ["🔍 I want to refine the properties of \"".ucwords($movie)."\""],
             ["🔙 Return to the list of \"".$propertyType."\""]
          ];
