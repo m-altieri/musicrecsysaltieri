@@ -18,6 +18,14 @@ class ResetCommand extends Command
         $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
         file_put_contents("php://stderr", '/reset - chatId:'.$chatId.PHP_EOL);
 
+        $argument_array = explode (' ', $arguments);
+        foreach ($argument_array as $key => $value) {
+             file_put_contents("php://stderr", 'Argument['. $key. ']: '. $value.PHP_EOL);
+         }
+
+
+
+
         $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
         $result = deleteAllPropertyRated($chatId);
       
