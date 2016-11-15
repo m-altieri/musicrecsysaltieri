@@ -8,7 +8,7 @@ function switchText($telegram, $chatId, $text, $firstname){
    $userMovieprofile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
 
    switch ($text) { 
-      case "/start": case "/help": case "/info":      
+      case "/start": case "/help": case "/info": case "/reset":    
          $telegram->commandsHandler(true);
          break;
       case strpos($text, 'profile'): case strpos($text, '/profile'):
@@ -28,8 +28,8 @@ function switchText($telegram, $chatId, $text, $firstname){
       case "/no": case "no":            
          noReply($telegram, $chatId);
          break;
-      case "/reset":         
-         resetPropertyValueRatingReply($telegram, $chatId, $firstname);
+      case "reset":         
+         resetAllPropertyValueRatingReply($telegram, $chatId, $firstname);
          break;
       case strpos($text, '/directors'): case strpos($text, 'directors'): case strpos($text, 'director'):            
          $propertyType = "director";

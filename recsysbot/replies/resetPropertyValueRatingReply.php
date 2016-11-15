@@ -5,7 +5,7 @@ function resetPropertyValueRatingReply($telegram, $chatId, $firstname){
 	$userID = $chatId;  
 
    $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
-   $result = deletePropertyRating($chatId);
+   $result = deleteAllPropertyRated($chatId);
       
    $newNumberOfRatedProperties = $result;
 
@@ -15,10 +15,7 @@ function resetPropertyValueRatingReply($telegram, $chatId, $firstname){
       $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
    }
 
-   $keyboard = [
-         ['🔴 I want to choose some movie properties'],
-         ['🔵 I want to choose some movies']
-     ];
+   $keyboard = startProfileAcquisitionKeyboard();
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
