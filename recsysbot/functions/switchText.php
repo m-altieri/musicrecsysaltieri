@@ -19,7 +19,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          break;
       case strpos($text, '🔵'):
          $userMovieprofile->handle();
-         //profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         //userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          //movieListTop5Reply($telegram, $chatId);
          break;
       case "->":   case strpos($text, '🔎'):
@@ -188,15 +188,15 @@ function switchText($telegram, $chatId, $text, $firstname){
          break;
       case strpos($text, '👍'):
          $rating = 1;
-         profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          break;
       case strpos($text, '👎'):
          $rating = 0;
-         profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          break;
       case strpos($text, '🗯'):
          $rating = 2;
-         profileReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
          break;
       case strpos($text, '😃'):
          $rating = 1;
@@ -206,7 +206,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
          file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
          file_put_contents("php://stderr", "propertyValue:".$propertyName.PHP_EOL);               
-         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating);
+         userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating);
          break;
       case strpos($text, '😑'):
          $rating = 0;
@@ -216,7 +216,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
          file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
          file_put_contents("php://stderr", "propertyValue:".$propertyValue.PHP_EOL);              
-         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
+         userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
          break;
       case strpos($text, '🤔'):
          $rating = 2;   
@@ -226,7 +226,7 @@ function switchText($telegram, $chatId, $text, $firstname){
          file_put_contents("php://stderr", "propertyValueRatingReply - rating:".$rating.PHP_EOL); 
          file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
          file_put_contents("php://stderr", "propertyValue:".$propertyValue.PHP_EOL);               
-         otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
+         userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyValue, $rating);
          break;
       case strpos($text, '🏁'):
          acceptRecommendationReply($telegram, $chatId, $firstname);

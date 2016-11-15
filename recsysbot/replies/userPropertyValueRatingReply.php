@@ -1,6 +1,6 @@
 <?php
 
-function otherPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){   
+function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){   
 
    if ($propertyType != "null" && $propertyName != "null" ) {
 
