@@ -15,7 +15,7 @@ class ResetCommand extends Command
 
     public function handle($arguments)
     {
-        $chatId = $this->getTelegram()->getUpdates()->getMessage()->getChat()->getId();
+        $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
         file_put_contents("php://stderr", '/reset - chatId:'.$chatId.PHP_EOL);
 
         $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
