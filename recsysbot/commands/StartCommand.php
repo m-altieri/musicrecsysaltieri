@@ -18,7 +18,7 @@ class StartCommand extends Command
 
       $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
 
-      $keyboard = getUserStartProfileAcquisitionKeyboard($chatId);
+      $keyboard = $this->getUserStartProfileAcquisitionKeyboard($chatId);
 
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
         'keyboard' => $keyboard,
