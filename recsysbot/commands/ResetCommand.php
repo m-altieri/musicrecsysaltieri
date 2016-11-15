@@ -13,8 +13,7 @@ class ResetCommand extends Command
     protected $name = "reset";
     protected $description = "Reset all movie or property rated";
 
-    public function handle($arguments)
-    {
+    public function handle($arguments){
         $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
         $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
         //file_put_contents("php://stderr", '/reset - chatId:'.$chatId.PHP_EOL);
@@ -27,13 +26,13 @@ class ResetCommand extends Command
         $resetArguments = $argumentArray[0];
         $resetArguments = strtolower($resetArguments);
          if (strpos($resetArguments, 'movies') !== false) {
-             $text = resetAllPropertyRated($chatId, $firstname);
+             $text = $this->resetAllPropertyRated($chatId, $firstname);
          }
          elseif (strpos($resetArguments, 'properties') !== false) {
-            $text = resetAllMovieRated($chatId, $firstname);
+            $text = $this->resetAllMovieRated($chatId, $firstname);
          }
          elseif (strpos($resetArguments, 'all') !== false) {
-             $text = resetAllMovieAndPropertyRated($chatId, $firstname);
+             $text = $this->resetAllMovieAndPropertyRated($chatId, $firstname);
          }
          else{
             $text = "Non hai inserito parametri";
