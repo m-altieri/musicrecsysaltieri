@@ -23,9 +23,17 @@ function profileReply($telegram, $chatId, $rating, $userMovieprofile){
    }
    
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
-
-   $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
-   $text = "Do you want evaluate another movie? \n Type \profile"; 
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+
+   if ($newNumberOfRatedMovies >= 3) {
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
+      $text = "Do you want evaluate another movie? \n Type profile"; 
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+   }
+   else{
+      $userMovieprofile->handle();
+   }
+
+
+
 }
