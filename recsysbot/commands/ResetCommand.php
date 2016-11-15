@@ -25,10 +25,10 @@ class ResetCommand extends Command
 
         $resetArguments = $argumentArray[0];
         $resetArguments = strtolower($resetArguments);
-         if (strpos($resetArguments, 'movies') !== false) {
+         if (strpos($resetArguments, 'properties') !== false) {
              $text = $this->resetAllPropertyRated($chatId, $firstname);
          }
-         elseif (strpos($resetArguments, 'properties') !== false) {
+         elseif (strpos($resetArguments, 'movies') !== false) {
             $text = $this->resetAllMovieRated($chatId, $firstname);
          }
          elseif (strpos($resetArguments, 'all') !== false) {
@@ -94,9 +94,9 @@ class ResetCommand extends Command
 
 
       if ($newNumberOfRatedProperties + $newNumberOfRatedMovies == 0) {
-         $text = "All right ".$firstname.", i reset all properties that you have evaluated";
+         $text = "All right ".$firstname.", i reset all movies and properties that you have evaluated";
       } else{
-         $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
+         $text = "Sorry ".$firstname.", there was a problem to reset all movies and properties that you have evaluated";
       }
 
       return $text;
