@@ -69,7 +69,7 @@ if (isset ($message['text'])){
             strpos($text, '🔵') !== false ||
             strpos($text, '👍') !== false || 
             strpos($text, '👎') !== false || 
-            strpos($text, '🗯') !== false ) {
+            strpos($text, '💬') !== false ) {
       switchText($telegram, $chatId, $text, $firstname);    
       file_put_contents("php://stderr", "help || info || movies || properties".PHP_EOL);
    } 
