@@ -16,9 +16,9 @@ class StartCommand extends Command
     public function handle($arguments)
     {
 
-      //$telegram->sendMessage(['chat_id' => $chatId, 'text' => 'start...']);
+      $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
 
-      $keyboard = startProfileAcquisitionKeyboard();
+      $keyboard = getUserStartProfileAcquisitionKeyboard($chatId);
 
       $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
         'keyboard' => $keyboard,
@@ -37,5 +37,20 @@ class StartCommand extends Command
             ]);
         
     }
+
+    private function getUserStartProfileAcquisitionKeyboard($chatId){
+      $numberRatedMovies = getNumberRatedMovies($chatId);
+
+      if ($numberRatedMovies >= 3)
+         $keyboard = startProfileAcquisitionKeyboard();
+      else
+         $keyboard = [
+             ['🔵 Choose some movies']
+         ];
+
+
+      return $keyboard;
+   }
+
+
 }
-?>
