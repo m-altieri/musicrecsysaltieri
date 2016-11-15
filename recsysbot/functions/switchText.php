@@ -8,7 +8,7 @@ function switchText($telegram, $chatId, $text, $firstname){
    $userMovieprofile = new UserProfileAcquisitionByMovie($telegram, $chatId, $text);
 
    switch ($text) { 
-      case "/start": case "/help": case "/info": case "/reset":    
+      case strpos($text, '/start'): case strpos($text, '/help'): case strpos($text, '/info'): case strpos($text, '/reset'):    
          $telegram->commandsHandler(true);
          break;
       case strpos($text, 'profile'): case strpos($text, '/profile'):
