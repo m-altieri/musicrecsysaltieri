@@ -63,10 +63,6 @@ class userProfileAcquisitionByMovie
       
       
       //bot
-      $text = "Do you like this movie?";
-      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
-
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
 
       $img = './recsysbot/images/poster.jpg';
@@ -74,17 +70,16 @@ class userProfileAcquisitionByMovie
       $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $title]);
       copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
 
+      $text = "Do you 👍 Like or 👎 Dislike this movie?";
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
+
       $keyboard = $this->getKeyboardFilms();
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-                             'resize_keyboard' => true,
-                             'one_time_keyboard' => false
-                             ]);
-      
-      $text = "Skip, if you don't watch";
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+      $text = "💬 Skip, if you don't watch";
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);        
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text,
-            'reply_markup' => $reply_markup
-            ]);
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
    }
 
 
