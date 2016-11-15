@@ -35,7 +35,9 @@ class ResetCommand extends Command
              $text = $this->resetAllMovieAndPropertyRated($chatId, $firstname);
          }
          else{
-            $text = "Non hai inserito parametri";
+            $this->replyWithChatAction(['action' => Actions::TYPING]);
+            $this->replyWithMessage(['text' => '😕 Reset format is incorrect', 'reply_markup' => $reply_markup]);
+            $text = "You can use the following format:\n- /reset movies\n- /reset properties\n- /reset all";
          }
 
         $keyboard = startProfileAcquisitionKeyboard();
