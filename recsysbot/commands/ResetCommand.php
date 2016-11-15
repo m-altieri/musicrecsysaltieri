@@ -16,26 +16,28 @@ class ResetCommand extends Command
     public function handle($arguments)
     {
         $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
-        file_put_contents("php://stderr", '/reset - chatId:'.$chatId.PHP_EOL);
+        $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
+        //file_put_contents("php://stderr", '/reset - chatId:'.$chatId.PHP_EOL);
 
-        $argument_array = explode (' ', $arguments);
-        foreach ($argument_array as $key => $value) {
+        $argumentArray = explode (' ', $arguments);
+/*        foreach ($argumentArray as $key => $value) {
              file_put_contents("php://stderr", 'Argument['. $key. ']: '. $value.PHP_EOL);
+         }*/
+
+        $resetArguments = $argumentArray[0];
+        $resetArguments = strtolower($resetArguments);
+         if (strpos($resetArguments, 'movies') !== false) {
+             $text = resetAllPropertyRated($chatId, $firstname);
          }
-
-
-
-
-        $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
-        $result = deleteAllPropertyRated($chatId);
-      
-        $newNumberOfRatedProperties = $result;
-
-       if ($newNumberOfRatedProperties < $oldNumberOfRatedProperties) {
-          $text = "All right ".$firstname.", i reset all properties that you have evaluated";
-       } else{
-          $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
-       }
+         elseif (strpos($resetArguments, 'properties') !== false) {
+            $text = resetAllMovieRated($chatId, $firstname);
+         }
+         elseif (strpos($resetArguments, 'all') !== false) {
+             $text = resetAllMovieAndPropertyRated($chatId, $firstname);
+         }
+         else{
+            $text = "Non hai inserito parametri";
+         }
 
         $keyboard = startProfileAcquisitionKeyboard();
 
@@ -52,5 +54,55 @@ class ResetCommand extends Command
         $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);
         
     }
+
+   private function resetAllPropertyRated($chatId, $firstname){
+
+      $data = deleteAllPropertyRated($chatId);          
+      $newNumberOfRatedProperties = $data;
+
+      if ($newNumberOfRatedProperties == 0) {
+         $text = "All right ".$firstname.", i reset all properties that you have evaluated";
+      } else{
+         $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
+      }
+
+      return $text;
+
+    }
+
+   private function resetAllMovieRated($chatId, $firstname){
+
+      $data = deleteAllMovieRated($chatId);          
+      $newNumberOfRatedMovies = $data;
+
+      if ($newNumberOfRatedMovies == 0 ) {
+         $text = "All right ".$firstname.", i reset all movies that you have evaluated";
+      } else{
+         $text = "Sorry ".$firstname.", there was a problem to reset all movies that you have evaluated";
+      }
+
+      return $text;
+
+   }
+
+
+   private function resetAllMovieAndPropertyRated($chatId, $firstname){
+
+      $dataProperty = deleteAllPropertyRated($chatId);
+      $dataMovie = deleteAllMovieRated($chatId);           
+      $newNumberOfRatedProperties = $dataProperty;
+      $newNumberOfRatedMovies = $dataMovie;
+
+
+      if ($newNumberOfRatedProperties + $newNumberOfRatedMovies == 0) {
+         $text = "All right ".$firstname.", i reset all properties that you have evaluated";
+      } else{
+         $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
+      }
+
+      return $text;
+
+   }
+
+
 }
-?>
