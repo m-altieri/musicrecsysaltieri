@@ -128,21 +128,20 @@ function movieDetailReply($telegram, $chatId, $movie){
       //if ($editing !== '') {$text .= "\n*Edited by* ".$editing;}
       //if ($distributor !== '') {$text .= "\n*Distributed by* ".$distributor;}
       //if ($basedOn !== '') {$text .= "\n*Based on:* ".$basedOn;}
-      if ($category !== '') {$text .= "\n*Category:* ".$category;}
+      //if ($category !== '') {$text .= "\n*Category:* ".$category;}
       if ($genre !== '') {$text .= "\n*Genre:* ".$genre;}
-      if ($awards !== '') {$text .= "\n*Awards:* ".$awards;}
-      if ($runtime !== '') {$text .= "\n*Running time:* ".$runtime." minute";}
+      //if ($awards !== '') {$text .= "\n*Awards:* ".$awards;}
+      //if ($runtime !== '') {$text .= "\n*Running time:* ".$runtime." minute";}
       if ($releaseDate !== '') {$text .= "\n*Release year:* ".$releaseDate;}
-      if ($plot !== '') {$text .= "\n*Plot:* ".$plot;}
+      //if ($plot !== '') {$text .= "\n*Plot:* ".$plot;}
 
       //$keyboard[] = array("🏁 I accept the recommendation","🔍 I want to refine It");
 
-      $propertyType = "Movies";
       $keyboard = [
             ["🏁 I accept the recommendation"],
             ["💭 Why have I received this recommendation?"],
-            ["🔍 I want to refine the properties of \"".ucwords($movie)."\""],
-            ["🔙 Return to the list of \"".$propertyType."\""]
+            ["🔍 I want to refine this recommendation"],
+            ["🔙 Return to the list of Movies"]
          ];
 
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
@@ -167,4 +166,3 @@ function movieDetailReply($telegram, $chatId, $movie){
                               'parse_mode' => 'Markdown']);
    }
 }
-   

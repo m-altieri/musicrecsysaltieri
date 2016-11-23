@@ -2,7 +2,10 @@
 
 use Recsysbot\Classes\userProfileAcquisitionByMovie;
 
-function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){   
+function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){  
+
+   $test = $userMovieprofile->getUserPropertyValue();
+   file_put_contents("php://stderr", "Test userMovieprofile propertyValue:".$test.PHP_EOL); 
 
    $oldNumberOfRatedMovies = getNumberRatedMovies($chatId);
 

@@ -2,8 +2,7 @@
 
 function refineMoviePropertyReply($telegram, $chatId, $text){
 
-   $reply = explode("\"", $text);
-   $movie = isset($reply[1])? $reply[1] : null;
+   $movie = lastMovie($chatId);
 
 	$keyboard = refineMoviePropertyKeyboard($chatId, $movie);
 

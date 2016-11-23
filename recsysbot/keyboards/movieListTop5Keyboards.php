@@ -29,8 +29,7 @@ function movieListTop5Keyboards($chatId){
    } 
 
    $keyboard = array_slice($result, 0, 5);
-   $propertyType = "Properties";
-   $keyboard[] = array("🔙 Return to the list of \"".$propertyType."\"");
+   $keyboard[] = array("🔙 Return to the list of Properties");
 
    //file_put_contents("php://stderr", "movieListTop5Keyboards return:".$keyboard.PHP_EOL);
    return $keyboard;

@@ -17,6 +17,7 @@ class StartCommand extends Command
     {
 
       $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
+      $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
 
       $keyboard = $this->getUserStartProfileAcquisitionKeyboard($chatId);
 
@@ -28,8 +29,7 @@ class StartCommand extends Command
 
         //$reply_markup = replyKeyboardMarkup($keyboard, true, true);
         //$reply_markup = $this->replyKeyboardMarkup($keyboard, true, true);
-
-        $text = "Let me to recommend a movie.\nPlease, tell me something about you";
+        $text = "Hi ".$firstname."!\nLet me to recommend a movie.\nPlease, tell me something about you";
         $this->replyWithChatAction(['action' => Actions::TYPING]);
         $this->replyWithMessage([
             'text' => $text, 
@@ -51,6 +51,6 @@ class StartCommand extends Command
 
       return $keyboard;
    }
-
-
 }
+
+

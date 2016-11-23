@@ -1,6 +1,11 @@
 <?php
 
-function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){   
+function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){  
+
+   file_put_contents("php://stderr", "userPropertyValueRatingReply...".PHP_EOL);
+   file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
+   file_put_contents("php://stderr", "propertyValue:".$propertyName.PHP_EOL);    
+   file_put_contents("php://stderr", "rating:".$rating.PHP_EOL);     
 
    if ($propertyType != "null" && $propertyName != "null" ) {
 

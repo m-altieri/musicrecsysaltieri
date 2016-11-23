@@ -10,11 +10,12 @@ function allPropertyTypeReply($telegram, $chatId){
    foreach ($fullMenuArray as $key => $property) {
        $keyboard[] = array($property);
    }
-   $keyboard[] = array('/profile','/help','<-');
+   $keyboard[] = ['🔙 Return to the short list'];
+   $keyboard[] = array('Profile','/help');
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
-   $text = "Choose your favourite...";
+   $text = "Choose among...";
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
    $telegram->sendMessage(['chat_id' => $chatId, 
                            'text' => $text,

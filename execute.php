@@ -13,6 +13,7 @@ $config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 foreach(glob("recsysbot/classes/*.php") as $file){require $file;}
 foreach(glob("recsysbot/functions/*.php") as $file){require $file;}
 foreach(glob("recsysbot/keyboards/*.php") as $file){require $file;}
+foreach(glob("recsysbot/messages/*.php") as $file){require $file;}
 foreach(glob("recsysbot/replies/*.php") as $file){require $file;}
 foreach(glob("recsysbot/restService/*.php") as $file){require $file;}
 
@@ -49,6 +50,14 @@ $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name']
 $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
+file_put_contents("php://stderr", "message".$message.PHP_EOL);
+file_put_contents("php://stderr", "messageId".$messageId.PHP_EOL);
+file_put_contents("php://stderr", "chatId".$chatId.PHP_EOL);
+file_put_contents("php://stderr", "firstname".$firstname.PHP_EOL);
+file_put_contents("php://stderr", "lastname".$lastname.PHP_EOL);
+file_put_contents("php://stderr", "username".$username.PHP_EOL);
+file_put_contents("php://stderr", "date".$date.PHP_EOL);
+file_put_contents("php://stderr", "text".$text.PHP_EOL);
 
 // pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
 $text = trim($text);
@@ -58,8 +67,7 @@ if (isset ($message['text'])){
    $numberRatedMovies = getNumberRatedMovies($chatId);
    $numberRatedProperties = getNumberRatedProperties($chatId); 
    if (($text == "/start")) {
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => 'Welcome '.$firstname]);
-      switchText($telegram, $chatId, $text, $firstname);
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "text == start".PHP_EOL);
    } 
    elseif ( $text == "profile" || 
@@ -70,16 +78,16 @@ if (isset ($message['text'])){
             strpos($text, '👍') !== false || 
             strpos($text, '👎') !== false || 
             strpos($text, '💬') !== false ) {
-      switchText($telegram, $chatId, $text, $firstname);    
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname); 
       file_put_contents("php://stderr", "help || info || movies || properties".PHP_EOL);
    } 
    elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
-      switchText($telegram, $chatId, $text, $firstname);
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "numberRatedMovies >= 3 || numberRatedProperties >= 3".PHP_EOL);
    }
    else {
       $text = "profile";
-      switchText($telegram, $chatId, $text, $firstname);
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "profile".PHP_EOL);
    }
 }
@@ -123,3 +131,4 @@ else{
    $response = "I'm sorry. I received a message, but i can't unswer";
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
 }
+

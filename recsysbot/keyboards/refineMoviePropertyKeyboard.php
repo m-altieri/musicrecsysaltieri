@@ -123,8 +123,7 @@ function refineMoviePropertyKeyboard($chatId, $movie){
        $keyboard[] = array($property);
    }
 
-   $propertyType = "Movies";
-   $keyboard[] = array("🔙 Return to the list of \"".$propertyType."\"");
+   $keyboard[] = array("🔙 Return to the list of Movies");
 
    return $keyboard;
 }

@@ -24,7 +24,7 @@ function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyTyp
    
    $keyboard = $result;
    $propertyType = "Properties";
-   $keyboard[] = array("🔙 Return to the list of \"".$propertyType."\"");
+   $keyboard[] = array("🔙 Return to the list of Properties");
    
    return $keyboard;
 }

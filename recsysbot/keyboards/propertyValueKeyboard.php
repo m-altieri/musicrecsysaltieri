@@ -15,7 +15,7 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
    $propertyArray = array();
    if ($data != "null") {
       if ($movieName == null) {
-         $returnType = "\"Properties\"";
+         $returnType = "Properties";
          foreach ($data as $movie => $propertiesValue){
             //echo '<pre>'; print_r("All movies: ".$movie); echo '</pre>';
             foreach ($propertiesValue as $propertyScore => $propertyValue) {
