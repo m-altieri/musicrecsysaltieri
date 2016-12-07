@@ -16,7 +16,7 @@ class HelpCommand extends Command
     public function handle($arguments)
     {
         // handled when you replace `send<Method>` with `replyWith` and use all their parameters except chat_id.
-        $text = "/help , Here you find the commands available";
+        $text = "Here you find the available commands";
 
         $this->replyWithMessage([
             'text' => $text

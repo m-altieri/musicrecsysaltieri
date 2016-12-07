@@ -6,7 +6,7 @@ use Telegram\Bot\FileUpload\InputFile;
 function movieDetailReply($telegram, $chatId, $movie){
 
    $textSorry ="Sorry :)\nI don't understand \nPlease enter a command (es.\"/start\") ";   
-   $movieName = str_replace(' ', '_', $movie); 
+   $movieName = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
    $data = getAllPropertyListFromMovie($movieName);
 
    $result = array();

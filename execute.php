@@ -50,15 +50,10 @@ $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name']
 $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
-file_put_contents("php://stderr", "message".$message.PHP_EOL);
-file_put_contents("php://stderr", "messageId".$messageId.PHP_EOL);
-file_put_contents("php://stderr", "chatId".$chatId.PHP_EOL);
-file_put_contents("php://stderr", "firstname".$firstname.PHP_EOL);
-file_put_contents("php://stderr", "lastname".$lastname.PHP_EOL);
-file_put_contents("php://stderr", "username".$username.PHP_EOL);
-file_put_contents("php://stderr", "date".$date.PHP_EOL);
-file_put_contents("php://stderr", "text".$text.PHP_EOL);
 
+// Stampa nel log
+$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+file_put_contents("php://stderr", "Date:".$globalDate." - chatId:".$chatId." - firstname:".$firstname." - text:".$text.PHP_EOL);
 // pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
 $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
@@ -67,6 +62,7 @@ if (isset ($message['text'])){
    $numberRatedMovies = getNumberRatedMovies($chatId);
    $numberRatedProperties = getNumberRatedProperties($chatId); 
    if (($text == "/start")) {
+      putUserDetail($chatId, $firstname, $lastname, $username);
       switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "text == start".PHP_EOL);
    } 

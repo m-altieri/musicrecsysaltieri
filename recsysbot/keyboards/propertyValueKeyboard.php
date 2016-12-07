@@ -8,6 +8,9 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
    $movieName = isset($reply[1])? $reply[1] : null;
    //$movieName = "cast away";   
 
+   file_put_contents("php://stderr", "propertyValueKeyboard - propertyType:".$propertyType.PHP_EOL);
+   file_put_contents("php://stderr", "propertyValueKeyboard - movieName:".$movieName.PHP_EOL);
+
    $data = getPropertyValueListFromPropertyType($chatId, $propertyType);
   
    $result = array();

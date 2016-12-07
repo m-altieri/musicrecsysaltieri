@@ -11,7 +11,7 @@ use Telegram\Bot\Commands\Command;
 class StartCommand extends Command
 {
     protected $name = "start";
-    protected $description = "RecSysBot Menu";
+    protected $description = "Bot Start";
 
     public function handle($arguments)
     {

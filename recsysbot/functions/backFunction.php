@@ -8,7 +8,7 @@ function backFunction($telegram, $chatId, $text){
 	switch ($text) { 
       case stristr($text, 'movies') !== false:  
       	file_put_contents("php://stderr", "back - movies: ".$text.PHP_EOL); 
-         movieListTop5Reply($telegram, $chatId);
+         recommendationMovieListTop5Reply($telegram, $chatId);
          break;
       case stristr($text, 'properties') !== false:
       	file_put_contents("php://stderr", "back - properties: ".$text.PHP_EOL); 
@@ -18,7 +18,8 @@ function backFunction($telegram, $chatId, $text){
       	file_put_contents("php://stderr", "back - property: ".$text.PHP_EOL); 
          $reply = explode("\"", $text);
          $textRefine = "to \"".$reply[3]."\"";
-         refineMoviePropertyReply($telegram, $chatId, $textRefine);
+         //refineMoviePropertyReply($telegram, $chatId, $textRefine, $pagerankCicle);
+         callRefineOrRefocusFunction($telegram, $chatId);
          break;
       case stristr($text, 'short') !== false:  
       	file_put_contents("php://stderr", "back - base:".$text.PHP_EOL); 
@@ -38,15 +39,16 @@ function backFunction($telegram, $chatId, $text){
    $propertyType = $reply[1];
    file_put_contents("php://stderr", "propertyType: ".$propertyType.PHP_EOL);       
    if ($propertyType == "movies") {
-      movieListTop5Reply($telegram, $chatId);
+      recommendationMovieListTop5Reply($telegram, $chatId);
    }
    elseif ($propertyType == "properties") {
       allPropertyTypeReply($telegram, $chatId);
    }
    elseif ($propertyType == "property") {
       $textRefine = "to \"".$reply[3]."\"";
-      file_put_contents("php://stderr", "return ".$textRefine.PHP_EOL); 
-      refineMoviePropertyReply($telegram, $chatId, $textRefine);
+      file_put_contents("php://stderr", "return ".$textRefine.PHP_EOL);
+      $pagerankCicle = getNumberPagerankCicle($chatId);
+      refineMoviePropertyReply($telegram, $chatId, $textRefine, $pagerankCicle);
    }
    else{
       $textRefine = null;

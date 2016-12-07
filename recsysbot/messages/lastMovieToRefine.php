@@ -1,8 +1,8 @@
 <?php
 
-function lastPropertyType($chatId, $pagerankCicle){
+function lastMovieToRefine($chatId, $pagerankCicle){
 
-   $replyFunctionCall = "lastPropertyType";
+   $replyFunctionCall = "lastMovieToRefine";
    $result = getChatMessage($chatId, $replyFunctionCall, $pagerankCicle);
    if ($result != "null") {
    	$replyText = $result['reply_text'];
@@ -12,7 +12,7 @@ function lastPropertyType($chatId, $pagerankCicle){
    	$reply = "null";
    }   
 
-   file_put_contents("php://stderr", "lastPropertyType:".$reply.PHP_EOL);
+   file_put_contents("php://stderr", "lastMovieToRefine:".$reply.PHP_EOL);
 
    return $reply;
 }

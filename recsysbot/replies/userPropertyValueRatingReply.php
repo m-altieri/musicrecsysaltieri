@@ -1,6 +1,6 @@
 <?php
 
-function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating){  
+function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating, $lastChange){  
 
    file_put_contents("php://stderr", "userPropertyValueRatingReply...".PHP_EOL);
    file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
@@ -10,7 +10,7 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
    if ($propertyType != "null" && $propertyName != "null" ) {
 
       $oldNumberOfRatedProperties = getNumberRatedProperties($chatId);
-      $data = putPropertyRating($chatId, $propertyType, $propertyName, $rating);
+      $data = putPropertyRating($chatId, $propertyType, $propertyName, $rating, $lastChange);
       
       $newNumberOfRatedProperties = $data;
 

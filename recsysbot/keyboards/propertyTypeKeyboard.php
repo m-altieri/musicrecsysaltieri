@@ -7,7 +7,7 @@ function propertyTypeKeyboard($chatId){
 
 	$userID = $chatId;
 
-	$text = null;
+	$text = "null";
 		
 	$director = propertyValueKeyboard($userID, "director", $text); 
 	$starring = propertyValueKeyboard($userID, "starring", $text);

@@ -1,16 +1,14 @@
 <?php
 
-//function refineMoviePropertyReply($telegram, $chatId, $text, $pagerankCicle){
-function refineMoviePropertyReply($telegram, $chatId){
+function refineFunctionReply($telegram, $chatId){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
    $movie = lastMovieToRefine($chatId, $pagerankCicle);
    
-   $text = "You are at ".$pagerankCicle." cicle of recommendation.";
-   $text .= "\nIn this cycle you have chosen ".$movie.".";
-   $text .= "\nWe continue with Classic Refine";
+   //Chiama prima la funzione di refine e poi fai modicare  una proprietà
+   $text = refineFunction($chatId);
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
-   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+   $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);   
    
 
 	$keyboard = refineMoviePropertyKeyboard($chatId, $movie);

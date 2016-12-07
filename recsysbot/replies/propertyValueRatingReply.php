@@ -1,9 +1,9 @@
 <?php
 
 //function propertyRatingReply($telegram, $chatId, $propertyType, $propertyValue){   
-function propertyValueRatingReply($telegram, $chatId){
+function propertyValueRatingReply($telegram, $chatId, $pagerankCicle){
 
-   $reply =  lastPropertyTypeAndPropertyName($chatId);
+   $reply =  lastPropertyTypeAndPropertyName($chatId, $pagerankCicle);
    $propertyType = $reply[0];
    $propertyName = $reply[1];
 

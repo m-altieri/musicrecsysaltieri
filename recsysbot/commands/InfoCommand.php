@@ -11,7 +11,7 @@ use Telegram\Bot\Commands\Command;
 class InfoCommand extends Command
 {
     protected $name = "info";
-    protected $description = "BOT information";
+    protected $description = "Bot information";
 
     public function handle($arguments)
     {

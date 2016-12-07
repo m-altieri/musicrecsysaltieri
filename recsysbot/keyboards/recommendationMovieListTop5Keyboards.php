@@ -2,10 +2,13 @@
 
 use GuzzleHttp\Client;
 
-function movieListTop5Keyboards($chatId){
+function recommendationMovieListTop5Keyboards($chatId){
 
    $propertyType = 'movie';
+   
+      
    //chiama il pagerank
+   $data = null;
    $data = getPropertyValueListFromPropertyType($chatId, $propertyType);
   
    $result = array();
@@ -29,9 +32,8 @@ function movieListTop5Keyboards($chatId){
    } 
 
    $keyboard = array_slice($result, 0, 5);
-   $propertyType = "Properties";
-   $keyboard[] = array("🔙 Return to the list of \"".$propertyType."\"");
+   $keyboard[] = array("🔙 Return to the list of Properties");
 
-   //file_put_contents("php://stderr", "movieListTop5Keyboards return:".$keyboard.PHP_EOL);
+   //file_put_contents("php://stderr", "recommendationMovieListTop5Keyboards return:".$keyboard.PHP_EOL);
    return $keyboard;
 }
