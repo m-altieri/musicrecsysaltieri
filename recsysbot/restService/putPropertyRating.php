@@ -15,19 +15,19 @@ function putPropertyRating($chatId, $propertyType, $propertyName, $rating, $last
 			$propertyURI = $propertyName;
 			break;
 		case "director": case "starring": case "writer": case "producer": case "musicComposer": case "cinematography": case "basedOn": case "editing": case "distributor":
-			if ($propertyName != "null"){
+			if ($propertyName !== "null"){
 	         $propertyName = str_replace(' ', '_', $propertyName);
 	         $propertyURI = "http://dbpedia.org/resource/";
 	         $propertyURI .= $propertyName;
 	      }
-	      if ($propertyType != "null"){
+	      if ($propertyType !== "null"){
 	         $propertyType = str_replace(' ', '_', $propertyType);
 	         $propertyTypeURI = "http://dbpedia.org/ontology/";
 	         $propertyTypeURI .= $propertyType;
 	      }
 			break;
 		case "category": case "http://purl.org/dc/terms/subject":
-			if ($propertyName != "null"){
+			if ($propertyName !== "null"){
 	         $propertyName = str_replace(' ', '_', $propertyName);
 	         $propertyURI = "http://dbpedia.org/resource/Category:";
 	         $propertyURI .= $propertyName;
@@ -39,7 +39,7 @@ function putPropertyRating($chatId, $propertyType, $propertyName, $rating, $last
 	}
 
 
-   if ($propertyURI != "null" && $propertyTypeURI != "null" ){    	
+   if ($propertyURI !== "null" && $propertyTypeURI !== "null" ){    	
       // $client = new Client(['base_uri'=>'http://localhost:8080']);
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
       $stringGetRequest = '/lodrecsysrestful/restService/propertyRating/putPropertyRating?userID='.$userID.'&propertyTypeURI='.$propertyTypeURI.'&propertyURI='.$propertyURI.'&rating='.$rating.'&lastChange='.$lastChange;

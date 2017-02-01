@@ -5,7 +5,7 @@ function lastPropertyTypeAndPropertyName($chatId, $pagerankCicle){
 
    $replyFunctionCall = "lastPropertyTypeAndPropertyName";
    $result = getChatMessage($chatId, $replyFunctionCall, $pagerankCicle);
-   if ($result != "null") {
+   if ($result !== "null") {
       $replyText = $result['reply_text'];
       $reply = explode(",", $replyText);
       //$propertyType = $reply[0];
@@ -18,8 +18,8 @@ function lastPropertyTypeAndPropertyName($chatId, $pagerankCicle){
 
 
 
-   file_put_contents("php://stderr", "lastPropertyTypeAndPropertyName 0:".$reply[0].PHP_EOL);
-   file_put_contents("php://stderr", "lastPropertyTypeAndPropertyName 1:".$reply[1].PHP_EOL);
+   file_put_contents("php://stderr", "lastPropertyTypeAndPropertyName 0:".$reply[0]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
+   file_put_contents("php://stderr", "lastPropertyTypeAndPropertyName 1:".$reply[1]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
 
 
    return $reply;

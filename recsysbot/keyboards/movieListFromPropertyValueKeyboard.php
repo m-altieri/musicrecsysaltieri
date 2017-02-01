@@ -6,7 +6,7 @@ function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyTyp
 
    $result = array();
    $keyboard = array();
-   if ($data != "null") {
+   if ($data !== "null") {
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
             $propertyStr = str_replace("http://dbpedia.org/resource/", "", $v);
@@ -18,7 +18,7 @@ function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyTyp
       }
       
       foreach ($propertyArray as $key => $property) {
-          $result[] = array(" ".$property);
+          $result[] = array("".$property);
       }
    }
    

@@ -18,8 +18,7 @@ function backFunction($telegram, $chatId, $text){
       	file_put_contents("php://stderr", "back - property: ".$text.PHP_EOL); 
          $reply = explode("\"", $text);
          $textRefine = "to \"".$reply[3]."\"";
-         //refineMoviePropertyReply($telegram, $chatId, $textRefine, $pagerankCicle);
-         callRefineOrRefocusFunction($telegram, $chatId);
+         refineLastMoviePropertyReply($telegram, $chatId);
          break;
       case stristr($text, 'short') !== false:  
       	file_put_contents("php://stderr", "back - base:".$text.PHP_EOL); 

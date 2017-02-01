@@ -50,7 +50,7 @@ function propertyTypeKeyboard($chatId){
 	$fullMenuArray[10+$size_runtimeRange."runtimeRange"] = "Runtime";
 	$fullMenuArray[10+$size_cinematography."cinematography"] = "Cinematography";
 	$fullMenuArray[10+$size_basedOn."basedOn"] = "Based on";
-	$fullMenuArray[10+$size_editing."editing"] = "Editing";
+	$fullMenuArray[10+$size_editing."editing"] = "Editor";
 	$fullMenuArray[10+$size_distributor."distributor"] = "Distributor";
 	krsort($fullMenuArray);
 

@@ -4,7 +4,7 @@ function lastMovie($chatId, $pagerankCicle){
 
    $replyFunctionCall = "lastMovie"; //movieDetailReply
    $result = getChatMessage($chatId, $replyFunctionCall, $pagerankCicle);
-   if ($result != "null") {
+   if ($result !== "null") {
    	$replyText = $result['reply_text'];
    	$reply = $replyText;
    }
@@ -12,7 +12,7 @@ function lastMovie($chatId, $pagerankCicle){
    	$reply = "null";
    }   
 
-   file_put_contents("php://stderr", "lastMovie:".$reply.PHP_EOL);
+   file_put_contents("php://stderr", "lastMovie:".$reply." - pagerankCicle:".$pagerankCicle.PHP_EOL);
 
    return $reply;
 }

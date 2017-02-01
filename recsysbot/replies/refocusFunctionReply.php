@@ -10,11 +10,7 @@ function refocusFunctionReply($telegram, $chatId){
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);   
    
 	$text = "Do you prefer to tell me something else about you \nor can I recommend you a movie?";
-
-   $keyboard = [
-      ["✔ Recommend me a movie"],
-      ["🔎 Let me choose additional properties"]
-   ];
+   $keyboard = userPropertyValueKeyboard();
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 

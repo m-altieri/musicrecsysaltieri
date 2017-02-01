@@ -3,6 +3,7 @@
 function recommendationMovieListTop5Reply($telegram, $chatId){
 
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
+
    $keyboard = recommendationMovieListTop5Keyboards($chatId);
        
    if (sizeof($keyboard) == 1) {
@@ -13,20 +14,25 @@ function recommendationMovieListTop5Reply($telegram, $chatId){
       //torna al menu...
    } 
    else {
+      $text = "I found this movies for you:";
+      $i = 1;
       foreach ($keyboard as $key => $property) {
-         if ($property[0] != "Menu") {
+         //if ($property[0] != "Menu") {
+         if (stristr($property[0], '🔙') == false) {
             $movie = $property[0];
-            movieDetailTop5Reply($telegram, $chatId, $movie);
-         } 
-         break;        
+            $text .= "\n".$i."^ *".ucwords($movie)."*";
+            //movieDetailTop5Reply($telegram, $chatId, $movie);
+            $i++;
+         }                
       }
 
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
-      $text = "Please, choose the movie you like more";
+      $text .= "\nPlease, choose the movie you like more";
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
       $telegram->sendMessage(['chat_id' => $chatId, 
                               'text' => $text,
-                              'reply_markup' => $reply_markup]);
+                              'reply_markup' => $reply_markup,
+                              'parse_mode' => 'Markdown']);
    } 
 }

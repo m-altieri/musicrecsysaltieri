@@ -10,14 +10,12 @@ use GuzzleHttp\Client;
  */
 class userProfileAcquisitionByMovie
 {
-   protected $name = "profile";
-   protected $description = "RecSysBot - create user profile command";
    protected $telegram;
    protected $chatId; 
    protected $text;
-   protected $client;
+
    protected $movieToRating;
-   protected $userPropertyValue = "niente";
+   protected $userPropertyValue;
 
    public function __construct($telegram, $chatId, $text){
       $this->setTelegram($telegram);     
@@ -62,15 +60,24 @@ class userProfileAcquisitionByMovie
 
 
    public function handle(){
+      $chatId = $this->getChatId();    
+      $movieName = $this->getUserMovieToRating($chatId);
+
+      $this->movieRatingReply($movieName);         
+   }
+
+
+   public function movieRatingReply($movie){
 
       $telegram = $this->getTelegram();
-      $chatId = $this->getChatId();
-      file_put_contents("php://stderr", "handle - chatId: ".$chatId.PHP_EOL);
+      $chatId = $this->getChatId();      
 
-      $movieName = $this->getUserMovieToRating($chatId); 
-      $title = $this->getTitleAndPosterMovieToRating($movieName);      
+      $movieName = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
       
-      //bot
+      file_put_contents("php://stderr", "userMovieprofile->movieRating() - chatId: ".$chatId.PHP_EOL);
+      
+      $title = $this->getTitleAndPosterMovieToRating($movieName);
+
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
 
       $img = './recsysbot/images/poster.jpg';
@@ -84,7 +91,9 @@ class userProfileAcquisitionByMovie
       $text = "Do you 👍 like or 👎 dislike this movie?";
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
+
       
+
    }
 
 
@@ -96,7 +105,7 @@ class userProfileAcquisitionByMovie
       else
          $keyboard = ratedMovieNewUserKeyboard();
 
-
+      file_put_contents("php://stderr", "userMovieprofile->getUserRatedMovieKeyboard - chatId: ".$chatId."/return keyboard".PHP_EOL);
       return $keyboard;
    }
 
@@ -108,13 +117,14 @@ class userProfileAcquisitionByMovie
       $movieName = str_replace('_', ' ', $movieName); // Replaces all underscore with spaces.
       
       $this->setMovieToRating($movieName);
+      file_put_contents("php://stderr", "userMovieprofile->getUserMovieToRating - chatId: ".$chatId."/return movieName:".$movieName.PHP_EOL);
 
       return $movieName;
    }
 
   public function putUserMovieToRating($chatId, $movieName, $rating){
 
-      if ($movieName != "null"){
+      if ($movieName !== "null"){
          $movieName = str_replace(' ', '_', $movieName);
          $movieURI = "http://dbpedia.org/resource/";
          $movieURI .= $movieName;
@@ -125,6 +135,7 @@ class userProfileAcquisitionByMovie
       else{
          $data = null;
       }
+      file_put_contents("php://stderr", "userMovieprofile->putUserMovieToRating - chatId: ".$chatId." - movieURI: "." - rating:".$rating.PHP_EOL);
 
       return $data;
    }
@@ -159,6 +170,7 @@ class userProfileAcquisitionByMovie
          $img = './recsysbot/images/poster.jpg';
          copy($poster, $img);
       }
+      file_put_contents("php://stderr", "userMovieprofile->getTitleAndPosterMovieToRating - movieName: ".$movieName."/return title:".$title.PHP_EOL);
 
       return $title;
    }

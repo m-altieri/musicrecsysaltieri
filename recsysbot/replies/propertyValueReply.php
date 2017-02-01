@@ -6,10 +6,13 @@ function propertyValueReply($telegram, $chatId, $propertyType, $text){
 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,'resize_keyboard' => true,'one_time_keyboard' => false]);
 
 	if (strpos($propertyType, 'starring') !== false) {
-		$text = "Please, choose the actor you want to rate";
+		$text = "Please, choose the actor you want to rate \nor type the name";
+	}
+	elseif (strpos($propertyType, 'editing') !== false) {
+		$text = "Please, choose the editor you want to rate \nor type the name";
 	}
 	else{
-		$text = "Please, choose the ".$propertyType." you want to rate";
+		$text = "Please, choose the ".$propertyType." you want to rate \nor type the name";
 	}
 
 	

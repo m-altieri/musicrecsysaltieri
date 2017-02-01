@@ -20,7 +20,7 @@ function refocusFunction($chatId){
 
    $directors = $starring = $categories = $genres = $writers = $producers = $musicComposers = $cinematographies = $based = $editings = $distributors = array();
    $runtime = $releaseDate = "";
-   if ($data != "null") {
+   if ($data !== "null") {
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
             $propertyType = str_replace("http://dbpedia.org/ontology/", "", $v[1]);

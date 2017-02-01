@@ -6,7 +6,22 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
 
    $reply = explode("\"", $text);
    $movieName = isset($reply[1])? $reply[1] : null;
-   //$movieName = "cast away";   
+
+   $keyboard = array();
+   if ($movieName == null) {
+      $keyboard = propertyValueFromPropertyTypeKeyboard($chatId, $propertyType);
+   }      
+   else{
+      $keyboard = propertyValueFromPropertyTypeAndMovieKeyboard($chatId, $propertyType, $text);
+   }   
+
+   return $keyboard;
+}
+/*function propertyValueKeyboard($chatId, $propertyType, $text){   
+
+   $reply = explode("\"", $text);
+   $movieName = isset($reply[1])? $reply[1] : null;
+   //$movieName = "cast away";  
 
    file_put_contents("php://stderr", "propertyValueKeyboard - propertyType:".$propertyType.PHP_EOL);
    file_put_contents("php://stderr", "propertyValueKeyboard - movieName:".$movieName.PHP_EOL);
@@ -16,7 +31,8 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
    $result = array();
    $keyboard = array();
    $propertyArray = array();
-   if ($data != "null") {
+   $scoreUpdate = 0.0000000000001;
+   if ($data !== "null") {
       if ($movieName == null) {
          $returnType = "Properties";
          foreach ($data as $movie => $propertiesValue){
@@ -26,6 +42,7 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
                $propertyName = str_replace("http://dbpedia.org/resource/", "", $propertyValue);
                $propertyName = str_replace('_', ' ', $propertyName); // Replaces all underscore with spaces.
                list($score, $property) = explode(',', $propertyName);
+               //problema stesso score valori diversi e score diversi valori uguali
                $propertyArray[$score] = $property;
                krsort($propertyArray);               
             }
@@ -33,27 +50,40 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
       }
       else{
          $returnType = "\"property\" of \"".$movieName."\"";
-         foreach ($data as $movie => $propertiesValue){
-            //echo '<pre>'; print_r("Single movie: ".$movie); echo '</pre>';
+         foreach ($data as $movie => $propertiesValue){            
+            
             $movieName = str_replace(' ', '_', $movieName); // Replaces all spaces with underscore.
             if (strpos(strtolower($movie),strtolower($movieName))) {
+               //echo '<pre>'; print_r("Single movie: ".$movie); echo '</pre>';
                foreach ($propertiesValue as $propertyScore => $propertyValue) {
                   //echo '<pre>'; print_r($propertiesValue); echo '</pre>';
                   $propertyName = str_replace("http://dbpedia.org/resource/", "", $propertyValue);
                   $propertyName = str_replace('_', ' ', $propertyName); // Replaces all underscore with spaces.
                   list($score, $property) = explode(',', $propertyName);
-                  $propertyArray[$score] = $property;
+                  if( isset( $propertyArray[$score])) {
+                     echo '<pre>'; print_r("score: ".$score); echo '</pre>';
+                     $score = floatval($score) + $scoreUpdate;
+                     $scoreUpdate = $scoreUpdate + 0.0000000000001;                     
+                     
+                     echo '<pre>'; print_r("scoreUpdate: ".$scoreUpdate); echo '</pre>';
+                     echo '<pre>'; print_r("newscore: ".$score); echo '</pre>';
+                     $propertyArray[sprintf($score)] = $property;
+                  }
+                  else{
+                     $propertyArray[$score] = $property;
+                  }                  
                   krsort($propertyArray);                  
                }
+            
             }            
          }         
       }
       
-      //echo '<pre>'; print_r($propertyArray); echo '</pre>';
+      echo '<pre>'; print_r($propertyArray); echo '</pre>';
       foreach ($propertyArray as $key => $property) {
          switch ($propertyType) {
             case "/directors": case "directors": case "director":
-               $result[] = array("📽"." ".$property);
+               $result[] = array("🎬"." ".$property);
                break;
             case "/starring": case "starring":
                $result[] = array("🕴"." ".$property);
@@ -63,7 +93,7 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
                $result[] = array("📼"." ".$property);
                break;
             case "/genres": case "genres": case "genre":
-               $result[] = array("🎬"." ".$property);
+               $result[] = array("🎞"." ".$property);
                break;
             case "/writers": case "writers": case "writer":
                 $result[] = array("🖊"." ".$property);
@@ -104,4 +134,4 @@ function propertyValueKeyboard($chatId, $propertyType, $text){
    $keyboard[] = array("🔙 Return to the list of ".$returnType);
 
    return $keyboard;
-}
+}*/

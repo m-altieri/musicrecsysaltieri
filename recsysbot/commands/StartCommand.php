@@ -19,37 +19,34 @@ class StartCommand extends Command
       $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
       $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
 
-      $keyboard = $this->getUserStartProfileAcquisitionKeyboard($chatId);
-
-      $reply_markup = $this->getTelegram()->replyKeyboardMarkup([
-        'keyboard' => $keyboard,
-        'resize_keyboard' => true,
-        'one_time_keyboard' => false
-        ]);
-
-        //$reply_markup = replyKeyboardMarkup($keyboard, true, true);
-        //$reply_markup = $this->replyKeyboardMarkup($keyboard, true, true);
-        $text = "Hi ".$firstname."!\nLet me to recommend a movie.\nPlease, tell me something about you";
-        $this->replyWithChatAction(['action' => Actions::TYPING]);
-        $this->replyWithMessage([
-            'text' => $text, 
-            'reply_markup' => $reply_markup
-            ]);
-        
-    }
-
-    private function getUserStartProfileAcquisitionKeyboard($chatId){
       $numberRatedMovies = getNumberRatedMovies($chatId);
+      $numberRatedProperties = getNumberRatedProperties($chatId);
 
-      if ($numberRatedMovies >= 3)
-         $keyboard = startProfileAcquisitionKeyboard();
-      else
-         $keyboard = [
-             ['🔵 Choose some movies']
-         ];
+      
+      $this->replyWithChatAction(['action' => Actions::TYPING]);
 
+      if ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
 
-      return $keyboard;
+        $keyboard = userPropertyValueKeyboard();
+        $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+         $text = "Hi ".$firstname." 😃\nLet me to recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";
+         $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);              
+      }
+      else{
+
+        $keyboard = startProfileAcquisitionKeyboard();
+        $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+         $text = "Hi ".$firstname." 😃";
+         $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
+
+         $text = "I need at least 3 preferences for generating recommendations.";
+         $this->replyWithMessage(['text' => $text]); 
+
+         $text = "Let me to recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";
+         $this->replyWithMessage(['text' => $text]); 
+      }        
    }
 }
 

@@ -6,8 +6,8 @@ function refineFunctionReply($telegram, $chatId){
    $movie = lastMovieToRefine($chatId, $pagerankCicle);
    
    //Chiama prima la funzione di refine e poi fai modicare  una proprietà
-   $text = refineFunction($chatId);
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
+   $text = refineFunction($chatId);
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);   
    
 

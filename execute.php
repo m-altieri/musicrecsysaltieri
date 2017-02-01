@@ -59,6 +59,18 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 if (isset ($message['text'])){
+   if (($text == "/start")) {
+      putUserDetail($chatId, $firstname, $lastname, $username);
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
+      file_put_contents("php://stderr", "Switch text: /start".PHP_EOL);
+   }
+   else{
+      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
+      file_put_contents("php://stderr", "Switch text: ".$text.PHP_EOL);
+   }
+
+}
+/*if (isset ($message['text'])){
    $numberRatedMovies = getNumberRatedMovies($chatId);
    $numberRatedProperties = getNumberRatedProperties($chatId); 
    if (($text == "/start")) {
@@ -66,7 +78,7 @@ if (isset ($message['text'])){
       switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "text == start".PHP_EOL);
    } 
-   elseif ( $text == "profile" || 
+   elseif ( $text == "preferences" || 
             $text == "/help" || 
             $text == "/info" || 
             strpos($text, '🔴') !== false || 
@@ -82,11 +94,11 @@ if (isset ($message['text'])){
       file_put_contents("php://stderr", "numberRatedMovies >= 3 || numberRatedProperties >= 3".PHP_EOL);
    }
    else {
-      $text = "profile";
+      $text = "preferences";
       switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
       file_put_contents("php://stderr", "profile".PHP_EOL);
    }
-}
+}*/
 elseif (isset ($message['audio'])){
    $response = "I'm sorry. I received an audio message";
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);

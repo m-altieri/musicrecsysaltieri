@@ -10,7 +10,7 @@ function movieListTop5Keyboards($chatId){
   
    $result = array();
    $keyboard = array();
-   if ($data != "null") {
+   if ($data !== "null") {
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
             $propertyStr = str_replace("http://dbpedia.org/resource/", "", $v);
