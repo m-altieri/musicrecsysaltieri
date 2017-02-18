@@ -51,6 +51,7 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
+file_put_contents("php://stderr", "execute.php - chatId: ".$chatId." - update: ".print_r($update, true).PHP_EOL);
 // Stampa nel log
 $globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
 file_put_contents("php://stderr", "Date:".$globalDate." - chatId:".$chatId." - firstname:".$firstname." - text:".$text.PHP_EOL);

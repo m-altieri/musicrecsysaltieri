@@ -5,7 +5,9 @@ use Recsysbot\Classes\userProfileAcquisitionByMovie;
 function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){
 
    $oldNumberOfRatedMovies = getNumberRatedMovies($chatId);
-   $movieName = $userMovieprofile->getUserMovieToRating($chatId);
+   $pagerankCicle = getNumberPagerankCicle($chatId);
+   $movieName = lastMovieToRating($chatId, $pagerankCicle);
+   $userMovieprofile->setMovieToRating($movieName);
    file_put_contents("php://stderr", "out if - userMovieRatingReply - movieName: ".$movieName." - rating: ".$rating.PHP_EOL);
 
    if ($movieName !== "null" && $rating !== "null" ) {
