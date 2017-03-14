@@ -757,7 +757,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         recMovieRatingReply($telegram, $chatId, $rating, $userMovieRecommendation);
+         recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //film raccomandato valutato negativamente
       case strpos($text, '🙁'):
@@ -774,7 +774,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         recMovieRatingReply($telegram, $chatId, $rating, $userMovieRecommendation);
+         recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //I Like but
       case strpos($text, '🌀'):

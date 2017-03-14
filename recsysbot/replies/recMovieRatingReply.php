@@ -2,7 +2,7 @@
 
 use Recsysbot\Classes\userMovieRecommendation;
 
-function recMovieRatingReply($telegram, $chatId, $rating, $userMovieRecommendation){
+function recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $botName, $date, $userMovieRecommendation){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
 
@@ -30,7 +30,7 @@ function recMovieRatingReply($telegram, $chatId, $rating, $userMovieRecommendati
    
    $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movie);
    $page = $page+1;
-   backNextFunction($telegram, $chatId, $page, $userMovieRecommendation);
+   backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
 
    
 
