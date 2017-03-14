@@ -6,6 +6,8 @@ function recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $bo
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
 
+   $text = null;
+
    if ($rating == 1) {
       $reply = likeRecMovieSelected($chatId, $pagerankCicle);
       $movie = $reply[1];
@@ -30,6 +32,7 @@ function recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $bo
    
    $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movie);
    $page = $page+1;
+   $text = $page;
    backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
 
    
