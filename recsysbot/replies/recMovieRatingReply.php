@@ -26,7 +26,7 @@ function recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $bo
    
    $title = $userMovieRecommendation->getTitleAndPosterRecMovieToRating($movie);
 
-   $text .= $text." \"".$title."\" movie 😉";
+   $text = $text." \"".$title."\" movie 😉";
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
    
