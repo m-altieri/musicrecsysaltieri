@@ -10,9 +10,9 @@ function refineMoviePropertyReply($telegram, $chatId, $userMovieRecommendation){
     $userMovieRecommendation->setUserRecMovieToRating($movie);
     $userMovieRecommendation->putUserRecMovieRefine($chatId, $movie); 
 
-  // $text = "".$pagerankCicle."^ cicle of recommendation...";
-  // $text .= "\nIn this cycle you have chosen:";
-   $text = "\nYou have chosen:";
+   $text = "".$pagerankCicle."^ cicle of recommendation...";
+   $text .= "\nIn this cycle you have chosen:";
+   $text .= "\nYou have chosen:";
    $text .= "\n\"".ucwords($movie)."\"";
    $text .= "\nWe continue with Classic Refine";
 

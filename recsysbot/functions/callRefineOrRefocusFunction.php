@@ -14,16 +14,16 @@ function callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendatio
 		$oldRecMovieToRefineSelected = $replyOld[1];
 		$lastRecMovieToRefineSelected = $replyLast[1];
 
-   	// $text = "".$pagerankCicle."^ cicle of recommendation...";
-      // $text .= "\nDuring previous cycle you have chosen:";
-      // $text .= "\n\"".ucwords($oldRecMovieToRefineSelected)."\"";
-      // $text .= "\nIn this cycle you have chosen:";
-      // $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
+   	 $text = "".$pagerankCicle."^ cicle of recommendation...";
+       $text .= "\nDuring previous cycle you have chosen:";
+       $text .= "\n\"".ucwords($oldRecMovieToRefineSelected)."\"";
+       $text .= "\nIn this cycle you have chosen:";
+       $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
 
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
 
    	if (strcasecmp($oldRecMovieToRefineSelected, $lastRecMovieToRefineSelected) == 0){
-         $text = "\nYou have chosen:";
+         $text .= "\nYou have chosen:";
          $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
          $text .= "\nWe continue with Refocus";
 
@@ -32,7 +32,7 @@ function callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendatio
          refocusFunctionReply($telegram, $chatId);
    	}
    	else{
-         $text = "\nYou have chosen:";
+         $text .= "\nYou have chosen:";
          $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
          $text .= "\nWe continue with Refine";
 
