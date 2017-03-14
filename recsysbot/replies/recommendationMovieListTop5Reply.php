@@ -21,6 +21,7 @@ function recommendationMovieListTop5Reply($telegram, $chatId){
          if (stristr($property[0], '🔙') == false) {
             $movie = $property[0];
             $text .= "\n".$i."^ *".ucwords($movie)."*";
+            //$text .= "\n*".ucwords($movie)."*";
             //movieDetailTop5Reply($telegram, $chatId, $movie);
             $i++;
          }                

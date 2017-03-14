@@ -46,7 +46,7 @@ class ResetCommand extends Command
             $this->triggerCommand('start');
          }
          elseif (strpos($resetArguments, 'all') !== false) {
-            $text = $this->resetAllMovieAndPropertyRated($chatId, $firstname);
+            $text = $this->resetAllProfile($chatId, $firstname);
 
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup(['keyboard' => $keyboard,  'resize_keyboard' => true, 'one_time_keyboard' => false]);
@@ -55,8 +55,18 @@ class ResetCommand extends Command
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);
             $this->triggerCommand('start');
          }
-         elseif (strpos($resetArguments, 'pagerank') !== false) {
-            $text = $this->resetAllPagerankScores($chatId, $firstname);
+         elseif (strpos($resetArguments, 'chat') !== false) {
+            $text = $this->resetAllChatMessage($chatId, $firstname);
+
+            $keyboard = startProfileAcquisitionKeyboard();
+            $reply_markup = $this->getTelegram()->replyKeyboardMarkup(['keyboard' => $keyboard,  'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+            $this->replyWithChatAction(['action' => Actions::TYPING]);
+            $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);
+            $this->triggerCommand('start');
+         }
+         elseif (strpos($resetArguments, 'rec') !== false) {
+            $text = $this->resetAllRecMovies($chatId, $firstname);
 
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup(['keyboard' => $keyboard,  'resize_keyboard' => true, 'one_time_keyboard' => false]);
@@ -68,7 +78,7 @@ class ResetCommand extends Command
          else{
             $this->replyWithChatAction(['action' => Actions::TYPING]);
             $this->replyWithMessage(['text' => '😕 Reset format is incorrect', 'reply_markup' => $reply_markup]);
-            $text = "You can use the following format:\n- /reset movies\n- /reset properties\n- /reset pagerank\n- /reset all";
+            $text = "You can use the following format:\n- /reset movies\n- /reset properties\n- /reset all";
 
             $keyboard = startProfileAcquisitionKeyboard();
 
@@ -76,73 +86,63 @@ class ResetCommand extends Command
 
             $this->replyWithChatAction(['action' => Actions::TYPING]);
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);
-         }
-
-
-
-        //$reply_markup = replyKeyboardMarkup($keyboard, true, true);
-        //$reply_markup = $this->replyKeyboardMarkup($keyboard, true, true);
-
-
-        
+         }        
     }
 
    private function resetAllPropertyRated($chatId, $firstname){
-
-      deleteAllPagerankScores($chatId);
-      $dataChat = deleteAllChatMessage($chatId); 
       $data = deleteAllPropertyRated($chatId);        
       $newNumberOfRatedProperties = $data;
 
       if ($newNumberOfRatedProperties == 0) {
-         $text = "All right ".$firstname.", i reset all properties that you have evaluated";
+         $text = "All right ".$firstname.", I deleted all your preferences";
       } else{
-         $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
+         $text = "Sorry ".$firstname.", there is a problem to reset all properties that you have evaluated";
       }
       return $text;
     }
 
    private function resetAllMovieRated($chatId, $firstname){
-
-      deleteAllPagerankScores($chatId);
       $data = deleteAllMovieRated($chatId);          
       $newNumberOfRatedMovies = $data;
 
       if ($newNumberOfRatedMovies == 0 ) {
-         $text = "All right ".$firstname.", i reset all movies that you have evaluated";
+         $text = "All right ".$firstname.", I deleted all your movie preferences";
       } else{
-         $text = "Sorry ".$firstname.", there was a problem to reset all movies that you have evaluated";
+         $text = "Sorry ".$firstname.", there is a problem to delete your movie preferences";
       }
       return $text;
    }
 
-   private function resetAllPagerankScores($chatId, $firstname){
+   private function resetAllProfile($chatId, $firstname){
+      $data = deleteAllProfile($chatId);          
+      $newNumberPagerankCicle = $data;
 
-      deleteAllPagerankScores($chatId);
-      $text = "All right ".$firstname.", i reset all pagerank scores saved";
-
-      return $text;
-   }
-
-
-   private function resetAllMovieAndPropertyRated($chatId, $firstname){
-
-      //Va finito di gestire l'azzeramento dei messaggi - forse solo il pagerank è da controllare
-      deleteAllPagerankScores($chatId);  
-      $dataProperty = deleteAllPropertyRated($chatId);
-      $dataMovie = deleteAllMovieRated($chatId);
-      $dataChat = deleteAllChatMessage($chatId);
-             
-      $newNumberOfRatedProperties = $dataProperty;
-      $newNumberOfRatedMovies = $dataMovie;
-
-      if ($newNumberOfRatedProperties + $newNumberOfRatedMovies == 0) {
-         $text = "All right ".$firstname.", i reset all movies and properties that you have evaluated";
+      if ($newNumberPagerankCicle == 0 ) {
+         $text = "All right ".$firstname.", I deleted all your preferences";
       } else{
-         $text = "Sorry ".$firstname.", there was a problem to reset all movies and properties that you have evaluated";
+         $text = "Sorry ".$firstname.", there is a problem to delete your movie preferences";
       }
       return $text;
 
+   }
+
+   private function resetAllChatMessage($chatId, $firstname){
+      $data = deleteAllChatMessage($chatId);      
+      $newNumberPagerankCicle = $data;
+
+      if ($newNumberPagerankCicle == 0) {
+         $text = "All right ".$firstname.", I deleted all your chat messages ";
+      } else{
+         $text = "Sorry ".$firstname.", there is a problem to delete your chat messages";
+      }
+      return $text;
+    }
+
+   private function resetAllRecMovies($chatId, $firstname){
+      deleteAllRecMovies($chatId);
+      $text = "All right ".$firstname.", I deleted all your recommended movies";
+
+      return $text;
    }
 
 

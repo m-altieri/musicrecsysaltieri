@@ -10,9 +10,16 @@ function putPropertyRating($chatId, $propertyType, $propertyName, $rating, $last
 
 	
 	switch ($propertyType) {
-		case "genre": case "releaseYear": case "runtimeRange":
+		case "genre": case "releaseYear":
 			$propertyTypeURI = $propertyType;
 			$propertyURI = $propertyName;
+			break;
+		case "runtimeRange":
+			//$propertyName = str_replace(' ', '_', $propertyName);
+			$propertyTypeURI = $propertyType;
+			$propertyURI = $propertyName;
+			print_r("<br>propertyTypeURI:".$propertyTypeURI."<br>");
+      	print_r("<br>propertyURI:".$propertyURI."<br>");
 			break;
 		case "director": case "starring": case "writer": case "producer": case "musicComposer": case "cinematography": case "basedOn": case "editing": case "distributor":
 			if ($propertyName !== "null"){
@@ -40,7 +47,7 @@ function putPropertyRating($chatId, $propertyType, $propertyName, $rating, $last
 
 
    if ($propertyURI !== "null" && $propertyTypeURI !== "null" ){    	
-      // $client = new Client(['base_uri'=>'http://localhost:8080']);
+      //$client = new Client(['base_uri'=>'http://localhost:8080']);
       $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
       $stringGetRequest = '/lodrecsysrestful/restService/propertyRating/putPropertyRating?userID='.$userID.'&propertyTypeURI='.$propertyTypeURI.'&propertyURI='.$propertyURI.'&rating='.$rating.'&lastChange='.$lastChange;
       $response = $client->request('GET', $stringGetRequest);

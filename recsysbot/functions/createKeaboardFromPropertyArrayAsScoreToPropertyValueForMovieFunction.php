@@ -25,15 +25,17 @@ function createKeaboardFromPropertyArrayAsScoreToPropertyValueForMovieFunction($
          case "/producers": case "producers": case "producer":
              $result[] = array("💰"." ".ucwords($propertyValue)." - Producer");
             break;
-         case "/release year": case "release year": case "releaseYear":
-             $result[] = array("🗓"." ".ucwords($propertyValue)." - Release year");
-            break;
+         // case "/release year": case "release year": case "releaseYear":
+         //    //da gestire come filtro
+         //     $result[] = array("🗓"." ".ucwords($propertyValue)." - Release year");
+         //    break;
          case "/music composers": case "music composers": case "music composer": case "musicComposer": case "music":
             $result[] = array("🎼"." ".ucwords($propertyValue)." - Music composer");
             break;
-         case "/runtimeRange": case "runtimeRange": case "runtime":
-            $result[] = array("🕰"." Under ".ucwords($propertyValue)." minutes");
-            break;
+         // case "/runtimeRange": case "runtimeRange": case "runtime":
+         // //da gestire come filtro
+         //    $result[] = array("🕰"." Under ".ucwords($propertyValue)." minutes");
+         //    break;
          case "/cinematographies": case "cinematographies": case "cinematography":
              $result[] = array("📷"." ".ucwords($propertyValue)." - Cinematography");
             break;

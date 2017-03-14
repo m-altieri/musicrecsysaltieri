@@ -1,13 +1,14 @@
 <?php
-
 use Recsysbot\Classes\userMovieRecommendation;
 
 function recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation){
 
+	$text = "Please wait. I'm working for you 😉";
+	
+	//echo '<pre>'; print_r($text); echo '</pre>';
 	$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-	$text = "Please wait. I'm working for you 🤔"; 
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
 
-	$userMovieRecommendation->setText(1);
+	$userMovieRecommendation->setPage(1);
    $userMovieRecommendation->handle();
 }

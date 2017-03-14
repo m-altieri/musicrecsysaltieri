@@ -5,9 +5,9 @@ use Telegram\Bot\FileUpload\InputFile;
 
 function movieDetailTop5Reply($telegram, $chatId, $movie){
    
-   $movieName = str_replace(' ', '_', $movie); 
+   $movie_name = str_replace(' ', '_', $movie); 
 
-   $data = getAllPropertyListFromMovie($movieName);
+   $data = getAllPropertyListFromMovie($movie_name);
 
    $result = array();
    $keyboard = array();
@@ -39,6 +39,7 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
                case "/genres": case "genres": case "genre":
                    $genres[] = $property;
                   break;
+               //Sicuramente va gestita come filtro
                case "/runtime": case "runtime": case "runtimeRange":      
                   $runtime = $property;
                   break;
@@ -48,6 +49,7 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
                case "/producers": case "producers": case "producer":
                    $producers[] = $property;
                   break;
+               //Sicuramente va gestita come filtro
                case "/release date": case "release date": case "releaseDate": case "releaseYear":
                   $releaseDate = $property;
                   break;
@@ -112,10 +114,10 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
 
       if ($poster != '' AND $poster != "N/A" ) {   
          $img = './recsysbot/images/poster.jpg';
-         copy($poster, $img);
+         copy($poster, $img); //copia nell'immagine l'immagine del poster
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $text]);
-         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
       }
    }
 }

@@ -6,9 +6,10 @@ function startProfileAcquisitioReply($telegram, $chatId){
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
 
    $numberRatedMovies = getNumberRatedMovies($chatId);
-   $numberRatedProperties = getNumberRatedProperties($chatId); 
+   $numberRatedProperties = getNumberRatedProperties($chatId);
+   $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
-   if ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
+   if ($needNumberOfRatedProperties <= 0){
       $keyboard = userPropertyValueKeyboard();
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]); 
 

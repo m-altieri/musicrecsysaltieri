@@ -2,7 +2,8 @@
 
 use GuzzleHttp\Client;
 
-function movieOrPropertyToRatingKeyboard($chatId){  
+//Costruscire la tastiera di ProfileReply
+function movieOrPropertyToRatingKeyboard($chatId){ 
 
    file_put_contents("php://stderr", "movieOrPropertyToRatingKeyboard".PHP_EOL);
 
@@ -13,10 +14,10 @@ function movieOrPropertyToRatingKeyboard($chatId){
    $propertyArray = array();
    $result = array();
    if ($data !== "null") {
-      foreach ($data as $uriAndTypeKey => $rating) {
-      	$property = explode(',', $uriAndTypeKey);
-      	$propertyValueUri = $property[0];
-      	$propertyTypeUri = $property[1];
+      foreach ($data as $typeAndUriKey => $rating) {
+      	$property = explode(',', $typeAndUriKey);
+      	$propertyTypeUri = $property[0];
+      	$propertyValueUri = $property[1];      	
          $propertyValue = replaceUriWithName($propertyValueUri);
          $propertyType = replaceUriWithName($propertyTypeUri);
          
@@ -48,7 +49,7 @@ function movieOrPropertyToRatingKeyboard($chatId){
 	            $result[] = array("🎼"." ".$movieOrPropertyRating);
 	            break;
 	         case "/runtimeRange": case "runtimeRange": case "runtime":
-	            $result[] = array("🕰"." Under ".$movieOrPropertyRating." minutes");
+	            $result[] = array("🕰"." ".$movieOrPropertyRating);
 	            break;
 	         case "/cinematographies": case "cinematographies": case "cinematography":
 	             $result[] = array("📷"." ".$movieOrPropertyRating);
@@ -73,11 +74,11 @@ function movieOrPropertyToRatingKeyboard($chatId){
  
    if(!empty($result)){
 	   $keyboard = $result;
-	   $keyboard[] = array("🔙 Go to the list of Properties");
+	   $keyboard[] = array("🔙 Home");
+	   $keyboard[] = array("✖ Reset");
 	}
 	else{
-		$keyboard[] = array("Your profile is empty");
-		$keyboard[] = array("🔙 Go to the list of Properties");
+		$keyboard[] = array("🔙 Home");
 	}
 
 

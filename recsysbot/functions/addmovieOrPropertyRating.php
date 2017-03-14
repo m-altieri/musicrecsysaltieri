@@ -1,10 +1,7 @@
 <?php
  
 function addmovieOrPropertyRating($propertyValue, $propertyType, $rating){
-   //👍
-   //👎
-   //😃
-   //😑
+
    $movieOrPropertyRating = $propertyValue;
    switch ($propertyType) {
       case "movie":
@@ -17,7 +14,7 @@ function addmovieOrPropertyRating($propertyValue, $propertyType, $rating){
          break;
       case ($propertyType !== 'movie'):
          if ($rating == 1) {
-            $movieOrPropertyRating = ucwords($propertyValue)." - "."😃 liked ".$propertyType;
+            $movieOrPropertyRating = ucwords($propertyValue)." - "."🙂 liked ".$propertyType;
          } 
          elseif ($rating == 0){
             $movieOrPropertyRating = ucwords($propertyValue)." - "."😑 disliked ".$propertyType;

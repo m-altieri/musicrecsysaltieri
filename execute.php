@@ -50,56 +50,45 @@ $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name']
 $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
-
-file_put_contents("php://stderr", "execute.php - chatId: ".$chatId." - update: ".print_r($update, true).PHP_EOL);
-// Stampa nel log
 $globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
-file_put_contents("php://stderr", "Date:".$globalDate." - chatId:".$chatId." - firstname:".$firstname." - text:".$text.PHP_EOL);
+$botName = "testrecsysbot";
+
+// gestisci edited_message, per evitare blocco del bot
+if($chatId == "")
+{
+   $message = isset($update['edited_message']) ? $update['edited_message'] : "";
+   $messageId = isset($message['message_id']) ? $message['message_id'] : "";
+   $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
+   $firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
+   $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
+   $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
+   $date = isset($message['date']) ? $message['date'] : "";
+   $text = isset($message['text']) ? $message['text'] : "";
+   $globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+   file_put_contents("php://stderr", "edited_message execute.php - chatId: ".$chatId." - update: ".print_r($update, true).PHP_EOL);
+}
+// Stampa nel log
+file_put_contents("php://stderr","botName".$botName. " - Date:".$globalDate." - chatId:".$chatId." - firstname:".$firstname." - text:".$text.PHP_EOL);
+
 // pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
 $text = trim($text);
+
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
+
+//gestisco il tipo di messaggio: testo
 if (isset ($message['text'])){
+   
    if (($text == "/start")) {
       putUserDetail($chatId, $firstname, $lastname, $username);
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
-      file_put_contents("php://stderr", "Switch text: /start".PHP_EOL);
+      messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
    }
    else{
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
-      file_put_contents("php://stderr", "Switch text: ".$text.PHP_EOL);
+      messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
    }
 
 }
-/*if (isset ($message['text'])){
-   $numberRatedMovies = getNumberRatedMovies($chatId);
-   $numberRatedProperties = getNumberRatedProperties($chatId); 
-   if (($text == "/start")) {
-      putUserDetail($chatId, $firstname, $lastname, $username);
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
-      file_put_contents("php://stderr", "text == start".PHP_EOL);
-   } 
-   elseif ( $text == "preferences" || 
-            $text == "/help" || 
-            $text == "/info" || 
-            strpos($text, '🔴') !== false || 
-            strpos($text, '🔵') !== false ||
-            strpos($text, '👍') !== false || 
-            strpos($text, '👎') !== false || 
-            strpos($text, '💬') !== false ) {
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname); 
-      file_put_contents("php://stderr", "help || info || movies || properties".PHP_EOL);
-   } 
-   elseif ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
-      file_put_contents("php://stderr", "numberRatedMovies >= 3 || numberRatedProperties >= 3".PHP_EOL);
-   }
-   else {
-      $text = "preferences";
-      switchText($telegram, $chatId, $messageId, $date, $text, $firstname);
-      file_put_contents("php://stderr", "profile".PHP_EOL);
-   }
-}*/
+
 elseif (isset ($message['audio'])){
    $response = "I'm sorry. I received an audio message";
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);

@@ -4,10 +4,10 @@
 function userPropertyValueKeyboard(){
 
    $keyboard = [
-         ["✔ Recommend movie"],
-         ["🔴 Choose some movie properties"],
-         ['🔵 Choose some movies'],
-         ['👤 Explore my profile']
+         ["🌐 Recommend Movies"],
+         ["🔴 Rate movie properties"],
+         ['🔵 Rate movies'],
+         ['👤 Profile']
      ];
 
 	return $keyboard;

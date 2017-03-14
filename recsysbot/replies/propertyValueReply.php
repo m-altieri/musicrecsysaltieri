@@ -3,6 +3,8 @@
 function propertyValueReply($telegram, $chatId, $propertyType, $text){
 
 	$keyboard = propertyValueKeyboard($chatId, $propertyType, $text);
+	//echo '<pre>'; print_r($keyboard); echo '</pre>';
+
 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,'resize_keyboard' => true,'one_time_keyboard' => false]);
 
 	if (strpos($propertyType, 'starring') !== false) {

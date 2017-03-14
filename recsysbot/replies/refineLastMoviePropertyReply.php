@@ -3,7 +3,8 @@
 function refineLastMoviePropertyReply($telegram, $chatId){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
-   $movie = oldMovieToRefine($chatId, $pagerankCicle);
+   $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
+   $movie = $replyOld[1];
    
    $text = "Refine additional properties of ";
    $text .= "\n\"".ucwords($movie)."\"";

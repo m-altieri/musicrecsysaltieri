@@ -1,46 +1,47 @@
 <?php 
 
-function callRefineOrRefocusFunction($telegram, $chatId){
+function callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendation){
 
 	$pagerankCicle = getNumberPagerankCicle($chatId);
    $text = null;
 
 	if ($pagerankCicle == 0) {
-		 refineMoviePropertyReply($telegram, $chatId);
+		 refineMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
 	}
 	else{
-		$oldMovieToRefine = oldMovieToRefine($chatId, $pagerankCicle);
-		$lastMovieToRefine = lastMovieToRefine($chatId, $pagerankCicle);
+      $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
+      $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
+		$oldRecMovieToRefineSelected = $replyOld[1];
+		$lastRecMovieToRefineSelected = $replyLast[1];
 
-   	$text = "".$pagerankCicle."^ cicle of recommendation...";
-   	$text .= "\nDuring previous cycle you have chosen:";
-      $text .= "\n\"".ucwords($oldMovieToRefine)."\"";
-   	$text .= "\nIn this cycle you have chosen:";
-      $text .= "\n\"".ucwords($lastMovieToRefine)."\"";
-   	$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
-   	$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+   	// $text = "".$pagerankCicle."^ cicle of recommendation...";
+      // $text .= "\nDuring previous cycle you have chosen:";
+      // $text .= "\n\"".ucwords($oldRecMovieToRefineSelected)."\"";
+      // $text .= "\nIn this cycle you have chosen:";
+      // $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
 
-   	if (strcasecmp($oldMovieToRefine, $lastMovieToRefine) == 0){
+      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
+
+   	if (strcasecmp($oldRecMovieToRefineSelected, $lastRecMovieToRefineSelected) == 0){
+         $text = "\nYou have chosen:";
+         $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
+         $text .= "\nWe continue with Refocus";
+
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+
          refocusFunctionReply($telegram, $chatId);
    	}
    	else{
+         $text = "\nYou have chosen:";
+         $text .= "\n\"".ucwords($lastRecMovieToRefineSelected)."\"";
+         $text .= "\nWe continue with Refine";
+
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+
          refineFunctionReply($telegram, $chatId);
    	}
    	
 	}
-
-/*   putNumberPagerankCicle($chatId, $pagerankCicle+1);
-
-   $text = "Do you prefer to tell me something else about you \nor can I recommend you a movie?";
-   $keyboard = userPropertyValueKeyboard();
-
-   $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-
-   $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-   $telegram->sendMessage(['chat_id' => $chatId, 
-                           'text' => $text,
-                           'reply_markup' => $reply_markup]);*/
-
 
 }
 

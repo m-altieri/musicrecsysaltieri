@@ -2,8 +2,8 @@
 
 function refineMoviePropertyKeyboard($chatId, $movie){
    
-   $movieName = str_replace(' ', '_', $movie);  
-   $data = getAllPropertyListFromMovie($movieName);
+   $movie_name = str_replace(' ', '_', $movie);  
+   $data = getAllPropertyListFromMovie($movie_name);
 
    $fullMenuArray = array();
 
@@ -30,6 +30,7 @@ function refineMoviePropertyKeyboard($chatId, $movie){
                case "/genres": case "genres": case "genre":
                    $genres[] = $property;
                   break;
+               //Sicuramente va gestita come filtro
                case "/runtime": case "runtime": case "runtimeRange":      
                   $runtimeRange[] = $property;
                   break;
@@ -39,6 +40,7 @@ function refineMoviePropertyKeyboard($chatId, $movie){
                case "/producers": case "producers": case "producer":
                    $producers[] = $property;
                   break;
+               //Sicuramente va gestita come filtro
                case "/release date": case "release date": case "releaseDate": case "releaseYear":
                   $releaseYear[] = $property;
                   break;
@@ -134,10 +136,12 @@ function refineMoviePropertyKeyboard($chatId, $movie){
          $keyboard[] = array($property);
       }
       $keyboard[] = array("🔙 Return to the list of Movies");
+      $keyboard[] = array("🔙 Home","👤 Profile");
    }
    else{
       $keyboard = array();
       $keyboard[] = array("🔙 Return to the list of Movies");
+      $keyboard[] = array("🔙 Home","👤 Profile");
    }
 
    echo '<pre>'; print_r($fullMenuArray); echo '</pre>';

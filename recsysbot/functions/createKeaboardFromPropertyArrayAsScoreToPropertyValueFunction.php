@@ -25,13 +25,26 @@ function createKeaboardFromPropertyArrayAsScoreToPropertyValueFunction($property
                 $result[] = array("💰"." ".ucwords($property));
                break;
             case "/release year": case "release year": case "releaseYear":
-                $result[] = array("🗓"." ".ucwords($property));
+               //$result[] = array("🗓"." ".ucwords($property));
+               $result = [
+                              ["🗓 1910s - 1950s"],
+                              ["🗓 1950s - 1980s"],
+                              ["🗓 1980s - 2000s"],
+                              ["🗓 2000s - today"]
+                           ];
                break;
             case "/music composers": case "music composers": case "music composer": case "musicComposer": case "music":
                $result[] = array("🎼"." ".ucwords($property));
                break;
             case "/runtimeRange": case "runtimeRange": case "runtime":
-               $result[] = array("🕰"." Under ".ucwords($property)." minutes");
+               //$result[] = array("🕰"." Under ".ucwords($property)." minutes";
+               //$result[] = array("🕰 < 90", "🕰 90 - 120", "🕰 120 - 180", "🕰 > 180");
+               $result = [
+                              ["🕰 < 90 min"],
+                              ["🕰 90 - 120 min"],
+                              ["🕰 120 - 150 min"],
+                              ["🕰 > 150 min"]
+                           ];
                break;
             case "/cinematographies": case "cinematographies": case "cinematography":
                 $result[] = array("📷"." ".ucwords($property));

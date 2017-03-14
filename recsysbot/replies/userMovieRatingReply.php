@@ -4,28 +4,41 @@ use Recsysbot\Classes\userProfileAcquisitionByMovie;
 
 function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){
 
-   $oldNumberOfRatedMovies = getNumberRatedMovies($chatId);
    $pagerankCicle = getNumberPagerankCicle($chatId);
-   $movieName = lastMovieToRating($chatId, $pagerankCicle);
-   $userMovieprofile->setMovieToRating($movieName);
-   file_put_contents("php://stderr", "out if - userMovieRatingReply - movieName: ".$movieName." - rating: ".$rating.PHP_EOL);
+   $reply = movieToRatingSelected($chatId, $pagerankCicle);
+   $movieName = $reply[1];
+   $userMovieprofile->setUserMovieToRating($movieName);
+
+   //prendo l'ultimo film accettato per capire se è stato valutato
+   $replyAccept = acceptRecMovieToRatingSelected($chatId, $pagerankCicle);
+   $acceptRecMovieName = $replyAccept[1];
 
    if ($movieName !== "null" && $rating !== "null" ) {
-      file_put_contents("php://stderr", "in if - userMovieRatingReply - movieName: ".$movieName." - rating: ".$rating.PHP_EOL);
-      $data = $userMovieprofile->putUserMovieToRating($chatId, $movieName, $rating);
-      $newNumberOfRatedMovies = getNumberRatedMovies($chatId);
+
+      $oldNumberOfRatedMovies = getNumberRatedMovies($chatId);
+      $data = $userMovieprofile->putUserMovieRating($chatId, $movieName, $rating);
+
+      //se sono uguali, sto valutando un film accettato -> inserisci la valutazione
+      if (strcasecmp($movieName,$acceptRecMovieName) == 0) {
+         $userMovieprofile->putUserAcceptRecMovieRating($chatId, $acceptRecMovieName, $rating);
+      }
+      
+      $numberRatedMovies = getNumberRatedMovies($chatId);
+      $numberRatedProperties = getNumberRatedProperties($chatId);
+
+      $needNumberOfRatedMovies = 3 - ($numberRatedProperties + $numberRatedMovies);
 
       //manca il richiamo del profilo o la funzione, rivedere.
-      //29.11 al momento funziona
+      //Credo sia tutto ok
       $title = $userMovieprofile->getTitleAndPosterMovieToRating($movieName);
+      
 
-      $needNumberOfRatedMovies = 3 - $newNumberOfRatedMovies;
       if ($needNumberOfRatedMovies > 0) {
 
          if ($rating == 2) {
-            $text = "You have skipped\n \"".$title."\" movie.\nI need ".$needNumberOfRatedMovies." more ratings 😉";
+            $text = "You skipped\n \"".$title."\" movie.\nI need ".$needNumberOfRatedMovies." more ratings 😉";
          }
-         elseif ($newNumberOfRatedMovies > $oldNumberOfRatedMovies) {
+         elseif ($numberRatedMovies > $oldNumberOfRatedMovies) {
             $text = "You have rated \"".$title."\" movie \nI need ".$needNumberOfRatedMovies." more ratings 😉";
          } 
          else {
@@ -36,13 +49,13 @@ function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){
       else {
 
          if ($rating == 2) {
-            $text = "You have skipped\n \"".$title."\" movie.";
+            $text = "You skipped\n \"".$title."\" movie.";
          }
-         elseif ($newNumberOfRatedMovies > $oldNumberOfRatedMovies) {
-            $text = "You have rated \"".$title."\" movie \nProfile update with ".$newNumberOfRatedMovies." rated movies";
+         elseif ($numberRatedMovies > $oldNumberOfRatedMovies) {
+            $text = "You have rated \"".$title."\" movie \nProfile update with ".$numberRatedMovies." rated movies";
          } 
          else {
-            $text = "You have rated ".$newNumberOfRatedMovies." movies";
+            $text = "You have rated ".$numberRatedMovies." movies";
          }
 
       }
@@ -51,7 +64,9 @@ function userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile){
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
 
    }
-      
+   
+   $movieName = $userMovieprofile->getAndSetUserMovieToRating($chatId);
+   $userMovieprofile->putMovieToRating($movieName);
    $userMovieprofile->handle();
    
 

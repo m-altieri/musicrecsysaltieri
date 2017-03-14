@@ -1,10 +1,14 @@
 <?php
 
 function ratedMovieOldUserKeyboard(){
-
+	//📃📜📋📝
+	//['👍 Like','👎 Dislike','💬 Skip'],
    $keyboard = [
-                   ['👍 Like','👎 Dislike','💬 Skip'],
-                   ['🔴 Add properties','✔ Recommend me a movie']
+                   
+                   ['📋 Details','👍','👎','➡ Skip'],
+                   ['🌐 Recommend Movies'],
+                   ['🔴 Properties','👤 Profile']
+                   
                ];
 
    return $keyboard;

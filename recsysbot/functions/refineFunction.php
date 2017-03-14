@@ -10,9 +10,10 @@
 function refineFunction($chatId){   
 
 	$pagerankCicle = getNumberPagerankCicle($chatId);
-	$movie = lastMovieToRefine($chatId, $pagerankCicle);
-	$movieName = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-	$data = getAllPropertyListFromMovie($movieName);
+   $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
+   $movie = $replyLast[1];
+	$movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+	$data = getAllPropertyListFromMovie($movie_name);
 
    $text = "We continue with Refine...";
 
@@ -38,18 +39,18 @@ function refineFunction($chatId){
                case "/genres": case "genres": case "genre":
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);                
                   break;
-               case "/runtime": case "runtime": case "runtimeRange":      
+/*               case "/runtime": case "runtime": case "runtimeRange":      
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);
-                  break;
+                  break;*/
                case "/writers": case "writers": case "writer":
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);
                   break;
                case "/producers": case "producers": case "producer":
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);
                   break;
-               case "/release date": case "release date": case "releaseDate": case "releaseYear":
+/*               case "/release date": case "release date": case "releaseDate": case "releaseYear":
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);
-                  break;
+                  break;*/
                case "/music composers": case "music composers": case "music composer": case "musicComposer":
                   refineSubFunction($chatId, $propertyTypeUri, $propertyUri);
                   break;

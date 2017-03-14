@@ -19,18 +19,17 @@ class StartCommand extends Command
       $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
       $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
 
-      $numberRatedMovies = getNumberRatedMovies($chatId);
-      $numberRatedProperties = getNumberRatedProperties($chatId);
-
-      
       $this->replyWithChatAction(['action' => Actions::TYPING]);
 
-      if ($numberRatedMovies >= 3 || $numberRatedProperties >= 3) {
+      $numberRatedMovies = getNumberRatedMovies($chatId);
+      $numberRatedProperties = getNumberRatedProperties($chatId);
+      $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
-        $keyboard = userPropertyValueKeyboard();
-        $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+      if ($needNumberOfRatedProperties <= 0){
+         $keyboard = userPropertyValueKeyboard();
+         $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
-         $text = "Hi ".$firstname." 😃\nLet me to recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";
+         $text = "Hi ".$firstname." 😃\nLet me recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";
          $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);              
       }
       else{

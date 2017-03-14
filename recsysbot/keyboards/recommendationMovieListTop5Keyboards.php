@@ -19,16 +19,18 @@ function recommendationMovieListTop5Keyboards($chatId){
             $propertyArray[$score] = $propertyStr;
             krsort($propertyArray);
          }
-
+      $i = 1;
       if ($propertyType == 'movie') {
          foreach ($propertyArray as $key => $property) {
-            $result[] = array("".$property);
+            //$result[] = array("".$i."^ "."🎥"." ".ucwords($property));
+            $result[] = array("🎥"." ".$property);
+            $i++;
          }
       }
    } 
 
    $keyboard = array_slice($result, 0, 5);
-   $keyboard[] = array("🔙 Return to the list of Properties");
+   $keyboard[] = array("🔙 Home","👤 Profile");
 
    //file_put_contents("php://stderr", "recommendationMovieListTop5Keyboards return:".$keyboard.PHP_EOL);
    return $keyboard;

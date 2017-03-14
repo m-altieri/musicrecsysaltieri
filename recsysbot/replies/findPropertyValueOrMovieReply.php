@@ -1,21 +1,28 @@
 <?php 
  
-use GuzzleHttp\Client;
+function findPropertyValueOrMovieReply($telegram, $chatId,  $messageId, $date, $name, $userMovieprofile){
 
-function findPropertyValueOrMovieReply($telegram, $chatId, $userMovieprofile, $name){
-
-	$textSorry ="Sorry :)\nI don't understand \nPlease enter a command \n(es.\"/start\") ";   
-   $fullname = str_replace(' ', '_', $name); //tutti gli spazi con undescore
+   $textSorry ="Sorry :)\nI don't understand \nPlease enter a command \n(es.\"/start\") ";   
+   $full_name = str_replace(' ', '_', $name); //tutti gli spazi con undescore
    
-   $movieData = getAllPropertyListFromMovie($fullname);
+   $movieData = getAllPropertyListFromMovie($full_name);
 
    if ($movieData !== "null") { //se si tratta di un film
-      $userMovieprofile->movieRatingReply($fullname);
-      //$page = 1;
-      //movieDetailReply($telegram, $chatId, $name, $page);
+         //$replyFunctionCall = "movieToRatingSelected";
+         // $text = "movie, ".$name;
+         // $pagerankCicle = getNumberPagerankCicle($chatId);
+         // $result = putChatMessage($chatId, $messageId, $replyFunctionCall, $text, $pagerankCicle, $date); 
+
+         //propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
+         // movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue);
+         $userMovieprofile->putMovieToRating($name);
+         $userMovieprofile->setUserMovieToRating($name);
+         $userMovieprofile->handle();
+         //$page = 1;
+         //movieDetailReply($telegram, $chatId, $name, $page);
    }
    else{  //se si tratta do una proprietà
-      $propertyData = getPropertyTypeListFromPropertyValue($fullname);
+      $propertyData = getPropertyTypeListFromPropertyValue($full_name);
       if ($propertyData !== "null") {
          $keyboard = propertyTypeListFromPropertyValueKeyboard($propertyData);
          $text = "Did you mean:";
@@ -25,7 +32,7 @@ function findPropertyValueOrMovieReply($telegram, $chatId, $userMovieprofile, $n
          $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
       }
       else{
-         $levDistanceData = levDistanceTop5Keyboards($fullname);
+         $levDistanceData = levDistanceTop5Keyboards($full_name);
          if ($levDistanceData !== "null") {
             $keyboard = $levDistanceData;
             $text = "Did you mean:";

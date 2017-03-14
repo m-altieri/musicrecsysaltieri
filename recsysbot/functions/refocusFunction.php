@@ -12,9 +12,10 @@ function refocusFunction($chatId){
 	$pagerankCicle = getNumberPagerankCicle($chatId);
 	$rating = 0;
 	$lastChange = "refocus";	
-	$movie = lastMovieToRefine($chatId, $pagerankCicle);
-	$movieName = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-	$data = getAllPropertyListFromMovie($movieName);
+   $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
+   $movie = $replyLast[1];
+	$movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+	$data = getAllPropertyListFromMovie($movie_name);
 
    $text = "We continue with Refocus...";
 
@@ -40,18 +41,18 @@ function refocusFunction($chatId){
                case "/genres": case "genres": case "genre":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;
-               case "/runtime": case "runtime": case "runtimeRange":      
+/*               case "/runtime": case "runtime": case "runtimeRange":      
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
+                  break;*/
                case "/writers": case "writers": case "writer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;
                case "/producers": case "producers": case "producer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;
-               case "/release date": case "release date": case "releaseDate": case "releaseYear":
+/*               case "/release date": case "release date": case "releaseDate": case "releaseYear":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
+                  break;*/
                case "/music composers": case "music composers": case "music composer": case "musicComposer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;

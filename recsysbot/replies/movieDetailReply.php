@@ -6,14 +6,14 @@ use Telegram\Bot\FileUpload\InputFile;
 function movieDetailReply($telegram, $chatId, $movie, $page){
 
    $textSorry ="Sorry :)\nI don't understand \nPlease enter a command (es.\"/start\") ";   
-   $movieName = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-   $data = getAllPropertyListFromMovie($movieName);
+   $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+   $data = getAllPropertyListFromMovie($movie_name);
 
    $result = array();
    $keyboard = array();
 
-   $directors = $starring = $categories = $genres = $writers = $producers = $musicComposers = $cinematographies = $based = $editings = $distributors = array();
-   $runtime = $releaseDate = $title = $plot = $language = $country = $awards = $poster = $trailer = "";
+   $directors = $starring = $genres = $writers = $producers = array();
+   $runtimeMinutes = $releaseYear = $title = $imdbRating = $poster = "";
    if ($data == "null") {
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
@@ -25,67 +25,35 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
             $property = str_replace('_', ' ', $property); // Replaces all underscore with spaces.
 
             switch ($propertyType) {
-               case "/directors": case "directors": case "director":
+               case "director":
                   $directors[] = $property;
                   break;
-               case "/starring": case "starring":
+               case "starring":
                   $starring[] = $property;
                   break;
-               case "/categories": case "categories": case "category": case "http://purl.org/dc/terms/subject":
-                  $property = str_replace("Category:", "", $property);
-                  $categories[] = $property;
-                  break;
-               case "/genres": case "genres": case "genre":
+               case "genre":
                    $genres[] = $property;
                   break;
-               case "/runtime": case "runtime": case "runtimeRange":      
-                  $runtime = $property;
+               case "runtimeMinutes":      
+                  $runtimeMinutes = $property;
                   break;
-               case "/writers": case "writers": case "writer":
+               case "writer":
                    $writers[] = $property;
                   break;
-               case "/producers": case "producers": case "producer":
+               case "producer":
                    $producers[] = $property;
                   break;
-               case "/release date": case "release date": case "releaseDate": case "releaseYear":
-                  $releaseDate = $property;
-                  break;
-               case "/music composers": case "music composers": case "music composer": case "musicComposer":
-                  //no
-                  $musicComposers[] = $property;
-                  break;
-               case "/cinematographies": case "cinematographies": case "cinematography":
-                   $cinematographies[] = $property;
-                  break;
-               case "/based on": case "based on": case "basedOn":
-                  $based[] = $property;
-                  break;
-               case "/editings": case "editings": case "editing":
-                  $editings[] = $property;
-                  break;
-               case "/distributors": case "distributors": case "distributor":
-                  $distributors[] = $property;
+               case "releaseYear":
+                  $releaseYear = $property;
                   break;
                case "title":
                   $title = $property;
                   break;
-               case "plot":
-                  $plot = $property;
-                  break;
-               case "language":
-                  $language = $property;
-                  break;
-               case "country":
-                  $country = $property;
-                  break;
-               case "awards":
-                  $awards = $property;
+               case "imdbRating":
+                  $imdbRating = $property;
                   break;
                case "poster":
                   $poster = $property;
-                  break;
-               case "trailer":
-                  $trailer = $property;
                   break;
                default:
                   //test
@@ -94,67 +62,66 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
             }
          }
       }
-/*    $director = implode(", ", array_reverse($directors));
-      $producer = implode(", ",array_reverse($producers));
-      $writer = implode(", ", array_reverse($writers));
-      $star = implode(", ", array_reverse($starring));
-      $musicComposer = implode(", ", array_reverse($musicComposers));
-      $cinematography = implode(", ", array_reverse($cinematographies));
-      $editing = implode(", ", array_reverse($editings));
-      $distributor = implode(", ",array_reverse($distributors));
-      $basedOn = implode(", ", array_reverse($based));
-      $category = implode(", ", array_reverse($categories));
-      $genre = implode(", ", array_reverse($genres));*/
 
       $director = implode(", ", array_slice($directors, 0, 3));
-      $producer = implode(", ",array_slice($producers, 0, 3));
-      $writer = implode(", ", array_slice($writers, 0, 3));
       $star = implode(", ", array_slice($starring, 0, 3));
-      $musicComposer = implode(", ", array_slice($musicComposers, 0, 3));
-      $cinematography = implode(", ", array_slice($cinematographies, 0, 3));
-      $editing = implode(", ", array_slice($editings, 0, 3));
-      $distributor = implode(", ",array_slice($distributors, 0, 3));
-      $basedOn = implode(", ", array_slice($based, 0, 3));
-      $category = implode(", ", array_slice($categories, 0, 3));
       $genre = implode(", ", array_slice($genres, 0, 3));
+
+      $producer = implode(", ",array_slice($producers, 0, 3));
+      $writer = implode(", ", array_slice($writers, 0, 3));    
 
       if ($poster != '' AND $poster != "N/A" ) {   
          $img = './recsysbot/images/poster.jpg';
          //$img = curl_file_create('test.png','image/png');
          //file_put_contents($img, file_get_contents($poster));
          //copy('http://somedomain.com/file.jpeg', '/tmp/file.jpeg');
-         copy($poster, $img);
+         copy($poster, $img); //copia nell'immagine l'immagine del poster
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
-         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg');
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
       }
 
-      $text = "";
+/*      $text = "";
       if ($title != '') {$text .= "*Title:* ".$title;}
       if ($director != '') {$text .= "\n*Directed by* ".$director;}
-      //if ($producer !== '') {$text .= "\n*Produced by* ".$producer;}
-      //if ($writer !== '') {$text .= "\n*Written by* ".$writer;}
       if ($star !== '') {$text .= "\n*Starring:* ".$star."...";}
-      //if ($musicComposer !== '') {$text .="\n*Music by* ".$musicComposer;}
-      //if ($cinematography !== '') {$text .= "\n*Cinematography:* ".$cinematography;}      
-      //if ($editing !== '') {$text .= "\n*Edited by* ".$editing;}
-      //if ($distributor !== '') {$text .= "\n*Distributed by* ".$distributor;}
-      //if ($basedOn !== '') {$text .= "\n*Based on:* ".$basedOn;}
-      //if ($category !== '') {$text .= "\n*Category:* ".$category;}
       if ($genre !== '') {$text .= "\n*Genre:* ".$genre;}
-      //if ($awards !== '') {$text .= "\n*Awards:* ".$awards;}
-      //if ($runtime !== '') {$text .= "\n*Running time:* ".$runtime." minute";}
-      if ($releaseDate !== '') {$text .= "\n*Release year:* ".$releaseDate;}
-      //if ($plot !== '') {$text .= "\n*Plot:* ".$plot;}
+      if ($releaseYear !== '') {$text .= "\n*Release year:* ".$releaseYear;}*/
 
-      //$keyboard[] = array("🏁 I accept the recommendation","🔍 I want to refine It");
+      $text = "";
+      if ($title !== '') {$text .= "🎥 *".$title."*";}
+         if ($releaseYear !== '') {$text .= " *(".$releaseYear.")*";}
+
+      if ($runtimeMinutes !== '') {$text .= "\n_".$runtimeMinutes."min_ "."⭐️*".$imdbRating."*"." @imdb";}
+      
+      $SizeDirectors = count($directors);
+      if ($SizeDirectors <= 3) {
+         if ($director !== '') {$text .= "\n*Director: *".$director;}
+         elseif($producer !== '') {$text .= "\n*Producers: *".$producer;}
+            elseif($writer !== '') {$text .= "\n*Writers: *".$writer;}
+      } else {
+         if ($director !== '') {$text .= "\n*Director: *".$director."...";}
+         elseif($producer !== '') {$text .= "\n*Producers: *".$producer;}
+            elseif($writer !== '') {$text .= "\n*Writers: *".$writer;}
+      }  
+      
+      if ($star !== '') {$text .= "\n*Actors: *".$star."...";}
+         elseif($director !== '' && $producer !== '') {$text .= "\n*Producers: *".$producer;}
+            elseif($director !== '' && $writer !== '') {$text .= "\n*Writers: *".$writer;}      
+
+      if ($genre !== '') {$text .= "\n*Genres: *".$genre;}
+
+
       if ($page == 1) {
          $nextPage = $page+1;
          $keyboard = [
-                        ["🏁 I accept the recommendation"],
-                        ["💭 Why have I received this recommendation?"],
-                        ["🔍 I like this movie, but change some properties"],
-                        ["🔙 Go to the list of Recommended Movies","Next ".$nextPage." 👉"]
+                        //["🎯 Accept recommendation"],
+                        //["🌀 Revise your preferences to find the right movie"],
+                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
+                        //["🔘 List of Recommended Movies"],
+                        ["📑 Details","📣 Why?"],
+                        ["Next ".$nextPage." 👉"],
+                        ['🔙 Home','👤 Profile']
 
                      ];
       } 
@@ -162,30 +129,36 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
          $nextPage = $page+1;
          $backPage = $page-1;
          $keyboard = [
-                        ["🏁 I accept the recommendation"],
-                        ["💭 Why have I received this recommendation?"],
-                        ["🔍 I like this movie, but change some properties"],
+                        //["🎯 Accept recommendation"],
+                        //["🌀 Revise your preferences to find the right movie"],
+                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
+                        //["🔘 List of Recommended Movies"],
+                        ["📑 Details","📣 Why?"],
                         ["👈 Back ".$backPage,"Next ".$nextPage." 👉"],
-                        ["🔙 Go to the list of Recommended Movies"]
+                        ['🔙 Home','👤 Profile']
                      ];
       }
       elseif($page > 4) {
          $backPage = 4;
          $keyboard = [
-                        ["🏁 I accept the recommendation"],
-                        ["💭 Why have I received this recommendation?"],
-                        ["🔍 I like this movie, but change some properties"],
-                        ["👈 Back ".$backPage,"🔙 Go to the list of Recommended Movies"]
+                        //["🎯 Accept recommendation"],
+                        //["🌀 Revise your preferences to find the right movie"],
+                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
+                        //["🔘 List of Recommended Movies"],
+                        ["📑 Details","📣 Why?"],
+                        ["👈 Back ".$backPage."", "💢 Change"],
+                        ['🔙 Home','👤 Profile']
                      ];
       }
       
-
+      echo '<pre>'; echo($text); echo '</pre>';
+      echo '<pre>'; print_r($keyboard); echo '</pre>';
 
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
 /*      $inLineKeyboard =[
          ["Detail of \"".ucwords($movie)."\""]
-      ]*/;
+      ];*/
       //$textInlineKeyboardButton = "Detail of \"".ucwords($movie)."\"";
       //$telegram->inlineKeyboardButton(['text' => $textInlineKeyboardButton]);
 
@@ -197,9 +170,6 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
 
 
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-      $telegram->sendMessage(['chat_id' => $chatId, 
-                              'text' => $text,
-                              'reply_markup' => $reply_markup, 
-                              'parse_mode' => 'Markdown']);
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup, 'parse_mode' => 'Markdown']);
    }
 }
