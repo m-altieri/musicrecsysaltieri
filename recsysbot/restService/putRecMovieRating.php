@@ -2,12 +2,12 @@
  
 use GuzzleHttp\Client;
 
-function putRecMovieRating($chatId, $movieURI, $rating, $position, $pagerankCicle, $refineRefocus, $botName, $messageID, $botTimestamp, $recommendatinsList, $ratingsList, $numberRecommendationList){
+function putRecMovieRating($chatId, $movieURI, $numberRecommendationList, $rating, $position, $pagerankCicle, $refine, $refocus, $botName, $messageID, $botTimestamp, $recommendatinsList, $ratingsList){
 
 	$userID = $chatId;
 	//$client = new Client(['base_uri'=>'http://localhost:8080']);
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest ='/lodrecsysrestful/restService/ratingsRecMovie/putRecMovieRating?userID='.$userID.'&movieURI='.$movieURI.'&rating='.$rating.'&position='.$position.'&pagerankCicle='.$pagerankCicle.'&refineRefocus='.$refineRefocus.'&botName='.$botName.'&messageID='.$messageID.'&botTimestamp='.$botTimestamp.'&recommendatinsList='.$recommendatinsList.'&ratingsList='.$ratingsList.'&numberRecommendationList='.$numberRecommendationList;
+   $stringGetRequest ='/movierecsysrestful/restService/ratingsRecMovie/putRecMovieRating?userID='.$userID.'&movieURI='.urlencode($movieURI).'&numberRecommendationList='.$numberRecommendationList.'&rating='.$rating.'&position='.$position.'&pagerankCicle='.$pagerankCicle.'&refine='.$refine.'&refocus='.$refocus.'&botName='.$botName.'&messageID='.$messageID.'&botTimestamp='.$botTimestamp.'&recommendatinsList='.$recommendatinsList.'&ratingsList='.$ratingsList;
 
    $response = $client->request('GET', $stringGetRequest);
    $bodyMsg = $response->getBody()->getContents();

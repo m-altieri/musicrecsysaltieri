@@ -5,9 +5,9 @@ use GuzzleHttp\Client;
 function getMovieListFromProperty($chatId, $propertyName, $propertyType){
 
    $userID = $chatId;
-   	// $client = new Client(['base_uri'=>'http://localhost:8080']);
+   	//$client = new Client(['base_uri'=>'http://localhost:8080']);
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest = '/lodrecsysrestful/restService/movieList/getMovieListFromProperty?userID='.$userID.'&propertyName='.$propertyName.'&propertyType='.$propertyType;
+   $stringGetRequest = '/movierecsysrestful/restService/movieList/getMovieListFromProperty?userID='.$userID.'&propertyName='.urlencode($propertyName).'&propertyType='.urlencode($propertyType);
    $response = $client->request('GET', $stringGetRequest);
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);

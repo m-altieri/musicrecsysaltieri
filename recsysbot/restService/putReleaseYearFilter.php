@@ -7,7 +7,7 @@ function putReleaseYearFilter($chatId, $propertyType, $propertyValue){
 	$userID = $chatId;
 	//$client = new Client(['base_uri'=>'http://localhost:8080']);
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest = '/lodrecsysrestful/restService/releaseYearFilter/putReleaseYearFilter?userID='.$userID.'&propertyType='.$propertyType.'&propertyValue='.$propertyValue;
+   $stringGetRequest = '/movierecsysrestful/restService/releaseYearFilter/putReleaseYearFilter?userID='.$userID.'&propertyType='.$propertyType.'&propertyValue='.$propertyValue;
    $response = $client->request('GET', $stringGetRequest);
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);

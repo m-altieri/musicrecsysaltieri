@@ -7,7 +7,7 @@ function putUserEducation($chatId, $education){
 	$userID = $chatId;
 	//$client = new Client(['base_uri'=>'http://localhost:8080']);
    $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest = '/lodrecsysrestful/restService/userEducation/putUserEducation?userID='.$userID.'&education='.$education;
+   $stringGetRequest = '/movierecsysrestful/restService/education/putUserEducation?userID='.$userID.'&education='.$education;
    $response = $client->request('GET', $stringGetRequest);
    $bodyMsg = $response->getBody()->getContents();
    $data = json_decode($bodyMsg);
