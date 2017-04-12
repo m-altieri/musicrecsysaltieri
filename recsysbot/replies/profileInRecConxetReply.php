@@ -1,10 +1,10 @@
 <?php
 
-function profileReply($telegram, $chatId){
+function profileInRecConxetReply($telegram, $chatId){
 
 	$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']); 
 
-	$context = "ratingContext";
+	$context = "recContext";
 	$keyboard = movieOrPropertyToRatingKeyboard($chatId, $context);
 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,'resize_keyboard' => true,'one_time_keyboard' => false]);
 

@@ -1,5 +1,5 @@
 <?php 
-
+//in disuso
 function movieListFromPropertyValueReply($telegram, $chatId, $propertyType, $propertyValue ){
 
    $name = substr($propertyValue,5);

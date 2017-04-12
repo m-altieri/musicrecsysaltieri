@@ -15,9 +15,9 @@ function resetConfirmReply($telegram, $chatId, $firstname, $deleteType, $prefere
          $newNumberOfRatedProperties = $data;
 
          if ($newNumberOfRatedProperties == 0) {
-            $text = "All right ".$firstname.", i have reset all properties that you have evaluated";
+            $text = "All right ".$firstname.", I deleted all your preferences";
          } else{
-            $text = "Sorry ".$firstname.", there was a problem to reset all properties that you have evaluated";
+            $text = "Sorry ".$firstname.", there is a problem to reset all your preferences";
          }
 
       }
@@ -26,9 +26,9 @@ function resetConfirmReply($telegram, $chatId, $firstname, $deleteType, $prefere
          $newNumberOfRatedMovies = $data;
 
          if ($newNumberOfRatedMovies == 0 ) {
-            $text = "All right ".$firstname.", i have reset all movies that you have evaluated";
+            $text = "All right ".$firstname.", I deleted all your movie preferences";
          } else{
-            $text = "Sorry ".$firstname.", there was a problem to reset all movies that you have evaluated";
+            $text = "Sorry ".$firstname.", there is a problem to delete your movie preferences";
          }
 
       }
@@ -37,9 +37,9 @@ function resetConfirmReply($telegram, $chatId, $firstname, $deleteType, $prefere
          $newNumberPagerankCicle = $data;
 
          if ($newNumberPagerankCicle == 0 ) {
-            $text = "All right ".$firstname.", i have reset all preferences that you have evaluated";
+            $text = "All right ".$firstname.", I deleted all your preferences";
          } else{
-            $text = "Sorry ".$firstname.", there was a problem to reset all preferences that you have evaluated";
+            $text = "Sorry ".$firstname.", there is a problem to reset all preferences that you have evaluated";
          }
       }
        

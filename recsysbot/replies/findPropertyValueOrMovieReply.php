@@ -2,7 +2,8 @@
  
 function findPropertyValueOrMovieReply($telegram, $chatId,  $messageId, $date, $name, $userMovieprofile){
 
-   $textSorry ="Sorry :)\nI don't understand \nPlease enter a command \n(es.\"/start\") ";   
+   $textSorry ="Sorry...😕\nI'm not be able to finding what you are looking 🤔\nPlease, try again 😉";
+
    $full_name = str_replace(' ', '_', $name); //tutti gli spazi con undescore
    
    $movieData = getAllPropertyListFromMovie($full_name);

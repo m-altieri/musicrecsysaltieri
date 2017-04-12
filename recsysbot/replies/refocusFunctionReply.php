@@ -3,8 +3,7 @@
 function refocusFunctionReply($telegram, $chatId){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
-   $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
-   $movie = $replyLast[1];
+   $movie = recMovieToRefineSelected($chatId, $pagerankCicle);
    
    $text = refocusFunction($chatId);
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  

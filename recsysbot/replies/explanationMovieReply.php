@@ -1,11 +1,14 @@
 <?php 
 
-function explanationMovieReply($telegram, $chatId){
+function explanationMovieReply($telegram, $chatId, $userMovieRecommendation){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
-   $reply = recMovieSelected($chatId, $pagerankCicle);
-   $movie = $reply[1];
+   $movie = recMovieSelected($chatId, $pagerankCicle);
    $movie_name = str_replace(' ', '_', $movie);
+
+   //inserisce la richiesta di why? del film raccomandato
+   $userMovieRecommendation->putUserWhyRecMovieRequest($chatId, $movie_name);
+
    $text = getMovieExplanation($chatId, $movie_name);
 
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  

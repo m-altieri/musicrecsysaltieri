@@ -15,9 +15,9 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
    $directors = $starring = $categories = $genres = $writers = $producers = $musicComposers = $cinematographies = $based = $editings = $distributors = array();
    $runtime = $releaseDate = $title = $plot = $language = $country = $awards = $poster = $trailer = "";
    if ($data == "null") {
-      $textSorry ="Sorry :) \nI don't understand \n Please enter a command (es.\"/start\") ";
+      $text ="Sorry...😕\nI'm not able to find details 🤔";
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
+      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
    } else {
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
@@ -112,13 +112,38 @@ function movieDetailTop5Reply($telegram, $chatId, $movie){
          $text .= "...";
       }
 
-      if ($poster != '' AND $poster != "N/A" ) {   
+/*      if ($poster != '' AND $poster != "N/A" ) {   
          $img = './recsysbot/images/poster.jpg';
          copy($poster, $img); //copia nell'immagine l'immagine del poster
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $text]);
          copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
+      }*/
+
+      if ($poster != '' AND $poster != "N/A" ) {            
+         //controllo sulla grandezza dell'immagine della locandina
+         $img = './recsysbot/images/poster.jpg';
+         copy($poster, $img); //copia nell'immagine l'immagine del poster
+         $filesize = filesize($img); // bytes
+         $filesize = round($filesize / 1024, 2); 
+         file_put_contents("php://stderr", "conf2userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
+         if ($filesize <= 4900) {
+            $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+            $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $text]);
+         }
+         else{
+            copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
+            $img = './recsysbot/images/poster.jpg';
+            $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+            $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $text]);
+         }
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
       }
+
+
+
+
+
    }
 }
    
