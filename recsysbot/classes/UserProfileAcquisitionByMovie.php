@@ -191,8 +191,9 @@ class userProfileAcquisitionByMovie
 
   private function getUserRatedMovieKeyboard($chatId){
       $numberRatedMovies = getNumberRatedMovies($chatId);
-      $needNumberOfRatedProperties = 3 - ($numberRatedMovies);
-
+      $numberRatedProperties = getNumberRatedProperties($chatId);
+      $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
+         
       if ($needNumberOfRatedProperties <= 0)
          $keyboard = ratedMovieOldUserKeyboard();
       else

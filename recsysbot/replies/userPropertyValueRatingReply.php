@@ -10,7 +10,6 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
       
       $numberRatedMovies = getNumberRatedMovies($chatId);
       $numberRatedProperties = getNumberRatedProperties($chatId); 
-
       $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
       file_put_contents("php://stderr", "needNumberOfRatedProperties:".$needNumberOfRatedProperties.PHP_EOL);      

@@ -4,7 +4,7 @@ function ratedMovieNewUserKeyboard(){
    
    $keyboard = [
                    ['📋 Details','👍','👎','➡ Skip'],
-                   ['📘 Help','⚙️ Profile']
+                   ['🔴 Properties','📘 Help','⚙️ Profile']
                ];
 
    return $keyboard;
