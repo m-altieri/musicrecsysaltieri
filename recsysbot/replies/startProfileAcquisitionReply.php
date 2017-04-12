@@ -13,7 +13,8 @@ function startProfileAcquisitioReply($telegram, $chatId){
       $keyboard = userPropertyValueKeyboard();
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]); 
 
-   	$text = "Let me to recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";
+      $text = "Let me recommend a movie  😃";
+      $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
    	$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);       
    }
    else{

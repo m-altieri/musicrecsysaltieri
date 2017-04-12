@@ -1,11 +1,7 @@
 <?php
+use GuzzleHttp\Client;
 
 function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating, $lastChange){  
-
-   //file_put_contents("php://stderr", "userPropertyValueRatingReply...".PHP_EOL);
-   //file_put_contents("php://stderr", "propertyType:".$propertyType.PHP_EOL);
-   //file_put_contents("php://stderr", "propertyValue:".$propertyName.PHP_EOL);    
-   //file_put_contents("php://stderr", "rating:".$rating.PHP_EOL);     
 
    if ($propertyType !== "null" && $propertyName !== "null" ) {
 
@@ -17,11 +13,7 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
 
       $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
-      file_put_contents("php://stderr", "numberRatedProperties:".$numberRatedProperties.PHP_EOL);
-      file_put_contents("php://stderr", "numberRatedMovies:".$numberRatedMovies.PHP_EOL);
-      file_put_contents("php://stderr", "needNumberOfRatedProperties:".$needNumberOfRatedProperties.PHP_EOL);  
-
-      
+      file_put_contents("php://stderr", "needNumberOfRatedProperties:".$needNumberOfRatedProperties.PHP_EOL);      
 
       if ($needNumberOfRatedProperties > 0 ) {  
 
@@ -43,7 +35,7 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
             $text = "You have rated Indifferent \"".ucwords($propertyName)."\"";
          } 
          elseif ($numberRatedProperties > $oldNumberOfRatedProperties) {
-            $text = "You have rated \"".ucwords($propertyName)."\"\nProfile update with ".$numberRatedProperties." rated properties";
+            $text = "You have rated \"".ucwords($propertyName)."\"\nProfile updated with ".$numberRatedProperties." rated properties";
          } 
          else{
             //Fare un controllo se si è aggiornato il rating della property
@@ -52,33 +44,26 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
 
       }
 
-      //echo '<pre>'; print_r($text); echo '</pre>';
-
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]); 
    }
 
+      $numberRatedMovies = getNumberRatedMovies($chatId);
+      $numberRatedProperties = getNumberRatedProperties($chatId); 
 
-   $numberRatedMovies = getNumberRatedMovies($chatId);
-   $numberRatedProperties = getNumberRatedProperties($chatId);
-   $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
+      $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
    if ($needNumberOfRatedProperties <= 0) {
 
-      
-      $text = "Do you prefer to tell me something else about you \nor can I recommend you a movie?";
-
       $pagerankCicle = getNumberPagerankCicle($chatId);
-      $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
-      $movie = $replyOld[1];
-      file_put_contents("php://stderr", "Let me rate other properties of: ".$movie.PHP_EOL);    
+      $movie = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
+      
+      $text = "Do you prefer rate other properties of "."\"".ucwords($movie)."\" \nor Back to movies?";
+   
       if ($movie !== "null") {
          $keyboard = [
-                        ["🌐 Recommend Movies"],
                         ["🔎 Rate other properties of "."\"".ucwords($movie)."\""],
-                        ["🔴 Rate additional movie properties"],
-                        ["🔵 Rate movies"],
-                        ["👤 Profile"]
+                        ["🔙 Back to Movies"]
                     ];
       } 
       else {

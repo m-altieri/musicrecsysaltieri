@@ -1,13 +1,15 @@
 <?php 
-
+/**
+ * @author Francesco Baccaro
+ */
 namespace Recsysbot\Classes;
 
 use Telegram\Bot\Api;
 use GuzzleHttp\Client;
 
-/**
- * @author Francesco Baccaro
- */
+/*
+   Classe che gestisce la creazione del profilo utente attraverso i film
+*/
 class userProfileAcquisitionByMovie
 {
    protected $telegram;
@@ -83,22 +85,9 @@ class userProfileAcquisitionByMovie
       $movie = $this->getUserMovieToRating($chatId);
 
       //valuta il film
-      $this->movieRatingReply($movie);
-      //$this->movieDetailReply($movie);      
+      $this->movieRatingReply($movie);    
    }
 
-   public function putAcceptRecMovieToRating($movie){    
-      $chatId = $this->getChatId();
-      $messageId = $this->getMessageId();
-      $botName = $this->getBotName();
-      $context = "acceptRecMovieToRatingSelected";
-      $replyText = "rateMovie, ".$movie;
-      $replyFunctionCall = "userMovieprofileInstance"; 
-      $pagerankCicle = getNumberPagerankCicle($chatId);
-      $date = $this->getDate();
-      $responseType = "button";
-      $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
-   }
 
    public function putMovieToRating($movie){
       $chatId = $this->getChatId();
@@ -113,24 +102,11 @@ class userProfileAcquisitionByMovie
       $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
    }
 
-   public function getAndSetUserAcceptRecMovieToRating($chatId){
-      //prendi l'utimo film raccomandato accettato
-      $data = getAcceptRecMovieToRating($chatId);
-      $movieURI = $data;
-      $movie_name = str_replace("http://dbpedia.org/resource/", "", $movieURI);
-      $movie = str_replace('_', ' ', $movie_name); // Replaces all underscore with spaces.
-
-      $this->setUserMovieToRating($movie);
-      
-      file_put_contents("php://stderr", "userMovieprofile->getAndSetUserAcceptRecMovieToRating - chatId: ".$chatId."/return movie:".$movie.PHP_EOL);
-
-      return $movie;
-   }
-
 
    public function getAndSetUserMovieToRating($chatId){
       //prendi il film da valutare
-      $data = getMovieToRating($chatId);
+      //$data = getMovieToRating($chatId);  //popolartity
+      $data = getMovieToRatingByDiversity($chatId); //diversity
       $movieURI = $data;
       $movie_name = str_replace("http://dbpedia.org/resource/", "", $movieURI);
       $movie = str_replace('_', ' ', $movie_name); // Replaces all underscore with spaces.
@@ -148,62 +124,74 @@ class userProfileAcquisitionByMovie
 
       $telegram = $this->getTelegram();
       $chatId = $this->getChatId();      
+      if ($movie !== "null") {
+         $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+         
+         file_put_contents("php://stderr", "userMovieprofile->movieRating() - chatId: ".$chatId." - movie: ".$movie.PHP_EOL);
+         
+         $title = $this->getTitleAndPosterMovieToRating($movie_name);
 
-      $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-      
-      file_put_contents("php://stderr", "userMovieprofile->movieRating() - chatId: ".$chatId.PHP_EOL);
-      
-      $title = $this->getTitleAndPosterMovieToRating($movie_name);
+         $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
 
-      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+         //controllo sulla grandezza dell'immagine della locandina
+         $img = './recsysbot/images/poster.jpg';
+         $filesize = filesize($img); // bytes
+         $filesize = round($filesize / 1024, 2); 
+         file_put_contents("php://stderr", "userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
+         if ($filesize <= 4900) {
+            $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+            $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $title]);
+         }
+         else{
+            copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
+            $img = './recsysbot/images/poster.jpg';
+            $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
+            $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $title]);
+         }
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
 
-      $img = './recsysbot/images/poster.jpg';
-      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
-      $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img, 'caption' => $title]);
-      copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
 
-      $keyboard = $this->getUserRatedMovieKeyboard($chatId);
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+         $keyboard = $this->getUserRatedMovieKeyboard($chatId);
+         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
-      $text = "Do you 👍 like or 👎 dislike this movie?\nOtherwise, press ➡skip \nor type the name of the movie to rate";
-      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);       
+         $text = "Do you 👍 like or 👎 dislike this movie?\nOtherwise, tap ➡skip";
+         $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
+
+         $numberRatedMovies = getNumberRatedMovies($chatId);
+         $numberRatedProperties = getNumberRatedProperties($chatId);
+         $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
+
+         if ($needNumberOfRatedProperties == 0){
+            $text = "\n\nI am now able to recommend you some movies 😃";
+            $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by rating this movie 🙂";
+
+            $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
+            $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
+         }
+      }
+      else{
+         //Se sono stati valutati tutti i film o ci sono problemi
+         $text = "Sorry...😕\nI'm not be able to finding other movies right now🤔\n";
+         $text .= "\nTap on \"🌐 Recommend Movies\" button 😉";
+
+         $keyboard =    $keyboard = [
+                                        ['🌐 Recommend Movies'],
+                                        ['📘 Help','⚙️ Profile']
+                                    ];
+
+         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+
+         $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
+      }   
 
    }
-
-/*   public function movieDetailReply($movie){
-      $telegram = $this->getTelegram();
-      $chatId = $this->getChatId();      
-
-      $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-      $title = $this->getTitleAndPosterMovieToRating($movie_name);
-
-      $inline_keyboard[] = [
-                         //['text' => 'inline', 'switch_inline_query' => 'true'],
-                         //['text' => 'callback', 'callback_data' => 'identifier'],
-                         ['text' => 'trailer', 'url' => 'https://github.com/akalongman/php-telegram-bot']
-                     ];
-
-
-      $inlineKeyboardMarkup = $telegram->replyKeyboardMarkup(['inline_keyboard' => $inline_keyboard]);
-      //$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-
-      $text = "...more about ".$title."? choose:";
-      //$text = "";
-      $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);  
-      $telegram->sendMessage(['chat_id' => $chatId, 
-                              'text' => $text,
-                              'reply_markup' => $inlineKeyboardMarkup]);
-
-
-
-   }*/
 
 
   private function getUserRatedMovieKeyboard($chatId){
       $numberRatedMovies = getNumberRatedMovies($chatId);
-      $numberRatedProperties = getNumberRatedProperties($chatId);
-      $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
+      $needNumberOfRatedProperties = 3 - ($numberRatedMovies);
 
       if ($needNumberOfRatedProperties <= 0)
          $keyboard = ratedMovieOldUserKeyboard();
@@ -213,31 +201,14 @@ class userProfileAcquisitionByMovie
       return $keyboard;
    }
 
-   public function putUserAcceptRecMovieRating($chatId, $movie, $rating){
+  public function putUserMovieRating($chatId, $movie, $rating, $lastChange){
 
       if ($movie !== "null"){
          $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore  
          $movieURI = "http://dbpedia.org/resource/";
          $movieURI .= $movie_name;
 
-         $data = putAcceptRecMovieRating($chatId, $movieURI, $rating); 
-      }
-      else{
-         $data = null;
-      }
-      file_put_contents("php://stderr", "userMovieprofile->putUserAcceptRecMovieRating - chatId: ".$chatId." - movieURI: "." - rating:".$rating.PHP_EOL);
-
-      return $data;
-   }
-
-  public function putUserMovieRating($chatId, $movie, $rating){
-
-      if ($movie !== "null"){
-         $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore  
-         $movieURI = "http://dbpedia.org/resource/";
-         $movieURI .= $movie_name;
-
-         $data = putMovieRating($chatId, $movieURI, $rating);
+         $data = putMovieRating($chatId, $movieURI, $rating, $lastChange);
          
       }
       else{
@@ -248,22 +219,41 @@ class userProfileAcquisitionByMovie
       return $data;
    }
 
+   //inserisce la richiesta di details sul film
+   public function putUserDetailsMovieRequest($chatId, $movie_name){
+      if ($movie !== "null"){
+         $movieURI = "http://dbpedia.org/resource/";
+         $movieURI .= $movie_name;
+         $number_recommendation_list = getNumberRecommendationList($chatId); 
+         $details = "details";
+
+         $data = putDetailsMovieRequest($chatId, $movieURI, $number_recommendation_list, $details);
+      }
+      else{
+         file_put_contents("php://stderr", "userMovieprofile->putUserDetailsMovieRequest - chatId: ".$chatId." - movieURI: ".$movieURI." - number_recommendation_list:".$number_recommendation_list.PHP_EOL);
+         $data = null;
+      }
+
+      return $data;
+   }
+
    public function getTitleAndPosterMovieToRating($movie){
 
-      $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore   
+      $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore 
+
+      copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
+
       $data = getAllPropertyListFromMovie($movie_name);
 
       if ($data == "null") {
          $chatId = $this->getChatId();
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = movieToRatingSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = movieToRatingSelected($chatId, $pagerankCicle);
          $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore  
          $data = getAllPropertyListFromMovie($movie_name);
-         file_put_contents("php://stderr", "ERROR - userMovieprofile->getTitleAndPosterMovieToRating - movie_name: ".$movie_name."/return title:".$title.PHP_EOL);
+         file_put_contents("php://stderr", "warning - userMovieprofile->getTitleAndPosterMovieToRating - movie_name: ".$movie_name."/return title:".$title.PHP_EOL);
       }       
 
-      copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
       $poster = $title = "";
 
       foreach ((array)$data as $key => $value){

@@ -3,7 +3,8 @@
 use GuzzleHttp\Client;
 
 function levDistanceTop5Keyboards($text){
-
+	
+	//credo dia un errore su uno inserisce un film con l'apostrofo
    $data = getLevDistanceFromAllVertexUriByName($text);
    echo "Data:<br>";
 	echo '<pre>'; print_r($data); echo '</pre>';

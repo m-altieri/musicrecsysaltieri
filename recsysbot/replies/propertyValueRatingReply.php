@@ -11,7 +11,7 @@ function propertyValueRatingReply($telegram, $chatId, $pagerankCicle){
       ["🙂 I like \"".ucwords($propertyName)."\""],
       ["😑 I dislike \"".ucwords($propertyName)."\""],
       ["🤔 Is indifferent to me"],
-      ["🔙 Return to the list of ".$propertyType]
+      //["🔙 Return to the list of ".$propertyType]
    ];
 
    //echo '<pre>'; print_r($keyboard); echo '</pre>';

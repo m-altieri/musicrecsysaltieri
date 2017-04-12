@@ -6,9 +6,10 @@ function recommendationMovieListTop5Keyboards($chatId){
 
    $propertyType = 'movie';   
       
-   //chiama il pagerank
    $data = null;
-   $data = getPropertyValueListFromPropertyType($chatId, $propertyType);
+   $data = getUserRecMovieList($chatId);
+   //chiama il pagerank
+   //$data = getPropertyValueListFromPropertyType($chatId, $propertyType);
   
    $result = array();
    $keyboard = array();
@@ -30,7 +31,7 @@ function recommendationMovieListTop5Keyboards($chatId){
    } 
 
    $keyboard = array_slice($result, 0, 5);
-   $keyboard[] = array("🔙 Home","👤 Profile");
+   $keyboard[] = array("🔙 Home","⚙️ Profile");
 
    //file_put_contents("php://stderr", "recommendationMovieListTop5Keyboards return:".$keyboard.PHP_EOL);
    return $keyboard;

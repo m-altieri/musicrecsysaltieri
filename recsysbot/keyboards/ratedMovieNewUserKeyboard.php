@@ -1,11 +1,10 @@
 <?php
 
 function ratedMovieNewUserKeyboard(){
-//'📋 Detail'
-	//➡
+   
    $keyboard = [
                    ['📋 Details','👍','👎','➡ Skip'],
-                   ['🔴 Properties','👤 Profile']
+                   ['📘 Help','⚙️ Profile']
                ];
 
    return $keyboard;

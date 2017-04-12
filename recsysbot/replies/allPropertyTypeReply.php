@@ -10,7 +10,7 @@ function allPropertyTypeReply($telegram, $chatId){
        $keyboard[] = array($property);
    }
    $keyboard[] = ['🔙 Return to the short list'];
-   $keyboard[] = array('🔵 Movies','👤 Profile');
+   $keyboard[] = array('🔵 Movies','⚙️ Profile');
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 

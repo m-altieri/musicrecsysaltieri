@@ -11,7 +11,7 @@ function createKeaboardFromPropertyArrayAsPropertyTypeToPropertyValueFunction($p
          case "/starring": case "starring":
             $result[] = array("🕴"." ".ucwords($propertyValue)." - Actor");
             break;
-         case "/categories": case "categories": case "category":
+         case "/categories": case "categories": case "category": case "http://purl.org/dc/terms/subject":
             $propertyValue = str_replace("Category:", "", $propertyValue);
             $result[] = array("📼"." ".ucwords($propertyValue)." - Category");
             break;

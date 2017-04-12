@@ -3,7 +3,7 @@
 use GuzzleHttp\Client;
 
 //Costruscire la tastiera di ProfileReply
-function movieOrPropertyToRatingKeyboard($chatId){ 
+function movieOrPropertyToRatingKeyboard($chatId, $context){ 
 
    file_put_contents("php://stderr", "movieOrPropertyToRatingKeyboard".PHP_EOL);
 
@@ -29,7 +29,7 @@ function movieOrPropertyToRatingKeyboard($chatId){
 	         case "/starring": case "starring":
 	            $result[] = array("🕴"." ".$movieOrPropertyRating);
 	            break;
-	         case "/categories": case "categories": case "category":
+	         case "/categories": case "categories": case "category":	case "http://purl.org/dc/terms/subject": 
 	            $movieOrPropertyRating = str_replace("Category:", "", $movieOrPropertyRating);
 	            $result[] = array("📼"." ".$movieOrPropertyRating);
 	            break;
@@ -70,17 +70,30 @@ function movieOrPropertyToRatingKeyboard($chatId){
 	            break;
 	      }
 	   }   
-   }     
- 
-   if(!empty($result)){
-	   $keyboard = $result;
-	   $keyboard[] = array("🔙 Home");
-	   $keyboard[] = array("✖ Reset");
-	}
-	else{
-		$keyboard[] = array("🔙 Home");
-	}
+   }
+   if (strcasecmp($context, "recContext") == 0) {
 
+   	   if(!empty($result)){
+			   $keyboard = $result;
+			   $keyboard[] = array("🔙 Back to Movies","📙 Help");
+			}
+			else{
+				$keyboard[] = array("🔙 Back to Movies","📙 Help");
+			}
+
+   }
+   else{
+
+   	   if(!empty($result)){
+			   $keyboard = $result;
+			   $keyboard[] = array("🔙 Home","📙 Help");
+			   $keyboard[] = array("✖ Reset");
+			}
+			else{
+				$keyboard[] = array("🔙 Home","📙 Help");
+			}
+
+   }     
 
    return $keyboard;
 }

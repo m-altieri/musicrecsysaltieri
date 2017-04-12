@@ -4,7 +4,6 @@ use Recsysbot\Classes\userMovieRecommendation;
 
 function backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation){
    //Return to the list of recommended movies
-   //Pensare a come non mandare sempre in esecuzione il pagerank per recuperare la lista
 
    switch ($text) {
       //Vai a una delle pagine dei film raccomandati
@@ -23,7 +22,17 @@ function backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date
          $userMovieRecommendation->setPage($text);
          $userMovieRecommendation->handle();
          break;
-      default:
+      case stristr($text, 'next 👉') !== false: case stristr($text, '6') !== false: 
+         $context = "backNextFunctionSelected";
+         $replyText = $text;
+         $replyFunctionCall = "checkRefineRecMovieListFunction"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+
+         checkRefineRecMovieListReply($telegram, $chatId, $userMovieRecommendation); 
+         break;
+      case stristr($text, 'more 👉') !== false:
       //Vai al full menu delle properties
          $context = "backNextFunctionSelected";
          $replyText = $text;
@@ -34,6 +43,9 @@ function backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date
 
          allPropertyTypeReply($telegram, $chatId);
          break;
+      default:
+         break;
       }
+
 
 }

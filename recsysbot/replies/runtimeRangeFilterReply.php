@@ -2,7 +2,7 @@
 
 function runtimeRangeFilterReply($telegram, $chatId, $propertyType, $propertyValue, $addFilter){
 
-	if ($propertyType !== "null") {
+   if ($propertyType !== "null") {
       if (strcasecmp($addFilter, "yes") == 0) {
          $data = putRuntimeRangeFilter($chatId, $propertyType, $propertyValue);
          $text = "You have added the filter \"".$propertyValue."\"";
@@ -19,7 +19,6 @@ function runtimeRangeFilterReply($telegram, $chatId, $propertyType, $propertyVal
    else{
       $text = "Problem with: No filter added for runtime range";
    } 
-   //echo '<pre>'; print_r($text); echo '</pre>';
 
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
@@ -32,16 +31,12 @@ function runtimeRangeFilterReply($telegram, $chatId, $propertyType, $propertyVal
       $text = "Do you prefer to tell me something else about you \nor can I recommend you a movie?";
 
       $pagerankCicle = getNumberPagerankCicle($chatId);
-      $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
-      $movie = $replyOld[1];
+      $movie =  oldRecMovieToRefineSelected($chatId, $pagerankCicle);
       file_put_contents("php://stderr", "Let me rate other properties of: ".$movie.PHP_EOL);    
       if ($movie !== "null") {
          $keyboard = [
-                        ["🌐 Recommend Movies"],
                         ["🔎 Rate other properties of "."\"".ucwords($movie)."\""],
-                        ["🔴 Rate movie properties"],
-                        ["🔵 Rate movies"],
-                        ["👤 Profile"]
+                        ["🔙 Back to Movies"]
                     ];
       } 
       else {

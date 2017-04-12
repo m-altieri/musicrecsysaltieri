@@ -41,54 +41,33 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         //prendi l'ultimo film raccomandato accettato
-         $movieName = $userMovieprofile->getAndSetUserAcceptRecMovieToRating($chatId); //chiama /getAcceptRecMovieToRating
-         if (strcasecmp($movieName, "null") == 0) {
-            //prendi un film da valutare
-            $movieName = $userMovieprofile->getAndSetUserMovieToRating($chatId); //chiama /getMovieToRating
-         }
-         else {//salva il film accettato e da valutare tra i messaggi della chat
-              $userMovieprofile->putAcceptRecMovieToRating($movieName);       //chiama /putChatMessage: acceptRecMovieToRatingSelected - movie, nome film
-             }    
+         //prendi un film da valutare
+         $movieName = $userMovieprofile->getAndSetUserMovieToRating($chatId); //chiama /getMovieToRating  
          //salva il film da valutare tra i messaggi della chat
          $userMovieprofile->putMovieToRating($movieName);                     //chiama /putChatMessage: movieToRatingSelected - movie, nome film
-         
          //prendi il film da valutare, rispondi e costruisci la tastiera
          $userMovieprofile->handle();
-         //userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
-         //recommendationMovieListTop5Reply($telegram, $chatId);
          break;
       //Rate movies
       case strpos($text, 'movies'):
          $context = "rateMoviesSelected";
-         $replyText = $text;
+         $replyText = str_replace('🔵', 'icon movies,', $text);
          $replyFunctionCall = "userMovieprofileInstance"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "keyboard";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         //prendi l'ultimo film raccomandato accettato
-         $movieName = $userMovieprofile->getAndSetUserAcceptRecMovieToRating($chatId); //chiama /getAcceptRecMovieToRating
-         if (strcasecmp($movieName, "null") == 0) {
-            //prendi un film da valutare
-            $movieName = $userMovieprofile->getAndSetUserMovieToRating($chatId); //chiama /getMovieToRating
-         }
-         else {//salva il film accettato e da valutare tra i messaggi della chat
-              $userMovieprofile->putAcceptRecMovieToRating($movieName);       //chiama /putChatMessage: acceptRecMovieToRatingSelected - movie, nome film
-             }    
+         //prendi un film da valutare
+         $movieName = $userMovieprofile->getAndSetUserMovieToRating($chatId); //chiama /getMovieToRating  
          //salva il film da valutare tra i messaggi della chat
          $userMovieprofile->putMovieToRating($movieName);                     //chiama /putChatMessage: movieToRatingSelected - movie, nome film
-         
          //prendi il film da valutare, rispondi e costruisci la tastiera
          $userMovieprofile->handle();
-         //userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
-         //recommendationMovieListTop5Reply($telegram, $chatId);
          break;
       //Details movies to rating
       case strpos($text, '📋'): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = movieToRatingSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = movieToRatingSelected($chatId, $pagerankCicle);
 
          $context = "detailsMovieToRatingSelected";
          $replyText = "detailsMovieToRating,".$movie;
@@ -98,14 +77,14 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
          $movie_name = str_replace(' ', '_', $movie);
-         detailReply($telegram, $chatId, $movie_name);   
+         detailsMovieRequestReply($telegram, $chatId, $movie_name, $userMovieprofile);  
          break;
       //Film Proposto valutato positivamente
       case strpos($text, '👍'):
          $rating = 1;
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = movieToRatingSelected($chatId, $pagerankCicle);
-         $movieName = $reply[1];
+         $movieName = movieToRatingSelected($chatId, $pagerankCicle);
+         $lastChange = "user"; 
 
          $context = "likeMovieToRatingSelected";
          $replyText = "likeMovieToRating,".$movieName;
@@ -113,14 +92,14 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Film Proposto valutato negativamente
       case strpos($text, '👎'):
          $rating = 0;
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = movieToRatingSelected($chatId, $pagerankCicle);
-         $movieName = $reply[1];
+         $movieName = movieToRatingSelected($chatId, $pagerankCicle);
+         $lastChange = "user"; 
 
          $context = "dislikeMovieToRatingSelected";
          $replyText = "dislikeMovieToRating,".$movieName;
@@ -128,14 +107,14 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Film Proposto non valutato
       case strpos($text, '➡'):
          $rating = 2;
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = movieToRatingSelected($chatId, $pagerankCicle);
-         $movieName = $reply[1];
+         $movieName = movieToRatingSelected($chatId, $pagerankCicle);
+         $lastChange = "user"; 
 
          $context = "skipMovieToRatingSelected";
          $replyText = "skipMovieToRating,".$movieName;
@@ -143,7 +122,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         userMovieRatingReply($telegram, $chatId, $rating, $userMovieprofile);
+         userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Rate movie properties
       case strpos($text, '🔴'):
@@ -621,18 +600,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
       //Vai all'opportuno caso di back function
       case strpos($text, '🔙'):
          //la put del messaggio è richiamata nella funzione
-         backFunction($telegram, $chatId, $messageId, $text, $botName, $date);
-         break;
-      //Lista dei 5 film raccomandati
-      case strpos($text, '🔘'):
-         $context = "recMovieListTop5Selected";
-         $replyText = str_replace('🔘', 'icon list top5 rec movie', $text);
-         $replyFunctionCall = "recommendationMovieListTop5Reply"; 
-         $pagerankCicle = getNumberPagerankCicle($chatId);
-         $responseType = "button";
-         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
-
-         recommendationMovieListTop5Reply($telegram, $chatId);
+         backFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //Reset del profilo
       case strpos($text, '✖'):
@@ -731,25 +699,14 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation);
          break;
-       //Recommend movies
-      case stristr($text, 'rec') !== false:   case stristr($text, 'run') !== false:  case stristr($text, 'recommend') !== false:  case stristr($text, 'recommend movies') !== false:
-         $context = "recommendMoviesSelected";
-         $replyText = $text;
-         $replyFunctionCall = "recommendationBackNextMovieReply"; 
-         $pagerankCicle = getNumberPagerankCicle($chatId);
-         $responseType = "keyboard";
-         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
-
-         recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation);
-         break;
        //film raccomandato valutato positivamente
       case strpos($text, '😃'):
          //TODO
          $rating = 1;
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
          $page = $userMovieRecommendation->getPageFromMovieName($chatId, $movie);
+         $lastChange = "user";
 
          $context = "likeRecMovieSelected";
          $replyText = $page."likeRecMovie,".$movie;
@@ -757,16 +714,16 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $botName, $date, $userMovieRecommendation);
+         recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //film raccomandato valutato negativamente
       case strpos($text, '🙁'):
          //TODO
          $rating = 0;
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
          $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movie);
+         $lastChange = "user";
 
          $context = "dislikeRecMovieSelected";
          $replyText = $page."dislikeRecMovie,".$movie;
@@ -774,13 +731,12 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         recMovieRatingReply($telegram, $chatId, $rating, $messageId, $text, $botName, $date, $userMovieRecommendation);
+         recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //I Like but
       case strpos($text, '🌀'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
 
          $context = "recMovieToRefineSelected";
          $replyText = "refineRecMovie,".$movie;
@@ -788,13 +744,13 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendation);
+         //callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendation);
+         refineMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Details of recommendation movies
       case strpos($text, '📑'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
 
          $context = "detailsRecMovieSelected";
          $replyText = "detailsRecMovie,".$movie;
@@ -803,13 +759,12 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
          $movie_name = str_replace(' ', '_', $movie);
-         detailReply($telegram, $chatId, $movie_name);
+         detailsRecMovieRequestReply($telegram, $chatId, $movie_name, $userMovieRecommendation);
          break;
       //Why?
       case strpos($text, '📣'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
 
          $context = "whyRecMovieSelected";
          $replyText = "whyRecMovie,".$movie;
@@ -817,29 +772,12 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         explanationMovieReply($telegram, $chatId);
-         break;
-      //Film raccomandato accettato - da valutare
-      case  strpos($text, '🎯'): 
-         $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
-         $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movie);
-
-         $context = "acceptRecMovieToRatingSelected";
-         $replyText = $page."recMovie,".$movie;
-         $replyFunctionCall = "acceptRecommendationReply"; 
-         $responseType = "button";
-         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
-         
-         $movie_name = str_replace(' ', '_', $movie);
-         acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name);
+         explanationMovieReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Change - refocus
       case strpos($text, '💢'): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $reply = recMovieSelected($chatId, $pagerankCicle);
-         $movie = $reply[1];
+         $movie = recMovieSelected($chatId, $pagerankCicle);
 
          //$context = "refocusChangeRecMovieListSelected";
          $context = "recMovieToRefocusSelected";
@@ -848,7 +786,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         refocusChangeRecMovieListReply($telegram, $chatId);
+         //refocusChangeRecMovieListReply($telegram, $chatId);
+         //in questo caso azzera le property e i film...
+         refocusChangeRecMovieListReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Refine le proprietà del film
       case strpos($text, '🔎'):
@@ -870,18 +810,73 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
-                 
-         profileReply($telegram, $chatId);
+         
+         profileInRecConxetReply($telegram, $chatId);  
          break;
-      case strpos($text, 'profile'):
+      // ⚙️ profilo dalla schermata dei film raccomandati
+      case strpos($text, '⚙️'):
          $context = "profileSelected";
-         $replyText = $text;
+         $replyText = str_replace('⚙️', 'icon profile,', $text);
          $replyFunctionCall = "profileReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
-         $responseType = "keyboard";
+         $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
                  
          profileReply($telegram, $chatId);
+         break;      
+      case strpos($text, '📘'):
+         $help = "rateMovieSelected";
+         $context = "helpSelected";
+         $replyText = "help, rateMovieSelected";
+         $replyFunctionCall = "conf1helpReply"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+                 
+         helpReply($telegram, $chatId, $help);
+         break;
+      case strpos($text, '📗'):
+         $help = "recMovieSelected";
+         $context = "helpSelected";
+         $replyText = "help,recMovieSelected";
+         $replyFunctionCall = "conf1helpReply"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+                 
+         helpReply($telegram, $chatId, $help);
+         break;
+      case strpos($text, '📙'):
+         $help = "profileSelected";
+         $context = "helpSelected";
+         $replyText = "help,profileSelected";
+         $replyFunctionCall = "conf1helpReply"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+                 
+         helpReply($telegram, $chatId, $help);
+         break;
+      case strcasecmp($text, '🌟 🌟 🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟') == 0:  case strcasecmp($text, '🌟') == 0:
+         $context = "experimentalValutationSelected";
+         $replyText = "star,".$text;
+         $replyFunctionCall = "experimentCompleteReply"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+                 
+         experimentCompleteReply($telegram, $chatId, $text);
+         break;
+      //nuova sessione/passaggio a nuova configurazione
+      case strpos($text, '🤖'): 
+         $context = "newSessionSelected";
+         $replyText = str_replace('🤖', 'icon new session', $text);
+         $replyFunctionCall = "newSessionReply"; 
+         $pagerankCicle = getNumberPagerankCicle($chatId);
+         $responseType = "button";
+         $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
+                 
+         newSessionReply($telegram, $chatId, $firstname, $date);
          break;
       case ($text[0] != "/"):
          $context = "findPropertyValueOrMovieSelected";

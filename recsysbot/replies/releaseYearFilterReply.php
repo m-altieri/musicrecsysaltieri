@@ -2,7 +2,7 @@
 
 function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValue, $addFilter){ 
 
-   if ($propertyType !== "null") {
+  if ($propertyType !== "null") {
       if (strcasecmp($addFilter, "yes") == 0) {
          $data = putReleaseYearFilter($chatId, $propertyType, $propertyValue);
          $text = "You have added the filter \"".$propertyValue."\"";
@@ -23,7 +23,6 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);   
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
 
-
    $numberRatedMovies = getNumberRatedMovies($chatId);
    $numberRatedProperties = getNumberRatedProperties($chatId);
    $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
@@ -32,16 +31,12 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
       $text = "Do you prefer to tell me something else about you \nor can I recommend you a movie?";
 
       $pagerankCicle = getNumberPagerankCicle($chatId);
-      $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
-      $movie = $replyOld[1];
+      $movie =  oldRecMovieToRefineSelected($chatId, $pagerankCicle);
       file_put_contents("php://stderr", "Rate other properties of: ".$movie.PHP_EOL);    
       if ($movie !== "null") {
          $keyboard = [
-                        ["🌐 Recommend Movies"],
                         ["🔎 Rate other properties of "."\"".ucwords($movie)."\""],
-                        ["🔴 Rate movie properties"],
-                        ["🔵 Rate movies"],
-                        ["👤 Profile"]
+                        ["🔙 Back to Movies"]
                     ];
       } 
       else {

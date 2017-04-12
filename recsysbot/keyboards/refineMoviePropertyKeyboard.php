@@ -1,6 +1,7 @@
 <?php
+use GuzzleHttp\Client;
 
-function refineMoviePropertyKeyboard($chatId, $movie){
+function refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation){
    
    $movie_name = str_replace(' ', '_', $movie);  
    $data = getAllPropertyListFromMovie($movie_name);
@@ -30,9 +31,9 @@ function refineMoviePropertyKeyboard($chatId, $movie){
                case "/genres": case "genres": case "genre":
                    $genres[] = $property;
                   break;
-               //Sicuramente va gestita come filtro
-               case "/runtime": case "runtime": case "runtimeRange":      
-                  $runtimeRange[] = $property;
+               case "/runtime": case "runtime": case "runtimeRange":   
+                  //$runtimeRange[] = $property;
+                  $runtimeRange = runtimeRangeFilterKeyboard();
                   break;
                case "/writers": case "writers": case "writer":
                    $writers[] = $property;
@@ -40,9 +41,9 @@ function refineMoviePropertyKeyboard($chatId, $movie){
                case "/producers": case "producers": case "producer":
                    $producers[] = $property;
                   break;
-               //Sicuramente va gestita come filtro
                case "/release date": case "release date": case "releaseDate": case "releaseYear":
-                  $releaseYear[] = $property;
+                  //$releaseYear[] = $property;
+                  $releaseYear = releaseYearFilterKeyboard();
                   break;
                case "/music composers": case "music composers": case "music composer": case "musicComposer":
                   $musicComposers[] = $property;
@@ -102,29 +103,33 @@ function refineMoviePropertyKeyboard($chatId, $movie){
       $size_editing = count($editings);
       $size_distributor = count($distributors);
 
-      $fullMenuArray[10+$size_director."director"] = "Directors of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_starring."starring"] = "Actors of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_category."category"] = "Categories of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_genre."genre"] = "Genres of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_writer."writer"] = "Writers of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_producer."producer"] = "Producers of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_releaseYear."releaseYear"] = "Release year of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_musicComposer."musicComposer"] = "Music of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_runtimeRange."runtimeRange"] = "Runtime of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_cinematography."cinematography"] = "Cinematographies of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_basedOn."basedOn"] = "Based on of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_editing."editing"] = "Editors of \"".ucwords($movie)."\"";
-      $fullMenuArray[10+$size_distributor."distributor"] = "Distributors of \"".ucwords($movie)."\"";
+      if ($size_director > 0) {$fullMenuArray[10+$size_director."director"] = "Directors of \"".ucwords($movie)."\"";}
+      if ($size_starring > 0) {$fullMenuArray[10+$size_starring."starring"] = "Actors of \"".ucwords($movie)."\"";}
+      if ($size_category > 0) {$fullMenuArray[10+$size_category."category"] = "Categories of \"".ucwords($movie)."\"";}
+      if ($size_genre > 0) {$fullMenuArray[10+$size_genre."genre"] = "Genres of \"".ucwords($movie)."\"";}
+      if ($size_writer > 0) {$fullMenuArray[10+$size_writer."writer"] = "Writers of \"".ucwords($movie)."\"";}
+      if ($size_producer > 0) {$fullMenuArray[10+$size_producer."producer"] = "Producers of \"".ucwords($movie)."\"";}
+      if ($size_releaseYear > 0) {$fullMenuArray[10+$size_releaseYear."releaseYear"] = "Release year of \"".ucwords($movie)."\"";}
+      if ($size_musicComposer > 0) {$fullMenuArray[10+$size_musicComposer."musicComposer"] = "Music of \"".ucwords($movie)."\"";}
+      if ($size_runtimeRange > 0) {$fullMenuArray[10+$size_runtimeRange."runtimeRange"] = "Runtime of \"".ucwords($movie)."\"";}
+      if ($size_cinematography > 0) {$fullMenuArray[10+$size_cinematography."cinematography"] = "Cinematographies of \"".ucwords($movie)."\"";}
+      if ($size_basedOn > 0) {$fullMenuArray[10+$size_basedOn."basedOn"] = "Based on of \"".ucwords($movie)."\"";}
+      if ($size_editing > 0) {$fullMenuArray[10+$size_editing."editing"] = "Editors of \"".ucwords($movie)."\"";}
+      if ($size_distributor > 0) {$fullMenuArray[10+$size_distributor."distributor"] = "Distributors of \"".ucwords($movie)."\"";}
+
       krsort($fullMenuArray);
 
-      $keyboardDirector = propertyValueKeyboard($chatId, "director", "Directors of \"".ucwords($movie)."\"");
-      $keyboardStarring = propertyValueKeyboard($chatId, "starring", "Actors of \"".ucwords($movie)."\"");
-      $keyboardGenre = propertyValueKeyboard($chatId, "genre", "Genres of \"".ucwords($movie)."\"");
-      $keyboardReleaseYear = propertyValueKeyboard($chatId, "releaseYear", "Release year of \"".ucwords($movie)."\"");
+      // $keyboardDirector = propertyValueKeyboard($chatId, "director", "Directors of \"".ucwords($movie)."\"");
+      // $keyboardStarring = propertyValueKeyboard($chatId, "starring", "Actors of \"".ucwords($movie)."\"");
+      // $keyboardGenre = propertyValueKeyboard($chatId, "genre", "Genres of \"".ucwords($movie)."\"");
+
+      $keyboardDirector = propertyValueFromPropertyTypeAndMovieKeyboard($chatId, "director", $movie);
+      $keyboardStarring = propertyValueFromPropertyTypeAndMovieKeyboard($chatId, "starring", $movie);
+      $keyboardGenre = propertyValueFromPropertyTypeAndMovieKeyboard($chatId, "genre", $movie);
 
       $valueKeyboard = array();
       $keyboard = array();
-      $valueKeyboard = array_merge($keyboardDirector, $keyboardStarring, $keyboardGenre, $keyboardReleaseYear);
+      $valueKeyboard = array_merge($keyboardDirector, $keyboardStarring, $keyboardGenre);
 
       foreach ($valueKeyboard as $key => $property) {
          if (stristr($property[0], '🔙') == false) {
@@ -135,17 +140,15 @@ function refineMoviePropertyKeyboard($chatId, $movie){
       foreach ($fullMenuArray as $key => $property) {
          $keyboard[] = array($property);
       }
-      $keyboard[] = array("🔙 Return to the list of Movies");
-      $keyboard[] = array("🔙 Home","👤 Profile");
+      $keyboard[] = array("🔙 Back to Movies");
    }
    else{
       $keyboard = array();
-      $keyboard[] = array("🔙 Return to the list of Movies");
-      $keyboard[] = array("🔙 Home","👤 Profile");
+      $keyboard[] = array("🔙 Back to Movies");
    }
 
-   echo '<pre>'; print_r($fullMenuArray); echo '</pre>';
-   
+   // echo '<pre>'; echo("refineMoviePropertyKeyboard:"); echo '</pre>';
+   // echo '<pre>'; print_r($keyboard); echo '</pre>';
 
    return $keyboard;
 }

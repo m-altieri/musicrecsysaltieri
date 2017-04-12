@@ -1,5 +1,6 @@
 <?php
 
+//obsoleta
 function acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name){
 
 	//Qui chiedere se gli piace il film, se lo ha già visto o non gli piace...stile profilo

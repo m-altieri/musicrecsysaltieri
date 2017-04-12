@@ -10,8 +10,7 @@
 function refineFunction($chatId){   
 
 	$pagerankCicle = getNumberPagerankCicle($chatId);
-   $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
-   $movie = $replyLast[1];
+	$movie = recMovieToRefineSelected($chatId, $pagerankCicle);
 	$movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
 	$data = getAllPropertyListFromMovie($movie_name);
 

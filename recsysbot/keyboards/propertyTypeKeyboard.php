@@ -39,19 +39,20 @@ function propertyTypeKeyboard($chatId){
 
 	$fullMenuArray = array();
 
-	$fullMenuArray[10+$size_director."director"] = "Director";
-	$fullMenuArray[10+$size_starring."starring"] = "Actor";
-	$fullMenuArray[10+$size_category."category"] = "Category";
-	$fullMenuArray[10+$size_genre."genre"] = "Genre";
-	$fullMenuArray[10+$size_writer."writer"] = "Writer";
-	$fullMenuArray[10+$size_producer."producer"] = "Producer";
-	$fullMenuArray[10+$size_releaseYear."releaseYear"] = "Release year";
-	$fullMenuArray[10+$size_musicComposer."musicComposer"] = "Music";
-	$fullMenuArray[10+$size_runtimeRange."runtimeRange"] = "Runtime";
-	$fullMenuArray[10+$size_cinematography."cinematography"] = "Cinematography";
-	$fullMenuArray[10+$size_basedOn."basedOn"] = "Based on";
-	$fullMenuArray[10+$size_editing."editing"] = "Editor";
-	$fullMenuArray[10+$size_distributor."distributor"] = "Distributor";
+	if ($size_director > 0) {$fullMenuArray[10+$size_director."director"] = "Director";}
+	if ($size_starring > 0) {$fullMenuArray[10+$size_starring."starring"] = "Actor";}
+	if ($size_category > 0) {$fullMenuArray[10+$size_category."category"] = "Category";}
+	if ($size_genre > 0) {$fullMenuArray[10+$size_genre."genre"] = "Genre";}
+	if ($size_writer > 0) {$fullMenuArray[10+$size_writer."writer"] = "Writer";}
+	if ($size_producer > 0) {$fullMenuArray[10+$size_producer."producer"] = "Producer";}
+	if ($size_releaseYear > 0) {$fullMenuArray[10+$size_releaseYear."releaseYear"] = "Release year";}
+	if ($size_musicComposer > 0) {$fullMenuArray[10+$size_musicComposer."musicComposer"] = "Music";}
+	if ($size_runtimeRange > 0) {$fullMenuArray[10+$size_runtimeRange."runtimeRange"] = "Runtime";}
+	if ($size_cinematography > 0) {$fullMenuArray[10+$size_cinematography."cinematography"] = "Cinematography";}
+	if ($size_basedOn > 0) {$fullMenuArray[10+$size_basedOn."basedOn"] = "Based on";}
+	if ($size_editing > 0) {$fullMenuArray[10+$size_editing."editing"] = "Editor";}
+	if ($size_distributor > 0) {$fullMenuArray[10+$size_distributor."distributor"] = "Distributor";}
+
 	krsort($fullMenuArray);
 
    return $fullMenuArray;

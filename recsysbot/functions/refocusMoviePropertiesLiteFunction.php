@@ -7,7 +7,7 @@
  *
  */
 
-function refocusMovieFunction($chatId, $movie){
+function refocusMoviePropertiesLiteFunction($chatId, $movie){
 
 	$pagerankCicle = getNumberPagerankCicle($chatId);
 	$rating = 0;
@@ -17,8 +17,12 @@ function refocusMovieFunction($chatId, $movie){
 
    $text = "We continue with Refocus...";
 
-   $directors = $starring = $categories = $genres = $writers = $producers = $musicComposers = $cinematographies = $based = $editings = $distributors = array();
-   $runtime = $releaseDate = "";
+/*   $directors = $starring = $categories = $genres = $writers = $producers = $musicComposers = $cinematographies = $based = $editings = $distributors = array();
+   $runtime = $releaseDate = "";*/
+
+    $directors = $starring = $categories = $writers = $producers = $cinematographies = array();
+
+
    if ($data !== "null") {
       foreach ($data as $key => $value){
          foreach ($value as $k => $v) {
@@ -33,39 +37,39 @@ function refocusMovieFunction($chatId, $movie){
                case "/starring": case "starring":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);                  
                   break;
-               case "/categories": case "categories": case "category": case "http://purl.org/dc/terms/subject":
+/*               case "/categories": case "categories": case "category": case "http://purl.org/dc/terms/subject":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/genres": case "genres": case "genre":
+                  break;*/
+/*               case "/genres": case "genres": case "genre":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
+                  break;*/
 /*               case "/runtime": case "runtime": case "runtimeRange":      
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;*/
-               case "/writers": case "writers": case "writer":
+/*               case "/writers": case "writers": case "writer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/producers": case "producers": case "producer":
+                  break;*/
+/*               case "/producers": case "producers": case "producer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
+                  break;*/
 /*               case "/release date": case "release date": case "releaseDate": case "releaseYear":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
                   break;*/
-               case "/music composers": case "music composers": case "music composer": case "musicComposer":
+/*               case "/music composers": case "music composers": case "music composer": case "musicComposer":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/cinematographies": case "cinematographies": case "cinematography":
+                  break;*/
+/*               case "/cinematographies": case "cinematographies": case "cinematography":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/based on": case "based on": case "basedOn":
+                  break;*/
+/*               case "/based on": case "based on": case "basedOn":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/editings": case "editings": case "editing":
+                  break;*/
+/*               case "/editings": case "editings": case "editing":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
-               case "/distributors": case "distributors": case "distributor":
+                  break;*/
+/*               case "/distributors": case "distributors": case "distributor":
                   putPropertyUriRating($chatId, $propertyTypeURI, $propertyURI, $rating, $lastChange);
-                  break;
+                  break;*/
                default:
                   break;
             }

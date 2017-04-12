@@ -2,8 +2,17 @@
 
 function propertyValueReply($telegram, $chatId, $propertyType, $text){
 
-	$keyboard = propertyValueKeyboard($chatId, $propertyType, $text);
-	//echo '<pre>'; print_r($keyboard); echo '</pre>';
+	$reply = explode("\"", $text);
+   $movieName = isset($reply[1])? $reply[1] : null;
+
+   $keyboard = array();
+
+   if ($movieName == null) {  
+      $keyboard = propertyValueFromPropertyTypeKeyboard($chatId, $propertyType);
+   }      
+   else{
+      $keyboard = propertyValueFromPropertyTypeAndMovieKeyboard($chatId, $propertyType, $movieName);
+   }
 
 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,'resize_keyboard' => true,'one_time_keyboard' => false]);
 

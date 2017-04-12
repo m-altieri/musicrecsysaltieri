@@ -9,12 +9,10 @@ function callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendatio
 		 refineMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
 	}
 	else{
-      $replyOld = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
-      $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
-		$oldRecMovieToRefineSelected = $replyOld[1];
-		$lastRecMovieToRefineSelected = $replyLast[1];
+		$oldRecMovieToRefineSelected = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
+		$lastRecMovieToRefineSelected = recMovieToRefineSelected($chatId, $pagerankCicle);
 
-   	 $text = "".$pagerankCicle."^ cicle of recommendation...";
+		$text = "".$pagerankCicle."^ cicle of recommendation...";
        $text .= "\nDuring previous cycle you have chosen:";
        $text .= "\n\"".ucwords($oldRecMovieToRefineSelected)."\"";
        $text .= "\nIn this cycle you have chosen:";

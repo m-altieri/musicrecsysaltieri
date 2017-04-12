@@ -1,13 +1,12 @@
 <?php
 
-//probabilmente in disuso, gestire...
 function userPropertyValueKeyboard(){
 
    $keyboard = [
          ["🌐 Recommend Movies"],
          ["🔴 Rate movie properties"],
          ['🔵 Rate movies'],
-         ['👤 Profile']
+         ['⚙️ Profile']
      ];
 
 	return $keyboard;

@@ -12,8 +12,7 @@ function refocusFunction($chatId){
 	$pagerankCicle = getNumberPagerankCicle($chatId);
 	$rating = 0;
 	$lastChange = "refocus";	
-   $replyLast = recMovieToRefineSelected($chatId, $pagerankCicle);
-   $movie = $replyLast[1];
+	$movie = recMovieToRefineSelected($chatId, $pagerankCicle);
 	$movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
 	$data = getAllPropertyListFromMovie($movie_name);
 
