@@ -32,7 +32,7 @@ class StartCommand extends Command
          $keyboard = userPropertyValueKeyboard();
          $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
          $text = "Hi ".$firstname." 😃\n";
-         $text .= "\n\nI am now able to recommend you some movies 😃";
+         $text .= "\nI am now able to recommend you some movies 😃";
          $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
          
          $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);      

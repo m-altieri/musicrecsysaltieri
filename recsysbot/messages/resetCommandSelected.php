@@ -3,6 +3,7 @@
 function resetCommandSelected($chatId, $pagerankCicle){
 
    $context = "resetCommandSelected";
+
    $result = getChatMessage($chatId, $context, $pagerankCicle);
    if ($result !== "null") {
       $replyText = $result['reply_text'];
@@ -15,8 +16,8 @@ function resetCommandSelected($chatId, $pagerankCicle){
       $reply = "null";
    }   
 
-   file_put_contents("php://stderr", "resetCommandSelected 0:".$reply[0]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
-   file_put_contents("php://stderr", "resetCommandSelected 1:".$reply[1]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
+   file_put_contents("php://stderr", "resetCommandSelected:".print_r($reply)." - pagerankCicle:".$pagerankCicle.PHP_EOL);
+   file_put_contents("php://stderr", "resetCommandSelected:".$reply." - pagerankCicle:".$pagerankCicle.PHP_EOL);
 
    return $reply;
 }

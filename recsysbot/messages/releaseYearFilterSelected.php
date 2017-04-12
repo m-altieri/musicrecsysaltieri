@@ -3,6 +3,7 @@
 function releaseYearFilterSelected($chatId, $pagerankCicle){
 
    $context = "releaseYearFilterSelected";
+
    $result = getChatMessage($chatId, $context, $pagerankCicle);
    if ($result !== "null") {
       $replyText = $result['reply_text'];
@@ -15,8 +16,8 @@ function releaseYearFilterSelected($chatId, $pagerankCicle){
       $reply = "null";
    }   
 
-   file_put_contents("php://stderr", "releaseYearFilterSelected propertyType:".$reply[0]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
-   file_put_contents("php://stderr", "releaseYearFilterSelected propertyValue:".$reply[1]." - pagerankCicle:".$pagerankCicle.PHP_EOL);
-
+   file_put_contents("php://stderr", "releaseYearFilterSelected:".print_r($reply,true)." - pagerankCicle:".$pagerankCicle.PHP_EOL);
+   file_put_contents("php://stderr", "releaseYearFilterSelected:".$reply." - pagerankCicle:".$pagerankCicle.PHP_EOL);
+   
    return $reply;
 }
