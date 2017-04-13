@@ -26,7 +26,7 @@ function recMovieKeyboard($chatId, $page){
 	               ];
 	}
 	elseif($page > 4) {
-		$nextPage = confXsetNextOrChangeKeyfunction($chatId);
+		$nextPage = setNextOrChangeKeyfunction($chatId);
 	   $backPage = 4;
 	   $keyboard = [
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],

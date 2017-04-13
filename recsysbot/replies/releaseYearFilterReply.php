@@ -33,7 +33,7 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
 
       $movie = recMovieToRefineSelected($chatId, $pagerankCicle);
 
-      file_put_contents("php://stderr", "conf4userPropertyValueRatingReply - movie:".$movie." - pagerankCicle:".$pagerankCicle.PHP_EOL);  
+      file_put_contents("php://stderr", "userPropertyValueRatingReply - movie:".$movie." - pagerankCicle:".$pagerankCicle.PHP_EOL);  
       
       if (strcasecmp($movie, "null") !== 0 && $pagerankCicle >= 0) {
          $text = "Do you prefer rate other properties of "."\"".ucwords($movie)."\" \nor Back to movies?";

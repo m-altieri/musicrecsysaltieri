@@ -828,7 +828,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $help = "rateMovieSelected";
          $context = "helpSelected";
          $replyText = "help, rateMovieSelected";
-         $replyFunctionCall = "conf1helpReply"; 
+         $replyFunctionCall = "helpReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
@@ -839,7 +839,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $help = "recMovieSelected";
          $context = "helpSelected";
          $replyText = "help,recMovieSelected";
-         $replyFunctionCall = "conf1helpReply"; 
+         $replyFunctionCall = "helpReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
@@ -850,7 +850,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $help = "profileSelected";
          $context = "helpSelected";
          $replyText = "help,profileSelected";
-         $replyFunctionCall = "conf1helpReply"; 
+         $replyFunctionCall = "helpReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
