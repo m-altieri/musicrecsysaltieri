@@ -9,12 +9,12 @@
 
 function refocusFunction($chatId){
 
-	$pagerankCicle = getNumberPagerankCicle($chatId);
-	$rating = 0;
-	$lastChange = "refocus";	
-	$movie = recMovieToRefineSelected($chatId, $pagerankCicle);
-	$movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
-	$data = getAllPropertyListFromMovie($movie_name);
+   $pagerankCicle = getNumberPagerankCicle($chatId);
+   $rating = 0;
+   $lastChange = "refocus";   
+   $movie = recMovieToRefineSelected($chatId, $pagerankCicle);
+   $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+   $data = getAllPropertyListFromMovie($movie_name);
 
    $text = "We continue with Refocus...";
 
@@ -72,7 +72,7 @@ function refocusFunction($chatId){
             }
          }
       }
- 	$pagerankCicle = getNumberPagerankCicle($chatId);
+   $pagerankCicle = getNumberPagerankCicle($chatId);
    putNumberPagerankCicle($chatId, $pagerankCicle+1);
    }
    else{
