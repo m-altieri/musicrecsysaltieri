@@ -13,7 +13,7 @@ function experimentCompleteReply($telegram, $chatId, $text){
    file_put_contents("php://stderr", "experimentCompleteReply :".$text." - chatId: ".$chatId." - star:".$numberStars.PHP_EOL);
 
 	$text = " 👨‍🔬 The recommendation session is completed.";
-   $text .= "\n\n😊 If you enjoyed 😁 you can start a new session by tapping \"🤖 New Session\"";
+   $text .= "\n\n😊 If you enjoyed 😁 you can start a new session by tapping\n\"🤖 New Session\"";
    $text .= "\n\n🙋‍♂️ See you soon, and don’t forget 🍿 popcorn! 😃";
 
    $keyboard = [
