@@ -76,7 +76,7 @@ $text = trim($text);
 
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
-// try {
+try {
       //gestisco il tipo di messaggio: testo
       if (isset ($message['text'])){
          
@@ -130,7 +130,7 @@ $text = strtolower($text);
          $response = "I'm sorry. I received a message, but i can't unswer";
          $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
       }
-//    } catch (Exception $e) {
-//       file_put_contents("php://stderr","Exception chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
-//       file_put_contents("php://stderr","Exception chatId:".$chatId." Caught exception: ".print_r($e->getMessage()).PHP_EOL);
-// }
+   } catch (Exception $e) {
+      file_put_contents("php://stderr","Exception chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
+      file_put_contents("php://stderr","Exception chatId:".$chatId." Caught exception: ".print_r($e).PHP_EOL);
+}
