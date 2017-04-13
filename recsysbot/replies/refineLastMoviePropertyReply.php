@@ -1,6 +1,6 @@
 <?php
 
-function refineLastMoviePropertyReply($telegram, $chatId){
+function refineLastMoviePropertyReply($telegram, $chatId, $userMovieRecommendation){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
    $movie = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
@@ -13,7 +13,7 @@ function refineLastMoviePropertyReply($telegram, $chatId){
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
    
 
-	$keyboard = refineMoviePropertyKeyboard($chatId, $movie);
+	$keyboard = refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation);
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
    $text = "Which properties of movie you want to change?";

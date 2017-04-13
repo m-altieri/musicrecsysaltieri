@@ -1,7 +1,7 @@
 <?php
 use GuzzleHttp\Client;
 
-function refineFunctionReply($telegram, $chatId){
+function refineFunctionReply($telegram, $chatId, $userMovieRecommendation){
 
    $pagerankCicle = getNumberPagerankCicle($chatId);
    $movie = recMovieToRefineSelected($chatId, $pagerankCicle);
@@ -12,7 +12,7 @@ function refineFunctionReply($telegram, $chatId){
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);   
    
 
-	$keyboard = refineMoviePropertyKeyboard($chatId, $movie);
+	$keyboard = refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation);
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
    $text = "Which properties of movie you want to change?";

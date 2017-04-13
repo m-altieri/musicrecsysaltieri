@@ -36,7 +36,7 @@ function callRefineOrRefocusFunction($telegram, $chatId, $userMovieRecommendatio
 
          $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
 
-         refineFunctionReply($telegram, $chatId);
+         refineFunctionReply($telegram, $chatId, $userMovieRecommendation);
    	}
    	
 	}

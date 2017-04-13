@@ -60,7 +60,7 @@ function backFunction($telegram, $chatId, $messageId, $text, $botName, $date, $u
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
 
-         refineLastMoviePropertyReply($telegram, $chatId);
+         refineLastMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //ritorna alla lista dei valori della proprietà considerata
       default:

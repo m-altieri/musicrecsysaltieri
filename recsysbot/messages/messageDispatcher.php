@@ -800,7 +800,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
                   
          //$replyText = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
-         refineLastMoviePropertyReply($telegram, $chatId);
+         refineLastMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //profile
       case strpos($text, '👤'):
