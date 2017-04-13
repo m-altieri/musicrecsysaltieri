@@ -81,7 +81,7 @@ $text = strtolower($text);
       if (isset ($message['text'])){
          
          if (($text == "/start")) {
-            putUserDetail($chatId, $firstname, $lastname, $username);
+            putUserDetail($chatId, $firstname, $lastname, $username, $botName);
             messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
          }
          else{

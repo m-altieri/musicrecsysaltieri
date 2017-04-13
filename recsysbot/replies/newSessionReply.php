@@ -26,8 +26,9 @@ The whole experiment will take less than five minutes.";
    $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
 
    //inserire il put configuration
+   startProfileAcquisitioReply($telegram, $chatId);
    
-   if (strcasecmp($botName, 'conf1testrecsysbot') == 0){
+/*   if (strcasecmp($botName, 'conf1testrecsysbot') == 0){
          conf1startProfileAcquisitioReply($telegram, $chatId);
       }
       elseif (strcasecmp($botName, 'conf2testrecsysbot') == 0){
@@ -42,6 +43,6 @@ The whole experiment will take less than five minutes.";
       }
       else{ //movierecsysbot
          startProfileAcquisitioReply($telegram, $chatId);
-      }    
+      }  */  
                            
 }
