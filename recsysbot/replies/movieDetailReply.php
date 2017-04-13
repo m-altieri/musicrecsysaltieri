@@ -90,7 +90,7 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
          copy($poster, $img); //copia nell'immagine l'immagine del poster
          $filesize = filesize($img); // bytes
          $filesize = round($filesize / 1024, 2); 
-         file_put_contents("php://stderr", "conf2userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
+         file_put_contents("php://stderr", "userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
          if ($filesize <= 4900) {
             $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
             $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
@@ -129,7 +129,7 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
       if ($genre !== '') {$text .= "\n*Genres: *".$genre;}
 
       //Crea la tastiera per la valutazione del film raccomandato
-      $keyboard = confXrecMovieKeyboard($chatId, $page);
+      $keyboard = recMovieKeyboard($chatId, $page);
       
       // echo '<pre>'; echo($text); echo '</pre>';
       // echo '<pre>'; print_r($keyboard); echo '</pre>';
