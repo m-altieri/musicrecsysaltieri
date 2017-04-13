@@ -16,7 +16,7 @@ function backFunction($telegram, $chatId, $messageId, $text, $botName, $date, $u
 
          //$movie = recMovieToRefineSelected($chatId, $pagerankCicle);
          $movie = recMovieSelected($chatId, $pagerankCicle);
-         $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movie);
+         $page = $userMovieRecommendation->getPageFromMovieName($chatId, $movie);
          $userMovieRecommendation->setPage($page);
          $userMovieRecommendation->handle();
          
