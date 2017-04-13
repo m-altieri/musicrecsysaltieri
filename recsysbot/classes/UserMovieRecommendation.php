@@ -287,7 +287,7 @@ class userMovieRecommendation
          $movieURI = "http://dbpedia.org/resource/";
          $movieURI .= $movie_name;
          $number_recommendation_list = getNumberRecommendationList($chatId);
-         $position = $this->getPageFromMovieName($chatId,$movie);
+         $position = $this->getPageFromMovieName($chatId, $movie);
          $pagerank_cicle = getNumberPagerankCicle($chatId);
          $botName = $this->getBotName();
          $message_id = $this->getMessageId();
