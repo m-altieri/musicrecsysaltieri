@@ -5,7 +5,7 @@ use Telegram\Bot\FileUpload\InputFile;
 
 function movieDetailReply($telegram, $chatId, $movie, $page){
 
-   $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
+    $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
    $data = getAllPropertyListFromMovie($movie_name);
 
    $result = array();
@@ -25,6 +25,21 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
             $property = str_replace('_', ' ', $property); // Replaces all underscore with spaces.
 
             switch ($propertyType) {
+               case "poster":
+                  $poster = $property;
+                  break;
+               case "title":
+                  $title = $property;
+                  break;
+               case "runtimeMinutes":      
+                  $runtimeMinutes = $property;
+                  break;
+               case "releaseYear":
+                  $releaseYear = $property;
+                  break;
+               case "imdbRating":
+                  $imdbRating = $property;
+                  break;
                case "director":
                   $directors[] = $property;
                   break;
@@ -34,27 +49,12 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
                case "genre":
                    $genres[] = $property;
                   break;
-               case "runtimeMinutes":      
-                  $runtimeMinutes = $property;
-                  break;
-               case "writer":
-                   $writers[] = $property;
-                  break;
                case "producer":
                    $producers[] = $property;
                   break;
-               case "releaseYear":
-                  $releaseYear = $property;
-                  break;
-               case "title":
-                  $title = $property;
-                  break;
-               case "imdbRating":
-                  $imdbRating = $property;
-                  break;
-               case "poster":
-                  $poster = $property;
-                  break;
+               case "writer":
+                   $writers[] = $property;
+                  break;             
                default:
                   //test
                   //$telegram->sendMessage(['chat_id' => $chatId, 'text' => $textSorry]);
@@ -71,17 +71,20 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
       $writer = implode(", ", array_slice($writers, 0, 3));    
 
 /*      if ($poster != '' AND $poster != "N/A" ) {   
+         //$img = './../recsysbot/images/poster.jpg'; //in test
+         
          $img = './recsysbot/images/poster.jpg';
-         //$img = curl_file_create('test.png','image/png');
-         //file_put_contents($img, file_get_contents($poster));
-         //copy('http://somedomain.com/file.jpeg', '/tmp/file.jpeg');
          copy($poster, $img); //copia nell'immagine l'immagine del poster
+
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
          $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
          copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
-      }*/
 
-      if ($poster != '' AND $poster != "N/A" ) {            
+         //copy('./../recsysbot/images/default.jpg', './../recsysbot/images/poster.jpg'); //in test
+      }
+*/
+      if ($poster != '' AND $poster != "N/A" ) {
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default            
          //controllo sulla grandezza dell'immagine della locandina
          $img = './recsysbot/images/poster.jpg';
          copy($poster, $img); //copia nell'immagine l'immagine del poster
@@ -98,17 +101,9 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
             $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
             $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);
          }
-         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default
+         copy('./recsysbot/images/default.jpg', './recsysbot/images/poster.jpg'); //copia nel poster l'immagine di default  
       }
 
-
-
-/*      $text = "";
-      if ($title != '') {$text .= "*Title:* ".$title;}
-      if ($director != '') {$text .= "\n*Directed by* ".$director;}
-      if ($star !== '') {$text .= "\n*Starring:* ".$star."...";}
-      if ($genre !== '') {$text .= "\n*Genre:* ".$genre;}
-      if ($releaseYear !== '') {$text .= "\n*Release year:* ".$releaseYear;}*/
 
       $text = "";
       if ($title !== '') {$text .= "🎥 *".$title."*";}
@@ -133,65 +128,25 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
 
       if ($genre !== '') {$text .= "\n*Genres: *".$genre;}
 
-
-      if ($page == 1) {
-         $nextPage = $page+1;
-         $keyboard = [
-                        //["🎯 Accept recommendation"],
-                        //["🌀 Revise your preferences to find the right movie"],
-                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
-                        //["🔘 List of Recommended Movies"],
-                        ["📑 Details","📣 Why?"],
-                        ["Next ".$nextPage." 👉"],
-                        ['🔙 Home','👤 Profile']
-
-                     ];
-      } 
-      elseif ($page > 1 && $page < 5) {
-         $nextPage = $page+1;
-         $backPage = $page-1;
-         $keyboard = [
-                        //["🎯 Accept recommendation"],
-                        //["🌀 Revise your preferences to find the right movie"],
-                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
-                        //["🔘 List of Recommended Movies"],
-                        ["📑 Details","📣 Why?"],
-                        ["👈 Back ".$backPage,"Next ".$nextPage." 👉"],
-                        ['🔙 Home','👤 Profile']
-                     ];
-      }
-      elseif($page > 4) {
-         $backPage = 4;
-         $keyboard = [
-                        //["🎯 Accept recommendation"],
-                        //["🌀 Revise your preferences to find the right movie"],
-                        ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
-                        //["🔘 List of Recommended Movies"],
-                        ["📑 Details","📣 Why?"],
-                        ["👈 Back ".$backPage."", "💢 Change"],
-                        ['🔙 Home','👤 Profile']
-                     ];
-      }
+      //Crea la tastiera per la valutazione del film raccomandato
+      $keyboard = confXrecMovieKeyboard($chatId, $page);
       
-      echo '<pre>'; echo($text); echo '</pre>';
-      echo '<pre>'; print_r($keyboard); echo '</pre>';
+      // echo '<pre>'; echo($text); echo '</pre>';
+      // echo '<pre>'; print_r($keyboard); echo '</pre>';
 
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
-/*      $inLineKeyboard =[
-         ["Detail of \"".ucwords($movie)."\""]
-      ];*/
-      //$textInlineKeyboardButton = "Detail of \"".ucwords($movie)."\"";
-      //$telegram->inlineKeyboardButton(['text' => $textInlineKeyboardButton]);
-
-/*      $reply_markup1 = $telegram->inlineKeyboardMarkup(['inline_keyboard' => $keyboard]);
-            $telegram->sendMessage(['chat_id' => $chatId, 
-                              'text' => $text,
-                              'reply_markup' => $reply_markup1 
-                           ]);*/
-
-
       $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
       $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup, 'parse_mode' => 'Markdown']);
+
+      //inserisce il testo che consiglia di andare indietro
+      $change = setNextOrChangeKeyfunction($chatId);
+      if ($page == 5 && (strcasecmp($change, "💢 Change") == 0) ) {
+         $text = "If you don’t like this set of movies, please tap \"💢 Change\".\nOtherwise go back in the list 😉";
+         
+         $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);
+      }
+
    }
 }
