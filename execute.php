@@ -66,7 +66,7 @@ if($chatId == "")
    $globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
    file_put_contents("php://stderr", "edited_message execute.php - chatId: ".$chatId." - update: ".print_r($update, true).PHP_EOL);
 }
-$botName = "movierecsysbot"; 
+$botName = checkUserAndBotNameFunction($chatId, $firstname, $lastname, $username, $date);
 
 // Stampa nel log
 file_put_contents("php://stderr","chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
@@ -81,7 +81,7 @@ $text = strtolower($text);
       if (isset ($message['text'])){
          
          if (($text == "/start")) {
-            putUserDetail($chatId, $firstname, $lastname, $username, $botName);
+            putUserDetail($chatId, $firstname, $lastname, $username);
             messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
          }
          else{

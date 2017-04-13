@@ -24,10 +24,10 @@ function checkUserAndBotNameFunction($chatId, $firstname, $lastname, $username, 
       }
    }
    if ($botName == null) {
-   	//$botName = "conf1testrecsysbot";
-   	//putUserBotName($chatId, $botName);
+   	$botName = "movierecsysbot";
+   	putUserBotName($chatId, $botName);
 
-   	//A regime
+   	//movierec
    	$botName = getOrSetUserBotName($chatId);
 		putUserDetail($chatId, $firstname, $lastname, $username);
 
