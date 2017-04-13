@@ -31,7 +31,7 @@ function basePropertyTypeReply($telegram, $chatId){
                      ["🌐 Recommend Movies"],
                      [$result[0][0], $result[1][0]],
                      [$result[2][0], $result[3][0]],
-                     ['⚙️ Profile', 'More 👉']
+                     ['🔵 Movies','⚙️ Profile', 'More 👉']
                   ];
    }
    else{
@@ -40,7 +40,7 @@ function basePropertyTypeReply($telegram, $chatId){
       $keyboard = [
                      [$result[0][0], $result[1][0]],
                      [$result[2][0], $result[3][0]],
-                     ['⚙️ Profile', 'More 👉']
+                     ['🔵 Movies','⚙️ Profile', 'More 👉']
                   ];
    }
 
