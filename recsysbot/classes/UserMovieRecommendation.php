@@ -198,6 +198,7 @@ class userMovieRecommendation
    //lacia il pagerank e crea la lista
    public function getPagerankForUserRecMovieListTop5($chatId){
 
+      file_put_contents("php://stderr", "userMovieRecommendation->getPagerankForUserRecMovieListTop5: chatId: ".$chatId.PHP_EOL);
       $keyboard = pagerankUserRecMovieListTop5Keyboards($chatId);
       $movieListTop5 = array();
           
@@ -216,7 +217,7 @@ class userMovieRecommendation
             }                
          }
       }
-
+      file_put_contents("php://stderr", "userMovieRecommendation->getPagerankForUserRecMovieListTop5 CREATE chatId: ".$chatId.PHP_EOL);
       return $movieListTop5;
    }
 
