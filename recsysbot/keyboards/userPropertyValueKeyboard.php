@@ -3,8 +3,8 @@
 function userPropertyValueKeyboard(){
 
    $keyboard = [
-         ["🌐 Recommend Movies"],
-         ["🔴 Rate movie properties"],
+         ['🌐 Recommend Movies'],
+         ['🔴 Rate movie properties'],
          ['🔵 Rate movies'],
          ['⚙️ Profile']
      ];

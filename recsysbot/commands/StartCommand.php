@@ -40,10 +40,9 @@ class StartCommand extends Command
       else{
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-            $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 
             $text = "I need at least 3 preferences for generating recommendations.";
-            $this->replyWithMessage(['text' => $text]); 
+            $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 
             $text = "Let me recommend a movie \nPlease, tell me something about you \nor type your preference 🙂";
             $this->replyWithMessage(['text' => $text]); 
