@@ -40,8 +40,14 @@ class StartCommand extends Command
       else{
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-
-            $text = "I need at least 3 preferences for generating recommendations.";
+            $text = "Hi ".$firstname." 😃\n";
+            $text .= "\nIn this experiment you will receive some recommendations about MOVIES.
+In the following, we will ask you some information about you and your preferences in the movie domain.
+Next, you will receive a list of recommended movies and you will be asked to evaluate the goodness of the recommendations.
+You can improve the recommendations by telling me what you like and what you dislike in the recommended movies.
+You can also ask why a movie has been recommended by tapping the “Why?” button.
+The whole experiment will take less than five minutes.";
+            $text .= "\nI need at least 3 preferences for generating recommendations.";
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 
             $text = "Let me recommend a movie \nPlease, tell me something about you \nor type your preference 🙂";
