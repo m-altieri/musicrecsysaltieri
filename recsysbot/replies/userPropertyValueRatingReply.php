@@ -52,14 +52,16 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
 
       $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
+      $pagerankCicle = getNumberPagerankCicle($chatId);
+      
    if ($needNumberOfRatedProperties <= 0) {
 
-      $pagerankCicle = getNumberPagerankCicle($chatId);
-      $movie = oldRecMovieToRefineSelected($chatId, $pagerankCicle);
+
+      $movie = recMovieToRefineSelected($chatId, $pagerankCicle);
       
       $text = "Do you prefer rate other properties of "."\"".ucwords($movie)."\" \nor Back to movies?";
    
-      if ($movie !== "null") {
+      if (strcasecmp($movie, "null") !== 0 && $pagerankCicle >= 0) {
          $keyboard = [
                         ["🔎 Rate other properties of "."\"".ucwords($movie)."\""],
                         ["🔙 Back to Movies"]
