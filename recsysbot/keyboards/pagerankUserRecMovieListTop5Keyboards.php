@@ -33,6 +33,6 @@ function pagerankUserRecMovieListTop5Keyboards($chatId){
    $keyboard = array_slice($result, 0, 5);
    $keyboard[] = array("🔙 Home","⚙️ Profile");
 
-   //file_put_contents("php://stderr", "recommendationMovieListTop5Keyboards return:".$keyboard.PHP_EOL);
+   file_put_contents("php://stderr", "pagerankUserRecMovieListTop5Keyboards return:".$keyboard.PHP_EOL);
    return $keyboard;
 }
