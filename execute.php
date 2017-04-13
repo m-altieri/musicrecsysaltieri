@@ -133,4 +133,4 @@ $text = strtolower($text);
    // } catch (Exception $e) {
       // file_put_contents("php://stderr","Exception chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
       // file_put_contents("php://stderr","Exception chatId:".$chatId." Caught exception: ".print_r($e->getMessage()).PHP_EOL);
-}
+// }
