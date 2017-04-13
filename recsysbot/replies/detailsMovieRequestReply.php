@@ -132,7 +132,7 @@ function detailsMovieRequestReply($telegram, $chatId, $movie_name, $userMoviepro
          copy($poster, $img); //copia nell'immagine l'immagine del poster
          $filesize = filesize($img); // bytes
          $filesize = round($filesize / 1024, 2); 
-         file_put_contents("php://stderr", "conf2userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
+         file_put_contents("php://stderr", "userMovieprofile->movieRating() filesize: ".$filesize.PHP_EOL);
          if ($filesize <= 4900) {
             $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'upload_photo']);
             $telegram->sendPhoto(['chat_id' => $chatId,'photo' => $img]);

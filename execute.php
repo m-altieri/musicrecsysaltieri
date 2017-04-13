@@ -77,60 +77,60 @@ $text = trim($text);
 // converto tutti i caratteri alfanumerici del messaggio in minuscolo
 $text = strtolower($text);
 try {
-   //gestisco il tipo di messaggio: testo
-   if (isset ($message['text'])){
-      
-      if (($text == "/start")) {
-         putUserDetail($chatId, $firstname, $lastname, $username);
-         messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
+      //gestisco il tipo di messaggio: testo
+      if (isset ($message['text'])){
+         
+         if (($text == "/start")) {
+            putUserDetail($chatId, $firstname, $lastname, $username);
+            messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
+         }
+         else{
+            messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
+         }
+
+      }
+
+      elseif (isset ($message['audio'])){
+         $response = "I'm sorry. I received an audio message";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['document'])){
+         $response = "I'm sorry. I received a message document, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['photo'])){
+         $response = "I'm sorry. I received a message photo, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['sticker'])){
+         $response = "I'm sorry. I received a sticker message, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['video'])){
+         $response = "I'm sorry. I received a video message, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['voice'])){
+         $response = "I'm sorry. I received a voice message, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['contact'])){
+         $response = "I'm sorry. I received a message contact, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['location'])){
+         $response = "I'm sorry. I received a location message, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
+      }
+      elseif (isset ($message['venue'])){
+         $response = "I'm sorry. I received a venue, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
       }
       else{
-         messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName);
+         $response = "I'm sorry. I received a message, but i can't unswer";
+         $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
       }
-
-   }
-
-   elseif (isset ($message['audio'])){
-      $response = "I'm sorry. I received an audio message";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['document'])){
-      $response = "I'm sorry. I received a message document, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['photo'])){
-      $response = "I'm sorry. I received a message photo, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['sticker'])){
-      $response = "I'm sorry. I received a sticker message, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['video'])){
-      $response = "I'm sorry. I received a video message, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['voice'])){
-      $response = "I'm sorry. I received a voice message, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['contact'])){
-      $response = "I'm sorry. I received a message contact, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['location'])){
-      $response = "I'm sorry. I received a location message, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   elseif (isset ($message['venue'])){
-      $response = "I'm sorry. I received a venue, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-   else{
-      $response = "I'm sorry. I received a message, but i can't unswer";
-      $telegram->sendMessage(['chat_id' => $chatId, 'text' => $response]);
-   }
-} catch (Exception $e) {
-   file_put_contents("php://stderr","Exception chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
-   file_put_contents("php://stderr","Exception chatId:".$chatId." Caught exception: ".print_r($e->getMessage()).PHP_EOL);
+   } catch (Exception $e) {
+      file_put_contents("php://stderr","Exception chatId:".$chatId." - firstname:".$firstname." - botName".$botName. " - Date:".$globalDate." - text:".$text.PHP_EOL);
+      file_put_contents("php://stderr","Exception chatId:".$chatId." Caught exception: ".print_r($e->getMessage()).PHP_EOL);
 }
