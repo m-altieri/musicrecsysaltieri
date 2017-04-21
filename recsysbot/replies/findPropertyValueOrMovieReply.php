@@ -22,7 +22,7 @@ function findPropertyValueOrMovieReply($telegram, $chatId,  $messageId, $date, $
          //$page = 1;
          //movieDetailReply($telegram, $chatId, $name, $page);
    }
-   else{  //se si tratta do una proprietà
+   else{  //se si tratta di una proprietà
       $propertyData = getPropertyTypeListFromPropertyValue($full_name);
       if ($propertyData !== "null") {
          $keyboard = propertyTypeListFromPropertyValueKeyboard($propertyData);
