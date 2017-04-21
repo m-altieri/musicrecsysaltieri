@@ -19,13 +19,11 @@ class HelpCommand extends Command
         $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
         
         $text = "Hi ".$firstname." 😃";
-        $text .= "Do you like Movies?🍿🍿🍿🍿🍿 
-I can find the perfect 🎬 #movie for you, based on your tastes 😉
+        $text .= "Do you like Movies?🍿🍿🍿🍿🍿 \nI can find the perfect 🎬 #movie for you, based on your tastes 😉
 In the following, we will ask you some information about you and your preferences in the movie domain.
 Next, you will receive a list of recommended movies and you will be asked to evaluate the goodness of the recommendations.
 You can improve the recommendations by telling me what you like and what you dislike in the recommended movies.
-You can also ask why a movie has been recommended by tapping the “Why?” button.
-The whole experiment will take less than five minutes";
+You can also ask why a movie has been recommended by tapping the “Why?” button.";
         $this->replyWithMessage(['text' => $text]);
 
         $text = "Here you find the available commands";
