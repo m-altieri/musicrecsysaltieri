@@ -1,19 +1,17 @@
 <?php
-
 use GuzzleHttp\Client;
-
-function putUserEducation($chatId, $education){
-
+function putUserEducation($chatId, $education) {
 	$userID = $chatId;
-	//$client = new Client(['base_uri'=>'http://localhost:8080']);
-   $client = new Client(['base_uri'=>'http://193.204.187.192:8080']);
-   $stringGetRequest = '/movierecsysrestful/restService/education/putUserEducation?userID='.$userID.'&education='.$education;
-   $response = $client->request('GET', $stringGetRequest);
-   $bodyMsg = $response->getBody()->getContents();
-   $data = json_decode($bodyMsg);
-
-   file_put_contents("php://stderr", "http://193.204.187.192:8080".$stringGetRequest."/return:".$data.PHP_EOL);
-
-   return $data;
-   
+	// $client = new Client(['base_uri'=>'http://localhost:8080']);
+	$client = new Client ( [ 
+			'base_uri' => 'http://193.204.187.192:8080' 
+	] );
+	$stringGetRequest = '/movierecsysrestful/restService/education/putUserEducation?userID=' . $userID . '&education=' . $education;
+	$response = $client->request ( 'GET', $stringGetRequest );
+	$bodyMsg = $response->getBody ()->getContents ();
+	$data = json_decode ( $bodyMsg );
+	
+	file_put_contents ( "php://stderr", "http://193.204.187.192:8080" . $stringGetRequest . "/return:" . $data . PHP_EOL );
+	
+	return $data;
 }

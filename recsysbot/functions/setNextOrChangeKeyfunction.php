@@ -1,14 +1,12 @@
 <?php
-
-function setNextOrChangeKeyfunction($chatId){
-	$numberRatedRecMovieList = getNumberRatedRecMovieList($chatId);
-
+function setNextOrChangeKeyfunction($chatId) {
+	$numberRatedRecMovieList = getNumberRatedRecMovieList ( $chatId );
+	
 	if ($numberRatedRecMovieList > 0) {
 		$key = "Next 👉";
-	}
-	else{
+	} else {
 		$key = "💢 Change";
 	}
-
+	
 	return $key;
 }
