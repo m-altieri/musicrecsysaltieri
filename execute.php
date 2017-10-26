@@ -17,6 +17,7 @@ $verifyToken = $_REQUEST['hub_verify_token'];
 $challenge = $_REQUEST['hub_challenge'];
 if ($verifyToken === $myToken) {
 	echo $_REQUEST['hub_challenge'];
+	exit();
 }
 
 // richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
