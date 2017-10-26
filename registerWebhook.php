@@ -9,6 +9,8 @@ if ($_REQUEST['hub_verify_token'] === $verifyToken) {
 	echo $_REQUEST['hub_challenge'];
 }
 
+
+
 $input = json_decode(file_get_contents('php://input'), true);
 
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
