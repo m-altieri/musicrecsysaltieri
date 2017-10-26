@@ -1,7 +1,7 @@
 <?php
 
 $webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
-$verifyToken = "movierecsysbot";
+$verifyToken = "testmovierecsysbot";
 $accessToken = "EAAE0Lnad6ywBAAhC40YZAncbqj3ZAWOvlpbuH5EF0ZCxMf5KwnS8JCpctYpVIo6YTCdPpec7vk9olB30HuSyMoRbyUX96FvNxs8NQ0OoeoYr1xYmMSvk4qduu0wlVRycF5YbgJ8L6Vf79fJhKCPCoFzvmonF9OBWfZAZBbv1OEQZDZD";
 
 if ($_REQUEST['hub_verify_token'] === $verifyToken) {
