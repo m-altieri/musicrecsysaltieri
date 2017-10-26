@@ -9,6 +9,16 @@ use Telegram\Bot\Api;
 require 'vendor/autoload.php';
 $config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 
+$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
+$myToken = "testmovierecsysbot";
+$accessToken = "EAAE0Lnad6ywBAAhC40YZAncbqj3ZAWOvlpbuH5EF0ZCxMf5KwnS8JCpctYpVIo6YTCdPpec7vk9olB30HuSyMoRbyUX96FvNxs8NQ0OoeoYr1xYmMSvk4qduu0wlVRycF5YbgJ8L6Vf79fJhKCPCoFzvmonF9OBWfZAZBbv1OEQZDZD";
+
+$verifyToken = $_REQUEST['hub_verify_token'];
+$challenge = $_REQUEST['hub_challenge'];
+if ($verifyToken === $myToken) {
+	echo $_REQUEST['hub_challenge'];
+}
+
 // richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
 foreach ( glob ( "recsysbot/classes/*.php" ) as $file ) {
 	require $file;
