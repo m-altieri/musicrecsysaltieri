@@ -15,6 +15,7 @@ function explanationMovieReply($telegram, $chatId, $userMovieRecommendation) {
 	] );
 	$telegram->sendMessage ( [ 
 			'chat_id' => $chatId,
-			'text' => $text 
+// 			'text' => $text
+			'text' => 'You just have bad tastes'
 	] );
 }
