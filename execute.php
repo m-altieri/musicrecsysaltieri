@@ -4,7 +4,7 @@
 	 * @author Francesco Baccaro
 	 */
 	use GuzzleHttp\Client;
-	use Telegram\Bot\Api;
+// 	use Telegram\Bot\Api;
 	
 	require 'vendor/autoload.php';
 	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
@@ -61,7 +61,7 @@
 	date_default_timezone_set ( $config ['timezone'] );
 	$token = $config ['token'];
 	
-	$telegram = new Api ( $token );
+// 	$telegram = new Api ( $token );
 	
 	// recupero il contenuto inviato da Telegram
 	$content = file_get_contents("php://input");
@@ -75,10 +75,10 @@
 		exit ();
 	}
 	
-	$telegram->addCommand ( Recsysbot\Commands\HelpCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\HelpCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	
 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
 	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
@@ -104,7 +104,7 @@
 		$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
 		file_put_contents ( "php://stderr", "edited_message execute.php - chatId: " . $chatId . " - update: " . print_r ( $update, true ) . PHP_EOL );
 	}
-	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
+// 	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
 	
 	// Stampa nel log
 	file_put_contents ( "php://stderr", "chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
