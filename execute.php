@@ -85,6 +85,7 @@
 			"\nTime: " . $update["entry"][0]["time"] .
 			"\nMessaging: \nSenderId: " . $update["entry"][0]["messaging"][0]["sender"]["id"] .
 			"\nRecipientId: " . $update["entry"][0]["messaging"][0]["recipient"]["id"] .
+			"\nText: " . $update["entry"][0]["messaging"][0]["message"]["text"] .
 			PHP_EOL);
 	/*
 	 * chatId
