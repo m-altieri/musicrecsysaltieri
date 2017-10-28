@@ -149,7 +149,7 @@
 	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
 	$text = strtolower ( $text );
 	
-	file_put_contents("php://input", "trimmed-lowered-text: " . $text);
+	file_put_contents("php://stderr", "trimmed-lowered-text: " . $text);
 // 	try {
 // 		// gestisco il tipo di messaggio: testo
 // 		if (isset ( $message ['text'] )) {
