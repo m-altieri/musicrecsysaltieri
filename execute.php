@@ -80,30 +80,39 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	
-	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
-	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
-	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
-	$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
-	$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
-	$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
-	$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
-	$date = isset ( $message ['date'] ) ? $message ['date'] : "";
-	$text = isset ( $message ['text'] ) ? $message ['text'] : "";
-	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
+	file_put_contents("php://stderr", "Object: " . $update->object . "\nEntry: " . $update->entry . PHP_EOL);
+	/*
+	 * chatId
+	 * firstName
+	 * botName
+	 * globalDate
+	 * text
+	 * PHP.EOL
+	 */
+// 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
+// 	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
+// 	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
+// 	$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
+// 	$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
+// 	$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
+// 	$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
+// 	$date = isset ( $message ['date'] ) ? $message ['date'] : "";
+// 	$text = isset ( $message ['text'] ) ? $message ['text'] : "";
+// 	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
 	
-	// gestisci edited_message, per evitare blocco del bot
-	if ($chatId == "") {
-		$message = isset ( $update ['edited_message'] ) ? $update ['edited_message'] : "";
-		$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
-		$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
-		$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
-		$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
-		$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
-		$date = isset ( $message ['date'] ) ? $message ['date'] : "";
-		$text = isset ( $message ['text'] ) ? $message ['text'] : "";
-		$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
-		file_put_contents ( "php://stderr", "edited_message execute.php - chatId: " . $chatId . " - update: " . print_r ( $update, true ) . PHP_EOL );
-	}
+// 	// gestisci edited_message, per evitare blocco del bot
+// 	if ($chatId == "") {
+// 		$message = isset ( $update ['edited_message'] ) ? $update ['edited_message'] : "";
+// 		$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
+// 		$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
+// 		$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
+// 		$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
+// 		$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
+// 		$date = isset ( $message ['date'] ) ? $message ['date'] : "";
+// 		$text = isset ( $message ['text'] ) ? $message ['text'] : "";
+// 		$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
+// 		file_put_contents ( "php://stderr", "edited_message execute.php - chatId: " . $chatId . " - update: " . print_r ( $update, true ) . PHP_EOL );
+// 	}
 // 	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
 	
 	// Stampa nel log
