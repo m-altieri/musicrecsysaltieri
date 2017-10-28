@@ -80,14 +80,32 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	
-	file_put_contents("php://stderr", "Object: " . $update ["object"] . 
-			"\nEntry: \nId: " . $update ["entry"][0]["id"] .
-			"\nTime: " . $update["entry"][0]["time"] .
-			"\nMessaging: \nSenderId: " . $update["entry"][0]["messaging"][0]["sender"]["id"] .
-			"\nRecipientId: " . $update["entry"][0]["messaging"][0]["recipient"]["id"] .
-			"\nText: " . $update["entry"][0]["messaging"][0]["message"]["text"] .
-			PHP_EOL);
+
+	
+	$message = $update["entry"][0]["messaging"][0];
+	$messageId = $message["message"]["mid"];
+	$chatId = $message["sender"]["id"]; //ID dell'utente, non della chat; non esiste su messenger
+	$res = file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken);
+	$firstname = $res["first_name"];
+	$lastname = $res["last_name"];
+	$username = ""; //Non viene restituito dalla chiamata
+	$date = $update["entry"][0]["time"];
+	$text = $message["message"]["text"];
+	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+	
 	/*
+	 * Importanti:
+	 * message
+	 * messageId
+	 * chatId
+	 * firstname
+	 * lastname
+	 * username
+	 * date
+	 * text
+	 * globalDate
+	 * 
+	 * Log:
 	 * chatId
 	 * firstName
 	 * botName
@@ -95,6 +113,9 @@
 	 * text
 	 * PHP.EOL
 	 */
+	
+	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
+	
 // 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
 // 	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
 // 	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
