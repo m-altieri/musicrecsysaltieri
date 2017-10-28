@@ -80,7 +80,12 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	
-	file_put_contents("php://stderr", "Object: " . $update ["object"] . "\nEntry: " . $update ["entry"] . PHP_EOL);
+	file_put_contents("php://stderr", "Object: " . $update ["object"] . 
+			"\nEntry: \nId: " . $update ["entry"][0]["id"] .
+			"\nTime: " . $update["entry"][0]["time"] .
+			"\nMessaging: \nSenderId: " . $update["entry"][0]["messaging"][0]["sender"]["id"] .
+			"\nRecipientId: " . $update["entry"][0]["messaging"][0]["recipient"]["id"] .
+			PHP_EOL);
 	/*
 	 * chatId
 	 * firstName
