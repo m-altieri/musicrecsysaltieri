@@ -85,7 +85,7 @@
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
 	$chatId = $message["sender"]["id"]; //ID dell'utente, non della chat; non esiste su messenger
-	$res = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken));
+	$res = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken), true);
 	$firstname = $res["first_name"];
 	$lastname = $res["last_name"];
 	$username = ""; //Non viene restituito dalla chiamata
