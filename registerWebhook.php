@@ -1,29 +1,31 @@
 <?php
 
 $webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
-$verifyToken = "movierecsysbot";
+$myToken = "testmovierecsysbot";
 $accessToken = "EAAE0Lnad6ywBAAhC40YZAncbqj3ZAWOvlpbuH5EF0ZCxMf5KwnS8JCpctYpVIo6YTCdPpec7vk9olB30HuSyMoRbyUX96FvNxs8NQ0OoeoYr1xYmMSvk4qduu0wlVRycF5YbgJ8L6Vf79fJhKCPCoFzvmonF9OBWfZAZBbv1OEQZDZD";
 
-if ($_REQUEST['hub_verify_token'] === $verifyToken) {
-	console.log("Validating webhook");
+$verifyToken = $_REQUEST['hub_verify_token'];
+$challenge = $_REQUEST['hub_challenge'];
+if ($verifyToken === $myToken) {
 	echo $_REQUEST['hub_challenge'];
 }
 
-$input = json_decode(file_get_contents('php://input'), true);
 
-$senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
-$answer = $input['entry'][0]['messaging'][0]['message']['text'];
+// $input = json_decode(file_get_contents('php://input'), true);
 
-$response = [
-		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'text' => $answer ]
-];
-$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-curl_exec($ch);
-curl_close($ch);
+// $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
+// $answer = $input['entry'][0]['messaging'][0]['message']['text'];
+
+// $response = [
+// 		'recipient' => [ 'id' => $senderId ],
+// 		'message' => [ 'text' => $answer ]
+// ];
+// $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
+// curl_setopt($ch, CURLOPT_POST, 1);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
+// curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+// curl_exec($ch);
+// curl_close($ch);
 
 // $response = [
 // 		'recipient' => [ 'id' => $senderId ],
