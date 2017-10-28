@@ -85,9 +85,9 @@
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
 	$chatId = $message["sender"]["id"]; //ID dell'utente, non della chat; non esiste su messenger
-	$res = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken), true);
-	$firstname = $res["first_name"];
-	$lastname = $res["last_name"];
+	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken), true);
+	$firstname = $userInfo["first_name"];
+	$lastname = $userInfo["last_name"];
 	$username = ""; //Non viene restituito dalla chiamata
 	$date = $update["entry"][0]["time"];
 	$text = $message["message"]["text"];
@@ -114,6 +114,7 @@
 	 * PHP.EOL
 	 */
 	
+	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
 	
 // 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
@@ -142,14 +143,13 @@
 // 	}
 // 	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
 	
-	// Stampa nel log
-	file_put_contents ( "php://stderr", "chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
+	// pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
+	$text = trim ( $text );
 	
-// 	// pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
-// 	$text = trim ( $text );
+	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
+	$text = strtolower ( $text );
 	
-// 	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
-// 	$text = strtolower ( $text );
+	file_put_contents("php://input", "trimmed-lowered-text: " . $text);
 // 	try {
 // 		// gestisco il tipo di messaggio: testo
 // 		if (isset ( $message ['text'] )) {
