@@ -260,5 +260,5 @@
 		$result = curl_exec($ch);
 		curl_close($ch);
 		file_put_contents("php://stderr", "\nResult: " . $result);
-		file_put_contents("php://stderr", "\nchatId: " . $user . ", text: " . $text);
+		file_put_contents("php://stderr", "\nchatId: " . $user . ", text: " . $text . "\nToken: " . $config['token']);
 	}
