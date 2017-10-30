@@ -260,5 +260,6 @@
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$result = curl_exec($ch);
 		curl_close($ch);
-		file_put_contents("php://stderr", "messaggio inviato.\nResult: " . $result);
+		file_put_contents("php://stderr", "\nResult: " . $result);
+		file_put_contents("php://stderr", "\nchatId: " . $chatId . ", text: " . $text);
 	}
