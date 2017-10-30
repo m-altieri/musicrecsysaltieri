@@ -149,18 +149,10 @@
 	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
 	$text = strtolower ( $text );
 	
-	if ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
-		$response = "I'm sorry. I received an audio message";
-		// 			$telegram->sendMessage ( [
-		// 					'chat_id' => $chatId,
-		// 					'text' => $response
-		// 			] );
-		//Stampa nel log
-		file_put_contents("php://stderr", $response);
-	}
-// 	try {
-// 		// gestisco il tipo di messaggio: testo
-// 		if (isset ( $message ['text'] )) {
+	try {
+		$response = "";
+		// gestisco il tipo di messaggio: testo
+		if (isset ( $message ['text'] )) {
 			
 // 			if (($text == "/start")) {
 // 				putUserDetail ( $chatId, $firstname, $lastname, $username );
@@ -168,7 +160,8 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-// 		} 
+			facebookSendMessage("Ho ricevuto del testo");
+		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 // 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
 // 			$response = "I'm sorry. I received an audio message";
@@ -178,13 +171,19 @@
 // // 			] );
 // 			//Stampa nel log
 // 			file_put_contents("php://stderr", $response);
-// 		} elseif (isset ( $message ['document'] )) {
+// // 		} elseif (isset ( $message ['document'] )) {
+// 			elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
+				
+// 		}
 // 			$response = "I'm sorry. I received a message document, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} elseif (isset ( $message ['photo'] )) {
+// // 		} elseif (isset ( $message ['photo'] )) {
+// 			elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
+				
+// 		}
 // 			$response = "I'm sorry. I received a message photo, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
@@ -196,25 +195,29 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} elseif (isset ( $message ['video'] )) {
+// // 		} elseif (isset ( $message ['video'] )) {
+// 			elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
+				
 // 			$response = "I'm sorry. I received a video message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} elseif (isset ( $message ['voice'] )) {
+// // 		} elseif (isset ( $message ['voice'] )) {
 // 			$response = "I'm sorry. I received a voice message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} elseif (isset ( $message ['contact'] )) {
+// // 		} elseif (isset ( $message ['contact'] )) {
 // 			$response = "I'm sorry. I received a message contact, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} elseif (isset ( $message ['location'] )) {
+// // 		} elseif (isset ( $message ['location'] )) {
+// 			elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
+				
 // 			$response = "I'm sorry. I received a location message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
@@ -233,6 +236,25 @@
 // 					'text' => $response 
 // 			] );
 // 		}
-// 	} catch ( Exception $e ) {
-// 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
-// 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " Caught exception: " . print_r ( $e->getTraceAsString (), true ) . PHP_EOL );
+	} catch ( Exception $e ) {
+		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
+		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " Caught exception: " . print_r ( $e->getTraceAsString (), true ) . PHP_EOL );
+	}
+	
+	// Stampa nel log
+	file_put_contents("php://stderr", $response);
+	
+	function facebookSendMessage($text) {
+		// https://graph.facebook.com/v2.6/me/messages?access_token=<PAGE_ACCESS_TOKEN>
+		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $accessToken;
+		$res = [
+			'recipient' => [ 'id' => $chatId ],
+			'message' => [ 'text' => $text ]
+		];
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($res))
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_exec($ch);
+		curl_close($ch);
+	}
