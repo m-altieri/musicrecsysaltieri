@@ -257,7 +257,7 @@
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($res));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-		curl_exec($ch);
+		$result = curl_exec($ch);
 		curl_close($ch);
-		file_put_contents("php://stderr", "messaggio inviato");
+		file_put_contents("php://stderr", "messaggio inviato.\nResult: " . $result);
 	}
