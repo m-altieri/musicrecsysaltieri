@@ -161,6 +161,7 @@
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
 			facebookSendMessage("Ho ricevuto del testo");
+			file_put_contents("php://stderr", "funzione chiamata");
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 // 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
@@ -257,4 +258,5 @@
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 		curl_exec($ch);
 		curl_close($ch);
+		file_put_contents("php://stderr", "messaggio inviato");
 	}
