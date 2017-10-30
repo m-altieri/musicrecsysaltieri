@@ -2,7 +2,7 @@
 use GuzzleHttp\Client;
 function putUserDetail($chatId, $firstname, $lastname, $username) {
 	$userID = $chatId;
-	// $client = new Client(['base_uri'=>'http://localhost:8080']);
+	// $client = new Client(['base_uri'=>'http://192.168.1.107:8080']);
 	$client = new Client ( [ 
 			'base_uri' => 'http://193.204.187.192:8080' 
 	] );
