@@ -246,6 +246,9 @@
 	file_put_contents("php://stderr", $response);
 	
 	function facebookSendMessage($text, $user) {
+		
+		$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
+		
 		// https://graph.facebook.com/v2.6/me/messages?access_token=<PAGE_ACCESS_TOKEN>
 		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
 		$res = [
