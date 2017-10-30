@@ -155,7 +155,8 @@
 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
 // 			if (($text == "/start")) {
-// 				putUserDetail ( $chatId, $firstname, $lastname, $username );
+				$username = $firstname;
+				putUserDetail ( $chatId, $firstname, $lastname, $username );
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
@@ -266,6 +267,5 @@
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$result = curl_exec($ch);
 		curl_close($ch);
-		file_put_contents("php://stderr", "\nResult: " . $result);
-		file_put_contents("php://stderr", "\nchatId: " . $user . ", text: " . $text . "\nToken: " . $config['token']);
+		file_put_contents("php://stderr", "\nResult: " . $result . PHP_EOL);
 	}
