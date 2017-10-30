@@ -152,7 +152,8 @@
 	try {
 		$response = "";
 		// gestisco il tipo di messaggio: testo
-		if (isset ( $message ['text'] )) {
+// 		if (isset ( $message ['text'] )) {
+		if ( !isset $message ['message']['attachments'][0] === 'text' ) { //Messenger
 			
 // 			if (($text == "/start")) {
 // 				putUserDetail ( $chatId, $firstname, $lastname, $username );
