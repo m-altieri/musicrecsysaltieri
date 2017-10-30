@@ -173,7 +173,7 @@
 // 			file_put_contents("php://stderr", $response);
 			facebookSendMessage("Ho ricevuto un audio", $chatId);
 // // 		} elseif (isset ( $message ['document'] )) {
-		elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
 // 		}
 // 			$response = "I'm sorry. I received a message document, but i can't unswer";
@@ -183,7 +183,7 @@
 // 			] );
 			facebookSendMessage("Ho ricevuto un documento", $chatId);
 // // 		} elseif (isset ( $message ['photo'] )) {
-		elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
 				
 // 		}
 // 			$response = "I'm sorry. I received a message photo, but i can't unswer";
@@ -199,7 +199,7 @@
 // 					'text' => $response 
 // 			] );
 // // 		} elseif (isset ( $message ['video'] )) {
-		elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
 				
 // 			$response = "I'm sorry. I received a video message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -220,7 +220,7 @@
 // 					'text' => $response 
 // 			] );
 // // 		} elseif (isset ( $message ['location'] )) {
-		elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
 				
 // 			$response = "I'm sorry. I received a location message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
