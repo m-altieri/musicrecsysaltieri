@@ -11,7 +11,6 @@
 	
 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 	$myToken = "testmovierecsysbot";
-	$accessToken = "EAAE0Lnad6ywBAGrnw7jHREnIc0CiZAuOpLV8iykP1WOFS8ykXFeoLm4340Js0ZCmZCdZAH6wwpkV6Lr5PoeWZA7b8miJP9vUjfWerd8rF9v95ORNWhdMPUFJmjZBhl4nxW0DDaCImlZBjgqYFpewFhHtVAiHkMBbgKgVVwT7E2lswZDZD";
 	
 	$verifyToken = $_REQUEST['hub_verify_token'];
 	$challenge = $_REQUEST['hub_challenge'];
@@ -85,7 +84,7 @@
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
 	$chatId = $message["sender"]["id"]; //ID dell'utente, non della chat; non esiste su messenger
-	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $accessToken), true);
+	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
 	$firstname = $userInfo["first_name"];
 	$lastname = $userInfo["last_name"];
 	$username = ""; //Non viene restituito dalla chiamata
@@ -161,7 +160,7 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-			facebookSendMessage("Ho ricevuto del testo");
+			facebookSendMessage("Ho ricevuto del testo", $chatId);
 			file_put_contents("php://stderr", "funzione chiamata");
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
@@ -246,9 +245,9 @@
 	// Stampa nel log
 	file_put_contents("php://stderr", $response);
 	
-	function facebookSendMessage($text) {
+	function facebookSendMessage($text, $user) {
 		// https://graph.facebook.com/v2.6/me/messages?access_token=<PAGE_ACCESS_TOKEN>
-		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $accessToken;
+		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
 		$res = [
 			'recipient' => [ 'id' => $chatId ],
 			'message' => [ 'text' => $text ]
@@ -261,5 +260,5 @@
 		$result = curl_exec($ch);
 		curl_close($ch);
 		file_put_contents("php://stderr", "\nResult: " . $result);
-		file_put_contents("php://stderr", "\nchatId: " . $chatId . ", text: " . $text);
+		file_put_contents("php://stderr", "\nchatId: " . $user . ", text: " . $text);
 	}

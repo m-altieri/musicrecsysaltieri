@@ -4,7 +4,7 @@
  */
 return [ 
 		// Telegram TOKEN movierecsysbot
-		'token' => 'EAAE0Lnad6ywBAAhC40YZAncbqj3ZAWOvlpbuH5EF0ZCxMf5KwnS8JCpctYpVIo6YTCdPpec7vk9olB30HuSyMoRbyUX96FvNxs8NQ0OoeoYr1xYmMSvk4qduu0wlVRycF5YbgJ8L6Vf79fJhKCPCoFzvmonF9OBWfZAZBbv1OEQZDZD',
+		'token' => 'EAAE0Lnad6ywBAGrnw7jHREnIc0CiZAuOpLV8iykP1WOFS8ykXFeoLm4340Js0ZCmZCdZAH6wwpkV6Lr5PoeWZA7b8miJP9vUjfWerd8rF9v95ORNWhdMPUFJmjZBhl4nxW0DDaCImlZBjgqYFpewFhHtVAiHkMBbgKgVVwT7E2lswZDZD',
 		// The timezone setting, Guzzle suggests having this for proper requests/responses
 		'timezone' => 'Europe/Rome',
 		// If no response is found, this will be used as response
