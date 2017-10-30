@@ -83,7 +83,7 @@
 	
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
-	$chatId = $message["sender"]["id"]; //ID dell'utente, non della chat; non esiste su messenger
+	$chatId = $message["sender"]["id"];
 	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
 	$firstname = $userInfo["first_name"];
 	$lastname = $userInfo["last_name"];
@@ -252,7 +252,7 @@
 		// https://graph.facebook.com/v2.6/me/messages?access_token=<PAGE_ACCESS_TOKEN>
 		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
 		$res = [
-			'recipient' => [ 'id' => $chatId ],
+			'recipient' => [ 'id' => $user ],
 			'message' => [ 'text' => $text ]
 		];
 		$ch = curl_init($url);
