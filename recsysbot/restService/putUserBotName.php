@@ -7,7 +7,9 @@ function putUserBotName($chatId, $botName) {
 			'base_uri' => 'http://193.204.187.192:8080' 
 	] );
 	$stringGetRequest = '/movierecsysrestful/restService/botName/putUserBotName?userID=' . $userID . '&botName=' . $botName;
+	file_put_contents("php://stderr", "prima della chiamata" . PHP_EOL);
 	$response = $client->request ( 'GET', $stringGetRequest );
+	file_put_contents("php://stderr", "dopo la chiamata" . PHP_EOL);
 	$bodyMsg = $response->getBody ()->getContents ();
 	$data = json_decode ( $bodyMsg );
 	
