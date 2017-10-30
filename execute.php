@@ -161,10 +161,9 @@
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
 			facebookSendMessage("Ho ricevuto del testo", $chatId);
-			file_put_contents("php://stderr", "funzione chiamata");
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
-// 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
+		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
 // 			$response = "I'm sorry. I received an audio message";
 // // 			$telegram->sendMessage ( [ 
 // // 					'chat_id' => $chatId,
@@ -172,8 +171,9 @@
 // // 			] );
 // 			//Stampa nel log
 // 			file_put_contents("php://stderr", $response);
+			facebookSendMessage("Ho ricevuto un audio", $chatId);
 // // 		} elseif (isset ( $message ['document'] )) {
-// 			elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
+		elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
 // 		}
 // 			$response = "I'm sorry. I received a message document, but i can't unswer";
@@ -181,8 +181,9 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
+			facebookSendMessage("Ho ricevuto un documento", $chatId);
 // // 		} elseif (isset ( $message ['photo'] )) {
-// 			elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
+		elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
 				
 // 		}
 // 			$response = "I'm sorry. I received a message photo, but i can't unswer";
@@ -190,6 +191,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
+			facebookSendMessage("Ho ricevuto un'immagine", $chatId);
 // 		} elseif (isset ( $message ['sticker'] )) {
 // 			$response = "I'm sorry. I received a sticker message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -197,13 +199,14 @@
 // 					'text' => $response 
 // 			] );
 // // 		} elseif (isset ( $message ['video'] )) {
-// 			elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
+		elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
 				
 // 			$response = "I'm sorry. I received a video message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
+			facebookSendMessage("Ho ricevuto un video", $chatId);
 // // 		} elseif (isset ( $message ['voice'] )) {
 // 			$response = "I'm sorry. I received a voice message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -217,26 +220,28 @@
 // 					'text' => $response 
 // 			] );
 // // 		} elseif (isset ( $message ['location'] )) {
-// 			elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
+		elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
 				
 // 			$response = "I'm sorry. I received a location message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
+			facebookSendMessage("Ho ricevuto un'ubicazione", $chatId);
 // 		} elseif (isset ( $message ['venue'] )) {
 // 			$response = "I'm sorry. I received a venue, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		} else {
+		} else {
 // 			$response = "I'm sorry. I received a message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-// 		}
+			facebookSendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
+		}
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " Caught exception: " . print_r ( $e->getTraceAsString (), true ) . PHP_EOL );
@@ -249,7 +254,6 @@
 		
 		$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 		
-		// https://graph.facebook.com/v2.6/me/messages?access_token=<PAGE_ACCESS_TOKEN>
 		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
 		$res = [
 			'recipient' => [ 'id' => $user ],
