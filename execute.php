@@ -83,8 +83,8 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	//Creazione comandi iniziali
-	setGreeting("Hello");
-	setGetStarted("Bot started.");
+	setGreeting($config['greeting']);
+	setGetStarted("get_started");
 
 	
 	$message = $update["entry"][0]["messaging"][0];
@@ -97,27 +97,6 @@
 	$date = $update["entry"][0]["time"];
 	$text = $message["message"]["text"];
 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
-	
-	/*
-	 * Importanti:
-	 * message
-	 * messageId
-	 * chatId
-	 * firstname
-	 * lastname
-	 * username
-	 * date
-	 * text
-	 * globalDate
-	 * 
-	 * Log:
-	 * chatId
-	 * firstName
-	 * botName
-	 * globalDate
-	 * text
-	 * PHP.EOL
-	 */
 	
 	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);

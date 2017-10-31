@@ -13,11 +13,13 @@ class HelpCommand extends Command {
 	protected $name = "help"; // this is the string the user write
 	protected $description = "Help - Info & commands";
 	public function handle($arguments) {
+		
+		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 		$firstname = $this->getTelegram ()->getWebhookUpdates ()->getMessage ()->getChat ()->getFirstName ();
 		
 		$text = "Hi " . $firstname . " ðŸ˜ƒ";
-		$text .= "\nDo you like Movies?ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ \nI can find the perfect ðŸŽ¬ #movie for you, based on your tastes ðŸ˜‰
-In the following, we will ask you some information about you and your preferences in the movie domain.
+		$text .= "\n" . $config['greeting'];
+		$text .= "In the following, we will ask you some information about you and your preferences in the movie domain.
 Next, you will receive a list of recommended movies and you will be asked to evaluate the goodness of the recommendations.
 You can improve the recommendations by telling me what you like and what you dislike in the recommended movies.
 You can also ask why a movie has been recommended by tapping the â€œWhy?â€� button.";
