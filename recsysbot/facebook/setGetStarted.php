@@ -18,6 +18,8 @@ function setGetStarted($payload) {
 	$res = curl_exec($ch);
 	curl_close($ch);
 	file_put_contents("php://stderr", "Creato pulsante get_started, risposta: " . $res . PHP_EOL);
+	file_put_contents("php://stderr", "URL: " . $url . PHP_EOL);
+	
 }
 
 ?>

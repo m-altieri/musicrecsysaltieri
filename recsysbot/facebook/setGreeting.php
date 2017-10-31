@@ -23,6 +23,8 @@ function setGreeting($text) {
 	$res = curl_exec($ch);
 	curl_close($ch);
 	file_put_contents("php://stderr", "Creato testo greeting, risposta: " . $res . PHP_EOL);
+	file_put_contents("php://stderr", "URL: " . $url . PHP_EOL);
+	
 }
 
 ?>
