@@ -4,13 +4,9 @@ function sendMessage($text, $user) {
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
 	$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
-	/*
-	 * C'è un bug nel server in cui non riesce a convertire l'id perchè è troppo lungo
-	 */
-	$userShort = substr($user, 6);
 	
 	$res = [
-		'recipient' => [ 'id' => $userShort ],
+		'recipient' => [ 'id' => $user ],
 		'message' => [ 'text' => $text ]
 	];
 	$ch = curl_init($url);
