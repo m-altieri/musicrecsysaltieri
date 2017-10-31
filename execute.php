@@ -8,6 +8,7 @@
 	
 	require 'vendor/autoload.php';
 	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
+	$facebook = require __DIR__ . 'recsysbot/facebook/sendMessage.php';
 	
 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 	$myToken = "testmovierecsysbot";
@@ -78,6 +79,7 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
+	//Creazione comandi iniziali
 	
 
 	
@@ -161,7 +163,7 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-			facebookSendMessage("Ho ricevuto del testo", $chatId);
+			$facebook->sendMessage("Ho ricevuto del testo", $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
@@ -172,7 +174,7 @@
 // // 			] );
 // 			//Stampa nel log
 // 			file_put_contents("php://stderr", $response);
-			facebookSendMessage("Ho ricevuto un audio", $chatId);
+			$facebook->sendMessage("Ho ricevuto un audio", $chatId);
 // // 		} elseif (isset ( $message ['document'] )) {
 		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
@@ -182,7 +184,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			facebookSendMessage("Ho ricevuto un documento", $chatId);
+			$facebook->sendMessage("Ho ricevuto un documento", $chatId);
 // // 		} elseif (isset ( $message ['photo'] )) {
 		} elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
 				
@@ -192,7 +194,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			facebookSendMessage("Ho ricevuto un'immagine", $chatId);
+			$facebook->sendMessage("Ho ricevuto un'immagine", $chatId);
 // 		} elseif (isset ( $message ['sticker'] )) {
 // 			$response = "I'm sorry. I received a sticker message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -207,7 +209,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			facebookSendMessage("Ho ricevuto un video", $chatId);
+			$facebook->sendMessage("Ho ricevuto un video", $chatId);
 // // 		} elseif (isset ( $message ['voice'] )) {
 // 			$response = "I'm sorry. I received a voice message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -228,7 +230,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			facebookSendMessage("Ho ricevuto un'ubicazione", $chatId);
+			$facebook->sendMessage("Ho ricevuto un'ubicazione", $chatId);
 // 		} elseif (isset ( $message ['venue'] )) {
 // 			$response = "I'm sorry. I received a venue, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -241,7 +243,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			facebookSendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
+			$facebook->sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
 		}
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
@@ -251,21 +253,21 @@
 	// Stampa nel log
 	file_put_contents("php://stderr", $response);
 	
-	function facebookSendMessage($text, $user) {
+// 	function facebookSendMessage($text, $user) {
 		
-		$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
+// 		$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
 		
-		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
-		$res = [
-			'recipient' => [ 'id' => $user ],
-			'message' => [ 'text' => $text ]
-		];
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($res));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$result = curl_exec($ch);
-		curl_close($ch);
-		file_put_contents("php://stderr", "\nResult: " . $result . PHP_EOL);
-	}
+// 		$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
+// 		$res = [
+// 			'recipient' => [ 'id' => $user ],
+// 			'message' => [ 'text' => $text ]
+// 		];
+// 		$ch = curl_init($url);
+// 		curl_setopt($ch, CURLOPT_POST, 1);
+// 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($res));
+// 		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 		$result = curl_exec($ch);
+// 		curl_close($ch);
+// 		file_put_contents("php://stderr", "\nResult: " . $result . PHP_EOL);
+// 	}
