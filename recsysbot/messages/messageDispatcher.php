@@ -878,10 +878,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          newSessionReply($telegram, $chatId, $firstname, $date);
          break;
-      case ($text[0] != "/"):
-      	//Integer.parseInt bug
-      	$chatId = substr($chatId, 6);
-      	
+      case ($text[0] != "/"):      	
          $context = "findPropertyValueOrMovieSelected";
          $replyText = $text;
          $replyFunctionCall = "findPropertyValueOrMovieReply"; 

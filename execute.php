@@ -158,12 +158,13 @@
 			
 // 			if (($text == "/start")) {
 				$username = $firstname;
-				putUserDetail ( $chatId, $firstname, $lastname, $username );
+				//Integer.parseInt() bug
+				putUserDetail ( substr($chatId, 6), $firstname, $lastname, $username );
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-			sendMessage("Ho ricevuto del testo", $chatId);
+			sendMessage(getUserDetail($chatId), $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
