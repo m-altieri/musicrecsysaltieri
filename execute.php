@@ -165,7 +165,9 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
+			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $shortId);
 			$userDetail = getUserDetail($shortId);
+			file_put_contents("php://stderr", "User Detail ricevuto: " . $userDetail);
 			sendMessage($userDetail, $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
