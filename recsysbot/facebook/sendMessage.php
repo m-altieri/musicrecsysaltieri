@@ -7,10 +7,10 @@ function sendMessage($text, $user) {
 	/*
 	 * C'è un bug nel server in cui non riesce a convertire l'id perchè è troppo lungo
 	 */
-	$user = substr($user, 6);
+	$userShort = substr($user, 6);
 	
 	$res = [
-		'recipient' => [ 'id' => $user ],
+		'recipient' => [ 'id' => $userShort ],
 		'message' => [ 'text' => $text ]
 	];
 	$ch = curl_init($url);
