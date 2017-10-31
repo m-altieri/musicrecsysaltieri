@@ -7,7 +7,7 @@
 // 	use Telegram\Bot\Api;
 	
 	require 'vendor/autoload.php';
-	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
+	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	require '/app/recsysbot/facebook/sendMessage.php';
 	
 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
