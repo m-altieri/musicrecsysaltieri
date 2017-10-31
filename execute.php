@@ -159,7 +159,7 @@
 // 			if (($text == "/start")) {
 				$username = $firstname;
 				//Integer.parseInt() bug
-				$shortId = substr($chatId, 6);
+				$shortId = substr($chatId, 0, 6);
 				putUserDetail ($shortId, $firstname, $lastname, $username);
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			} else {
