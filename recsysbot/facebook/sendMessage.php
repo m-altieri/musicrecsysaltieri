@@ -1,7 +1,7 @@
 <?php
 function sendMessage($text, $user) {
 		
-	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
+	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
 	$url = "https://graph.facebook.com/v2.6/me/messages?access_token=" . $config['token'];
 	/*
