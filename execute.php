@@ -167,8 +167,15 @@
 // 			}
 			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $shortId);
 			$userDetail = getUserDetail($shortId);
-			file_put_contents("php://stderr", "User Detail ricevuto: " . $userDetail);
-			sendMessage($userDetail, $chatId);
+			file_put_contents("php://stderr", "User Detail ricevuto: " . 
+					"\nid: " . $userDetail['id'] . 
+					"\nusername: " . $userDetail['username'] . 
+					"\nfirstname: " . $userDetail['firstname'] . 
+					"\nlastname: " . $userDetail['lastname']);
+			sendMessage("id: " . $userDetail['id'] .
+					"\nusername: " . $userDetail['username'] .
+					"\nfirstname: " . $userDetail['firstname'] .
+					"\nlastname: " . $userDetail['lastname'], $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
