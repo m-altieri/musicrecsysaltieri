@@ -18,5 +18,5 @@ function getUserDetail($chatId) {
 	
 	file_put_contents ( "php://stderr", "http://193.204.187.192:8080" . $stringGetRequest . "/return:" . $bodyMsg . PHP_EOL );
 	
-	return json_decode($res);
+	return json_decode($res, true);
 }
