@@ -8,7 +8,7 @@
 	
 	require 'vendor/autoload.php';
 	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
-	include __DIR__ . '/recsysbot/facebook/sendMessage.php';
+	require __DIR__ . '/recsysbot/facebook/sendMessage.php';
 	
 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 	$myToken = "testmovierecsysbot";
