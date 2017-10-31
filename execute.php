@@ -80,7 +80,7 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 	//Creazione comandi iniziali
-	
+	setGreeting("Hello");
 
 	
 	$message = $update["entry"][0]["messaging"][0];
