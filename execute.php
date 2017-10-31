@@ -164,7 +164,7 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-			sendMessage(getUserDetail($chatId), $chatId);
+			sendMessage(getUserDetail(substr($chatId, 6)), $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
