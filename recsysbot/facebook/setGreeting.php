@@ -6,7 +6,7 @@ function setGreeting($text) {
 	$url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" . $config['token'];
 	
 	$req = [
-			"greeting" => ["locale" => "it_IT", "text" => $text]
+			"greeting" => array(0 => ["locale" => "it_IT", "text" => $text])
 	];
 	
 	$ch = curl_init($url);
