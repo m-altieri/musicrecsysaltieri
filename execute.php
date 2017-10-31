@@ -8,7 +8,7 @@
 	
 	require 'vendor/autoload.php';
 	$config = require __DIR__ . '/recsysbot/config/movierecsysbot-config.php';
-	$facebook = require __DIR__ . 'recsysbot/facebook/sendMessage.php';
+	include __DIR__ . 'recsysbot/facebook/sendMessage.php';
 	
 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 	$myToken = "testmovierecsysbot";
@@ -163,7 +163,7 @@
 // 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 // 			}
-			$facebook->sendMessage("Ho ricevuto del testo", $chatId);
+			sendMessage("Ho ricevuto del testo", $chatId);
 		} 
 // // 		elseif (isset ( $message ['audio'] )) { //Telegram
 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
@@ -174,7 +174,7 @@
 // // 			] );
 // 			//Stampa nel log
 // 			file_put_contents("php://stderr", $response);
-			$facebook->sendMessage("Ho ricevuto un audio", $chatId);
+			sendMessage("Ho ricevuto un audio", $chatId);
 // // 		} elseif (isset ( $message ['document'] )) {
 		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
@@ -184,7 +184,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			$facebook->sendMessage("Ho ricevuto un documento", $chatId);
+			sendMessage("Ho ricevuto un documento", $chatId);
 // // 		} elseif (isset ( $message ['photo'] )) {
 		} elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
 				
@@ -194,7 +194,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			$facebook->sendMessage("Ho ricevuto un'immagine", $chatId);
+			sendMessage("Ho ricevuto un'immagine", $chatId);
 // 		} elseif (isset ( $message ['sticker'] )) {
 // 			$response = "I'm sorry. I received a sticker message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -209,7 +209,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			$facebook->sendMessage("Ho ricevuto un video", $chatId);
+			sendMessage("Ho ricevuto un video", $chatId);
 // // 		} elseif (isset ( $message ['voice'] )) {
 // 			$response = "I'm sorry. I received a voice message, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -230,7 +230,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			$facebook->sendMessage("Ho ricevuto un'ubicazione", $chatId);
+			sendMessage("Ho ricevuto un'ubicazione", $chatId);
 // 		} elseif (isset ( $message ['venue'] )) {
 // 			$response = "I'm sorry. I received a venue, but i can't unswer";
 // 			$telegram->sendMessage ( [ 
@@ -243,7 +243,7 @@
 // 					'chat_id' => $chatId,
 // 					'text' => $response 
 // 			] );
-			$facebook->sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
+			sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
 		}
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
