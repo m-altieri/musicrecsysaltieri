@@ -7,12 +7,9 @@ function setGreeting($text) {
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	$url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" . $config['token'];
 	
-	$req = "greeting" => array (
-					[
-					"locale" => "it_IT",
-					"text" => $text
-							]
-			);
+	$req = [
+			"greeting" => ["locale" => "it_IT", "text" => $text]
+	]
 	
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
