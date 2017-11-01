@@ -99,7 +99,7 @@
 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
 	$postbackPayload = $message["postback"]["payload"];
 	
-	if ($postbackPayload == "get_started")) {
+	if ($postbackPayload == "get_started") {
 		file_put_contents("php://stderr", "postback ricevuto: " . $postbackPayload . PHP_EOL);
 	} else {
 		file_put_contents("php://stderr", "nessun postback" . PHP_EOL);
