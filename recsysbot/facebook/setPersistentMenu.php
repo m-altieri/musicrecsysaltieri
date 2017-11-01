@@ -7,32 +7,37 @@ function setPersistentMenu() {
 	
 	$req = [
 		"persistent_menu" => array(
-				0 => [
-						"locale" => "default",
-						"composer_input_disabled" => "false",
+			0 => [
+				"locale" => "default",
+				"composer_input_disabled" => "false",
+				"call_to_actions" => array(
+					0 => [
+						"title" => "Commands",
+						"type" => "nested",
 						"call_to_actions" => array(
-								0 => [
-										"title" => "Start",
-										"type" => "postback",
-										"payload" => "startCommand"
-								],
-								1 => [
-										"title" => "Info",
-										"type" => "postback",
-										"payload" => "infoCommand"
-								],
-								2 => [
-										"title" => "Help",
-										"type" => "postback",
-										"payload" => "helpCommand"
-								],
-								3 => [
-										"title" => "Reset",
-										"type" => "postback",
-										"payload" => "resetCommand"
-								]
-						)
-				]
+							0 => [
+									"title" => "Start",
+									"type" => "postback",
+									"payload" => "startCommand"
+							],
+							1 => [
+									"title" => "Info",
+									"type" => "postback",
+									"payload" => "infoCommand"
+							],
+							2 => [
+									"title" => "Help",
+									"type" => "postback",
+									"payload" => "helpCommand"
+							],
+							3 => [
+									"title" => "Reset",
+									"type" => "postback",
+									"payload" => "resetCommand"
+							]
+					]
+				)
+			]
 		)	
 	];
 	
