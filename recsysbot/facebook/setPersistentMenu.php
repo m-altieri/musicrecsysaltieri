@@ -35,6 +35,7 @@ function setPersistentMenu() {
 									"type" => "postback",
 									"payload" => "resetCommand"
 							]
+						)
 					]
 				)
 			]
