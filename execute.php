@@ -97,6 +97,13 @@
 	$date = $update["entry"][0]["time"];
 	$text = $message["message"]["text"];
 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+	$postbackPayload = $message["postback"]["payload"];
+	
+	if (isset($postbackPayload)) {
+		file_put_contents("php://stderr", "postback ricevuto: " . $postbackPayload . PHP_EOL);
+	} else {
+		file_put_contents("php://stderr", "nessun postback" . PHP_EOL);
+	}
 	
 	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
@@ -139,7 +146,8 @@
 // 		if (isset ( $message ['text'] )) {
 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
-// 			if (($text == "/start")) {
+// 			if (($text == "/start")) { //Telegram
+			i
 				$username = $firstname;
 				//Integer.parseInt() bug
 				$shortId = substr($chatId, 0, 6);
