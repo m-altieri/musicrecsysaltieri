@@ -35,6 +35,15 @@ function setPersistentMenu() {
 				]
 		)	
 	];
+	
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER,  ['Content-Type: application/json']);
+	$res = curl_exec($ch);
+	curl_close($ch);
+	file_put_contents("php://stderr", "Creato menu persistente, risposta: " . $res . PHP_EOL);
 }
 
 ?>
