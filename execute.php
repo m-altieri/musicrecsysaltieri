@@ -82,10 +82,12 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
-	//Creazione comandi iniziali
+
+	//Configurazione testo benvenuto e pulsante inizia
 	setGreeting($config['greeting']);
 	setGetStarted("get_started");
-
+	//Creazione persistent menu di Messenger
+	setPersistentMenu();
 	
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
@@ -98,12 +100,6 @@
 	$text = $message["message"]["text"];
 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
 	$postbackPayload = $message["postback"]["payload"];
-	
-	if ($postbackPayload == "get_started") {
-		file_put_contents("php://stderr", "postback ricevuto: " . $postbackPayload . PHP_EOL);
-	} else {
-		file_put_contents("php://stderr", "nessun postback" . PHP_EOL);
-	}
 	
 	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
@@ -143,10 +139,11 @@
 	try {
 		$response = "";
 		// gestisco il tipo di messaggio: testo
-// 		if (isset ( $message ['text'] )) {
+// 		if (isset ( $message ['text'] )) { //Telegram
 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
 // 			if (($text == "/start")) { //Telegram
+			if ($postbackPayload == $getStartedPayload) { //Messenger
 				$username = $firstname;
 				//Integer.parseInt() bug
 				$shortId = substr($chatId, 0, 6);
