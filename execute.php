@@ -147,7 +147,6 @@
 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
 // 			if (($text == "/start")) { //Telegram
-			i
 				$username = $firstname;
 				//Integer.parseInt() bug
 				$shortId = substr($chatId, 0, 6);
