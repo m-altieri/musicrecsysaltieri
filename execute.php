@@ -155,7 +155,8 @@
 					"\nid: " . $userDetail['id'] . 
 					"\nusername: " . $userDetail['username'] . 
 					"\nfirstname: " . $userDetail['firstname'] . 
-					"\nlastname: " . $userDetail['lastname']);
+					"\nlastname: " . $userDetail['lastname'] .
+					"\ntext: " . $text);
 			sendMessage("id: " . $userDetail['id'] .
 					"\nusername: " . $userDetail['username'] .
 					"\nfirstname: " . $userDetail['firstname'] .
