@@ -83,11 +83,8 @@
 // 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
 // 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 
-	//Configurazione testo benvenuto e pulsante inizia
-	setGreeting($config['greeting']);
-	setGetStarted("get_started");
-	//Creazione persistent menu di Messenger
-	setPersistentMenu();
+	//Configurazione testo benvenuto, pulsante inizia e altre caratteristiche del bot
+	setBotProfile();
 	
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];

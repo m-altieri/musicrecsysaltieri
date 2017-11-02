@@ -10,7 +10,7 @@ return [
 		// If no response is found, this will be used as response
 		'default_fallback_response' => 'Sorry, could you repeat that?',
 		// Greeting string
-		'greeting' => "Do you like Movies?ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ \nI can find the perfect ðŸŽ¬ #movie for you, based on your tastes ðŸ˜‰",
+		'greeting' => "Do you like Movies?ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ðŸ�¿ \nI can find the perfect \u{1F3AC} #movie for you, based on your tastes ðŸ˜‰",
 		// Facebook payload returned from "Start" button
 		'getStartedPayload' => "get_started"
 ];
