@@ -4,6 +4,9 @@ use Recsysbot\Classes\userMovieRecommendation;
 use Recsysbot\Classes\UserProfileAcquisitionByMovie;
 
 function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
+   
+   $emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $textSorry ="Sorry :) \nI don't understand \nPlease enter a command (es.\"/start\") ";
    $textWorkInProgress = "Sorry :) \nWe are developing this functionality \nSoon will be available ;)";
    $userMovieprofile = new UserProfileAcquisitionByMovie($telegram, $chatId, $messageId, $date, $text, $botName);
