@@ -803,7 +803,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          refineLastMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //profile
-      case strpos($text, 'ðŸ‘¤'):
+      case strpos($text, '⚙️'):
          $context = "profileSelected";
          $replyText = str_replace('ðŸ‘¤', 'icon profile,', $text);
          $replyFunctionCall = "profileReply"; 
