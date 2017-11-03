@@ -175,7 +175,7 @@ class userProfileAcquisitionByMovie
       else{
          //Se sono stati valutati tutti i film o ci sono problemi
          $text = "Sorry...😕\nI'm not be able to finding other movies right now🤔\n";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button 😉";
+         $text .= "\nTap on \"🌐 Recommend Movies\" button ".$emojis['smile']."";
 
          $keyboard =    $keyboard = [
                                         ['🌐 Recommend Movies'],

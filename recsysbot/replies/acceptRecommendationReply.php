@@ -29,7 +29,7 @@ function acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name){
 	$text .= "\nYou can read the movie details";
 	$text .= "\nand watch the trailer or tap \"Home\"";
 	//$text .= "\nadd movie to your list of films seen or to see";
-	$text .= "\nfor a new recommendation 😉";
+	$text .= "\nfor a new recommendation ".$emojis['smile']."";
 	$text .= "\n\n         🎉🎊🎊🎊🎊🎊🎊🎉";
 	$text .= "\n🍕🍺🍿Enjoy your movie😃  🍿🍺🍕";
 

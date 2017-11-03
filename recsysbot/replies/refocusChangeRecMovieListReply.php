@@ -2,7 +2,7 @@
 
 // Da capire se può essere ancora utile questa funzione
 function refocusChangeRecMovieListReply($telegram, $chatId, $userMovieRecommendation) {
-	$text = "Please wait.. I'm working for you 😉";
+	$text = "Please wait.. I'm working for you ".$emojis['smile']."";
 	
 	echo '<pre>';
 	print_r ( $text );

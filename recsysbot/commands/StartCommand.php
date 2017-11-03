@@ -35,16 +35,16 @@ class StartCommand extends Command
          $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
          $text = "Hi ".$firstname."". $emojis['smile'] . "\n";
          $text .= "\nI am now able to recommend you some movies " . $emojis['smile'];
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
+         $text .= "\nTap on \"" . $emojis['globe'] . " Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings " . $emojis['wink'];
          
          $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]);      
       }
       else{
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-            $text = "Hi ".$firstname." 😃\n";
+            $text = "Hi ".$firstname.$emojis['smile]." \n";
             $text .= $config['greeting'];
-            $text .= "\nI need at least 3 preferences for generating recommendations 😉";
+            $text .= "\nI need at least 3 preferences for generating recommendations ".$emojis['smile']."";
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 
             $text = "Let me recommend a movie \nPlease, tell me something about you \nor type your preference 🙂";

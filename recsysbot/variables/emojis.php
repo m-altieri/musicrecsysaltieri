@@ -16,6 +16,8 @@ return [
 	'smile' => '😃',
 	// Occhiolino
 	'wink' => '😉'
+	// Globo
+	'globe' => '🌐';
 
 	];
 

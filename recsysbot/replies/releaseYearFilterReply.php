@@ -49,7 +49,7 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
       else {
          //$text = "Do you want tell me something else about you?";
          $text = "Let me recommend a movie 😃";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
+         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
          //$text = "\nLet me recommend a movie 😃\n(tap \"🌐 Recommend Movies\")\n\nOr type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) 🙂";
          $keyboard = userPropertyValueKeyboard();
          

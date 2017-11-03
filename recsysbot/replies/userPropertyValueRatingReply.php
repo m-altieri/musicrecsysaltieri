@@ -17,14 +17,14 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
       if ($needNumberOfRatedProperties > 0 ) {  
 
          if ($rating == 2) {
-            $text = "You have rated Indifferent \"".ucwords($propertyName)."\"\nI need ".$needNumberOfRatedProperties." more ratings 😉";
+            $text = "You have rated Indifferent \"".ucwords($propertyName)."\"\nI need ".$needNumberOfRatedProperties." more ratings ".$emojis['smile']."";
          } 
          elseif ($numberRatedProperties > $oldNumberOfRatedProperties) {
-            $text = "You have rated \"".ucwords($propertyName)."\"\nI need ".$needNumberOfRatedProperties." more ratings 😉"; 
+            $text = "You have rated \"".ucwords($propertyName)."\"\nI need ".$needNumberOfRatedProperties." more ratings ".$emojis['smile'].""; 
          } 
          else{
             //Fare un controllo se si è aggiornato il rating della property
-            $text = "I need ".$needNumberOfRatedProperties." more ratings 😉";
+            $text = "I need ".$needNumberOfRatedProperties." more ratings ".$emojis['smile']."";
          }
 
       }
@@ -74,7 +74,7 @@ function userPropertyValueRatingReply($telegram, $chatId, $propertyType, $proper
       else {
          //$text = "Do you want tell me something else about you?";
          $text = "Let me recommend a movie 😃";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
+         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
          //$text = "\nLet me recommend a movie 😃\n(tap \"🌐 Recommend Movies\")\n\nOr type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) 🙂";
          $keyboard = userPropertyValueKeyboard();
          

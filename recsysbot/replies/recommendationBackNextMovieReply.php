@@ -1,6 +1,6 @@
 <?php
 function recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation) {
-	$text = "Please wait. I'm working for you 😉";
+	$text = "Please wait. I'm working for you ".$emojis['smile']."";
 	
 	echo '<pre>';
 	print_r ( $text );

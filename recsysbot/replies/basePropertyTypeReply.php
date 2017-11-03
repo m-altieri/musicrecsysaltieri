@@ -22,15 +22,15 @@ function basePropertyTypeReply($telegram, $chatId){
    if ($needNumberOfRatedProperties <= 0) {
       if ($needNumberOfRatedProperties == 0){
          $text = "I am now able to recommend you some movies " . $emojis['smile'];
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
+         $text .= "\nTap on \"".$emojis['globe']."Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['wink'];
       }
       elseif ($needNumberOfRatedProperties < 0){
-         $text = "Let me recommend a movie  😃";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
+         $text = "Let me recommend a movie  " . $emojis['smile'];
+         $text .= "\nTap on \"".$emojis['globe']."Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['wink'];
       }
 
       $keyboard = [
-                     ["🌐 Recommend Movies"],
+                     [$emojis['globe']." Recommend Movies"],
                      [$result[0][0], $result[1][0]],
                      [$result[2][0], $result[3][0]],
                      ['🔵 Movies','⚙️ Profile', 'More 👉']

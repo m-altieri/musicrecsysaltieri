@@ -142,7 +142,7 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
       //inserisce il testo che consiglia di andare indietro
       $change = setNextOrChangeKeyfunction($chatId);
       if ($page == 5 && (strcasecmp($change, "💢 Change") == 0) ) {
-         $text = "If you don’t like this set of movies, please tap \"💢 Change\".\nOtherwise go back in the list 😉";
+         $text = "If you don’t like this set of movies, please tap \"💢 Change\".\nOtherwise go back in the list ".$emojis['smile']."";
          
          $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
          $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);

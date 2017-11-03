@@ -5,7 +5,7 @@ function checkRefineRecMovieListReply($telegram, $chatId, $userMovieRecommendati
 	file_put_contents ( "php://stderr", "heckRefineRecMovieListReply numberRefineRecMovieList:" . $numberRefineRecMovieList . " - chatId: " . $chatId . PHP_EOL );
 	
 	if ($numberRefineRecMovieList > 0) {
-		$text = "Thanks for your feedback,\nI’m trying to improve the recommendations.\nPlease wait for a new set of movies.😉";
+		$text = "Thanks for your feedback,\nI’m trying to improve the recommendations.\nPlease wait for a new set of movies.".$emojis['smile']."";
 		
 		// echo '<pre>'; print_r($text); echo '</pre>';
 		$telegram->sendChatAction ( [ 

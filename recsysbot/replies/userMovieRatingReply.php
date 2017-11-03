@@ -19,11 +19,11 @@ function userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMov
 		if ($needNumberOfRatedMovies > 0) {
 			
 			if ($rating == 2) {
-				$text = "You skipped\n \"" . $title . "\" movie.\nI need " . $needNumberOfRatedMovies . " more ratings 😉";
+				$text = "You skipped\n \"" . $title . "\" movie.\nI need " . $needNumberOfRatedMovies . " more ratings ".$emojis['smile']."";
 			} elseif ($numberRatedMovies > $oldNumberOfRatedMovies) {
-				$text = "You have rated \"" . $title . "\" movie \nI need " . $needNumberOfRatedMovies . " more ratings 😉";
+				$text = "You have rated \"" . $title . "\" movie \nI need " . $needNumberOfRatedMovies . " more ratings ".$emojis['smile']."";
 			} else {
-				$text = "I need " . $needNumberOfRatedMovies . " more ratings 😉";
+				$text = "I need " . $needNumberOfRatedMovies . " more ratings ".$emojis['smile']."";
 			}
 		} else {
 			
