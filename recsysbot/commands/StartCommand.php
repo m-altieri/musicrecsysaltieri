@@ -15,6 +15,7 @@ class StartCommand extends Command
 
     public function handle($arguments)
     {
+    	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 
       $chatId = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getId();
       $firstname = $this->getTelegram()->getWebhookUpdates()->getMessage()->getChat()->getFirstName();
@@ -41,7 +42,7 @@ class StartCommand extends Command
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
             $text = "Hi ".$firstname." 😃\n";
-            $text .= "Do you like Movies?🍿🍿🍿🍿🍿\nI can find the perfect 🎬 #movie for you, based on your tastes 😉";
+            $text .= $config['greeting'];
             $text .= "\nI need at least 3 preferences for generating recommendations 😉";
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 

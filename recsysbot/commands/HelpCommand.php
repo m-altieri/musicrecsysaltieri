@@ -15,9 +15,11 @@ class HelpCommand extends Command {
 	public function handle($arguments) {
 		
 		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
+		$emojis = require '/app/recsysbot/variables/emojis.php';
+		
 		$firstname = $this->getTelegram ()->getWebhookUpdates ()->getMessage ()->getChat ()->getFirstName ();
 		
-		$text = "Hi " . $firstname . " ðŸ˜ƒ";
+		$text = "Hi " . $firstname . $emojis['smile'];
 		$text .= "\n" . $config['greeting'];
 		$text .= "In the following, we will ask you some information about you and your preferences in the movie domain.
 Next, you will receive a list of recommended movies and you will be asked to evaluate the goodness of the recommendations.
