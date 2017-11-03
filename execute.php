@@ -123,19 +123,19 @@
 		if (isset ( $message ['text'] )) { //Telegram
 // 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
-			if (($text == "/start")) { //Telegram
+			if ($text == "/start") { //Telegram
 // 			if ($postbackPayload == $getStartedPayload) { //Messenger
-				$username = $firstname;
+// 				$username = $firstname;
 // 				//Integer.parseInt() bug
-// 				$shortId = substr($chatId, 0, 6);
+// 				$chatId = substr($chatId, 0, 8);
 // 				putUserDetail ($shortId, $firstname, $lastname, $username);
 				putUserDetail($chatId, $firstname, $lastname, $username);
 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			} else {
 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			}
-			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $shortId);
-			$userDetail = getUserDetail($shortId);
+			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $chatId);
+			$userDetail = getUserDetail($chatId);
 			file_put_contents("php://stderr", "User Detail ricevuto: " . 
 					"\nid: " . $userDetail['id'] . 
 					"\nusername: " . $userDetail['username'] . 
@@ -157,7 +157,7 @@
 			//Stampa nel log
 			file_put_contents("php://stderr", $response);
 // 			sendMessage("Ho ricevuto un audio", $chatId);
-// 		} elseif (isset ( $message ['document'] )) {
+		} elseif (isset ( $message ['document'] )) {
 // 		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
 			$response = "I'm sorry. I received a message document, but i can't unswer";
