@@ -1,6 +1,8 @@
 <?php
 
 function basePropertyTypeReply($telegram, $chatId){
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
 
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
    
@@ -19,7 +21,7 @@ function basePropertyTypeReply($telegram, $chatId){
 
    if ($needNumberOfRatedProperties <= 0) {
       if ($needNumberOfRatedProperties == 0){
-         $text = "I am now able to recommend you some movies 😃";
+         $text = "I am now able to recommend you some movies " . $emojis['smile'];
          $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
       }
       elseif ($needNumberOfRatedProperties < 0){

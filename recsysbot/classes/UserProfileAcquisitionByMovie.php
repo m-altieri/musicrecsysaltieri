@@ -122,6 +122,8 @@ class userProfileAcquisitionByMovie
 
    public function movieRatingReply($movie){
 
+   		$emojis = require '/app/recsysbot/variables/emojis.php';
+   		
       $telegram = $this->getTelegram();
       $chatId = $this->getChatId();      
       if ($movie !== "null") {
@@ -163,7 +165,7 @@ class userProfileAcquisitionByMovie
          $needNumberOfRatedProperties = 3 - ($numberRatedProperties + $numberRatedMovies);
 
          if ($needNumberOfRatedProperties == 0){
-            $text = "\n\nI am now able to recommend you some movies 😃";
+            $text = "\n\nI am now able to recommend you some movies " . $emojis['smile'];
             $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by rating this movie 🙂";
 
             $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
