@@ -7,7 +7,7 @@
 $clapperboard = '🎬';
 $gear = '⚙️';
 $popcorn = '🍿';
-$smile = '\u200d';
+$smile = '😃';
 $wink = '😉';
 
 ?>

@@ -33,7 +33,7 @@ class StartCommand extends Command
       if ($needNumberOfRatedProperties <= 0){
          $keyboard = userPropertyValueKeyboard();
          $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-         $text = "Hi ".$firstname." 😃\n";
+         $text = "Hi ".$firstname." ".$emojis['smile']."\n";
          $text .= "\nI am now able to recommend you some movies " . $emojis['smile'];
          $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings 😉";
          
