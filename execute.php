@@ -13,15 +13,15 @@
 		require $file;
 	}
 	
-	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
-	$myToken = "testmovierecsysbot";
+// 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
+// 	$myToken = "testmovierecsysbot";
 	
-	$verifyToken = $_REQUEST['hub_verify_token'];
-	$challenge = $_REQUEST['hub_challenge'];
-	if ($verifyToken === $myToken) {
-		echo $_REQUEST['hub_challenge'];
-		exit();
-	}
+// 	$verifyToken = $_REQUEST['hub_verify_token'];
+// 	$challenge = $_REQUEST['hub_challenge'];
+// 	if ($verifyToken === $myToken) {
+// 		echo $_REQUEST['hub_challenge'];
+// 		exit();
+// 	}
 	
 	// richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
 	foreach ( glob ( "recsysbot/classes/*.php" ) as $file ) {
@@ -69,18 +69,17 @@
 	//Configurazione testo benvenuto, pulsante inizia e altre caratteristiche del bot
 // 	setBotProfile();
 	
-	$message = $update["entry"][0]["messaging"][0];
-	$messageId = $message["message"]["mid"];
-	$chatId = $message["sender"]["id"];
-	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
-	$firstname = $userInfo["first_name"];
-	$lastname = $userInfo["last_name"];
-	$username = ""; //Non viene restituito dalla chiamata
-	$date = $update["entry"][0]["time"];
-	$text = $message["message"]["text"];
-	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
-	$postbackPayload = $message["postback"]["payload"];
-	
+// 	$message = $update["entry"][0]["messaging"][0];
+// 	$messageId = $message["message"]["mid"];
+// 	$chatId = $message["sender"]["id"];
+// 	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
+// 	$firstname = $userInfo["first_name"];
+// 	$lastname = $userInfo["last_name"];
+// 	$username = ""; //Non viene restituito dalla chiamata
+// 	$date = $update["entry"][0]["time"];
+// 	$text = $message["message"]["text"];
+// 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+// 	$postbackPayload = $message["postback"]["payload"];
 	
 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
 	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
@@ -143,10 +142,10 @@
 					"\nfirstname: " . $userDetail['firstname'] . 
 					"\nlastname: " . $userDetail['lastname'] .
 					"\ntext: " . $text);
-			sendMessage("id: " . $userDetail['id'] .
-					"\nusername: " . $userDetail['username'] .
-					"\nfirstname: " . $userDetail['firstname'] .
-					"\nlastname: " . $userDetail['lastname'], $chatId);
+// 			sendMessage("id: " . $userDetail['id'] .
+// 					"\nusername: " . $userDetail['username'] .
+// 					"\nfirstname: " . $userDetail['firstname'] .
+// 					"\nlastname: " . $userDetail['lastname'], $chatId);
 		} 
 		elseif (isset ( $message ['audio'] )) { //Telegram
 // 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
@@ -157,7 +156,7 @@
 			] );
 			//Stampa nel log
 			file_put_contents("php://stderr", $response);
-			sendMessage("Ho ricevuto un audio", $chatId);
+// 			sendMessage("Ho ricevuto un audio", $chatId);
 // 		} elseif (isset ( $message ['document'] )) {
 // 		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
