@@ -7,15 +7,15 @@
 return [
 		
 	// Cinema
-	$clapperboard = '🎬';
+	'clapperboard' => '🎬',
 	// Ingranaggio
-	$gear = '⚙️';
+	'gear' => '⚙️',
 	// Popcorn
-	$popcorn = '🍿';
+	'popcorn' => '🍿',
 	// Faccina sorridente
-	$smile = '😃';
+	'smile' => '😃',
 	// Occhiolino
-	$wink = '😉';
+	'wink' => '😉'
 
 	];
 
