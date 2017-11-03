@@ -42,7 +42,7 @@ class StartCommand extends Command
       else{
             $keyboard = startProfileAcquisitionKeyboard();
             $reply_markup = $this->getTelegram()->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-            $text = "Hi ".$firstname.$emojis['smile]." \n";
+            $text = "Hi ".$firstname.$emojis['smile']." \n";
             $text .= $config['greeting'];
             $text .= "\nI need at least 3 preferences for generating recommendations ".$emojis['smile']."";
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
