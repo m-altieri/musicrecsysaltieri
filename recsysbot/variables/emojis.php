@@ -15,7 +15,7 @@ return [
 	// Faccina sorridente
 	'smile' => '😃',
 	// Occhiolino
-	'wink' => '😉'
+	'wink' => '😉',
 	// Globo
 	'globe' => '🌐';
 
