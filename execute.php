@@ -61,55 +61,55 @@
 		exit ();
 	}
 	
-	$telegram->addCommand ( Recsysbot\Commands\HelpCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
-	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\HelpCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
+// 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
 
 	//Configurazione testo benvenuto, pulsante inizia e altre caratteristiche del bot
 // 	setBotProfile();
 	
-// 	$message = $update["entry"][0]["messaging"][0];
-// 	$messageId = $message["message"]["mid"];
-// 	$chatId = $message["sender"]["id"];
-// 	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
-// 	$firstname = $userInfo["first_name"];
-// 	$lastname = $userInfo["last_name"];
-// 	$username = ""; //Non viene restituito dalla chiamata
-// 	$date = $update["entry"][0]["time"];
-// 	$text = $message["message"]["text"];
-// 	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
-// 	$postbackPayload = $message["postback"]["payload"];
+	$message = $update["entry"][0]["messaging"][0];
+	$messageId = $message["message"]["mid"];
+	$chatId = $message["sender"]["id"];
+	$userInfo = json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $chatId . "?access_token=" . $config['token']), true);
+	$firstname = $userInfo["first_name"];
+	$lastname = $userInfo["last_name"];
+	$username = ""; //Non viene restituito dalla chiamata
+	$date = $update["entry"][0]["time"];
+	$text = $message["message"]["text"];
+	$globalDate = gmdate("Y-m-d\TH:i:s\Z", $date);
+	$postbackPayload = $message["postback"]["payload"];
 	
-	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
-	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
-	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
-	$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
-	$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
-	$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
-	$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
-	$date = isset ( $message ['date'] ) ? $message ['date'] : "";
-	$text = isset ( $message ['text'] ) ? $message ['text'] : "";
-	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
+// 	// assegno alle seguenti variabili il contenuto ricevuto da Telegram
+// 	$message = isset ( $update ['message'] ) ? $update ['message'] : "";
+// 	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
+// 	$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
+// 	$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
+// 	$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
+// 	$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
+// 	$date = isset ( $message ['date'] ) ? $message ['date'] : "";
+// 	$text = isset ( $message ['text'] ) ? $message ['text'] : "";
+// 	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
 
 	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
 	
 	
-	// gestisci edited_message, per evitare blocco del bot
-	if ($chatId == "") {
-		$message = isset ( $update ['edited_message'] ) ? $update ['edited_message'] : "";
-		$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
-		$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
-		$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
-		$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
-		$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
-		$date = isset ( $message ['date'] ) ? $message ['date'] : "";
-		$text = isset ( $message ['text'] ) ? $message ['text'] : "";
-		$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
-		file_put_contents ( "php://stderr", "edited_message execute.php - chatId: " . $chatId . " - update: " . print_r ( $update, true ) . PHP_EOL );
-	}
-	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
+// 	// gestisci edited_message, per evitare blocco del bot
+// 	if ($chatId == "") {
+// 		$message = isset ( $update ['edited_message'] ) ? $update ['edited_message'] : "";
+// 		$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
+// 		$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
+// 		$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
+// 		$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
+// 		$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
+// 		$date = isset ( $message ['date'] ) ? $message ['date'] : "";
+// 		$text = isset ( $message ['text'] ) ? $message ['text'] : "";
+// 		$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
+// 		file_put_contents ( "php://stderr", "edited_message execute.php - chatId: " . $chatId . " - update: " . print_r ( $update, true ) . PHP_EOL );
+// 	}
+// 	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
 	
 	// pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
 	$text = trim ( $text );
@@ -120,19 +120,19 @@
 	try {
 		$response = "";
 		// gestisco il tipo di messaggio: testo
-		if (isset ( $message ['text'] )) { //Telegram
-// 		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
+// 		if (isset ( $message ['text'] )) { //Telegram
+		if ( !isset ($message ['message']['attachments'][0]) ) { //Messenger
 			
-			if ($text == "/start") { //Telegram
-// 			if ($postbackPayload == $getStartedPayload) { //Messenger
-// 				$username = $firstname;
+// 			if ($text == "/start") { //Telegram
+			if ($postbackPayload == $getStartedPayload) { //Messenger
+				$username = $firstname;
 // 				//Integer.parseInt() bug
-// 				$chatId = substr($chatId, 0, 8);
-// 				putUserDetail ($shortId, $firstname, $lastname, $username);
-				putUserDetail($chatId, $firstname, $lastname, $username);
-				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
+				$chatId = substr($chatId, 0, 8);
+				putUserDetail ($shortId, $firstname, $lastname, $username);
+// 				putUserDetail($chatId, $firstname, $lastname, $username);
+// 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			} else {
-				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
+// 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			}
 			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $chatId);
 			$userDetail = getUserDetail($chatId);
@@ -142,88 +142,88 @@
 					"\nfirstname: " . $userDetail['firstname'] . 
 					"\nlastname: " . $userDetail['lastname'] .
 					"\ntext: " . $text);
-// 			sendMessage("id: " . $userDetail['id'] .
-// 					"\nusername: " . $userDetail['username'] .
-// 					"\nfirstname: " . $userDetail['firstname'] .
-// 					"\nlastname: " . $userDetail['lastname'], $chatId);
+			sendMessage("id: " . $userDetail['id'] .
+					"\nusername: " . $userDetail['username'] .
+					"\nfirstname: " . $userDetail['firstname'] .
+					"\nlastname: " . $userDetail['lastname'], $chatId);
 		} 
-		elseif (isset ( $message ['audio'] )) { //Telegram
-// 		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
-			$response = "I'm sorry. I received an audio message";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
+// 		elseif (isset ( $message ['audio'] )) { //Telegram
+		elseif ( $message ['message']['attachments'][0]['type'] === 'audio' ) { //Messenger
+// 			$response = "I'm sorry. I received an audio message";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
 			//Stampa nel log
-			file_put_contents("php://stderr", $response);
-// 			sendMessage("Ho ricevuto un audio", $chatId);
-		} elseif (isset ( $message ['document'] )) {
-// 		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
+// 			file_put_contents("php://stderr", $response);
+			sendMessage("Ho ricevuto un audio", $chatId);
+// 		} elseif (isset ( $message ['document'] )) {
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'file' ) { //Messenger
 				
-			$response = "I'm sorry. I received a message document, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-// 			sendMessage("Ho ricevuto un documento", $chatId);
-		} elseif (isset ( $message ['photo'] )) {
-// 		} elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
+// 			$response = "I'm sorry. I received a message document, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+			sendMessage("Ho ricevuto un documento", $chatId);
+// 		} elseif (isset ( $message ['photo'] )) {
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'image' ) { //Messenger
 				
-			$response = "I'm sorry. I received a message photo, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
+// 			$response = "I'm sorry. I received a message photo, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
 // 			sendMessage("Ho ricevuto un'immagine", $chatId);
-		} elseif (isset ( $message ['sticker'] )) {
-			$response = "I'm sorry. I received a sticker message, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-		} elseif (isset ( $message ['video'] )) {
-// 		} elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
+// 		} elseif (isset ( $message ['sticker'] )) {
+// 			$response = "I'm sorry. I received a sticker message, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+// 		} elseif (isset ( $message ['video'] )) {
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'video' ) { //Messenger
 				
-			$response = "I'm sorry. I received a video message, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-// 			sendMessage("Ho ricevuto un video", $chatId);
-		} elseif (isset ( $message ['voice'] )) {
-			$response = "I'm sorry. I received a voice message, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-		} elseif (isset ( $message ['contact'] )) {
-			$response = "I'm sorry. I received a message contact, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-		} elseif (isset ( $message ['location'] )) {
-// 		} elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
+// 			$response = "I'm sorry. I received a video message, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+			sendMessage("Ho ricevuto un video", $chatId);
+// 		} elseif (isset ( $message ['voice'] )) {
+// 			$response = "I'm sorry. I received a voice message, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+// 		} elseif (isset ( $message ['contact'] )) {
+// 			$response = "I'm sorry. I received a message contact, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+// 		} elseif (isset ( $message ['location'] )) {
+		} elseif ( $message ['message']['attachments'][0]['type'] === 'location' ) { //Messenger
 				
-			$response = "I'm sorry. I received a location message, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-// 			sendMessage("Ho ricevuto un'ubicazione", $chatId);
-		} elseif (isset ( $message ['venue'] )) {
-			$response = "I'm sorry. I received a venue, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
+// 			$response = "I'm sorry. I received a location message, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+			sendMessage("Ho ricevuto un'ubicazione", $chatId);
+// 		} elseif (isset ( $message ['venue'] )) {
+// 			$response = "I'm sorry. I received a venue, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
 		} else {
-			$response = "I'm sorry. I received a message, but i can't unswer";
-			$telegram->sendMessage ( [ 
-					'chat_id' => $chatId,
-					'text' => $response 
-			] );
-// 			sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
+// 			$response = "I'm sorry. I received a message, but i can't unswer";
+// 			$telegram->sendMessage ( [ 
+// 					'chat_id' => $chatId,
+// 					'text' => $response 
+// 			] );
+			sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
 		}
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
