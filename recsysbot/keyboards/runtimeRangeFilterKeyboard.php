@@ -1,17 +1,20 @@
 <?php
 function runtimeRangeFilterKeyboard() {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$keyboard = [ 
 			[ 
-					"🕰 <= 90 min" 
+					"".$emojis['clockflat']." <= 90 min" 
 			],
 			[ 
-					"🕰 90 - 120 min" 
+					"".$emojis['clockflat']." 90 - 120 min" 
 			],
 			[ 
-					"🕰 120 - 150 min" 
+					"".$emojis['clockflat']." 120 - 150 min" 
 			],
 			[ 
-					"🕰 > 150 min" 
+					"".$emojis['clockflat']." > 150 min" 
 			] 
 	];
 	

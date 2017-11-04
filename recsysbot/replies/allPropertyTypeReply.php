@@ -1,6 +1,8 @@
 <?php
 function allPropertyTypeReply($telegram, $chatId){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
 
    $fullMenuArray = propertyTypeKeyboard($chatId);
@@ -9,8 +11,8 @@ function allPropertyTypeReply($telegram, $chatId){
    foreach ($fullMenuArray as $key => $property) {
        $keyboard[] = array($property);
    }
-   $keyboard[] = ['🔙 Return to the short list'];
-   $keyboard[] = array('🔵 Movies','⚙️ Profile');
+   $keyboard[] = ['".$emojis['backarrow']." Return to the short list'];
+   $keyboard[] = array('🔵 Movies','".$emojis['gear']." Profile');
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 

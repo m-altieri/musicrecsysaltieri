@@ -2,48 +2,50 @@
  
 function createKeaboardFromPropertyArrayAsPropertyTypeToPropertyValueFunction($propertyArray){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$result = array();
 	foreach ($propertyArray as $propertyType => $propertyValue) {
       switch ($propertyType) {
          case "/directors": case "directors": case "director":
-            $result[] = array("🎬"." ".ucwords($propertyValue)." - Director");
+            $result[] = array("".$emojis['clapperboard'].""." ".ucwords($propertyValue)." - Director");
             break;
          case "/starring": case "starring":
-            $result[] = array("🕴"." ".ucwords($propertyValue)." - Actor");
+            $result[] = array("".$emojis['manhovering'].""." ".ucwords($propertyValue)." - Actor");
             break;
          case "/categories": case "categories": case "category": case "http://purl.org/dc/terms/subject":
             $propertyValue = str_replace("Category:", "", $propertyValue);
-            $result[] = array("📼"." ".ucwords($propertyValue)." - Category");
+            $result[] = array("".$emojis['videocassette'].""." ".ucwords($propertyValue)." - Category");
             break;
          case "/genres": case "genres": case "genre":
-            $result[] = array("🎞"." ".ucwords($propertyValue)." - Genre");
+            $result[] = array("".$emojis['filmframe'].""." ".ucwords($propertyValue)." - Genre");
             break;
          case "/writers": case "writers": case "writer":
-             $result[] = array("🖊"." ".ucwords($propertyValue)." - Writer");
+             $result[] = array("".$emojis['pen'].""." ".ucwords($propertyValue)." - Writer");
             break;
          case "/producers": case "producers": case "producer":
-             $result[] = array("💰"." ".ucwords($propertyValue)." - Producer");
+             $result[] = array("".$emojis['moneybag'].""." ".ucwords($propertyValue)." - Producer");
             break;
          // case "/release year": case "release year": case "releaseYear":
-         //     $result[] = array("🗓"." ".ucwords($propertyValue)." - Release year");
+         //     $result[] = array("".$emojis['calendar'].""." ".ucwords($propertyValue)." - Release year");
          //    break;
          case "/music composers": case "music composers": case "music composer": case "musicComposer": case "music":
-            $result[] = array("🎼"." ".ucwords($propertyValue)." - Music composer");
+            $result[] = array("".$emojis['musicscore'].""." ".ucwords($propertyValue)." - Music composer");
             break;
          // case "/runtimeRange": case "runtimeRange": case "runtime":
-         //    $result[] = array("🕰"." Under ".ucwords($propertyValue)." minutes");
+         //    $result[] = array("".$emojis['clockflat'].""." Under ".ucwords($propertyValue)." minutes");
          //    break;
          case "/cinematographies": case "cinematographies": case "cinematography":
-             $result[] = array("📷"." ".ucwords($propertyValue)." - Cinematography");
+             $result[] = array("".$emojis['camera'].""." ".ucwords($propertyValue)." - Cinematography");
             break;
          case "/based on": case "based on": case "basedOn":
-             $result[] = array("📔"." ".ucwords($propertyValue)." - Based on");
+             $result[] = array("".$emojis['notebook'].""." ".ucwords($propertyValue)." - Based on");
             break;
          case "/editings": case "editings": case "editing":
-             $result[] = array("💼"." ".ucwords($propertyValue)." - Editor");
+             $result[] = array("".$emojis['briefcase'].""." ".ucwords($propertyValue)." - Editor");
             break;
          case "/distributors": case "distributors": case "distributor":
-             $result[] = array("🏢"." ".ucwords($propertyValue)." - Distributor");
+             $result[] = array("".$emojis['building'].""." ".ucwords($propertyValue)." - Distributor");
             break;
          default:
             break;

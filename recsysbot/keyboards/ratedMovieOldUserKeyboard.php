@@ -2,10 +2,12 @@
 
 function ratedMovieOldUserKeyboard(){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $keyboard = [
-                ['🌐 Recommend Movies'],
+                ['".$emojis['globe']." Recommend Movies'],
                 ['📋 Details','👍','👎','➡ Skip'],
-                ['🔴 Properties','📘 Help','⚙️ Profile']
+                ['🔴 Properties','📘 Help','".$emojis['gear']." Profile']
                 
             ];
 

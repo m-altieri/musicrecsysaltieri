@@ -1,6 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 function movieListTop5Keyboards($chatId) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$propertyType = 'movie';
 	// chiama il pagerank
 	$data = getPropertyValueListFromPropertyType ( $chatId, $propertyType );
@@ -30,7 +33,7 @@ function movieListTop5Keyboards($chatId) {
 	$keyboard = array_slice ( $result, 0, 5 );
 	$propertyType = "Properties";
 	$keyboard [] = array (
-			"🔙 Return to the list of \"" . $propertyType . "\"" 
+			"".$emojis['backarrow']." Return to the list of \"" . $propertyType . "\"" 
 	);
 	
 	// file_put_contents("php://stderr", "movieListTop5Keyboards return:".$keyboard.PHP_EOL);

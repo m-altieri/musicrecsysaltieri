@@ -3,6 +3,8 @@ use GuzzleHttp\Client;
 
 function conf1helpReply($telegram, $chatId, $help){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    switch ($help) {
      	case stristr($help, 'rateMovieSelected') !== false:
      		$text = "📋 Details: tap if you want to view the movie details";
@@ -29,7 +31,7 @@ function conf1helpReply($telegram, $chatId, $help){
 			$text .= "\n💢 Change: tap for receiving a new set of recommendations";
 
 			$keyboard = [
-			                ["🔙 Back to Movies"]
+			                ["".$emojis['backarrow']." Back to Movies"]
 			            ];
 
 		   $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);

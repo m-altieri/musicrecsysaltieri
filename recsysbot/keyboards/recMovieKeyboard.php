@@ -2,6 +2,8 @@
 
 function recMovieKeyboard($chatId, $page){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $keyboard = array();
 
    if ($page == 1) {
@@ -10,7 +12,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["Next ".$nextPage." 👉"],
-	                  ['🔙 Home','📗 Help','👤 Profile']
+	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
 
 	               ];
 	} 
@@ -21,7 +23,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["👈 Back ".$backPage,"Next ".$nextPage." 👉"],
-	                  ['🔙 Home','📗 Help','👤 Profile']
+	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
 
 	               ];
 	}
@@ -32,7 +34,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["👈 Back ".$backPage."", "".$nextPage],
-	                  ['🔙 Home','📗 Help','👤 Profile']
+	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
 	               ];
 	}
 

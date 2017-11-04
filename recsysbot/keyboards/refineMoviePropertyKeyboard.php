@@ -1,6 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 function refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$movie_name = str_replace ( ' ', '_', $movie );
 	$data = getAllPropertyListFromMovie ( $movie_name );
 	
@@ -184,7 +187,7 @@ function refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation) 
 		$valueKeyboard = array_merge ( $keyboardDirector, $keyboardStarring, $keyboardGenre );
 		
 		foreach ( $valueKeyboard as $key => $property ) {
-			if (stristr ( $property [0], '🔙' ) == false) {
+			if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
 				$keyboard [] = $property;
 			}
 		}
@@ -195,12 +198,12 @@ function refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation) 
 			);
 		}
 		$keyboard [] = array (
-				"🔙 Back to Movies" 
+				"".$emojis['backarrow']." Back to Movies" 
 		);
 	} else {
 		$keyboard = array ();
 		$keyboard [] = array (
-				"🔙 Back to Movies" 
+				"".$emojis['backarrow']." Back to Movies" 
 		);
 	}
 	

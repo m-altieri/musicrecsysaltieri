@@ -1,6 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 function propertyValueFromPropertyTypeAndMovieKeyboard($chatId, $propertyType, $movieName) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	file_put_contents ( "php://stderr", "propertyValueFromPropertyTypeAndMovieKeyboard - propertyType:" . $propertyType . " - movieName" . $movieName . PHP_EOL );
 	
 	$data = getPropertyValueAndScoreListByRecMovieFromUserAndPropertyType ( $chatId, $propertyType );
@@ -38,20 +41,20 @@ function propertyValueFromPropertyTypeAndMovieKeyboard($chatId, $propertyType, $
 	
 	$keyboard = createKeaboardFromPropertyArrayAsScoreToPropertyValueForMovieFunction ( $propertyArray, $propertyType );
 	$keyboard [] = array (
-			"🔙 Return to the list of \"property\" of \"" . $movieName . "\"" 
+			"".$emojis['backarrow']." Return to the list of \"property\" of \"" . $movieName . "\"" 
 	);
 	
 	// Crezione delle tastiere per i filtrirelease year e runtime range
 	if ((strcasecmp ( $propertyType, "releaseYear" ) == 0)) {
 		$keyboard = releaseYearFilterKeyboard ();
 		$keyboard [] = array (
-				"🔙 Return to the list of \"property\" of \"" . $movieName . "\"" 
+				"".$emojis['backarrow']." Return to the list of \"property\" of \"" . $movieName . "\"" 
 		);
 	}
 	if ((strcasecmp ( $propertyType, "runtimeRange" ) == 0)) {
 		$keyboard = runtimeRangeFilterKeyboard ();
 		$keyboard [] = array (
-				"🔙 Return to the list of \"property\" of \"" . $movieName . "\"" 
+				"".$emojis['backarrow']." Return to the list of \"property\" of \"" . $movieName . "\"" 
 		);
 	}
 	

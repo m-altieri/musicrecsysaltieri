@@ -1,17 +1,20 @@
 <?php
 function releaseYearFilterKeyboard() {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$keyboard = [ 
 			[ 
-					"🗓 1910s - 1950s" 
+					"".$emojis['calendar']." 1910s - 1950s" 
 			],
 			[ 
-					"🗓 1950s - 1980s" 
+					"".$emojis['calendar']." 1950s - 1980s" 
 			],
 			[ 
-					"🗓 1980s - 2000s" 
+					"".$emojis['calendar']." 1980s - 2000s" 
 			],
 			[ 
-					"🗓 2000s - today" 
+					"".$emojis['calendar']." 2000s - today" 
 			] 
 	];
 	

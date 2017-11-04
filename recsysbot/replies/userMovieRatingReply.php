@@ -1,5 +1,8 @@
 <?php
 function userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$pagerankCicle = getNumberPagerankCicle ( $chatId );
 	$movieName = movieToRatingSelected ( $chatId, $pagerankCicle );
 	$userMovieprofile->setUserMovieToRating ( $movieName );
@@ -54,7 +57,7 @@ function userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMov
 		
 		$keyboard = [ 
 				[ 
-						'🔙 Home' 
+						'".$emojis['backarrow']." Home' 
 				] 
 		];
 		

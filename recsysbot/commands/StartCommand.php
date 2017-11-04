@@ -47,7 +47,7 @@ class StartCommand extends Command
             $text .= "\nI need at least 3 preferences for generating recommendations ".$emojis['smile']."";
             $this->replyWithMessage(['text' => $text, 'reply_markup' => $reply_markup]); 
 
-            $text = "Let me recommend a movie \nPlease, tell me something about you \nor type your preference 🙂";
+            $text = "Let me recommend a movie \nPlease, tell me something about you \nor type your preference ".$emojis['smilesimple']."";
             $this->replyWithMessage(['text' => $text]); 
       }        
    }

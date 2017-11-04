@@ -1,5 +1,8 @@
 <?php
 function propertyValueRatingReply($telegram, $chatId, $pagerankCicle) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$reply = propertyTypeAndPropertyValueSelected ( $chatId, $pagerankCicle );
 	$propertyType = $reply [0];
 	$propertyName = $reply [1];
@@ -7,7 +10,7 @@ function propertyValueRatingReply($telegram, $chatId, $pagerankCicle) {
 	$text = "Do you like \"" . ucwords ( $propertyName ) . "\"?";
 	$keyboard = [ 
 			[ 
-					"🙂 I like \"" . ucwords ( $propertyName ) . "\"" 
+					"".$emojis['smilesimple']." I like \"" . ucwords ( $propertyName ) . "\"" 
 			],
 			[ 
 					"😑 I dislike \"" . ucwords ( $propertyName ) . "\"" 
@@ -15,7 +18,7 @@ function propertyValueRatingReply($telegram, $chatId, $pagerankCicle) {
 			[ 
 					"🤔 Is indifferent to me" 
 			] 
-		// ["🔙 Return to the list of ".$propertyType]
+		// ["".$emojis['backarrow']." Return to the list of ".$propertyType]
 	];
 	
 	// echo '<pre>'; print_r($keyboard); echo '</pre>';

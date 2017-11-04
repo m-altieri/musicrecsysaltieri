@@ -5,6 +5,8 @@ use Telegram\Bot\FileUpload\InputFile;
 
 function movieDetailReply($telegram, $chatId, $movie, $page){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
     $movie_name = str_replace(' ', '_', $movie); //tutti gli spazi con undescore
    $data = getAllPropertyListFromMovie($movie_name);
 
@@ -106,7 +108,7 @@ function movieDetailReply($telegram, $chatId, $movie, $page){
 
 
       $text = "";
-      if ($title !== '') {$text .= "🎥 *".$title."*";}
+      if ($title !== '') {$text .= "".$emojis['moviecamera']." *".$title."*";}
          if ($releaseYear !== '') {$text .= " *(".$releaseYear.")*";}
 
       if ($runtimeMinutes !== '') {$text .= "\n_".$runtimeMinutes."min_ "."⭐️*".$imdbRating."*"." @imdb";}

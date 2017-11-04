@@ -2,6 +2,8 @@
 
 function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValue, $addFilter){ 
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
   if ($propertyType !== "null") {
       if (strcasecmp($addFilter, "yes") == 0) {
          $data = putReleaseYearFilter($chatId, $propertyType, $propertyValue);
@@ -39,7 +41,7 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
          $text = "Do you prefer rate other properties of "."\"".ucwords($movie)."\" \nor Back to movies?";
          $keyboard = [
                         ["🔎 Rate other properties of "."\"".ucwords($movie)."\""],
-                        ["🔙 Back to Movies"]
+                        ["".$emojis['backarrow']." Back to Movies"]
                     ];
          $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 
@@ -49,8 +51,8 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
       else {
          //$text = "Do you want tell me something else about you?";
          $text = "Let me recommend a movie 😃";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
-         //$text = "\nLet me recommend a movie 😃\n(tap \"🌐 Recommend Movies\")\n\nOr type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) 🙂";
+         $text .= "\nTap on \"".$emojis['globe']." Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
+         //$text = "\nLet me recommend a movie 😃\n(tap \"".$emojis['globe']." Recommend Movies\")\n\nOr type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) ".$emojis['smilesimple']."";
          $keyboard = userPropertyValueKeyboard();
          
          $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
@@ -62,7 +64,7 @@ function releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyValu
    //new user
    else{
       $text = "Do you want tell me something else about you?";
-      //$text = "Do you want tell me something else about you?\n\nPlease, type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) 🙂";
+      //$text = "Do you want tell me something else about you?\n\nPlease, type your preference\n(e.g., Pulp Fiction or Tom Cruise or Thriller) ".$emojis['smilesimple']."";
       $keyboard = startProfileAcquisitionKeyboard();
       
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);

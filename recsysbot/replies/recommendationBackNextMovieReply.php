@@ -1,5 +1,8 @@
 <?php
 function recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$text = "Please wait. I'm working for you ".$emojis['smile']."";
 	
 	echo '<pre>';

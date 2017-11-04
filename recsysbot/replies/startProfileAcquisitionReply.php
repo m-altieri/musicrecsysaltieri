@@ -2,6 +2,7 @@
 
 function startProfileAcquisitioReply($telegram, $chatId){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
 	
    $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
 
@@ -14,7 +15,7 @@ function startProfileAcquisitioReply($telegram, $chatId){
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]); 
 
       $text = "Let me recommend a movie  😃";
-      $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
+      $text .= "\nTap on \"".$emojis['globe']." Recommend Movies\" button, otherwise you can enrich your profile by providing further ratings ".$emojis['smile']."";
    	$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);       
    }
    else{
@@ -24,7 +25,7 @@ function startProfileAcquisitioReply($telegram, $chatId){
    	$text = "I need at least 3 preferences for generating recommendations.";
    	$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]); 
 
-   	$text = "Let me to recommend a movie.\nPlease, tell me something about you \nor type your preference 🙂";  
+   	$text = "Let me to recommend a movie.\nPlease, tell me something about you \nor type your preference ".$emojis['smilesimple']."";  
    	$telegram->sendMessage(['chat_id' => $chatId, 'text' => $text]);    
    }
    

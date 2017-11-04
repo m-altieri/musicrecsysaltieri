@@ -2,6 +2,8 @@
  
 function addmovieOrPropertyRating($propertyValue, $propertyType, $rating){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $movieOrPropertyRating = $propertyValue;
    switch ($propertyType) {
       case "movie":
@@ -14,7 +16,7 @@ function addmovieOrPropertyRating($propertyValue, $propertyType, $rating){
          break;
       case strcasecmp($propertyType, "http://purl.org/dc/terms/subject") == 0: 
          if ($rating == 1) {
-            $movieOrPropertyRating = ucwords($propertyValue)." - "."🙂 liked category";
+            $movieOrPropertyRating = ucwords($propertyValue)." - "."".$emojis['smilesimple']." liked category";
          } 
          elseif ($rating == 0){
             $movieOrPropertyRating = ucwords($propertyValue)." - "."😑 disliked category";
@@ -22,7 +24,7 @@ function addmovieOrPropertyRating($propertyValue, $propertyType, $rating){
          break;
       case ($propertyType !== 'movie'):
          if ($rating == 1) {
-            $movieOrPropertyRating = ucwords($propertyValue)." - "."🙂 liked ".$propertyType;
+            $movieOrPropertyRating = ucwords($propertyValue)." - "."".$emojis['smilesimple']." liked ".$propertyType;
          } 
          elseif ($rating == 0){
             $movieOrPropertyRating = ucwords($propertyValue)." - "."😑 disliked ".$propertyType;

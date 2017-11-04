@@ -2,6 +2,9 @@
 
 // Da capire se può essere ancora utile questa funzione
 function refocusChangeRecMovieListReply($telegram, $chatId, $userMovieRecommendation) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$text = "Please wait.. I'm working for you ".$emojis['smile']."";
 	
 	echo '<pre>';

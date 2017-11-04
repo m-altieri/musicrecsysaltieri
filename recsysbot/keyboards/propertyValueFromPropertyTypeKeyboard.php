@@ -1,6 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 function propertyValueFromPropertyTypeKeyboard($chatId, $propertyType) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	file_put_contents ( "php://stderr", "propertyValueFromPropertyTypeKeyboard - propertyType:" . $propertyType . PHP_EOL );
 	
 	$data = getPropertyValueListFromPropertyType ( $chatId, $propertyType );
@@ -20,20 +23,20 @@ function propertyValueFromPropertyTypeKeyboard($chatId, $propertyType) {
 	
 	$keyboard = createKeaboardFromPropertyArrayAsScoreToPropertyValueFunction ( $propertyArray, $propertyType );
 	$keyboard [] = array (
-			"🔙 Return to the list of Properties" 
+			"".$emojis['backarrow']." Return to the list of Properties" 
 	);
 	
 	// Crezione delle tastiere per i filtrirelease year e runtime range
 	if ((strcasecmp ( $propertyType, "releaseYear" ) == 0)) {
 		$keyboard = releaseYearFilterKeyboard ();
 		$keyboard [] = array (
-				"🔙 Return to the list of Properties" 
+				"".$emojis['backarrow']." Return to the list of Properties" 
 		);
 	}
 	if ((strcasecmp ( $propertyType, "runtimeRange" ) == 0)) {
 		$keyboard = runtimeRangeFilterKeyboard ();
 		$keyboard [] = array (
-				"🔙 Return to the list of Properties" 
+				"".$emojis['backarrow']." Return to the list of Properties" 
 		);
 	}
 	

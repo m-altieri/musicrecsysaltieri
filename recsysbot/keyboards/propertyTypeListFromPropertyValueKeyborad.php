@@ -1,6 +1,9 @@
 <?php
 use GuzzleHttp\Client;
 function propertyTypeListFromPropertyValueKeyboard($propertyData) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	file_put_contents ( "php://stderr", "propertyTypeListFromPropertyValueKeyboard - propertyData" . PHP_EOL );
 	
 	$keyboard = array ();
@@ -17,7 +20,7 @@ function propertyTypeListFromPropertyValueKeyboard($propertyData) {
 	
 	$keyboard = createKeaboardFromPropertyArrayAsPropertyTypeToPropertyValueFunction ( $propertyArray );
 	$keyboard [] = array (
-			"🔙 Go to the list of Properties" 
+			"".$emojis['backarrow']." Go to the list of Properties" 
 	);
 	
 	return $keyboard;

@@ -2,13 +2,15 @@
 
 function resetProfileReply($telegram, $chatId, $pagerankCicle){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$reply =  resetCommandSelected($chatId, $pagerankCicle);
 	$preference = $reply[1];	
 
    $text = "...Warning! All your \"".ucwords($preference)."\" will be deleted.\nPlease, confirm the choice.";
    $keyboard = [
       ["✔ Yes","🚫 No"],
-      ["⚙️ Profile"]
+      ["".$emojis['gear']." Profile"]
    ];
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);   

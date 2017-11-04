@@ -4,6 +4,8 @@ use Telegram\Bot\FileUpload\InputFile;
 
 function detailReply($telegram, $chatId, $movie_name){
   
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 /*   $pagerankCicle = getNumberPagerankCicle($chatId);
    $reply = movieToRatingSelected($chatId, $pagerankCicle);
    $movie = $reply[1];
@@ -99,18 +101,18 @@ function detailReply($telegram, $chatId, $movie_name){
       $text = "";
       if ($title !== '') {$text .= "*".$title."*";}
          if ($releaseYear !== '') {$text .= " *(".$releaseYear.")*";}
-      //if ($runtimeMinutes !== '') {$text .= " 🕰".$runtimeMinutes."min";}
+      //if ($runtimeMinutes !== '') {$text .= " ".$emojis['clockflat']."".$runtimeMinutes."min";}
       if ($runtimeMinutes !== '') {$text .= "\n_".$runtimeMinutes."min_ "."⭐️*".$imdbRating."*"." @imdb";}
-      if ($director !== '') {$text .= "\n\n🎬 *Director: *".$director;}
-         elseif($producer !== '') {$text .= "\n\n💰 *Producers: *".$producer;}
-            elseif($writer !== '') {$text .= "\n\n🖊 *Writers: *".$writer;}
+      if ($director !== '') {$text .= "\n\n".$emojis['clapperboard']." *Director: *".$director;}
+         elseif($producer !== '') {$text .= "\n\n".$emojis['moneybag']." *Producers: *".$producer;}
+            elseif($writer !== '') {$text .= "\n\n".$emojis['pen']." *Writers: *".$writer;}
 
-      if ($star !== '') {$text .= "\n\n🕴 *Actors: *".$star;}
-         elseif($director !== '' && $producer !== '') {$text .= "\n\n💰 *Producers: *".$producer;}
-            elseif($director !== '' && $writer !== '') {$text .= "\n\n🖊 *Writers: *".$writer;}
+      if ($star !== '') {$text .= "\n\n".$emojis['manhovering']." *Actors: *".$star;}
+         elseif($director !== '' && $producer !== '') {$text .= "\n\n".$emojis['moneybag']." *Producers: *".$producer;}
+            elseif($director !== '' && $writer !== '') {$text .= "\n\n".$emojis['pen']." *Writers: *".$writer;}
       
-      if ($category !== '') {$text .= "\n\n📼 *Categories: *".$category;}
-      if ($genre !== '') {$text .= "\n\n🎞 *Genres: *".$genre;}
+      if ($category !== '') {$text .= "\n\n".$emojis['videocassette']." *Categories: *".$category;}
+      if ($genre !== '') {$text .= "\n\n".$emojis['filmframe']." *Genres: *".$genre;}
 
       if ($awards !== '') {$text .= "\n\n🏆 *Awards: *".$awards;}
 

@@ -23,6 +23,9 @@ class userMovieRecommendation {
 	protected $movieListTop5;
 	protected $recMovieToRating;
 	public function __construct($telegram, $chatId, $messageId, $date, $text, $botName) {
+		
+		$emojis = require '/app/recsysbot/variables/emojis.php';
+		
 		$this->setTelegram ( $telegram );
 		$this->setChatId ( $chatId );
 		$this->setMessageId ( $messageId );
@@ -182,9 +185,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '🔙' ) == false) {
+				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '🎥', '', $movie );
+					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;
@@ -205,9 +208,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '🔙' ) == false) {
+				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '🎥', '', $movie );
+					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;
@@ -228,9 +231,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '🔙' ) == false) {
+				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '🎥', '', $movie );
+					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;

@@ -5,6 +5,8 @@ use GuzzleHttp\Client;
 //Costruscire la tastiera di ProfileReply
 function movieOrPropertyToRatingKeyboard($chatId, $context){ 
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    file_put_contents("php://stderr", "movieOrPropertyToRatingKeyboard".PHP_EOL);
 
    $data = getAllMovieOrPropertyRatings($chatId);
@@ -24,47 +26,47 @@ function movieOrPropertyToRatingKeyboard($chatId, $context){
          $movieOrPropertyRating = addmovieOrPropertyRating($propertyValue, $propertyType, $rating);
          switch ($propertyType) {
 	         case "/directors": case "directors": case "director":
-	            $result[] = array("🎬"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['clapperboard'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/starring": case "starring":
-	            $result[] = array("🕴"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['manhovering'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/categories": case "categories": case "category":	case "http://purl.org/dc/terms/subject": 
 	            $movieOrPropertyRating = str_replace("Category:", "", $movieOrPropertyRating);
-	            $result[] = array("📼"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['videocassette'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/genres": case "genres": case "genre":
-	            $result[] = array("🎞"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['filmframe'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/writers": case "writers": case "writer":
-	             $result[] = array("🖊"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['pen'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/producers": case "producers": case "producer":
-	             $result[] = array("💰"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['moneybag'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/release year": case "release year": case "releaseYear":
-	             $result[] = array("🗓"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['calendar'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/music composers": case "music composers": case "music composer": case "musicComposer": case "music":
-	            $result[] = array("🎼"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['musicscore'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/runtimeRange": case "runtimeRange": case "runtime":
-	            $result[] = array("🕰"." ".$movieOrPropertyRating);
+	            $result[] = array("".$emojis['clockflat'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/cinematographies": case "cinematographies": case "cinematography":
-	             $result[] = array("📷"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['camera'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/based on": case "based on": case "basedOn":
-	             $result[] = array("📔"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['notebook'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/editings": case "editings": case "editing":
-	             $result[] = array("💼"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['briefcase'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "/distributors": case "distributors": case "distributor":
-	             $result[] = array("🏢"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['building'].""." ".$movieOrPropertyRating);
 	            break;
 	         case "movie": 
-	             $result[] = array("📽"." ".$movieOrPropertyRating);
+	             $result[] = array("".$emojis['projector'].""." ".$movieOrPropertyRating);
 	            break;
 	         default:
 	            break;
@@ -75,10 +77,10 @@ function movieOrPropertyToRatingKeyboard($chatId, $context){
 
    	   if(!empty($result)){
 			   $keyboard = $result;
-			   $keyboard[] = array("🔙 Back to Movies","📙 Help");
+			   $keyboard[] = array("".$emojis['backarrow']." Back to Movies","".$emojis['bookorange']." Help");
 			}
 			else{
-				$keyboard[] = array("🔙 Back to Movies","📙 Help");
+				$keyboard[] = array("".$emojis['backarrow']." Back to Movies","".$emojis['bookorange']." Help");
 			}
 
    }
@@ -86,11 +88,11 @@ function movieOrPropertyToRatingKeyboard($chatId, $context){
 
    	   if(!empty($result)){
 			   $keyboard = $result;
-			   $keyboard[] = array("🔙 Home","📙 Help");
-			   $keyboard[] = array("✖ Reset");
+			   $keyboard[] = array("".$emojis['backarrow']." Home","".$emojis['bookorange']." Help");
+			   $keyboard[] = array("".$emojis['x']." Reset");
 			}
 			else{
-				$keyboard[] = array("🔙 Home","📙 Help");
+				$keyboard[] = array("".$emojis['backarrow']." Home","".$emojis['bookorange']." Help");
 			}
 
    }     

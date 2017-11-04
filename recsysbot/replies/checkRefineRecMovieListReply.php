@@ -1,5 +1,8 @@
 <?php
 function checkRefineRecMovieListReply($telegram, $chatId, $userMovieRecommendation) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$numberRefineRecMovieList = getNumberRefineFromRecMovieList ( $chatId );
 	
 	file_put_contents ( "php://stderr", "heckRefineRecMovieListReply numberRefineRecMovieList:" . $numberRefineRecMovieList . " - chatId: " . $chatId . PHP_EOL );

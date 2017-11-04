@@ -2,6 +2,8 @@
 use GuzzleHttp\Client;
 function levDistanceTop5Keyboards($text) {
 	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	// credo dia un errore su uno inserisce un film con l'apostrofo
 	$data = getLevDistanceFromAllVertexUriByName ( $text );
 	echo "Data:<br>";
@@ -28,7 +30,7 @@ function levDistanceTop5Keyboards($text) {
 	$keyboard = $result;
 	$propertyType = "Properties";
 	$keyboard [] = array (
-			"🔙 Go to the list of \"" . $propertyType . "\"" 
+			"".$emojis['backarrow']." Go to the list of \"" . $propertyType . "\"" 
 	);
 	
 	file_put_contents ( "php://stderr", "levDistanceTop5Keyboards - text:" . $text . PHP_EOL );

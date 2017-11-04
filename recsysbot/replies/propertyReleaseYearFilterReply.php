@@ -1,5 +1,8 @@
 <?php
 function propertyReleaseYearFilterReply($telegram, $chatId, $pagerankCicle) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$reply = releaseYearFilterSelected ( $chatId, $pagerankCicle );
 	$propertyType = $reply [0];
 	$propertyName = $reply [1];
@@ -11,7 +14,7 @@ function propertyReleaseYearFilterReply($telegram, $chatId, $pagerankCicle) {
 					"🔸 No Filter" 
 			],
 			[ 
-					"🔙 Return to the list of " . $propertyType 
+					"".$emojis['backarrow']." Return to the list of " . $propertyType 
 			] 
 	];
 	

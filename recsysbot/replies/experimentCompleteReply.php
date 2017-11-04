@@ -3,6 +3,8 @@
 //lavora per conf1-conf2-conf3-conf4
 function experimentCompleteReply($telegram, $chatId, $text){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $stars = explode(" ", $text);
 
    $numberStars = count($stars);
@@ -14,7 +16,7 @@ function experimentCompleteReply($telegram, $chatId, $text){
 
 	$text = " 👨‍🔬 The recommendation session is completed.";
    $text .= "\n\n😊 If you enjoyed 😁 you can start a new session by tapping\n\"🤖 New Session\"";
-   $text .= "\n\n🙋‍♂️ See you soon, and don’t forget 🍿 popcorn! 😃";
+   $text .= "\n\n🙋‍♂️ See you soon, and don’t forget ".$emojis['popcorn']." popcorn! 😃";
 
    $keyboard = [
                   ['🤖 New Session']

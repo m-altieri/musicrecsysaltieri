@@ -1,6 +1,9 @@
 <?php
 use Recsysbot\Classes\userMovieRecommendation;
 function recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageId, $text, $botName, $date, $userMovieRecommendation) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$pagerankCicle = getNumberPagerankCicle ( $chatId );
 	
 	$text = null;

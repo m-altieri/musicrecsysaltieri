@@ -22,7 +22,10 @@ class userProfileAcquisitionByMovie
    protected $movieToRating;
 
    public function __construct($telegram, $chatId, $messageId, $date, $text, $botName){
-      $this->setTelegram($telegram);     
+      
+   	$emojis = require '/app/recsysbot/variables/emojis.php';
+   	
+   	$this->setTelegram($telegram);     
       $this->setChatId($chatId);
       $this->setMessageId($messageId);
       $this->setDate($date);
@@ -166,7 +169,7 @@ class userProfileAcquisitionByMovie
 
          if ($needNumberOfRatedProperties == 0){
             $text = "\n\nI am now able to recommend you some movies " . $emojis['smile'];
-            $text .= "\nTap on \"🌐 Recommend Movies\" button, otherwise you can enrich your profile by rating this movie 🙂";
+            $text .= "\nTap on \"".$emojis['globe']." Recommend Movies\" button, otherwise you can enrich your profile by rating this movie ".$emojis['smilesimple']."";
 
             $telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);       
             $telegram->sendMessage(['chat_id' => $chatId, 'text' => $text, 'reply_markup' => $reply_markup]);
@@ -175,11 +178,11 @@ class userProfileAcquisitionByMovie
       else{
          //Se sono stati valutati tutti i film o ci sono problemi
          $text = "Sorry...😕\nI'm not be able to finding other movies right now🤔\n";
-         $text .= "\nTap on \"🌐 Recommend Movies\" button ".$emojis['smile']."";
+         $text .= "\nTap on \"".$emojis['globe']." Recommend Movies\" button ".$emojis['smile']."";
 
          $keyboard =    $keyboard = [
-                                        ['🌐 Recommend Movies'],
-                                        ['📘 Help','⚙️ Profile']
+                                        ['".$emojis['globe']." Recommend Movies'],
+                                        ['📘 Help','".$emojis['gear']." Profile']
                                     ];
 
          $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);

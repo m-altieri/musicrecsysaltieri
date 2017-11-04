@@ -3,6 +3,8 @@
 //obsoleta
 function acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	//Qui chiedere se gli piace il film, se lo ha già visto o non gli piace...stile profilo
 
 	//inserisci il film tra quelli accettati
@@ -31,12 +33,12 @@ function acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name){
 	//$text .= "\nadd movie to your list of films seen or to see";
 	$text .= "\nfor a new recommendation ".$emojis['smile']."";
 	$text .= "\n\n         🎉🎊🎊🎊🎊🎊🎊🎉";
-	$text .= "\n🍕🍺🍿Enjoy your movie😃  🍿🍺🍕";
+	$text .= "\n🍕🍺".$emojis['popcorn']."Enjoy your movie😃  ".$emojis['popcorn']."🍺🍕";
 
    $keyboard = [
                    ['📑 Details','📣 Why?'],
                    ["🔘 List of Recommended Movies"],
-                   ['🔙 Home','👤 Profile']
+                   ['".$emojis['backarrow']." Home','👤 Profile']
                ];
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);   

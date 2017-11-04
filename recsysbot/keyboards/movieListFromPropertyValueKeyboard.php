@@ -1,5 +1,8 @@
 <?php
 function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyType) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$data = getMovieListFromProperty ( $chatId, $propertyName, $propertyType );
 	
 	$result = array ();
@@ -25,7 +28,7 @@ function movieListFromPropertyValueKeyboard($chatId, $propertyName, $propertyTyp
 	$keyboard = $result;
 	$propertyType = "Properties";
 	$keyboard [] = array (
-			"🔙 Return to the list of Properties" 
+			"".$emojis['backarrow']." Return to the list of Properties" 
 	);
 	
 	return $keyboard;

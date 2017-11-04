@@ -1,5 +1,8 @@
 <?php
 function findPropertyValueOrMovieReply($telegram, $chatId, $messageId, $date, $name, $userMovieprofile) {
+	
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
 	$textSorry = "Sorry...😕\nI'm not be able to finding what you are looking 🤔\nPlease, try again ".$emojis['smile']."";
 	
 	$full_name = str_replace ( ' ', '_', $name ); // tutti gli spazi con undescore

@@ -2,11 +2,13 @@
 
 function userPropertyValueKeyboard(){
 
+	$emojis = require '/app/recsysbot/variables/emojis.php';
+	
    $keyboard = [
-         ['🌐 Recommend Movies'],
+         ['".$emojis['globe']." Recommend Movies'],
          ['🔴 Rate movie properties'],
          ['🔵 Rate movies'],
-         ['⚙️ Profile']
+         ['".$emojis['gear']." Profile']
      ];
 
 	return $keyboard;
