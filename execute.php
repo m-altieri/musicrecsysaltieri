@@ -47,11 +47,11 @@
 	date_default_timezone_set ( $config ['timezone'] );
 	$token = $config ['token'];
 	
-	$telegram = new Api ( $token );
+// 	$telegram = new Api ( $token );
 	
 	// recupero il contenuto inviato da Telegram
-// 	$content = file_get_contents("php://input");
-	$content = $telegram->getWebhookUpdates ();
+	$content = file_get_contents("php://input");
+// 	$content = $telegram->getWebhookUpdates ();
 	
 	// converto il contenuto da JSON ad array PHP
 	$update = json_decode ( $content, true );
