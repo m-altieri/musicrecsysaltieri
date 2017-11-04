@@ -33,7 +33,7 @@ function basePropertyTypeReply($telegram, $chatId){
                      [$emojis['globe']." Recommend Movies"],
                      [$result[0][0], $result[1][0]],
                      [$result[2][0], $result[3][0]],
-                     ['🔵 Movies','".$emojis['gear']." Profile', 'More 👉']
+                     ['🔵 Movies',"".$emojis['gear']." Profile", 'More 👉']
                   ];
    }
    else{
@@ -42,7 +42,7 @@ function basePropertyTypeReply($telegram, $chatId){
       $keyboard = [
                      [$result[0][0], $result[1][0]],
                      [$result[2][0], $result[3][0]],
-                     ['🔵 Movies','".$emojis['gear']." Profile', 'More 👉']
+                     ['🔵 Movies',"".$emojis['gear']." Profile", 'More 👉']
                   ];
    }
 

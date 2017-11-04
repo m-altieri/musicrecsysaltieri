@@ -11,8 +11,8 @@ function allPropertyTypeReply($telegram, $chatId){
    foreach ($fullMenuArray as $key => $property) {
        $keyboard[] = array($property);
    }
-   $keyboard[] = ['".$emojis['backarrow']." Return to the short list'];
-   $keyboard[] = array('🔵 Movies','".$emojis['gear']." Profile');
+   $keyboard[] = ["".$emojis['backarrow']." Return to the short list"];
+   $keyboard[] = array('🔵 Movies',"".$emojis['gear']." Profile");
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 

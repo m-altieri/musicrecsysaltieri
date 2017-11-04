@@ -187,7 +187,7 @@ function refineMoviePropertyKeyboard($chatId, $movie, $userMovieRecommendation) 
 		$valueKeyboard = array_merge ( $keyboardDirector, $keyboardStarring, $keyboardGenre );
 		
 		foreach ( $valueKeyboard as $key => $property ) {
-			if (stristr ( $property [0], ("".$emojis['backarrow']."") ) == false) {
+			if (stristr ( $property [0], "".$emojis['backarrow']."" ) == false) {
 				$keyboard [] = $property;
 			}
 		}

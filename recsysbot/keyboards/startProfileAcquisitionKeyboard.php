@@ -7,7 +7,7 @@ function startProfileAcquisitionKeyboard(){
    $keyboard = [
          ['🔴 Rate movie properties'],
          ['🔵 Rate movies'],
-         ['".$emojis['gear']." Profile']
+         ["".$emojis['gear']." Profile"]
      ];
 
 	return $keyboard;

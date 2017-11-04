@@ -12,7 +12,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["Next ".$nextPage." 👉"],
-	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
+	                  ["".$emojis['backarrow']." Home",'📗 Help','👤 Profile']
 
 	               ];
 	} 
@@ -23,7 +23,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["👈 Back ".$backPage,"Next ".$nextPage." 👉"],
-	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
+	                  ["".$emojis['backarrow']." Home",'📗 Help','👤 Profile']
 
 	               ];
 	}
@@ -34,7 +34,7 @@ function recMovieKeyboard($chatId, $page){
 	                  ["😃 Like", "🙁 Dislike","🌀 Like, but..."],
 	                  ["📑 Details","📣 Why?"],
 	                  ["👈 Back ".$backPage."", "".$nextPage],
-	                  ['".$emojis['backarrow']." Home','📗 Help','👤 Profile']
+	                  ["".$emojis['backarrow']." Home",'📗 Help','👤 Profile']
 	               ];
 	}
 

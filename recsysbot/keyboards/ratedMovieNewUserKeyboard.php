@@ -6,7 +6,7 @@ function ratedMovieNewUserKeyboard(){
 	
    $keyboard = [
                    ['📋 Details','👍','👎','➡ Skip'],
-                   ['🔴 Properties','📘 Help','".$emojis['gear']." Profile']
+                   ['🔴 Properties','📘 Help',"".$emojis['gear']." Profile"]
                ];
 
    return $keyboard;

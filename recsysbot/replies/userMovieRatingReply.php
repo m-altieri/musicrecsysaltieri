@@ -57,7 +57,7 @@ function userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMov
 		
 		$keyboard = [ 
 				[ 
-						'".$emojis['backarrow']." Home' 
+						"".$emojis['backarrow']." Home" 
 				] 
 		];
 		

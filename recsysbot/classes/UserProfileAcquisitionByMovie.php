@@ -181,8 +181,8 @@ class userProfileAcquisitionByMovie
          $text .= "\nTap on \"".$emojis['globe']." Recommend Movies\" button ".$emojis['smile']."";
 
          $keyboard =    $keyboard = [
-                                        ['".$emojis['globe']." Recommend Movies'],
-                                        ['📘 Help','".$emojis['gear']." Profile']
+                                        ["".$emojis['globe']." Recommend Movies"],
+                                        ['📘 Help',"".$emojis['gear']." Profile"]
                                     ];
 
          $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);

@@ -38,7 +38,7 @@ function acceptRecommendationReply($telegram, $chatId, $firstname, $movie_name){
    $keyboard = [
                    ['📑 Details','📣 Why?'],
                    ["🔘 List of Recommended Movies"],
-                   ['".$emojis['backarrow']." Home','👤 Profile']
+                   ["".$emojis['backarrow']." Home",'👤 Profile']
                ];
 
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);   

@@ -27,7 +27,7 @@ function recommendationMovieListTop5Reply($telegram, $chatId) {
 		$i = 1;
 		foreach ( $keyboard as $key => $property ) {
 			// if ($property[0] != "Menu") {
-			if (stristr ( $property [0], ("".$emojis['backarrow']."") ) == false) {
+			if (stristr ( $property [0], "".$emojis['backarrow']."" ) == false) {
 				$movie = $property [0];
 				$text .= "\n" . $i . "^ *" . ucwords ( $movie ) . "*";
 				// $text .= "\n*".ucwords($movie)."*";
