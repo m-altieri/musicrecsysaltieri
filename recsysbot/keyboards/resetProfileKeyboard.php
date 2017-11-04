@@ -6,7 +6,7 @@ function resetProfileKeyboard() {
 					$emojis['whitesquarebutton'].'All Movies' 
 			],
 			[ 
-					'🗑 Delete all preferences' 
+					"".$emojis['wastebasket']." Delete all preferences" 
 			] 
 	];
 	

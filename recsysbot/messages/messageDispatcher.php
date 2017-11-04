@@ -651,7 +651,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetProfileReply($telegram, $chatId, $pagerankCicle);
          break;
       //delete all preference
-      case strpos($text, '🗑'):
+      case strpos($text, "".$emojis['wastebasket'].""):
          $text = "delete, preferences";
          $context = "resetCommandSelected";
          $replyText = $text;
