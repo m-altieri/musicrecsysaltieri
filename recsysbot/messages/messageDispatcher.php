@@ -36,9 +36,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          startProfileAcquisitioReply($telegram, $chatId);        
          break;
       //Rate movies
-      case strpos($text, 'ðŸ”µ'):
+      case strpos($text, '🔵'):
          $context = "rateMoviesSelected";
-         $replyText = str_replace('ðŸ”µ', 'icon movies,', $text);
+         $replyText = str_replace('🔵', 'icon movies,', $text);
          $replyFunctionCall = "userMovieprofileInstance"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -52,9 +52,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $userMovieprofile->handle();
          break;
       //Rate movies
-      case strpos($text, 'movies'):
+      case strpos($text, '🔵'):
          $context = "rateMoviesSelected";
-         $replyText = str_replace('ðŸ”µ', 'icon movies,', $text);
+         $replyText = str_replace('🔵', 'icon movies,', $text);
          $replyFunctionCall = "userMovieprofileInstance"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "keyboard";
@@ -68,7 +68,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $userMovieprofile->handle();
          break;
       //Details movies to rating
-      case strpos($text, 'ðŸ“‹'): 
+      case strpos($text, '📋'): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = movieToRatingSelected($chatId, $pagerankCicle);
 
@@ -83,7 +83,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          detailsMovieRequestReply($telegram, $chatId, $movie_name, $userMovieprofile);  
          break;
       //Film Proposto valutato positivamente
-      case strpos($text, 'ðŸ‘�'):
+      case strpos($text, '👍'):
          $rating = 1;
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movieName = movieToRatingSelected($chatId, $pagerankCicle);
@@ -98,7 +98,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Film Proposto valutato negativamente
-      case strpos($text, 'ðŸ‘Ž'):
+      case strpos($text, '👎'):
          $rating = 0;
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movieName = movieToRatingSelected($chatId, $pagerankCicle);
@@ -113,7 +113,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Film Proposto non valutato
-      case strpos($text, 'âž¡'):
+      case strpos($text, '➡'):
          $rating = 2;
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movieName = movieToRatingSelected($chatId, $pagerankCicle);
@@ -128,9 +128,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userMovieRatingReply($telegram, $chatId, $rating, $lastChange, $userMovieprofile);
          break;
       //Rate movie properties
-      case strpos($text, 'ðŸ”´'):
+      case strpos($text, '🔴'):
          $context = "rateMoviePropertiesSelected";
-         $replyText = str_replace('ðŸ”´', 'icon properties,', $text);
+         $replyText = str_replace('🔴', 'icon properties,', $text);
          $replyFunctionCall = "basePropertyTypeReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -150,7 +150,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          basePropertyTypeReply($telegram, $chatId);
          break;
       //Vai alla opportuno caso di backNext
-      case stristr($text, 'ðŸ‘ˆ') !== false: case stristr($text, 'ðŸ‘‰') !== false:
+      case stristr($text, '👈') !== false: case stristr($text, '👉') !== false:
          //la put del messaggio Ã¨ richiamata nella funzione
          backNextFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
@@ -297,9 +297,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueReply($telegram, $chatId, $propertyType, $text);
          break;
-      case strpos($text, 'ðŸŽ¬'):
+      case strpos($text, '🎬'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸŽ¬', 'director,', $text); // Replaces all ðŸŽ¬ with propertyType.
+         $text = str_replace('🎬', 'director,', $text); // Replaces all 🎬 with propertyType.
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -309,9 +309,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ•´'):
+      case strpos($text, '🕴'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ•´', 'starring,', $text);
+         $text = str_replace('🕴', 'starring,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -321,9 +321,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ“¼'):
+      case strpos($text, '📼'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ“¼', 'category,', $text);
+         $text = str_replace('📼', 'category,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -333,9 +333,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸŽž'):
+      case strpos($text, '🎞'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸŽž', 'genre,', $text);
+         $text = str_replace('🎞', 'genre,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -345,9 +345,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ–Š'):
+      case strpos($text, '🖊'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ–Š', 'writer,', $text);
+         $text = str_replace('🖊', 'writer,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -357,9 +357,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ’°'):
+      case strpos($text, '💰'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ’°', 'producer,', $text);
+         $text = str_replace('💰', 'producer,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -369,9 +369,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸŽ¼'):
+      case strpos($text, '🎼'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸŽ¼', 'musicComposer,', $text);
+         $text = str_replace('🎼', 'musicComposer,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -381,9 +381,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ“·'):
+      case strpos($text, '📷'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ“·', 'cinematography,', $text);
+         $text = str_replace('📷', 'cinematography,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -393,9 +393,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ“”'):
+      case strpos($text, '📔'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ“”', 'basedOn,', $text);
+         $text = str_replace('📔', 'basedOn,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -405,9 +405,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ’¼'):
+      case strpos($text, '💼'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ’¼', 'editing,', $text);
+         $text = str_replace('💼', 'editing,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -417,9 +417,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
 
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
-      case strpos($text, 'ðŸ�¢'):
+      case strpos($text, '🏢'):
          $text = clearLastPropertyTypeAndPropertyName($text);
-         $text = str_replace('ðŸ�¢', 'distributor,', $text);
+         $text = str_replace('🏢', 'distributor,', $text);
          $context = "propertyTypeAndPropertyValueSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyValueRatingReply"; 
@@ -430,8 +430,8 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          propertyValueRatingReply($telegram, $chatId, $pagerankCicle);
          break;
       //filtro sull'anno di realizzazione
-      case strpos($text, 'ðŸ—“'):
-         $text = str_replace('ðŸ—“', 'releaseYear,', $text);
+      case strpos($text, '🗓'):
+         $text = str_replace('🗓', 'releaseYear,', $text);
          $context = "releaseYearFilterSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyReleaseYearFilterReply"; 
@@ -442,7 +442,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          propertyReleaseYearFilterReply($telegram, $chatId, $pagerankCicle);
          break;
       //aggiungi un filtro sull'anno di realizzazione
-      case strpos($text, 'ðŸ“†'):
+      case strpos($text, '🗓'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = releaseYearFilterSelected($chatId, $pagerankCicle);
          $propertyType = $reply[0];
@@ -458,7 +458,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyName, $addFilter);
          break;
       //elimina filtro sull'anno di realizzazione
-      case strpos($text, 'ðŸ”¸'):
+      case strpos($text, '🔸'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = releaseYearFilterSelected($chatId, $pagerankCicle);
          $propertyType = $reply[0];
@@ -474,8 +474,8 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          releaseYearFilterReply($telegram, $chatId, $propertyType, $propertyName, $addFilter);
          break;
       //filtro sulla durata
-      case strpos($text, 'ðŸ•°'):
-         $text = str_replace('ðŸ•°', 'runtimeRange, runtime', $text);
+      case strpos($text, '🕰'):
+         $text = str_replace('🕰', 'runtimeRange, runtime', $text);
          $context = "runtimeRangeFilterSelected";
          $replyText = $text;
          $replyFunctionCall = "propertyRuntimeRangeFilterReply"; 
@@ -486,7 +486,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          propertyRuntimeRangeFilterReply($telegram, $chatId, $pagerankCicle);     
          break;
       //aggiungi un filtro sulla durata
-      case strpos($text, 'âŒ›'): 
+      case strpos($text, '⌛'): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = runtimeRangeFilterSelected($chatId, $pagerankCicle);
          $propertyType = $reply[0];
@@ -502,7 +502,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          runtimeRangeFilterReply($telegram, $chatId, $propertyType, $propertyName, $addFilter);
          break;
       //elimina filtro sulla durata
-      case strpos($text, 'ðŸ”¶'):
+      case strpos($text, '🔸'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = runtimeRangeFilterSelected($chatId, $pagerankCicle);
          $propertyType = $reply[0];
@@ -518,7 +518,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          runtimeRangeFilterReply($telegram, $chatId, $propertyType, $propertyName, $addFilter);
          break;
       //propertyValue gradita
-      case strpos($text, 'ðŸ™‚'):
+      case strpos($text, '🙂'):
          $rating = 1;
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = propertyTypeAndPropertyValueSelected($chatId, $pagerankCicle);
@@ -535,7 +535,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating, $lastChange);
          break;
       //propertyValue non gradita
-      case strpos($text, 'ðŸ˜‘'):
+      case strpos($text, '😑'):
          $rating = 0;
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $reply = propertyTypeAndPropertyValueSelected($chatId, $pagerankCicle);
@@ -552,7 +552,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating, $lastChange);
          break;
       //propertyValue indifferente
-      case strpos($text, 'ðŸ¤”'):
+      case strpos($text, '🤔'):
          $rating = 2;
          $pagerankCicle = getNumberPagerankCicle($chatId);   
          $reply = propertyTypeAndPropertyValueSelected($chatId, $pagerankCicle);
@@ -569,8 +569,8 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          userPropertyValueRatingReply($telegram, $chatId, $propertyType, $propertyName, $rating, $lastChange);
          break;
       //Modifica la valutazione di un film valutato
-      case strpos($text, 'ðŸ“½'):
-         $text = str_replace('ðŸ“½', '', $text);
+      case strpos($text, '📽'):
+         $text = str_replace('📽', '', $text);
          $text = clearLastPropertyTypeAndPropertyName($text);         
          $movieName = $text;
          $context = "changeMovieRatedSelected";
@@ -585,8 +585,8 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $userMovieprofile->handle();
          break;
       //Film scelto dalla top 5 list
-      case stristr($text, 'ðŸŽ¥') !== false:
-         $movieName = str_replace('ðŸŽ¥', '', $text);
+      case stristr($text, '🎥') !== false:
+         $movieName = str_replace('🎥', '', $text);
          $movieName = trim($movieName);
          $page = $userMovieRecommendation->getPageFromMovieName($chatId,$movieName);
          $userMovieRecommendation->setPage($page);
@@ -601,14 +601,14 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $userMovieRecommendation->handle();
          break;
       //Vai all'opportuno caso di back function
-      case strpos($text, 'ðŸ”™'):
+      case strpos($text, '".$emojis['backarrow']."'):
          //la put del messaggio Ã¨ richiamata nella funzione
          backFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //Reset del profilo
-      case strpos($text, 'âœ–'):
+      case strpos($text, '✖'):
          $context = "resetProfileSelected";
-         $replyText = str_replace('âœ–', 'icon reset,', $text);
+         $replyText = str_replace('✖', 'icon reset,', $text);
          $replyFunctionCall = "resetReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -627,7 +627,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetReply($telegram, $chatId);
          break;
       //delete all properties
-      case strpos($text, 'ðŸ”²'):
+      case strpos($text, ".$emojis['blacksquarebutton']."):
          $text = "delete, properties";
          $context = "resetCommandSelected";
          $replyText = $text;
@@ -639,7 +639,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetProfileReply($telegram, $chatId, $pagerankCicle);
          break;
       //delete all movies
-      case strpos($text, 'ðŸ”³'):
+      case strpos($text, '🔳'):
          $text = "delete, movies";
          $context = "resetCommandSelected";
          $replyText = $text;
@@ -651,7 +651,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetProfileReply($telegram, $chatId, $pagerankCicle);
          break;
       //delete all preference
-      case strpos($text, 'ðŸ—‘'):
+      case strpos($text, '🗑'):
          $text = "delete, preferences";
          $context = "resetCommandSelected";
          $replyText = $text;
@@ -663,7 +663,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetProfileReply($telegram, $chatId, $pagerankCicle);
          break;
       //conferm delete
-      case strpos($text, 'âœ”'):
+      case strpos($text, '✔'):
          $context = "confermResetSelected";
          $replyText = $text;
          $replyFunctionCall = "resetConfirmReply"; 
@@ -677,7 +677,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $confirm = "yes";
          resetConfirmReply($telegram, $chatId, $firstname, $deleteType, $preference, $confirm);
          break;
-      case strpos($text, 'ðŸš«'):
+      case strpos($text, '🚫'):
          $context = "confermResetSelected";
          $replyText = $text;
          $replyFunctionCall = "resetConfirmReply"; 
@@ -692,9 +692,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetConfirmReply($telegram, $chatId, $firstname, $deleteType, $preference, $confirm);
          break;
       //Recommend movies
-      case strpos($text, 'ðŸŒ�'): 
+      case strpos($text, '🌐'): 
          $context = "recommendMoviesSelected";
-         $replyText = str_replace('ðŸŒ�', 'icon rec,', $text);
+         $replyText = str_replace('🌐', 'icon rec,', $text);
          $replyFunctionCall = "recommendationBackNextMovieReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -703,7 +703,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          recommendationBackNextMovieReply($telegram, $chatId, $userMovieRecommendation);
          break;
        //film raccomandato valutato positivamente
-      case strpos($text, 'ðŸ˜ƒ'):
+      case strpos($text, '😃'):
          //TODO
          $rating = 1;
          $pagerankCicle = getNumberPagerankCicle($chatId);
@@ -720,7 +720,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //film raccomandato valutato negativamente
-      case strpos($text, 'ðŸ™�'):
+      case strpos($text, '🙁'):
          //TODO
          $rating = 0;
          $pagerankCicle = getNumberPagerankCicle($chatId);
@@ -737,7 +737,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
       //I Like but
-      case strpos($text, 'ðŸŒ€'):
+      case strpos($text, '🌀'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = recMovieSelected($chatId, $pagerankCicle);
 
@@ -751,7 +751,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          refineMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Details of recommendation movies
-      case strpos($text, 'ðŸ“‘'):
+      case strpos($text, '📑'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = recMovieSelected($chatId, $pagerankCicle);
 
@@ -765,7 +765,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          detailsRecMovieRequestReply($telegram, $chatId, $movie_name, $userMovieRecommendation);
          break;
       //Why?
-      case strpos($text, 'ðŸ“£'):
+      case strpos($text, '📣'):
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = recMovieSelected($chatId, $pagerankCicle);
 
@@ -778,13 +778,13 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          explanationMovieReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Change - refocus
-      case strpos($text, 'ðŸ’¢'): 
+      case strpos($text, '".$emojis['angersymbol']."'): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = recMovieSelected($chatId, $pagerankCicle);
 
          //$context = "refocusChangeRecMovieListSelected";
          $context = "recMovieToRefocusSelected";
-         $replyText = str_replace('ðŸ’¢', 'icon change,', $text);
+         $replyText = str_replace('".$emojis['angersymbol']."', 'icon change,', $text);
          $replyFunctionCall = "refocusChangeRecMovieListReply"; 
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
@@ -794,9 +794,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          refocusChangeRecMovieListReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Refine le proprietÃ  del film
-      case strpos($text, 'ðŸ”Ž'):
+      case strpos($text, '🔎'):
          $context = "recMovieToRefineSelected";
-         $replyText = str_replace('ðŸ”Ž', 'icon refine other properties,', $text);
+         $replyText = str_replace('🔎', 'icon refine other properties,', $text);
          $replyFunctionCall = "refineLastMoviePropertyReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -806,9 +806,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          refineLastMoviePropertyReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //profile
-      case strpos($text, '".$emojis['gear']."'):
+      case strpos($text, '👤'):
          $context = "profileSelected";
-         $replyText = str_replace('ðŸ‘¤', 'icon profile,', $text);
+         $replyText = str_replace('👤', 'icon profile,', $text);
          $replyFunctionCall = "profileReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -816,10 +816,10 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          
          profileInRecConxetReply($telegram, $chatId);  
          break;
-      // âš™ï¸� profilo dalla schermata dei film raccomandati
-      case strpos($text, 'âš™ï¸�'):
+         // ⚙️ profilo dalla schermata dei film raccomandati
+      case strpos($text, '⚙️'):
          $context = "profileSelected";
-         $replyText = str_replace('âš™ï¸�', 'icon profile,', $text);
+         $replyText = str_replace('⚙️', 'icon profile,', $text);
          $replyFunctionCall = "profileReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";
@@ -827,7 +827,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          profileReply($telegram, $chatId);
          break;      
-      case strpos($text, 'ðŸ“˜'):
+      case strpos($text, '📘'):
          $help = "rateMovieSelected";
          $context = "helpSelected";
          $replyText = "help, rateMovieSelected";
@@ -838,7 +838,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          helpReply($telegram, $chatId, $help);
          break;
-      case strpos($text, 'ðŸ“—'):
+      case strpos($text, '📗'):
          $help = "recMovieSelected";
          $context = "helpSelected";
          $replyText = "help,recMovieSelected";
@@ -849,7 +849,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          helpReply($telegram, $chatId, $help);
          break;
-      case strpos($text, 'ðŸ“™'):
+      case strpos($text, '📙'):
          $help = "profileSelected";
          $context = "helpSelected";
          $replyText = "help,profileSelected";
@@ -860,7 +860,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          helpReply($telegram, $chatId, $help);
          break;
-      case strcasecmp($text, 'ðŸŒŸ ðŸŒŸ ðŸŒŸ ðŸŒŸ ðŸŒŸ') == 0:  case strcasecmp($text, 'ðŸŒŸ ðŸŒŸ ðŸŒŸ ðŸŒŸ') == 0:  case strcasecmp($text, 'ðŸŒŸ ðŸŒŸ ðŸŒŸ') == 0:  case strcasecmp($text, 'ðŸŒŸ ðŸŒŸ') == 0:  case strcasecmp($text, 'ðŸŒŸ') == 0:
+      case strcasecmp($text, '🌟 🌟 🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟 🌟') == 0:  case strcasecmp($text, '🌟 🌟') == 0:  case strcasecmp($text, '🌟') == 0:
          $context = "experimentalValutationSelected";
          $replyText = "star,".$text;
          $replyFunctionCall = "experimentCompleteReply"; 
@@ -871,9 +871,9 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          experimentCompleteReply($telegram, $chatId, $text);
          break;
       //nuova sessione/passaggio a nuova configurazione
-      case strpos($text, 'ðŸ¤–'): 
+      case strpos($text, '🤖'): 
          $context = "newSessionSelected";
-         $replyText = str_replace('ðŸ¤–', 'icon new session', $text);
+         $replyText = str_replace('🤖', 'icon new session', $text);
          $replyFunctionCall = "newSessionReply"; 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $responseType = "button";

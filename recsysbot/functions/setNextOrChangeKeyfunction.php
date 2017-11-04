@@ -5,7 +5,7 @@ function setNextOrChangeKeyfunction($chatId) {
 	if ($numberRatedRecMovieList > 0) {
 		$key = "Next 👉";
 	} else {
-		$key = "💢 Change";
+		$key = "".$emojis['angersymbol']." Change";
 	}
 	
 	return $key;

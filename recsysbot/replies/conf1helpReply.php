@@ -28,7 +28,7 @@ function conf1helpReply($telegram, $chatId, $help){
 			$text .= "\n📑 Details: tap if you want to view the movie details";
 			$text .= "\n📣 Why?:	tap for viewing the motivations behind the recommendations";
 			$text .= "\n👤 Profile: by tapping this button you can view your preferences and change them";
-			$text .= "\n💢 Change: tap for receiving a new set of recommendations";
+			$text .= "\n".$emojis['angersymbol']." Change: tap for receiving a new set of recommendations";
 
 			$keyboard = [
 			                ["".$emojis['backarrow']." Back to Movies"]

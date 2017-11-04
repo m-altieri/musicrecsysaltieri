@@ -2,8 +2,8 @@
 function resetProfileKeyboard() {
 	$keyboard = [ 
 			[ 
-					'🔲 All Properties',
-					'🔳 All Movies' 
+					$emojis['blacksquarebutton'].'All Properties',
+					$emojis['whitesquarebutton'].'All Movies' 
 			],
 			[ 
 					'🗑 Delete all preferences' 
