@@ -185,9 +185,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
+				if (stristr ( $property [0], $emojis['backarrow'] ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
+					$movie = str_replace ( $emojis['moviecamera'], '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;
@@ -208,9 +208,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
+				if (stristr ( $property [0], $emojis['backarrow'] ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
+					$movie = str_replace ( $emojis['moviecamera'], '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;
@@ -231,9 +231,9 @@ class userMovieRecommendation {
 		} else {
 			$i = 1;
 			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], '".$emojis['backarrow']."' ) == false) {
+				if (stristr ( $property [0], ("".$emojis['backarrow']."") ) == false) {
 					$movie = $property [0];
-					$movie = str_replace ( '".$emojis['moviecamera']."', '', $movie );
+					$movie = str_replace ( ("".$emojis['moviecamera'].""), '', $movie );
 					$movie = trim ( $movie );
 					$movieListTop5 [$i] = $movie;
 					$i ++;

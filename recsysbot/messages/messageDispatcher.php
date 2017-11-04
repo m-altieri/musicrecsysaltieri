@@ -601,7 +601,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $userMovieRecommendation->handle();
          break;
       //Vai all'opportuno caso di back function
-      case strpos($text, '".$emojis['backarrow']."'):
+      case strpos($text, ("".$emojis['backarrow']."")):
          //la put del messaggio Ã¨ richiamata nella funzione
          backFunction($telegram, $chatId, $messageId, $text, $botName, $date, $userMovieRecommendation);
          break;
@@ -627,7 +627,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          resetReply($telegram, $chatId);
          break;
       //delete all properties
-      case strpos($text, ".$emojis['blacksquarebutton']."):
+      case strpos($text, $emojis['blacksquarebutton']):
          $text = "delete, properties";
          $context = "resetCommandSelected";
          $replyText = $text;
@@ -778,13 +778,13 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          explanationMovieReply($telegram, $chatId, $userMovieRecommendation);
          break;
       //Change - refocus
-      case strpos($text, '".$emojis['angersymbol']."'): 
+      case strpos($text, ("".$emojis['angersymbol']."")): 
          $pagerankCicle = getNumberPagerankCicle($chatId);
          $movie = recMovieSelected($chatId, $pagerankCicle);
 
          //$context = "refocusChangeRecMovieListSelected";
          $context = "recMovieToRefocusSelected";
-         $replyText = str_replace('".$emojis['angersymbol']."', 'icon change,', $text);
+         $replyText = str_replace(("".$emojis['angersymbol'].""), 'icon change,', $text);
          $replyFunctionCall = "refocusChangeRecMovieListReply"; 
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);

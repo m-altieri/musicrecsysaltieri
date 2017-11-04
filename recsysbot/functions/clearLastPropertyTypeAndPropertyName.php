@@ -6,7 +6,7 @@ function clearLastPropertyTypeAndPropertyName($fullText) {
 	$arrayText = explode ( " - ", $fullText );
 	$text = $arrayText [0];
 	$text = trim ( $text );
-	// $text = str_replace('".$emojis['pen']."', 'writer,', $text);
+	// $text = str_replace(("".$emojis['pen'].""), 'writer,', $text);
 	
 	return $text;
 }
