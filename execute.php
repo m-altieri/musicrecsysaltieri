@@ -68,8 +68,6 @@
 
 	//Configurazione testo benvenuto, pulsante inizia e altre caratteristiche del bot
 // 	setBotProfile();
-
-	file_put_contents("php://stderr", $update);
 	
 	$message = $update["entry"][0]["messaging"][0];
 	$messageId = $message["message"]["mid"];
@@ -130,7 +128,7 @@
 				$username = $firstname;
 // 				//Integer.parseInt() bug
 				$chatId = substr($chatId, 0, 8);
-				putUserDetail ($shortId, $firstname, $lastname, $username);
+				putUserDetail ($chatId, $firstname, $lastname, $username);
 // 				putUserDetail($chatId, $firstname, $lastname, $username);
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			} else {
