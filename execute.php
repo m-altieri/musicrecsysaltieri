@@ -127,14 +127,14 @@
 			if ($postbackPayload == $getStartedPayload) { //Messenger
 				$username = $firstname;
 // 				//Integer.parseInt() bug
-				putUserDetail (substr($chatId, 0, 8), $firstname, $lastname, $username);
+				putUserDetail (substr($chatId, 0, 9), $firstname, $lastname, $username); //substr perchè su messenger è troppo lungo
 // 				putUserDetail($chatId, $firstname, $lastname, $username);
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			} else {
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			}
 			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $chatId);
-			$userDetail = getUserDetail($chatId);
+			$userDetail = getUserDetail(substr($chatId, 0, 9)); //substr perchè su messenger è troppo lungo
 			file_put_contents("php://stderr", "User Detail ricevuto: " . 
 					"\nid: " . $userDetail['id'] . 
 					"\nusername: " . $userDetail['username'] . 
