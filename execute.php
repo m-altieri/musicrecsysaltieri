@@ -127,7 +127,7 @@
 			if ($postbackPayload == $getStartedPayload) { //Messenger
 				$username = $firstname;
 // 				//Integer.parseInt() bug
-				putUserDetail ($chatId, $firstname, $lastname, $username);
+				putUserDetail (substr($chatId, 0, 8), $firstname, $lastname, $username);
 // 				putUserDetail($chatId, $firstname, $lastname, $username);
 // 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			} else {
