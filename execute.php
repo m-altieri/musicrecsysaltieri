@@ -47,7 +47,14 @@
 	date_default_timezone_set ( $config ['timezone'] );
 	$token = $config ['token'];
 	
-// 	$telegram = new Api ( $token );
+	$telegram = new Api ( $token );
+	$keyboard =    $keyboard = [
+			["".$emojis['globe']." Recommend Movies"],
+			['📘 Help',"".$emojis['gear']." Profile"]
+	];
+	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+	file_put_contents("php://stderr", "reply_markup: " . $reply_markup);
+	
 	
 	// recupero il contenuto inviato da Telegram
 	$content = file_get_contents("php://input");
