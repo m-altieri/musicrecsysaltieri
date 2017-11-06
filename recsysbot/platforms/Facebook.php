@@ -7,7 +7,7 @@ class Facebook implements Platform {
 	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
-		
+		sendMessage($text, $chatId)
 	}
 	
 	public function sendPhoto($chatId, $photo, $caption) {
