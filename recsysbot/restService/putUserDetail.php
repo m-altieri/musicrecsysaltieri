@@ -12,9 +12,10 @@ function putUserDetail($chatId, $firstname, $lastname, $username) {
 // 	$data = json_decode ( $bodyMsg );
 	$ch = curl_init("http://193.204.187.192:8080" . $stringGetRequest);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_exec($ch);
+	$res = curl_exec($ch);
 	curl_close($ch);
 	//192.168.1.107
+	
 	file_put_contents("php://stderr", $res . PHP_EOL);
 	file_put_contents ( "php://stderr", "http://193.204.187.192:8080" . $stringGetRequest . "/return:" . $data . PHP_EOL );
 	
