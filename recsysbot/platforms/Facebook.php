@@ -7,7 +7,10 @@ class Facebook implements Platform {
 	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
-		sendMessage($text, $chatId)
+		sendMessage($text, $chatId);
+		/*
+		 * Aggiungere l'invio dei quick reply
+		 */
 	}
 	
 	public function sendPhoto($chatId, $photo, $caption) {
@@ -18,8 +21,18 @@ class Facebook implements Platform {
 		
 	}
 	
-	public function replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard) {
+	public function replyKeyboardMarkup($keyboard) {
 		
+		$quick_replies = array();
+		
+		foreach ($keyboard as $item) {
+			$quick_replies['content_type' => 'text'];
+			$quick_replies['title' => $item];
+			$quick_replies['payload' => $item];
+		}
+		
+		return $quick_replies;
+	
 	}
 	
 }
