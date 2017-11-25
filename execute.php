@@ -127,7 +127,7 @@
 /***************
 DEBUG
 ***************/
-if ($text == "sayHi") {
+if ($text == "sayhi") {
   sayHi();
   return;
 }
