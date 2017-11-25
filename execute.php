@@ -129,6 +129,7 @@ DEBUG
 ***************/
 if ($text == "sayHi") {
   sayHi();
+  return;
 }
 /***************
 DEBUG

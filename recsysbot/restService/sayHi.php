@@ -7,7 +7,7 @@ function sayHi() {
         $config = require '/app/recsysbot/config/movierecsysbot-config.php';
 
 	$client = new Client ( [ 
-			'base_uri' => $config['base_uri'];
+			'base_uri' => $config['base_uri']
 	] );
 
         // debug
