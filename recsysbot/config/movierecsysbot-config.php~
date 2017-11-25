@@ -22,8 +22,6 @@ return [
 				"#movie for you, based on your tastes " .
 				$emojis['wink'],
 		// Facebook payload returned from "Start" button
-		'getStartedPayload' => "get_started",
-                // Base URI (altieri)
-                'base_uri' => '193.204.187.192:8090'
+		'getStartedPayload' => "get_started"
 ];
 ?>

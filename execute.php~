@@ -123,16 +123,6 @@
 	
 	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
 	$text = strtolower ( $text );
-
-/***************
-DEBUG
-***************/
-if ($text == "sayHi") {
-  sayHi();
-}
-/***************
-DEBUG
-***************/
 	
 	try {
 		$response = "";
