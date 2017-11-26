@@ -1,6 +1,6 @@
 <?php 
 
-require "recsysbot/platforms/Platform.php";
+require_once "recsysbot/platforms/Platform.php";
 require "recsysbot/facebook/sendMessage.php";
 require "recsysbot/facebook/setBotProfile.php";
 require "recsysbot/facebook/setGetStarted.php";
