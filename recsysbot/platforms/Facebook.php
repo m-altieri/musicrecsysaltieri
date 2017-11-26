@@ -1,8 +1,10 @@
 <?php 
 
-foreach (glob('recsysbot/facebook/*.php' as $file)) {
-	require $file;
-}
+require "recsysbot/facebook/sendMessage.php";
+require "recsysbot/facebook/setBotProfile.php";
+require "recsysbot/facebook/setGetStarted.php";
+require "recsysbot/facebook/setGreeting.php";
+require "recsysbot/facebook/setPersistentMenu.php";
 
 class Facebook implements Platform {
 	

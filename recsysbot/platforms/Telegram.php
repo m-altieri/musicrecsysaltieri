@@ -1,5 +1,7 @@
 <?php 
 
+use Telegram\Bot\Api;
+
 class Telegram implements Platform {
 	
 	var $telegram;

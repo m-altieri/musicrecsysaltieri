@@ -4,14 +4,9 @@
 	 * @author Francesco Baccaro
 	 */
 	use GuzzleHttp\Client;
-	use Telegram\Bot\Api;
 	
 	require 'vendor/autoload.php';
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-	
-	foreach (glob("recsysbot/facebook/*.php") as $file) {
-		require $file;
-	}
 	
 // 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 // 	$myToken = "testmovierecsysbot";
