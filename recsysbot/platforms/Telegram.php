@@ -68,7 +68,7 @@ class Telegram implements Platform {
 			'username' => isset ($message['chat']['username']) ? $message['chat']['username'] : "",
 			'date' => isset ($message['date']) ? $message['date'] : "",
 			'text' => isset ($message['text']) ? $message['text'] : "",
-			'globalDate' = gmdate("Y-m-d\TH:i:s\Z", $date);
+			'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
 		];
 		
 		return $info;
