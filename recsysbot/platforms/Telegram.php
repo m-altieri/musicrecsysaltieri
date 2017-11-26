@@ -10,8 +10,8 @@ class Telegram implements Platform {
 	var $token;
 	
 	public function __construct() {
-		$telegram = new Api($token);
 		$token = $config['token'];
+		$telegram = new Api($token);
 	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
