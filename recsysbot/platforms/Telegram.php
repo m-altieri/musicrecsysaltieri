@@ -59,7 +59,11 @@ class Telegram implements Platform {
 	 */
 	public function getMessageInfo($json) {
 		
-		$info = [
+		foreach ($json as $value) {
+			file_put_contents("php://stderr", $value);
+		}
+		
+		$info = array(
 			'message' => isset ($json['message']) ? $json['message'] : "",
 			'messageId' => isset ($message['message_id']) ? $message['message_id'] : "",
 			'chatId' => isset ($message['chat']['id']) ? $message['chat']['id'] : "",
@@ -69,10 +73,8 @@ class Telegram implements Platform {
 			'date' => isset ($message['date']) ? $message['date'] : "",
 			'text' => isset ($message['text']) ? $message['text'] : "",
 			'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
-		];
-		foreach ($info as $item) {
-			file_put_contents("php://stderr", $item);
-		}
+		);
+
 		return $info;
 	}
 	
