@@ -70,7 +70,8 @@ class Telegram implements Platform {
 			'text' => isset ($message['text']) ? $message['text'] : "",
 			'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
 		];
-		
+	
+		file_put_contents("php://stderr", $info);
 		return $info;
 	}
 	
