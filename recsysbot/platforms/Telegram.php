@@ -8,7 +8,7 @@ class Telegram implements Platform {
 	var $telegram;
 	
 	public function __construct() {
-		$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
+		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 		file_put_contents("php://stderr", "Token: " . $config['token']);
 		$this->$telegram = new Api($config['token']);
 	}
