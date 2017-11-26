@@ -11,7 +11,14 @@ interface Platform {
 	 */
 	public function sendMessage($array);
 	
-	public function sendPhoto($chatId, $photo, $caption);
+	/**
+	 * Send a photo.
+	 * $array must contain 3 values:
+	 * 'chat_id' - the chat where to send the message to
+	 * 'photo' - the photo path
+	 * 'caption' - the caption to send alongside with the photo
+	 */
+	public function sendPhoto($array);
 	
 	/**
 	 *

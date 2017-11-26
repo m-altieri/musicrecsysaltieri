@@ -18,7 +18,7 @@ class Facebook implements Platform {
 		 */
 	}
 	
-	public function sendPhoto($chatId, $photo, $caption) {
+	public function sendPhoto($array) {
 		
 	}
 	
