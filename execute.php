@@ -66,10 +66,10 @@
 		exit ();
 	}
 	
-// 	$telegram->addCommand ( Recsysbot\Commands\HelpCommand::class );
-// 	$telegram->addCommand ( Recsysbot\Commands\InfoCommand::class );
-// 	$telegram->addCommand ( Recsysbot\Commands\ResetCommand::class );
-// 	$telegram->addCommand ( Recsysbot\Commands\StartCommand::class );
+	$platform->addCommand ( Recsysbot\Commands\HelpCommand::class );
+	$platform->addCommand ( Recsysbot\Commands\InfoCommand::class );
+	$platform->addCommand ( Recsysbot\Commands\ResetCommand::class );
+	$platform->addCommand ( Recsysbot\Commands\StartCommand::class );
 
 	//Configurazione testo benvenuto, pulsante inizia e altre caratteristiche del bot
 // 	setBotProfile();

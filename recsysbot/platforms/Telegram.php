@@ -77,6 +77,10 @@ class Telegram implements Platform {
 		$this->$telegram->commandsHandler($boolean);
 	}
 	
+	public function addCommand($commandClass) {
+		$this->$telegram->addCommand($commandClass);
+	}
+	
 }
 
 ?>

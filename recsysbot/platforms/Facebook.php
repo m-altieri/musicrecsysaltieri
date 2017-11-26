@@ -52,6 +52,10 @@ class Facebook implements Platform {
 		
 	}
 	
+	public function addCommand($commandClass) {
+		
+	}
+	
 }
 
 ?>

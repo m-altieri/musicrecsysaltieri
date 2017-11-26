@@ -45,6 +45,8 @@ interface Platform {
 	public function getMessageInfo($json);
 	
 	public function commandsHandler($boolean);
+	
+	public function addCommand($commandClass);
 
 }
 
