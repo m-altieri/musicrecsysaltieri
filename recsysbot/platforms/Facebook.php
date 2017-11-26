@@ -1,10 +1,10 @@
 <?php 
 
+foreach (glob('recsysbot/facebook/*.php' as $file)) {
+	require $file;
+}
+
 class Facebook implements Platform {
-	
-	foreach (glob('recsysbot/facebook/*.php' as $file)) {
-		require $file;
-	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
 		sendMessage($text, $chatId);
