@@ -1,5 +1,5 @@
 <?php
-function sendMessage($text, $user) {
+function sendMessage($user, $text) {
 		
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	

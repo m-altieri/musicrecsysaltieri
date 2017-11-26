@@ -11,8 +11,8 @@ $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Facebook implements Platform {
 	
-	public function sendMessage($chatId, $text, $reply_markup) {
-		sendMessage($text, $chatId);
+	public function sendMessage($array) {
+		sendMessage($array['chat_id'], $array['text']);
 		/*
 		 * Aggiungere l'invio dei quick reply
 		 */
