@@ -59,9 +59,8 @@ class Telegram implements Platform {
 	 */
 	public function getMessageInfo($json) {
 		
-		foreach ($json as $value) {
-			file_put_contents("php://stderr", $value);
-		}
+		file_put_contents("php://stderr", "Text:" . $json['message']['text']);
+		
 		
 		$info = array(
 			'message' => isset ($json['message']) ? $json['message'] : "",
