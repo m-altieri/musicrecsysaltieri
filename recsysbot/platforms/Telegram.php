@@ -2,16 +2,15 @@
 
 use Telegram\Bot\Api;
 require_once "recsysbot/platforms/Platform.php";
-$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Telegram implements Platform {
 	
 	var $telegram;
 	
 	public function __construct() {
-		$token = $config['token'];
-		file_put_contents("php://stderr", "Token: " . $token);
-		$this->$telegram = new Api($token);
+		$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
+		file_put_contents("php://stderr", "Token: " . $config['token']);
+		$this->$telegram = new Api($config['token']);
 	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
