@@ -6,7 +6,11 @@ interface Platform {
 	
 	public function sendPhoto($chatId, $photo, $caption);
 	
-	public function sendChatAction($chatId, $action);
+	/**
+	 *
+	 * @param unknown $array Array containing the chat_id and the action.
+	 */
+	public function sendChatAction($array);
 	
 	/**
 	 * Get the $reply_markup to pass in the sendMessage() function.

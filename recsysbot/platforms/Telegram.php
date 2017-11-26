@@ -23,10 +23,7 @@ class Telegram implements Platform {
 		
 	}
 	
-	/**
-	 * 
-	 * @param unknown $array Array containing the chat_id and the action.
-	 */
+
 	public function sendChatAction($array) {
 		$this->$telegram->sendChatAction([
 				$array['chat_id'],

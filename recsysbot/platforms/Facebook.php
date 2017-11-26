@@ -22,7 +22,7 @@ class Facebook implements Platform {
 		
 	}
 	
-	public function sendChatAction($chatId, $action) {
+	public function sendChatAction($array) {
 		
 	}
 	
