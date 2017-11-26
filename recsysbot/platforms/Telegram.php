@@ -57,31 +57,23 @@ class Telegram implements Platform {
 	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
 	 * @param unknown $json
 	 */
-	public function getMessageInfo($json) {		
+	public function getMessageInfo($json) {
 		
-// 		$info = array(
-// 			'message' => isset ($json['message']) ? $json['message'] : "",
-// 			'messageId' => isset ($message['message_id']) ? $message['message_id'] : "",
-// 			'chatId' => isset ($message['chat']['id']) ? $message['chat']['id'] : "",
-// 			'firstname' => isset ($message['chat']['first_name']) ? $message['chat']['first_name'] : "",
-// 			'lastname' => isset ($message['chat']['last_name']) ? $message['chat']['last_name'] : "",
-// 			'username' => isset ($message['chat']['username']) ? $message['chat']['username'] : "",
-// 			'date' => isset ($message['date']) ? $message['date'] : "",
-// 			'text' => isset ($message['text']) ? $message['text'] : "",
-// 			'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
-// 		);
-
+		file_put_contents("php://stderr", "Text:" . $json['message']['text']);
+		$message = isset ($json['message']) ? $json['message'] : "";
+		
 		$info = array(
-				'message' => $json['message'],
-				'messageId' => $message['message_id'],
-				'chatId' => $message['chat']['id'],
-				'firstname' => $message['chat']['first_name'],
-				'lastname' => $message['chat']['last_name'],
-				'username' => $message['chat']['username'],
-				'date' => $message['date'],
-				'text' => $message['text'],
-				'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
+			'message' => $message,
+			'messageId' => isset ($message['message_id']) ? $message['message_id'] : "",
+			'chatId' => isset ($message['chat']['id']) ? $message['chat']['id'] : "",
+			'firstname' => isset ($message['chat']['first_name']) ? $message['chat']['first_name'] : "",
+			'lastname' => isset ($message['chat']['last_name']) ? $message['chat']['last_name'] : "",
+			'username' => isset ($message['chat']['username']) ? $message['chat']['username'] : "",
+			'date' => isset ($message['date']) ? $message['date'] : "",
+			'text' => isset ($message['text']) ? $message['text'] : "",
+			'globalDate' => gmdate("Y-m-d\TH:i:s\Z", $date)
 		);
+
 		return $info;
 	}
 	
