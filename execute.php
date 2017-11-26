@@ -49,7 +49,7 @@
 	 * To create a new platform, create its own php class in the platforms folder.
 	 * It has to implement the Platform interface.
 	 */
-	$platform = new $telegram();
+	$platform = new Telegram();
 	
 	$keyboard = [
 			["".$emojis['globe']." Recommend Movies"],
