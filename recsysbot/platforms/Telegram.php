@@ -25,10 +25,7 @@ class Telegram implements Platform {
 	
 
 	public function sendChatAction($array) {
-		$this->$telegram->sendChatAction([
-				$array['chat_id'],
-				$array['action']
-			]);
+		$this->$telegram->sendChatAction($array);
 	}
 	
 	public function replyKeyboardMarkup($keyboard) {
