@@ -38,7 +38,7 @@
 		require $file;
 	}
 	foreach ( glob ( "recsysbot/platforms/*.php" ) as $file ) {
-		require $file;
+		require_once $file;
 	}
 	
 	// This is suggested from Guzzle
