@@ -28,9 +28,9 @@ class Facebook implements Platform {
 		$quick_replies = array();
 		
 		foreach ($keyboard as $item) {
-			$quick_replies['content_type' => 'text'];
-			$quick_replies['title' => $item];
-			$quick_replies['payload' => $item];
+			$quick_replies['content_type'] = 'text';
+			$quick_replies['title'] = $item;
+			$quick_replies['payload'] = $item;
 		}
 		
 		return $quick_replies;
