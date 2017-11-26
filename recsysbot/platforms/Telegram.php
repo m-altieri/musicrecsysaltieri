@@ -12,11 +12,8 @@ class Telegram implements Platform {
 		$this->$telegram = new Api($config['token']);
 	}
 	
-	public function sendMessage($chatId, $text, $reply_markup) {
-		$telegram->sendMessage ( [
-				'chat_id' => $chatId,
-				'text' => text
-		] );
+	public function sendMessage($array) {
+		$this->$telegram->sendMessage($array);
 	}
 	
 	public function sendPhoto($chatId, $photo, $caption) {

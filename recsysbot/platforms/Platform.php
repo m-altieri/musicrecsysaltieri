@@ -2,7 +2,14 @@
 
 interface Platform {
 	
-	public function sendMessage($chatId, $text, $reply_markup);
+	/**
+	 * Send a message.
+	 * $array must contain 3 values:
+	 * 'chat_id' - the chat where to send the message to
+	 * 'text' - the text of the message
+	 * 'reply_markup' - the keyboard provided to the users
+	 */
+	public function sendMessage($array);
 	
 	public function sendPhoto($chatId, $photo, $caption);
 	
