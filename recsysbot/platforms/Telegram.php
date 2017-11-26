@@ -7,12 +7,11 @@ $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 class Telegram implements Platform {
 	
 	var $telegram;
-	var $token;
 	
 	public function __construct() {
 		$token = $config['token'];
 		file_put_contents("php://stderr", "Token: " . $token);
-		$telegram = new Api($token);
+		$this->$telegram = new Api($token);
 	}
 	
 	public function sendMessage($chatId, $text, $reply_markup) {
