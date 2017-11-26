@@ -53,7 +53,7 @@
 			['📘 Help',"".$emojis['gear']." Profile"]
 	];
 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-	file_put_contents("php://stderr", "reply_markup: " . $reply_markup);
+// 	file_put_contents("php://stderr", "reply_markup: " . $reply_markup);
 	
 	
 	// recupero il contenuto inviato da Telegram
@@ -102,7 +102,6 @@
 	// Stampa nel log
 	file_put_contents("php://stderr", "messageId: " . $messageId . "\nchatId: " . $chatId . "\nfirstname: " . $firstname . "\nlastname: " . $lastname . "\ndate: " . $date . "\ntext: " . $text . "\nglobalDate: " . $globalDate . PHP_EOL);
 	
-	
 	// gestisci edited_message, per evitare blocco del bot
 	if ($chatId == "") {
 		$message = isset ( $update ['edited_message'] ) ? $update ['edited_message'] : "";
@@ -118,10 +117,8 @@
 	}
 	$botName = checkUserAndBotNameFunction ( $chatId, $firstname, $lastname, $username, $date );
 	
-	// pulisco il messaggio ricevuto togliendo eventuali spazi prima e dopo il testo
-	$text = trim ( $text );
-	
-	// converto tutti i caratteri alfanumerici del messaggio in minuscolo
+	// pulisco il messaggio ricevuto
+	$text = trim ( $text );	
 	$text = strtolower ( $text );
 
 /***************
@@ -152,7 +149,8 @@ DEBUG
 				messageDispatcher ( $telegram, $chatId, $messageId, $date, $text, $firstname, $botName );
 			}
 			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $chatId);
-			$userDetail = getUserDetail(substr($chatId, 0, 9)); //substr perchè su messenger è troppo lungo
+			$userDetail = getUserDetail($chatId, 0, 9);
+// 			$userDetail = getUserDetail(substr($chatId, 0, 9)); //substr perchè su messenger è troppo lungo
 			file_put_contents("php://stderr", "User Detail ricevuto: " . 
 					"\nid: " . $userDetail['id'] . 
 					"\nusername: " . $userDetail['username'] . 
@@ -164,12 +162,12 @@ DEBUG
 // 					"\nfirstname: " . $userDetail['firstname'] .
 // 					"\nlastname: " . $userDetail['lastname'], $chatId);
 		} else {
-// 			$response = "I'm sorry. I received a message, but i can't unswer";
-// 			$telegram->sendMessage ( [ 
-// 					'chat_id' => $chatId,
-// 					'text' => $response 
-// 			] );
-			sendMessage("Ho ricevuto un messaggio a cui non posso rispondere", $chatId);
+			$response = "I'm sorry. I received a message, but i can't unswer";
+			$telegram->sendMessage ( [ 
+					'chat_id' => $chatId,
+					'text' => $response 
+			] );
+// 			sendMessage("I'm sorry. I received a message, but i can't unswer", $chatId);
 		}
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $chatId . " - firstname:" . $firstname . " - botName" . $botName . " - Date:" . $globalDate . " - text:" . $text . PHP_EOL );
