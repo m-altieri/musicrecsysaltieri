@@ -48,6 +48,10 @@ class Facebook implements Platform {
 		
 	}
 	
+	public function commandsHandler($boolean) {
+		
+	}
+	
 }
 
 ?>

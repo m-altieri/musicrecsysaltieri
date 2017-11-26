@@ -36,6 +36,8 @@ interface Platform {
 	public function getWebhookUpdates();
 	
 	public function getMessageInfo($json);
+	
+	public function commandsHandler($boolean);
 
 }
 
