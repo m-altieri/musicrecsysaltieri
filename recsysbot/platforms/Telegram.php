@@ -1,6 +1,7 @@
 <?php 
 
 use Telegram\Bot\Api;
+require "recsysbot/platforms/Platform.php";
 
 class Telegram implements Platform {
 	
