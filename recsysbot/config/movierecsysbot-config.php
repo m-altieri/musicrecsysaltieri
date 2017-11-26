@@ -20,7 +20,7 @@ return [
 				"I need at least 3 preferences for generating recommendations 😉",
 		// Facebook payload returned from "Start" button
 		'getStartedPayload' => "get_started",
-                // Base URI (altieri)
-                'base_uri' => '193.204.187.192:8090'
+        // Base URI (altieri)
+        'base_uri' => '193.204.187.192:8090'
 ];
 ?>
