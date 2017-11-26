@@ -9,7 +9,6 @@ class Telegram implements Platform {
 	
 	public function __construct() {
 		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-		file_put_contents("php://stderr", "Token: " . $config['token']);
 		$this->$telegram = new Api($config['token']);
 	}
 	
@@ -34,7 +33,7 @@ class Telegram implements Platform {
 		 * resize_keyboard è sempre true e one_time_keyboard è sempre false,
 		 * quindi lo imposto così di default.
 		 */
-		$reply_markup = $telegram->replyKeyboardMarkup([$keyboard, true, false]);
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 		
 		// DEBUG
 		file_put_contents("php://stderr", "reply_markup: " . $reply_markup);
