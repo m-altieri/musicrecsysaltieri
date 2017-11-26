@@ -15,12 +15,9 @@ return [
 		// If no response is found, this will be used as response
 		'default_fallback_response' => 'Sorry, could you repeat that?',
 		// Greeting string
-		'greeting' => "Do you like Movies? " .
-				$emojis['popcorn'] . $emojis['popcorn'] . $emojis['popcorn'] . $emojis['popcorn'] . $emojis['popcorn'] . 
-				"\nI can find the perfect " .
-				$emojis['clapperboard'] . 
-				"#movie for you, based on your tastes " .
-				$emojis['wink'],
+		'greeting' => "Hi Massi,\n" . "I'm a movie recommender system.\n" .
+				"I'm able to suggest you movies 🎬 according to your preferences 😉\n" .
+				"I need at least 3 preferences for generating recommendations 😉",
 		// Facebook payload returned from "Start" button
 		'getStartedPayload' => "get_started",
                 // Base URI (altieri)
