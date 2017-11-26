@@ -11,6 +11,7 @@ class Telegram implements Platform {
 	
 	public function __construct() {
 		$token = $config['token'];
+		file_put_contents("php://stderr", "Token: " + $token);
 		$telegram = new Api($token);
 	}
 	
