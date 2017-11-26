@@ -28,7 +28,10 @@ interface Platform {
 	
 // 	public function commandsHandler() //credo già fatto con l'id profile
 // 	public function addCommand() //già fatto con l'id profile
-// 	public function getWebhookUpdates() //risolto con php://input
+
+	public function getWebhookUpdates();
+	
+	public function getMessageInfo($json);
 
 }
 

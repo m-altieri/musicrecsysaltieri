@@ -35,6 +35,14 @@ class Facebook implements Platform {
 	
 	}
 	
+	public function getWebhookUpdates() {
+		return file_get_contents("php://input");
+	}
+	
+	public function getMessageInfo($json) {
+		
+	}
+	
 }
 
 ?>
