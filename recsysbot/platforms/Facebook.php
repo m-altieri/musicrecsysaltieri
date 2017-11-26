@@ -6,6 +6,8 @@ require "recsysbot/facebook/setBotProfile.php";
 require "recsysbot/facebook/setGetStarted.php";
 require "recsysbot/facebook/setGreeting.php";
 require "recsysbot/facebook/setPersistentMenu.php";
+$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
+
 
 class Facebook implements Platform {
 	

@@ -6,7 +6,7 @@
 	use GuzzleHttp\Client;
 	
 	require 'vendor/autoload.php';
-	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
+	$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 	
 // 	$webhookUrl = "https://testmovierecsysbot.herokuapp.com/execute.php";
 // 	$myToken = "testmovierecsysbot";

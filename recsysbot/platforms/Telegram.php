@@ -2,6 +2,7 @@
 
 use Telegram\Bot\Api;
 require_once "recsysbot/platforms/Platform.php";
+$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Telegram implements Platform {
 	
