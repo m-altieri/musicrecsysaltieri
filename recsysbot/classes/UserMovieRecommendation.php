@@ -241,6 +241,13 @@ class userMovieRecommendation {
 			}
 			// $i = array_search($movieName,$movieListTop5);
 			$i = array_search ( strtolower ( $movieName ), array_map ( 'strtolower', $movieListTop5 ) );
+			file_put_contents("php://stderr", "strtolower(\$movieName): " . strtolower($movieName));
+			$debug = "";
+			foreach ($array_map('strtolower', $movieListTop5) as $item) {
+				debug .= "\n" . $item;
+			}
+			file_put_contents("php://stderr", "array_map..... : " . $debug);
+			file_put_contents("php://stderr", "\$i = array_search..... : " . $i);
 			$page = $i;
 		}
 		file_put_contents ( "php://stderr", "userMovieRecommendation getPageFromMovieName: page: " . $page . " - movieListTop5: " . print_r ( $movieListTop5, true ) . PHP_EOL );
