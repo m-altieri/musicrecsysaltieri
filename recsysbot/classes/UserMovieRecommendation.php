@@ -230,13 +230,13 @@ class userMovieRecommendation {
 			$page = null;
 		} else {
 			$i = 1;
-			foreach ( $keyboard as $key => $property ) {
-				if (stristr ( $property [0], "🔙" ) == false) {
-					$movie = $property [0];
-					$movie = str_replace ( "🎥", '', $movie );
-					$movie = trim ( $movie );
-					$movieListTop5 [$i] = $movie;
-					$i ++;
+			foreach ($keyboard as $key => $property) {
+				if (stristr($property[0], '🔙') == false) {
+					$movie = $property[0];
+					$movie = str_replace('🎥', '', $movie);
+					$movie = trim($movie);
+					$movieListTop5[$i] = $movie;
+					$i++;
 				}
 			}
 			// $i = array_search($movieName,$movieListTop5);
