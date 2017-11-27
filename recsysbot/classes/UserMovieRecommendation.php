@@ -314,6 +314,7 @@ class userMovieRecommendation {
 			
 			// inserisce il rating del film raccomndato valutato negativamente = 0, a 1 sul db
 			$dislike = 1;
+			file_put_contents("php://stderr", "[UserMovieRecommendation (317)] Sto mettendo dislike a questo film: " . $movieURI);
 			$data = putDislikeRecMovieRating ( $chatId, $movieURI, $number_recommendation_list, $dislike );
 			
 			// inserisce il film tra quelli valutati dall'utente e lo insirisce nel suo profilo

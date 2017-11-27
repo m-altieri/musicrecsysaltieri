@@ -8,7 +8,7 @@ function putDislikeRecMovieRating($chatId, $movieURI, $numberRecommendationList,
 			'base_uri' => 'http://193.204.187.192:8080' 
 	] );
 	$stringGetRequest = '/movierecsysrestful/restService/userDislikeRecMovieRating/putDislikeRecMovieRating?userID=' . $userID . '&movieURI=' . urlencode ( $movieURI ) . '&numberRecommendationList=' . $numberRecommendationList . '&dislike=' . $dislike;
-	file_put_contents ( "php://stderr", "http://193.204.187.192:8080" . $stringGetRequest . "/return:" . $data . PHP_EOL );
+	file_put_contents ( "php://stderr", "[putDislikeRecMovieRating] " . $stringGetRequest . "/return:" . $data . PHP_EOL );
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
