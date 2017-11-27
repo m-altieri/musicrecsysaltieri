@@ -241,7 +241,7 @@ class userMovieRecommendation {
 			}
 			// $i = array_search($movieName,$movieListTop5);
 			$i = array_search ( strtolower ( $movie ), array_map ( 'strtolower', $movieListTop5 ) );
-			file_put_contents("php://stderr", "strtolower(\$movieName): " . strtolower($movieName));
+			file_put_contents("php://stderr", "strtolower(\$movieName): " . strtolower($movie));
 			$debug = "";
 			foreach (array_map('strtolower', $movieListTop5) as $item) {
 				$debug .= "\n" . $item;
@@ -263,7 +263,7 @@ class userMovieRecommendation {
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
-			$position = $this->getPageFromMovieName ( $chatId, $movie );
+			$position = $this->getPageFromMovieName ( $chatId, $movie_name );
 			$pagerank_cicle = getNumberPagerankCicle ( $chatId );
 			$botName = $this->getBotName ();
 			$message_id = $this->getMessageId ();
