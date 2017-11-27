@@ -6,6 +6,7 @@ function getAllPropertyListFromMovie($movie_name) {
 	$client = new Client ( [ 
 			'base_uri' => 'http://193.204.187.192:8080' 
 	] );
+	$movie_name = str_replace("🎥_", "", $movie_name);
 	$stringGetRequest = '/movierecsysrestful/restService/movieDetail/getAllPropertyListFromMovie?movieName=' . urlencode ( $movie_name );
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
