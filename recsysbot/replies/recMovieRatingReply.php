@@ -19,6 +19,7 @@ function recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageI
 	}
 		
 	$movie = $reply [1];
+	$movie = str_replace('?? ', '', $movie);
 	$movie = str_replace('??', '', $movie);
 	$movie = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
 	$movie = str_replace('🎥_', '', $movie);
