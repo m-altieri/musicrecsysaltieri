@@ -244,7 +244,7 @@ class userMovieRecommendation {
 			file_put_contents("php://stderr", "strtolower(\$movieName): " . strtolower($movieName));
 			$debug = "";
 			foreach ($array_map('strtolower', $movieListTop5) as $item) {
-				debug .= "\n" . $item;
+				$debug .= "\n" . $item;
 			}
 			file_put_contents("php://stderr", "array_map..... : " . $debug);
 			file_put_contents("php://stderr", "\$i = array_search..... : " . $i);
