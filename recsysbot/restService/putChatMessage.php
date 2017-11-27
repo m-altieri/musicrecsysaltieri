@@ -8,7 +8,7 @@ function putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctio
 	$client = new Client ( [ 
 			'base_uri' => $config['base_uri'] 
 	] );
-	$stringGetRequest = $config['application_uri'] . '/movierecsysrestful/restService/chatMessage/putChatMessage?userID=' . $userID . '&messageID=' . $messageId . '&context=' . $context . '&replyFunctionCall=' . $replyFunctionCall . '&replyText=' . urlencode ( $replyText ) . '&pagerankCicle=' . $pagerankCicle . '&botName=' . $botName . '&botTimestamp=' . $botTimestamp . '&responseType=' . $responseType;
+	$stringGetRequest = $config['application_uri'] . '/restService/chatMessage/putChatMessage?userID=' . $userID . '&messageID=' . $messageId . '&context=' . $context . '&replyFunctionCall=' . $replyFunctionCall . '&replyText=' . urlencode ( $replyText ) . '&pagerankCicle=' . $pagerankCicle . '&botName=' . $botName . '&botTimestamp=' . $botTimestamp . '&responseType=' . $responseType;
 	file_put_contents ( "php://stderr", $config['base_uri'] . $stringGetRequest . "/return:" . $data . PHP_EOL );
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
