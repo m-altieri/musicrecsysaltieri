@@ -259,6 +259,7 @@ class userMovieRecommendation {
 	public function putUserRecMovieToRating($chatId, $movie) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥_', '', $movie_name);
 			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
@@ -282,6 +283,8 @@ class userMovieRecommendation {
 	public function putUserLikeRecMovieRating($chatId, $movie, $rating, $lastChange) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥_', '', $movie_name);
+			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
@@ -303,6 +306,8 @@ class userMovieRecommendation {
 	public function putUserDislikeRecMovieRating($chatId, $movie, $rating, $lastChange) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥_', '', $movie_name);
+			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
@@ -325,6 +330,8 @@ class userMovieRecommendation {
 	public function putUserRefineRecMovie($chatId, $movie) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥_', '', $movie_name);
+			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
@@ -378,6 +385,8 @@ class userMovieRecommendation {
 	public function putUserRefocusRecMovie($chatId, $movie) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥_', '', $movie_name);
+			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
