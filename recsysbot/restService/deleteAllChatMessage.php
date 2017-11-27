@@ -1,5 +1,6 @@
 <?php
 use GuzzleHttp\Client;
+
 function deleteAllChatMessage($chatId) {
 	$userID = $chatId;
 	// $client = new Client(['base_uri'=>'http://localhost:8080']);
