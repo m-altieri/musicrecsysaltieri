@@ -2,6 +2,7 @@
 use GuzzleHttp\Client;
 function putRecMovieToRating($chatId, $movieURI, $numberRecommendationList, $position, $pagerankCicle, $botName, $messageID, $botTimestamp) {
 	
+	
 	/*
 	 * if (!$position >=0) {
 	 * $position = 1;
@@ -12,7 +13,12 @@ function putRecMovieToRating($chatId, $movieURI, $numberRecommendationList, $pos
 	$client = new Client ( [ 
 			'base_uri' => 'http://193.204.187.192:8080' 
 	] );
+	
 	$stringGetRequest = '/movierecsysrestful/restService/userRecMovieToRating/putRecMovieToRating?userID=' . $userID . '&movieURI=' . urlencode ( $movieURI ) . '&numberRecommendationList=' . $numberRecommendationList . '&position=' . $position . '&pagerankCicle=' . $pagerankCicle . '&botName=' . $botName . '&messageID=' . $messageID . '&botTimestamp=' . $botTimestamp;
+	file_put_contents ( "php://stderr", "http://193.204.187.192:8080" . $stringGetRequest . "\nchatId: " . $chatId .
+			"\nmovieURI: " . $movieURI . "\nnumberRecommentationList: " . $numberRecommendationList . "\nposition: " . $position .
+			"\npagerankCycle: " . $pagerankCicle . "\nbotName: " . $botName . "\nmessageID: " . $messageID . "\nbotTimestamp: " . $botTimestamp . PHP_EOL );
+	
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
