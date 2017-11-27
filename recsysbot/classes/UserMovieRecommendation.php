@@ -240,7 +240,7 @@ class userMovieRecommendation {
 				}
 			}
 			// $i = array_search($movieName,$movieListTop5);
-			$i = array_search ( strtolower ( $movieName ), array_map ( 'strtolower', $movieListTop5 ) );
+			$i = array_search ( strtolower ( $movie ), array_map ( 'strtolower', $movieListTop5 ) );
 			file_put_contents("php://stderr", "strtolower(\$movieName): " . strtolower($movieName));
 			$debug = "";
 			foreach (array_map('strtolower', $movieListTop5) as $item) {
