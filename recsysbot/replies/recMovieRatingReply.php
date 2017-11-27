@@ -10,19 +10,19 @@ function recMovieRatingReply($telegram, $chatId, $rating, $lastChange, $messageI
 	
 	if ($rating == 1) {
 		$reply = likeRecMovieSelected ( $chatId, $pagerankCicle );
-		$movie = $reply [1];
-		// poni a uno il like
-		$userMovieRecommendation->putUserLikeRecMovieRating ( $chatId, $movie, $rating, $lastChange );
-		// putRecMovieRating($chatId, $movieURI, $rating, $position, $pagerank_cicle, $refineRefocus, $botName, $message_id, $bot_timestamp, $recommendatinsList, $ratingsList, $number_recommendation_list)
 		$text = "You Like";
+		
 	} elseif ($rating == 0) {
 		$reply = dislikeRecMovieSelected ( $chatId, $pagerankCicle );
-		$movie = $reply [1];
-		// $userMovieRecommendation->setUserRecMovieToRating($movie);
-		$userMovieRecommendation->putUserDislikeRecMovieRating ( $chatId, $movie, $rating, $lastChange );
-		// putRecMovieRating($chatId, $movieURI, $rating, $position, $pagerank_cicle, $refineRefocus, $botName, $message_id, $bot_timestamp, $recommendatinsList, $ratingsList, $number_recommendation_list)
 		$text = "You Dislike";
+		
 	}
+		
+	$movie = $reply [1];
+	$movie = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+	$movie = str_replace('🎥_', '', $movie);
+	$movie = str_replace('🎥', '', $movie);
+	$userMovieRecommendation->putUserDislikeRecMovieRating ( $chatId, $movie, $rating, $lastChange );
 	
 	$title = $userMovieRecommendation->getTitleAndPosterRecMovieToRating ( $movie );
 	
