@@ -259,6 +259,7 @@ class userMovieRecommendation {
 	public function putUserRecMovieToRating($chatId, $movie) {
 		if ($movie !== "null") {
 			$movie_name = str_replace ( ' ', '_', $movie ); // tutti gli spazi con undescore
+			$movie_name = str_replace('🎥', '', $movie_name);
 			$movieURI = "http://dbpedia.org/resource/";
 			$movieURI .= $movie_name;
 			$number_recommendation_list = getNumberRecommendationList ( $chatId );
