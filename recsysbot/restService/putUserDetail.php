@@ -9,7 +9,7 @@ function putUserDetail($chatId, $firstname, $lastname, $username) {
 	$client = new Client ( [ 
 			'base_uri' => $config['base_uri']
 	] );
-	$stringGetRequest = $config['application_name'] . '/restService/detail/putUserDetail?userID=' . $userID . '&firstname=' . $firstname . '&lastname=' . $lastname . '&username=' . $username;
+	$stringGetRequest = $config['application_uri'] . '/restService/detail/putUserDetail?userID=' . $userID . '&firstname=' . $firstname . '&lastname=' . $lastname . '&username=' . $username;
 	file_put_contents ( "php://stderr", $base_uri . $stringGetRequest . "/return:" . $data . PHP_EOL );
 	
 	$response = $client->request ( 'GET', $stringGetRequest );

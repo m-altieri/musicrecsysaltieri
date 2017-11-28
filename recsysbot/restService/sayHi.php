@@ -13,7 +13,7 @@ function sayHi() {
         // debug
         file_put_contents ("php://stderr", $config['base_uri'] . PHP_EOL);
 
-	$stringGetRequest = '/movierecsysservice/restService/sayHi';
+	$stringGetRequest = $config['application_uri'] . '/restService/sayHi';
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
 	$data = json_decode ( $bodyMsg );

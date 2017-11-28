@@ -3,7 +3,20 @@
 use Recsysbot\Classes\userMovieRecommendation;
 use Recsysbot\Classes\UserProfileAcquisitionByMovie;
 
-function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
+function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstname, $botName){
+	
+	file_put_contents("php://stderr", "Sending message to server: " . 
+			"\nChat ID: " . $chatId . "\nText: " . $text);
+	// Nome provvisorio
+	sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
+	
+	// JSON Object containing the text to send to the user.
+	$replyText = 
+	
+	// JSON Object containing the keyboard to provide to the user.
+	$markupKeyboard = 
+}
+/*function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
    
    $emojis = require '/app/recsysbot/variables/emojis.php';
 
@@ -894,4 +907,4 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
       default:
          break;
       }
-   }
+   }*/
