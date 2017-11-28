@@ -4,7 +4,7 @@ use GuzzleHttp\Client;
 	
 function sayHi() {
 	
-        $config = require '/app/recsysbot/config/movierecsysbot-config.php';
+    $config = require '/app/recsysbot/config/movierecsysbot-config.php';
 
 	$client = new Client ( [ 
 			'base_uri' => $config['base_uri']

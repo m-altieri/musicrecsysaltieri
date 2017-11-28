@@ -4,8 +4,6 @@ use GuzzleHttp\Client;
 function putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $botTimestamp, $responseType) {
 	
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-	file_put_contents ( "php://stderr", "DEBUG: base_uri: " . $config['base_uri'] . PHP_EOL );
-	file_put_contents ( "php://stderr", "DEBUG: application_uri: " . $config['application_uri'] . PHP_EOL );
 	
 	$userID = $chatId;
 	$base_uri = $config['base_uri'];
