@@ -8,13 +8,13 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	file_put_contents("php://stderr", "Sending message to server: " . 
 			"\nChat ID: " . $chatId . "\nText: " . $text);
 	// Nome provvisorio
-	sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
-	
+	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
+	file_put_contents("php://stderr", "Il server ha detto: " . $data);
 	// JSON Object containing the text to send to the user.
-	$replyText = 
+	//$replyText = 
 	
 	// JSON Object containing the keyboard to provide to the user.
-	$markupKeyboard = 
+	//$markupKeyboard = 
 }
 /*function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
    
