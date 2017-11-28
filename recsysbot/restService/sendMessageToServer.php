@@ -22,7 +22,7 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 	$client = new Client ( [
 			'base_uri' => $base_uri
 	] );
-	$stringGetRequest = $config['application_uri'] . '/restService/chatMessages/sendMessageToServer/send?userID=' . $userID . '&messageID=' . $messageId . '&timeStamp=' . $timeStamp . '&text=' . urlencode($text) . '&firstname=' . $firstname . '&botName=' . $botName;
+	$stringGetRequest = $config['application_uri'] . '/restService/chatMessage/sendMessageToServer?userID=' . $userID . '&messageID=' . $messageId . '&timeStamp=' . $timeStamp . '&text=' . urlencode($text) . '&firstname=' . $firstname . '&botName=' . $botName;
 	file_put_contents ( "php://stderr", $base_uri . $stringGetRequest . "/return:" . $data . PHP_EOL );
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
