@@ -21,8 +21,8 @@ return [
 		// Facebook payload returned from "Start" button
 		'getStartedPayload' => "get_started",
         // Base URI (Altieri)
-        'base_uri' => '193.204.187.192:8080', //DA MODIFICARE
+        'base_uri' => '193.204.187.192:8090', //DA MODIFICARE
 		// Server application URI (Altieri)
-		'application_uri' => '/movierecsysrestful' //DA MODIFICARE
+		'application_uri' => '/movierecsysservice' //DA MODIFICARE
 ];
 ?>
