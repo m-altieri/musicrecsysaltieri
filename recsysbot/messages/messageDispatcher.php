@@ -47,7 +47,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	/* forse inutili */
 	$keyboard = $markup['keyboard'];
-	$resize_keyboard = markup['resize_keyboard'];
+	$resize_keyboard = $markup['resize_keyboard'];
 	$one_time_keyboard = $markup['one_time_keyboard'];
 	/* */
 	
