@@ -14,7 +14,7 @@ class Telegram implements Platform {
 	
 	public function sendMessage($array) {
 		$this->$telegram->sendMessage($array);
-// 		$this->$telegram->replyKeyboardMarkup($array['reply_markup']);
+		$this->$telegram->replyKeyboardMarkup($array['reply_markup']);
 	}
 	
 	public function sendPhoto($array) {
