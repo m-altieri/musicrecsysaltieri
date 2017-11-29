@@ -13,12 +13,14 @@ class Telegram implements Platform {
 	}
 	
 	public function sendMessage($array) {
-// 		$this->$telegram->sendMessage($array);
+
 		$chatId = $array['chat_id'];
-// 		$keyboard[] = array('🔵 Movies','⚙️ Profile');
 		$keyboard = $array['reply_markup']['keyboard'];
+		$resize_keyboard = $array['reply_markup']['resize_keyboard'] == 1 ? true : false;
+		$one_time_keyboard = $array['reply_markup']['one_time_keyboard'] == 1 ? true : false;
 		
-		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+		
+		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => $resize_keyboard, 'one_time_keyboard' => $one_time_keyboard]);
 		$text = "Please, choose among the most popular properties \nor type the name";
 		$this->$telegram->sendMessage(['chat_id' => $chatId,
 				'text' => $text,
