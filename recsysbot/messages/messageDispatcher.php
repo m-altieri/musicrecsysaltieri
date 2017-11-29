@@ -43,7 +43,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 // 	$resize_keyboard = $markup['resize_keyboard'] == 1 ? true : false;
 // 	$one_time_keyboard = $markup['one_time_keyboard'] == 1 ? true : false;
 	
-	$replyMarkup = $platform->replyKeyboardMarkup($markup);
+// 	$replyMarkup = $platform->replyKeyboardMarkup($markup);
 	
 	$message = array(
 		'chat_id' => $chatId,
