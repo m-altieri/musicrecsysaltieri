@@ -5,20 +5,43 @@ use Recsysbot\Classes\UserProfileAcquisitionByMovie;
 
 function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstname, $botName){
 	
-	file_put_contents("php://stderr", "Sending message to server: " . 
-			"\nChat ID: " . $chatId . "\nText: " . $text);
+	$chatAction = array(
+			'chat_id' => $chatId,
+			'action' => 'typing'
+	);
+	
+	$platform->sendChatAction($chatAction);
+	
+	file_put_contents("php://stderr", "[messageDispatcher] Sending message to server: " . 
+			"\nChat ID: " . $chatId . "\nText: " . $text . PHP_EOL);
+	
 	// Nome provvisorio
+	// Prende le informazioni sul messaggio inviato dall'utente e le manda al server
+	// $data è già un array; sendMessageToServer si occupa di fare il json_decode
 	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
-	file_put_contents("php://stderr", "[messageDispatcher]");
-	foreach ($data as $key => $value) {
-		file_put_contents("php://stderr", "\n" . $key . " = " . $value . PHP_EOL);
-	}
+	
+	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
+	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
+	
 	
 	// JSON Object containing the text to send to the user.
-	//$replyText = 
-	
+	$replyText = $data['text'];	
 	// JSON Object containing the keyboard to provide to the user.
-	//$markupKeyboard = 
+	/*
+	 * reply_markup: {
+			"keyboard":[
+				["\ud83c\udf10 Recommend Movies"],
+				["\ud83d\udcd8 Help","\u2699\ufe0f Profile"]
+			],
+			"resize_keyboard":true,
+			"one_time_keyboard":false
+		}
+	 */
+	$markupKeyboard = $data['keyboard'];
+
+	$platform->sendMessage($chatId, $replyText, $markupKeyboard);
+	
+	return $data;
 }
 /*function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
    

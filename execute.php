@@ -151,7 +151,9 @@ DEBUG
 				putUserDetail($messageInfo['chatId'], $messageInfo['firstname'],
 						$messageInfo['lastname'], $messageInfo['username']);
 			}
-			messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
+			
+			// $reply è un array contenente 'action', 'text', 'photo', 'keyboard'
+			$reply = messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
 			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $messageInfo['chatId']);
 			$userDetail = getUserDetail($messageInfo['chatId']);
 // 			$userDetail = getUserDetail(substr($chatId, 0, 9)); //substr perchè su messenger è troppo lungo

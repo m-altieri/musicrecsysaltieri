@@ -12,6 +12,9 @@ use GuzzleHttp\Client;
  * @param text Testo del messaggio.
  * @param firstname Nome dell'utente.
  * @param botName Nome del bot.
+ * @return Risposta del server già json-decodificata (array); attualmente contiene
+ * 			'text' - Testo di risposta del bot,
+ * 			'keyboard' - Possibili opzioni di risposta dell'utente.
  */
 function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname, $botName) {
 	
@@ -33,14 +36,5 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 	$bodyMsg = $response->getBody ()->getContents ();
 	$data = json_decode ( $bodyMsg );
 
-	file_put_contents("php://stderr", "[sendMessageToServer]");
-	if (is_string($data)) {
-		file_put_contents("php://stderr", "Il server ha detto: " . $data);
-	} else {
-		foreach ($data as $key => $value) {
-			file_put_contents("php://stderr", "\n" . $key . " = " . $value . PHP_EOL);
-		}
-	}
-	
 	return $data;
 }
