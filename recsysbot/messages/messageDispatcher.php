@@ -48,7 +48,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$message = array(
 		'chat_id' => $chatId,
 		'text' => $replyText,
-		'markup' => $replyMarkup
+		'reply_markup' => $markup
 	);
 	$platform->sendMessage($message);
 	
