@@ -10,6 +10,9 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// Nome provvisorio
 	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
 	file_put_contents("php://stderr", "Il server ha detto: " . $data);
+	foreach ($data as $key => $value) {
+		file_put_contents("php://stderr", "\n" . $key . " = " . $value . PHP_EOL);
+	}
 	// JSON Object containing the text to send to the user.
 	//$replyText = 
 	
