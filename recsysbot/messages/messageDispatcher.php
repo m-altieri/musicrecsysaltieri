@@ -37,7 +37,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			"one_time_keyboard":false
 		}
 	 */
-	$markupKeyboard = $data['keyboard'];
+	$markupKeyboard = $data['reply_markup'];
 
 	$message = array(
 		'chat_id' => $chatId,
