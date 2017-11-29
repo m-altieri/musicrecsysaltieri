@@ -33,8 +33,14 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 	$bodyMsg = $response->getBody ()->getContents ();
 	$data = json_decode ( $bodyMsg );
 
-	file_put_contents ( "php://stderr", '/return: ' . $data . PHP_EOL );
-	
+	file_put_contents("php://stderr", "[sendMessageToServer]");
+	if (is_string($data)) {
+		file_put_contents("php://stderr", "Il server ha detto: " . $data);
+	} else {
+		foreach ($data as $key => $value) {
+			file_put_contents("php://stderr", "\n" . $key . " = " . $value . PHP_EOL);
+		}
+	}
 	
 	return $data;
 }
