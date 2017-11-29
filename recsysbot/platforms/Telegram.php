@@ -26,13 +26,14 @@ class Telegram implements Platform {
 	}
 	
 	public function replyKeyboardMarkup($keyboard) {
-		/*
-		 * In ogni chiamata di replyKeyboardMarkup nel progrmama,
-		 * resize_keyboard è sempre true e one_time_keyboard è sempre false,
-		 * quindi lo imposto così di default.
-		 */
-// 		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-		$reply_markup = $this->$telegram->replyKeyboardMarkup($keyboard);
+		
+		$resize_keyboard = $keyboard['resize_keyboard'] == 1 ? true : false;
+		$one_time_keyboard = $keyboard['one_time_keyboard'] == 1 ? true : false;
+		$reply_markup = $this->$telegram->replyKeyboardMarkup([
+				'keyboard' => $keyboard['keyboard'],
+				'resize_keyboard' => $resize_keyboard,
+				'one_time_keyboard' => $one_time_keyboard
+		]);
 
 		return $reply_markup;
 	}

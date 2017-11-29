@@ -38,27 +38,23 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		}
 	 */
 	$markup = $data['reply_markup'];
-
+	
+// 	$keyboard = $markup['keyboard'];
+// 	$resize_keyboard = $markup['resize_keyboard'] == 1 ? true : false;
+// 	$one_time_keyboard = $markup['one_time_keyboard'] == 1 ? true : false;
+	
+	$replyMarkup = $platform->replyKeyboardMarkup($markup);
+	
 	$message = array(
 		'chat_id' => $chatId,
-		'text' => $replyText
+		'text' => $replyText,
+		'markup' => $replyMarkup
 	);
 	$platform->sendMessage($message);
 	
-	/* forse inutili */
-	$keyboard = $markup['keyboard'];
-	$resize_keyboard = $markup['resize_keyboard'] == 1 ? true : false;
-	$one_time_keyboard = $markup['one_time_keyboard'] == 1 ? true : false;
-	/* */
+	
 	
 // 	$platform->replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard);
-	$keyboard = [
-			['Option 1'],
-			['Option 2 e 3','su un rigo']
-	];
-	
-	$reply_markup = $platform->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-	
 	
 	return $data;
 }
