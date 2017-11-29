@@ -17,7 +17,7 @@ class Telegram implements Platform {
 		$chatId = $array['chat_id'];
 // 		$keyboard[] = array('🔵 Movies','⚙️ Profile');
 		$keyboard[][] = $array['reply_markup']['keyboard'];
-		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard[][], 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 		
 		$text = "Please, choose among the most popular properties \nor type the name";
 		$this->$telegram->sendChatAction(['chat_id' => $chatId, 'action' => 'typing']);
