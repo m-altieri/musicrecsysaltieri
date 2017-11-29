@@ -51,7 +51,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$one_time_keyboard = $markup['one_time_keyboard'];
 	/* */
 	
-	$platform->replyKeyboardMarkup($markup);
+	$platform->replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard);
 	
 	return $data;
 }
