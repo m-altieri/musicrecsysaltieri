@@ -39,7 +39,12 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	 */
 	$markupKeyboard = $data['keyboard'];
 
-	$platform->sendMessage($chatId, $replyText, $markupKeyboard);
+	$message = array(
+		'chat_id' => $chatId,
+		'text' => $replyText,
+		'reply_markup' => $markupKeyboard
+	);
+	$platform->sendMessage($message);
 	
 	return $data;
 }
