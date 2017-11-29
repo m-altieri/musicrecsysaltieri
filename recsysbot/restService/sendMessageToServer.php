@@ -27,11 +27,14 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 	'&messageID=' . $messageId . '&timeStamp=' . $timeStamp . 
 	'&text=' . urlencode($text) . '&firstname=' . $firstname . '&botName=' . $botName;
 	
-	file_put_contents ( "php://stderr", $base_uri . $stringGetRequest . "/return:" . $data . PHP_EOL );
+	file_put_contents ( "php://stderr", $base_uri . $stringGetRequest . PHP_EOL );
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
 	$data = json_decode ( $bodyMsg );
+
+	file_put_contents ( "php://stderr", '/return: ' . $data . PHP_EOL );
+	
 	
 	return $data;
 }

@@ -9,6 +9,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			"\nChat ID: " . $chatId . "\nText: " . $text);
 	// Nome provvisorio
 	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
+	$data = json_decode($data);
 	if (is_string($data)) {
 		file_put_contents("php://stderr", "Il server ha detto: " . $data);
 	} else {
