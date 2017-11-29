@@ -9,16 +9,10 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			"\nChat ID: " . $chatId . "\nText: " . $text);
 	// Nome provvisorio
 	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
-	if (is_string($data)) 
-		file_put_contents("php://stderr", "E' una stringa: " . $data);
-	$data = json_decode($data);
-	if (is_string($data)) {
-		file_put_contents("php://stderr", "Il server ha detto: " . $data);
-	} else {
 		foreach ($data as $key => $value) {
 			file_put_contents("php://stderr", "\n" . $key . " = " . $value . PHP_EOL);
 		}
-	}
+	
 	// JSON Object containing the text to send to the user.
 	//$replyText = 
 	
