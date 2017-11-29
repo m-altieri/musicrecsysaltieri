@@ -26,7 +26,7 @@ class Facebook implements Platform {
 		
 	}
 	
-	public function replyKeyboardMarkup($keyboard) {
+	private function replyKeyboardMarkup($keyboard) {
 		
 		$quick_replies = array();
 		

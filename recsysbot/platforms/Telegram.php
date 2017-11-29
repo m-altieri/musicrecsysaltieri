@@ -19,8 +19,7 @@ class Telegram implements Platform {
 		$resize_keyboard = $array['reply_markup']['resize_keyboard'] == 1 ? true : false;
 		$one_time_keyboard = $array['reply_markup']['one_time_keyboard'] == 1 ? true : false;
 		
-		
-		$reply_markup = $this->$telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => $resize_keyboard, 'one_time_keyboard' => $one_time_keyboard]);
+		$reply_markup = $this->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => $resize_keyboard, 'one_time_keyboard' => $one_time_keyboard]);
 		$text = $array['text'];
 		$this->$telegram->sendMessage(['chat_id' => $chatId,
 				'text' => $text,
@@ -36,14 +35,12 @@ class Telegram implements Platform {
 		$this->$telegram->sendChatAction($array);
 	}
 	
-	public function replyKeyboardMarkup($keyboard) {
+	private function replyKeyboardMarkup($keyboard) {
 		
-		$resize_keyboard = $keyboard['resize_keyboard'] == 1 ? true : false;
-		$one_time_keyboard = $keyboard['one_time_keyboard'] == 1 ? true : false;
 		$reply_markup = $this->$telegram->replyKeyboardMarkup([
 				'keyboard' => $keyboard['keyboard'],
-				'resize_keyboard' => $resize_keyboard,
-				'one_time_keyboard' => $one_time_keyboard
+				'resize_keyboard' => $keyboard['resize_keyboard'],
+				'one_time_keyboard' => $keyboard['one_time_keyboard']
 		]);
 
 		return $reply_markup;
@@ -53,18 +50,6 @@ class Telegram implements Platform {
 		return $this->$telegram->getWebhookUpdates();
 	}
 	
-	/**
-	 * $message = isset ( $update ['message'] ) ? $update ['message'] : "";
-	$messageId = isset ( $message ['message_id'] ) ? $message ['message_id'] : "";
-	$chatId = isset ( $message ['chat'] ['id'] ) ? $message ['chat'] ['id'] : "";
-	$firstname = isset ( $message ['chat'] ['first_name'] ) ? $message ['chat'] ['first_name'] : "";
-	$lastname = isset ( $message ['chat'] ['last_name'] ) ? $message ['chat'] ['last_name'] : "";
-	$username = isset ( $message ['chat'] ['username'] ) ? $message ['chat'] ['username'] : "";
-	$date = isset ( $message ['date'] ) ? $message ['date'] : "";
-	$text = isset ( $message ['text'] ) ? $message ['text'] : "";
-	$globalDate = gmdate ( "Y-m-d\TH:i:s\Z", $date );
-	 * @param unknown $json
-	 */
 	public function getMessageInfo($json) {
 		
 		file_put_contents("php://stderr", "Text:" . $json['message']['text']);

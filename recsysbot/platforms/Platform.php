@@ -26,29 +26,24 @@ interface Platform {
 	 */
 	public function sendChatAction($array);
 	
-	/**
-	 * Get the $reply_markup to pass in the sendMessage() function.
-	 * @param unknown $keyboard JSON object containing the reply buttons and their text.
-	 * @param unknown $resize_keyboard boolean
-	 * @param unknown $one_time_keyboard boolean
-	 * @return A JSON-serialized object for an inline keyboard.
-	 * 
-	 * reply_markup: {
-			"keyboard":[
-				["\ud83c\udf10 Recommend Movies"],
-				["\ud83d\udcd8 Help","\u2699\ufe0f Profile"]
-			],
-			"resize_keyboard":true,
-			"one_time_keyboard":false
-		}
-	 */
-	public function replyKeyboardMarkup($keyboard);
-	
 // 	public function commandsHandler() //credo già fatto con l'id profile
 // 	public function addCommand() //già fatto con l'id profile
 
 	public function getWebhookUpdates();
 	
+	/**
+	 * Get various information about the message.
+	 * @param unknown $json The JSON-serialized message object.
+	 * @return An array containing:
+	 * 			'messageId' - the ID of the message;
+	 * 			'chatId' - the ID of the user;
+	 * 			'firstname' - the first name of the user;
+	 * 			'lastname' - the last name of the user;
+	 * 			'username' - the username of the user;
+	 * 			'date' - the date of the message in UNIX epoch format;
+	 * 			'text' - the text of the message;
+	 * 			'globalDate' - a readable format of the date.
+	 */
 	public function getMessageInfo($json);
 	
 	public function commandsHandler($boolean);

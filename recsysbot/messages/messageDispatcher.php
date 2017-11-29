@@ -27,23 +27,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// JSON Object containing the text to send to the user.
 	$replyText = $data['text'];	
 	// JSON Object containing the keyboard to provide to the user.
-	/*
-	 * reply_markup: {
-			"keyboard":[
-				["\ud83c\udf10 Recommend Movies"],
-				["\ud83d\udcd8 Help","\u2699\ufe0f Profile"]
-			],
-			"resize_keyboard":true,
-			"one_time_keyboard":false
-		}
-	 */
 	$markup = $data['reply_markup'];
-	
-// 	$keyboard = $markup['keyboard'];
-// 	$resize_keyboard = $markup['resize_keyboard'] == 1 ? true : false;
-// 	$one_time_keyboard = $markup['one_time_keyboard'] == 1 ? true : false;
-	
-// 	$replyMarkup = $platform->replyKeyboardMarkup($markup);
 	
 	$message = array(
 		'chat_id' => $chatId,
