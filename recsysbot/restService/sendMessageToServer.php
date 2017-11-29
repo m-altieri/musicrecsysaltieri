@@ -34,7 +34,7 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 	
 	$response = $client->request ( 'GET', $stringGetRequest );
 	$bodyMsg = $response->getBody ()->getContents ();
-	$data = json_decode ( $bodyMsg );
+	$data = json_decode ( $bodyMsg, true );
 
 	return $data;
 }
