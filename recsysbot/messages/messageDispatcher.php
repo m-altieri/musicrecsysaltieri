@@ -51,7 +51,14 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$one_time_keyboard = $markup['one_time_keyboard'] == 1 ? true : false;
 	/* */
 	
-	$platform->replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard);
+// 	$platform->replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard);
+	$keyboard = [
+			['Option 1'],
+			['Option 2 e 3','su un rigo']
+	];
+	
+	$reply_markup = $platform->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+	
 	
 	return $data;
 }
