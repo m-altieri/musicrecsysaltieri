@@ -9,7 +9,6 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			'chat_id' => $chatId,
 			'action' => 'typing'
 	);
-	
 	$platform->sendChatAction($chatAction);
 	
 	file_put_contents("php://stderr", "[messageDispatcher] Sending message to server: " . 
