@@ -33,11 +33,12 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				'chat_id' => $chatId,
 				'text' => $replyMessages[$i]['text'],
 				'photo' => $replyMessage[$i]['photo'],
-				'keyboard' => $markup
+				'reply_markup' => $markup
 		);
 	}
-	
 	foreach ($messages as $message) {
+		file_put_contents("php://stderr", "chat_id: " . $chat_id . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $message['keyboard']);
+		
 		if (isset ($message['photo'])) {
 			$platform->sendPhoto($message);
 		} else {
