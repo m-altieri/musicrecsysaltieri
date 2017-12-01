@@ -28,9 +28,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$markup = $data['reply_markup'];
 	
 	$replyMessages = $data['messages'];
-	$i = 0;
 	for ($i = 0; $i < count($replyMessages); $i++) {
-		$messages[i] = array(
+		$messages[$i] = array(
 				'chat_id' => $chatId,
 				'text' => $replyMessages[i]['text'],
 				'photo' => $replyMessage[i]['photo'],
