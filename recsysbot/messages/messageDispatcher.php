@@ -45,11 +45,14 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 // 			$platform->sendMessage($message);
 // 		}
 // 	}
-	$platform->replyKeyboardMarkup([
+	$platform->sendMessage([
 			'chat_id' => $chatId,
-			'keyboard' => $markup['keyboard'],
-			'resize_keyboard' => $markup['resize_keyboard'],
-			'one_time_keyboard' => $markup['one_time_keyboard']
+			'text' => '',
+			'reply_markup' => [
+					'keyboard' => $markup['keyboard'],
+					'resize_keyboard' => $markup['resize_keyboard'],
+					'one_time_keyboard' => $markup['one_time_keyboard']
+			]
 	]);
 		
 	return $data;
