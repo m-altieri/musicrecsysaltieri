@@ -27,7 +27,14 @@ class Telegram implements Platform {
 	}
 	
 	public function sendPhoto($array) {
-		$this->$telegram->sendPhoto($array);
+		$chatId = $array['chat_id'];
+		$photo = $array['photo'];
+		$caption = $array['text'];
+		$this->$telegram->sendPhoto([
+				'chat_id' => $chatId,
+				'photo' => $photo,
+				'caption' => $caption
+		]);
 	}
 	
 

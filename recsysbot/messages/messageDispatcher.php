@@ -27,12 +27,22 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// JSON Object containing the keyboard to provide to the user.
 	$markup = $data['reply_markup'];
 	
-	$message = array(
-		'chat_id' => $chatId,
-		'text' => $replyText,
-		'reply_markup' => $markup
-	);
-	$platform->sendMessage($message);
+	$replyMessages = $data['messages'];
+	for ($i = 0; $i < len($replyMessages); $i++) {
+		$messages[i] = array(
+				'chat_id' => $chatId,
+				'text' => $replyMessages[i]['text'],
+				'photo' => $replyMessage[i]['photo']
+		);
+	}
+	
+	foreach ($messages as $message) {
+		if (isset ($message['photo'])) {
+			$platform->sendPhoto($message);
+		} else {
+			$platform->sendMessage($message);
+		}
+	}
 		
 	return $data;
 }
