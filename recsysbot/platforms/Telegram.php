@@ -22,7 +22,7 @@ class Telegram implements Platform {
 		$reply_markup = $this->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => $resize_keyboard, 'one_time_keyboard' => $one_time_keyboard]);
 		$text = $array['text'];
 		$this->$telegram->sendMessage(['chat_id' => $chatId,
-				'text' => $text,
+				'text' => '',
 				'reply_markup' => $reply_markup]);
 	}
 	
@@ -42,19 +42,14 @@ class Telegram implements Platform {
 		$this->$telegram->sendChatAction($array);
 	}
 	
-	function replyKeyboardMarkup($array) {
+	private function replyKeyboardMarkup($keyboard) {
 		
 		$reply_markup = $this->$telegram->replyKeyboardMarkup([
-				'keyboard' => $array['keyboard'],
-				'resize_keyboard' => $array['resize_keyboard'],
-				'one_time_keyboard' => $array['one_time_keyboard']
+				'keyboard' => $keyboard['keyboard'],
+				'resize_keyboard' => $keyboard['resize_keyboard'],
+				'one_time_keyboard' => $keyboard['one_time_keyboard']
 		]);
 
-		$this->$telegram->sendMessage([
-			'chat_id' => $array['chat_id'],
-			'text' => "",
-			'reply_markup' => $reply_markup
-		]);
 		return $reply_markup;
 	}
 	
