@@ -12,39 +12,40 @@ class Telegram implements Platform {
 		$this->$telegram = new Api($config['token']);
 	}
 	
-	public function sendMessage($array) {
+	public function sendMessage($chat_id, $text, $reply_markup) {
 
-		$chatId = $array['chat_id'];
-		$keyboard = $array['reply_markup']['keyboard'];
-		$resize_keyboard = $array['reply_markup']['resize_keyboard'] == 1 ? true : false;
-		$one_time_keyboard = $array['reply_markup']['one_time_keyboard'] == 1 ? true : false;
+		$keyboard = $reply_markup['keyboard'];
+		$resize_keyboard = $reply_markup['resize_keyboard'] == 1 ? true : false;
+		$one_time_keyboard = $reply_markup['one_time_keyboard'] == 1 ? true : false;
 		
-		$reply_markup = $this->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => $resize_keyboard, 'one_time_keyboard' => $one_time_keyboard]);
-		$text = $array['text'];
-		$this->$telegram->sendMessage(['chat_id' => $chatId,
+		$markup = $this->replyKeyboardMarkup([
+				'keyboard' => $keyboard,
+				'resize_keyboard' => $resize_keyboard,
+				'one_time_keyboard' => $one_time_keyboard
+		]);
+		$this->$telegram->sendMessage([
+				'chat_id' => $chat_id,
 				'text' => $text,
-				'reply_markup' => $reply_markup]);
+				'reply_markup' => $markup
+		]);
 	}
 	
-	public function sendPhoto($array) {
-		$chatId = $array['chat_id'];
-		$photo = $array['photo'];
-		$caption = $array['text'];
+	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
 		
-		$keyboard = $array['reply_markup']['keyboard'];
-		$resize_keyboard = $array['reply_markup']['resize_keyboard'] == 1 ? true : false;
-		$one_time_keyboard = $array['reply_markup']['one_time_keyboard'] == 1 ? true : false;
+		$keyboard = $reply_markup['keyboard'];
+		$resize_keyboard = $reply_markup['resize_keyboard'] == 1 ? true : false;
+		$one_time_keyboard = $reply_markup['one_time_keyboard'] == 1 ? true : false;
 		
-		$reply_markup = $this->replyKeyboardMarkup([
+		$markup = $this->replyKeyboardMarkup([
 				'keyboard' => $keyboard,
 				'resize_keyboard' => $resize_keyboard,
 				'one_time_keyboard' => $one_time_keyboard
 		]);
 		$this->$telegram->sendPhoto([
-				'chat_id' => $chatId,
+				'chat_id' => $chat_id,
 				'photo' => $photo,
 				'caption' => $caption,
-				'reply_markup' => $reply_markup
+				'reply_markup' => $markup
 		]);
 	}
 	
