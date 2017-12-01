@@ -64,6 +64,9 @@ class Facebook implements Platform {
 				// Contiene il payload per i pulsanti nel caso vengano utilizzati
 				'postbackPayload' => isset ($message['postback']['payload']) ? $message['postback']['payload'] : ""
 		);
+		if  (isset ($info['postbackPayload'])) {
+			$info['text'] = $info['postbackPayload'];
+		}
 		
 		return $info;
 	}

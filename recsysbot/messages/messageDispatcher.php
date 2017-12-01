@@ -22,7 +22,6 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
 	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
 	
-	
 	// JSON Object containing the text to send to the user.
 	$replyText = $data['text'];	
 	// JSON Object containing the keyboard to provide to the user.
@@ -34,11 +33,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		'reply_markup' => $markup
 	);
 	$platform->sendMessage($message);
-	
-	
-	
-// 	$platform->replyKeyboardMarkup($keyboard, $resize_keyboard, $one_time_keyboard);
-	
+		
 	return $data;
 }
 /*function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){

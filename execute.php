@@ -83,16 +83,13 @@ DEBUG
 ***************/
 	
 	try {
-		$response = "";
-
 		if (isset ( $messageInfo['text'] )) {
-			if ($messageInfo['text'] == "/start") {putUserDetail($messageInfo['chatId'], $messageInfo['firstname'],
+			if ($messageInfo['text'] == "/start") {
+				putUserDetail($messageInfo['chatId'], $messageInfo['firstname'],
 						$messageInfo['lastname'], $messageInfo['username']);
 			}
-			
-			// $reply è un array contenente 'action', 'text', 'photo', 'keyboard'
-			$reply = messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
-			file_put_contents("php://stderr", "Richiedo l'user detail dell'id " . $messageInfo['chatId']);
+			messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
+
 			$userDetail = getUserDetail($messageInfo['chatId']);
 			file_put_contents("php://stderr", "User Detail ricevuto: " . 
 					"\nid: " . $userDetail['id'] . 
