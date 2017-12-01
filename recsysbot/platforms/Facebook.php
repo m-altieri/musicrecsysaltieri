@@ -11,14 +11,14 @@ $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Facebook implements Platform {
 	
-	public function sendMessage($array) {
-		sendMessage($array['chat_id'], $array['text']);
+	public function sendMessage($chat_id, $text, $reply_markup) {
+		sendMessage($chat_id, $text);
 		/*
 		 * Aggiungere l'invio dei quick reply
 		 */
 	}
 	
-	public function sendPhoto($array) {
+	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
 		
 	}
 	
