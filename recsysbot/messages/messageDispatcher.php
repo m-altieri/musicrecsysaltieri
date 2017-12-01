@@ -37,7 +37,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		);
 	}
 	foreach ($messages as $message) {
-		file_put_contents("php://stderr", "chat_id: " . $chat_id . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $message['keyboard']);
+		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $message['keyboard']);
 		
 		if (isset ($message['photo'])) {
 			$platform->sendPhoto($message);
