@@ -50,6 +50,7 @@ class Telegram implements Platform {
 				'one_time_keyboard' => $keyboard['one_time_keyboard']
 		]);
 
+		$this->$telegram->replyKeyboardMarkup($reply_markup);
 		return $reply_markup;
 	}
 	

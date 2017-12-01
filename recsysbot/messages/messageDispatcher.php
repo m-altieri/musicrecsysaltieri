@@ -28,21 +28,24 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$markup = $data['reply_markup'];
 	
 	$replyMessages = $data['messages'];
-	for ($i = 0; $i < count($replyMessages); $i++) {
-		$messages[i] = array(
-				'chat_id' => $chatId,
-				'text' => $replyMessages[i]['text'],
-				'photo' => $replyMessage[i]['photo']
-		);
-	}
+// 	$i = 0;
+// 	for ($i = 0; $i < count($replyMessages); $i++) {
+// 		$messages[i] = array(
+// 				'chat_id' => $chatId,
+// 				'text' => $replyMessages[i]['text'],
+// 				'photo' => $replyMessage[i]['photo'],
+// 				'keyboard' => $markup
+// 		);
+// 	}
 	
-	foreach ($messages as $message) {
-		if (isset ($message['photo'])) {
-			$platform->sendPhoto($message);
-		} else {
-			$platform->sendMessage($message);
-		}
-	}
+// 	foreach ($messages as $message) {
+// 		if (isset ($message['photo'])) {
+// 			$platform->sendPhoto($message);
+// 		} else {
+// 			$platform->sendMessage($message);
+// 		}
+// 	}
+	$platform->replyKeyboardMarkup($markup);
 		
 	return $data;
 }
