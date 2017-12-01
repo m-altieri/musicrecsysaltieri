@@ -42,15 +42,19 @@ class Telegram implements Platform {
 		$this->$telegram->sendChatAction($array);
 	}
 	
-	function replyKeyboardMarkup($keyboard) {
+	function replyKeyboardMarkup($array) {
 		
 		$reply_markup = $this->$telegram->replyKeyboardMarkup([
-				'keyboard' => $keyboard['keyboard'],
-				'resize_keyboard' => $keyboard['resize_keyboard'],
-				'one_time_keyboard' => $keyboard['one_time_keyboard']
+				'keyboard' => $array['keyboard'],
+				'resize_keyboard' => $array['resize_keyboard'],
+				'one_time_keyboard' => $array['one_time_keyboard']
 		]);
 
-		$this->$telegram->replyKeyboardMarkup($reply_markup);
+		$this->$telegram->sendMessage([
+			'chat_id' => $array['chat_id'],
+			'text' => "",
+			'reply_markup' => $reply_markup
+		]);
 		return $reply_markup;
 	}
 	
