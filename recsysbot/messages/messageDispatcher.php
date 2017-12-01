@@ -22,12 +22,11 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
 	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
 	
-	// JSON Object containing the text to send to the user.
-	$replyText = $data['text'];	
+	// JSON Object containing the messages to send to the user.
+	$replyMessages = $data['messages'];
 	// JSON Object containing the keyboard to provide to the user.
 	$markup = $data['reply_markup'];
 	
-	$replyMessages = $data['messages'];
 	for ($i = 0; $i < count($replyMessages); $i++) {
 		$messages[$i] = array(
 				'chat_id' => $chatId,
@@ -39,6 +38,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	foreach ($messages as $message) {
 // 		$message['photo'] = "./recsysbot/images/poster.jpg";
 		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $markup);
+		
 		if (isset ($message['photo'])) {
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
 		} else {
