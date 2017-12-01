@@ -37,8 +37,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		);
 	}
 	foreach ($messages as $message) {
+		$message['photo'] = "./recsysbot/images/poster.jpg";
 		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $markup);
-		$message['photo'] = "./images/poster.jpg";
 		if (isset ($message['photo'])) {
 			$platform->sendPhoto($message);
 		} else {
