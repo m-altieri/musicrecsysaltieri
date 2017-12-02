@@ -23,11 +23,20 @@ class Telegram implements Platform {
 				'resize_keyboard' => $resize_keyboard,
 				'one_time_keyboard' => $one_time_keyboard
 		]);
-		$this->$telegram->sendMessage([
+
+		if (isset($markup)) {
+			$message = array([
 				'chat_id' => $chat_id,
 				'text' => $text,
 				'reply_markup' => $markup
-		]);
+			]);
+		} else {
+			$message = array([
+				'chat_id' => $chat_id,
+				'text' => $text
+			]);
+		}
+		$this->$telegram->sendMessage($message);
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
