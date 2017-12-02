@@ -24,17 +24,16 @@ class Telegram implements Platform {
 				'one_time_keyboard' => $one_time_keyboard
 		]);
 
-		$message = "";
 		if (isset($reply_markup)) {
 			$this->$telegram->sendMessage([
-					'chat_id' => $message['chat_id'],
-					'text' => $message['text'],
+					'chat_id' => $chat_id,
+					'text' => $text,
 					'reply_markup' => $markup
 			]);
 		} else {
 			$this->$telegram->sendMessage([
-					'chat_id' => $message['chat_id'],
-					'text' => $message['text']
+					'chat_id' => $chat_id,
+					'text' => $text
 			]);
 		}
 	}
