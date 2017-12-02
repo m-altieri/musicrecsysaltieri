@@ -26,20 +26,17 @@ class Telegram implements Platform {
 
 		$message = "";
 		if (isset($reply_markup)) {
-			file_put_contents("php://stderr", "\nsto nell'if");
-			$message = array([
-				'chat_id' => $chat_id,
-				'text' => $text,
-				'reply_markup' => $markup
+			$this->$telegram->sendMessage([
+					'chat_id' => $message['chat_id'],
+					'text' => $message['text'],
+					'reply_markup' => $markup
 			]);
 		} else {
-			file_put_contents("php://stderr", "\nsto nell'else");
-			$message = array([
-				'chat_id' => $chat_id,
-				'text' => "test"
+			$this->$telegram->sendMessage([
+					'chat_id' => $message['chat_id'],
+					'text' => $message['text']
 			]);
 		}
-		$this->$telegram->sendMessage($message);
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
