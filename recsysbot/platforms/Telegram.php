@@ -38,7 +38,10 @@ class Telegram implements Platform {
 				'text' => $text
 			]);
 		}
-		$this->$telegram->sendMessage($message);
+		$this->$telegram->sendMessage([
+				'chat_id' => $chat_id,
+				'text' => "test"
+		]);
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
