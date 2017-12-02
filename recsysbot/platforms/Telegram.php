@@ -24,13 +24,15 @@ class Telegram implements Platform {
 				'one_time_keyboard' => $one_time_keyboard
 		]);
 
-		if (isset($markup)) {
+		if (isset($reply_markup)) {
+			file_put_contents("php://stderr", "sto nell'if");
 			$message = array([
 				'chat_id' => $chat_id,
 				'text' => $text,
 				'reply_markup' => $markup
 			]);
 		} else {
+			file_put_contents("php://stderr", "sto nell'else");
 			$message = array([
 				'chat_id' => $chat_id,
 				'text' => $text
