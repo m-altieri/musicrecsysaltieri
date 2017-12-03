@@ -34,17 +34,18 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				'photo' => $replyMessage[$i]['photo'],
 				'reply_markup' => $markup
 		);
-		file_put_contents("php://stderr", "DEBUG\ntext: " . $replyMessages[$i]['text'] . "\nphoto: " . $replyMessages[$i]['photo']);
+		file_put_contents("php://stderr", "DEBUG\ntext: " . $replyMessages[$i]['text'] . "\nphoto: " . $replyMessages[$i]['photo'] . PHP_EOL);
 		
 	}
-	foreach ($messages as $message) {
-// 		$message['photo'] = "./recsysbot/images/poster.jpg";
-		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $markup);
+	foreach ($replyMessages as $message) {
+
+		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. "\nkeyboard: " . $markup);
 		
 		if (isset ($message['photo'])) {
-			file_put_contents("php://stderr", "Ho rilevato una foto: " . $message['photo']);
+			file_put_contents("php://stderr", "Ho rilevato una foto: " . $message['photo'] . PHP_EOL);
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
 		} else {
+			file_put_contents("php://stderr", "Nessuna foto" . PHP_EOL);
 			$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
 		}
 	}
