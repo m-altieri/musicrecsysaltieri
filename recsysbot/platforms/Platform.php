@@ -48,11 +48,6 @@ interface Platform {
 	 * 			'globalDate' - a readable format of the date.
 	 */
 	public function getMessageInfo($json);
-	
-	public function commandsHandler($boolean);
-	
-	public function addCommand($commandClass);
-
 }
 
 ?>

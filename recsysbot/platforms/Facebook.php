@@ -70,15 +70,6 @@ class Facebook implements Platform {
 		
 		return $info;
 	}
-	
-	public function commandsHandler($boolean) {
-		
-	}
-	
-	public function addCommand($commandClass) {
-		
-	}
-	
 }
 
 ?>
