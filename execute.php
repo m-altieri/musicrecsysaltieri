@@ -34,6 +34,15 @@
 	// This is suggested from Guzzle
 	date_default_timezone_set ( $config ['timezone'] );
 	
+	/***************
+	DEBUG: SERVER ATTIVO @193.204.187.192:8090 ?
+	***************/
+	$isServerOn = sayHi();
+	if (!$isServerOn) {
+		file_put_contents("php://stderr", "Server off.");
+		exit();
+	}
+	
 	/**
 	 * Change platform here.
 	 * To create a new platform, create its own php class in the platforms folder.
@@ -70,18 +79,6 @@
 	// pulisco il messaggio ricevuto
 	$messageInfo['text'] = trim ($messageInfo['text']);
 	$messageInfo['text'] = strtoLower ($messageInfo['text']);	
-
-/***************
-DEBUG: SERVER ATTIVO @193.204.187.192:8090 ?
-***************/
-$isServerOn = sayHi();
-if (!$isServerOn) {
-	file_put_contents("php://stderr", "Server off.");
-	exit();
-}
-/***************
-DEBUG
-***************/
 	
 	try {
 		if (isset ( $messageInfo['text'] )) {
