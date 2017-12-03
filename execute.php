@@ -37,12 +37,12 @@
 	/*************
 	SERVER ATTIVO?
 	*************/
-	try {
-		sayHi();
-	} catch (ConnectException $e) {
-		file_put_contents("php://stderr", "Server off.");
-		exit();
-	}
+// 	try {
+// 		sayHi();
+// 	} catch (ConnectException $e) {
+// 		file_put_contents("php://stderr", "Server off.");
+// 		exit();
+// 	}
 	
 	/**
 	 * Change platform here.
