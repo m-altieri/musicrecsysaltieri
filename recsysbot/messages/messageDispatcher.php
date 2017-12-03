@@ -33,9 +33,9 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				'text' => $replyMessages[$i]['text'],
 				'photo' => $replyMessage[$i]['photo'],
 				'reply_markup' => $markup
-				
-				file_put_contents("php://stderr", "DEBUG\ntext: " . $replyMessages[$i]['text'] . "\nphoto: " . $replyMessages[$i]['photo']);
 		);
+		file_put_contents("php://stderr", "DEBUG\ntext: " . $replyMessages[$i]['text'] . "\nphoto: " . $replyMessages[$i]['photo']);
+		
 	}
 	foreach ($messages as $message) {
 // 		$message['photo'] = "./recsysbot/images/poster.jpg";
