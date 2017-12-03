@@ -27,22 +27,16 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// JSON Object containing the keyboard to provide to the user.
 	$markup = $data['reply_markup'];
 	
+	// Invio i messaggi e la eventuale keyboard all'utente
 	foreach ($replyMessages as $message) {
 
-		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. "\nkeyboard: " . $markup . PHP_EOL);
+		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
+				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. "\nkeyboard: " . $markup . PHP_EOL);
 		
 		if (isset ($message['photo'])) {
-			file_put_contents("php://stderr", "Invio foto:\nchatId: " . $chatId
-					. "\nphoto: " . $message['photo']
-					. "\ncaption: " . $message['text']
-					. "\nkeyboard: " . $message['reply_markup']
-					. PHP_EOL);
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
 		} else {
-			file_put_contents("php://stderr", "Invio testo:\nchatId: " . $chatId
-					. "\text: " . $message['text']
-					. "\nkeyboard: " . $message['reply_markup']
-					. PHP_EOL);$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
+			$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
 		}
 	}
 		

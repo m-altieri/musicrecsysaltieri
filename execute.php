@@ -74,9 +74,10 @@
 /***************
 DEBUG: SERVER ATTIVO @193.204.187.192:8090 ?
 ***************/
-if ($messageInfo['text'] == "sayhi") {
-  sayHi();
-  return;
+$isServerOn = sayHi();
+if (!$isServerOn) {
+	file_put_contents("php://stderr", "Server off.");
+	exit();
 }
 /***************
 DEBUG
