@@ -33,6 +33,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				'text' => $replyMessages[$i]['text'],
 				'photo' => $replyMessage[$i]['photo'],
 				'reply_markup' => $markup
+				
+				file_put_contents("php://stderr", "DEBUG\ntext: " . $replyMessages[$i]['text'] . "\nphoto: " . $replyMessages[$i]['photo']);
 		);
 	}
 	foreach ($messages as $message) {
@@ -40,7 +42,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $markup);
 		
 		if (isset ($message['photo'])) {
-			file_put_contents("php://stderr", "Ho rilevato una foto: " + $message['photo']);
+			file_put_contents("php://stderr", "Ho rilevato una foto: " . $message['photo']);
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
 		} else {
 			$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
