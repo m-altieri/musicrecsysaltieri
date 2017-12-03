@@ -34,16 +34,6 @@
 	// This is suggested from Guzzle
 	date_default_timezone_set ( $config ['timezone'] );
 	
-	/*************
-	SERVER ATTIVO?
-	*************/
-// 	try {
-// 		sayHi();
-// 	} catch (ConnectException $e) {
-// 		file_put_contents("php://stderr", "Server off.");
-// 		exit();
-// 	}
-	
 	/**
 	 * Change platform here.
 	 * To create a new platform, create its own php class in the platforms folder.
@@ -60,10 +50,10 @@
 		exit ();
 	}
 	
-	$platform->addCommand ( Recsysbot\Commands\HelpCommand::class );
-	$platform->addCommand ( Recsysbot\Commands\InfoCommand::class );
-	$platform->addCommand ( Recsysbot\Commands\ResetCommand::class );
-	$platform->addCommand ( Recsysbot\Commands\StartCommand::class );
+// 	$platform->addCommand ( Recsysbot\Commands\HelpCommand::class );
+// 	$platform->addCommand ( Recsysbot\Commands\InfoCommand::class );
+// 	$platform->addCommand ( Recsysbot\Commands\ResetCommand::class );
+// 	$platform->addCommand ( Recsysbot\Commands\StartCommand::class );
 
 	$messageInfo = $platform->getMessageInfo($update);
 	
