@@ -10,8 +10,8 @@ function sayHi() {
 			'base_uri' => $config['base_uri']
 	] );
 
-        // debug
-        file_put_contents ("php://stderr", $config['base_uri'] . PHP_EOL);
+    // debug
+    file_put_contents ("php://stderr", $config['base_uri'] . PHP_EOL);
 
 	$stringGetRequest = $config['application_uri'] . '/restService/sayHi';
 	$response = $client->request ( 'GET', $stringGetRequest );

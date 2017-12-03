@@ -39,7 +39,7 @@
 	*************/
 	try {
 		sayHi();
-	} catch (Exception $e) {
+	} catch (ConnectException $e) {
 		file_put_contents("php://stderr", "Server off.");
 		exit();
 	}
@@ -53,10 +53,10 @@
 	
 	// recupero il contenuto inviato dall'utente
 	$content = $platform->getWebhookUpdates();
-	$update = json_decode ( $content, true );
+	$update = json_decode($content, true);
 	
 	// se la richiesta è null interrompo lo script
-	if (! $update) {
+	if (!$update) {
 		exit ();
 	}
 	
@@ -88,14 +88,6 @@
 						$messageInfo['lastname'], $messageInfo['username']);
 			}
 			messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
-
-			$userDetail = getUserDetail($messageInfo['chatId']);
-			file_put_contents("php://stderr", "User Detail ricevuto: " . 
-					"\nid: " . $userDetail['id'] . 
-					"\nusername: " . $userDetail['username'] . 
-					"\nfirstname: " . $userDetail['firstname'] . 
-					"\nlastname: " . $userDetail['lastname'] .
-					"\ntext: " . $messageInfo['text']);
 		} else {
 			$response = "I'm sorry. I received a message, but i can't unswer";
 			$platform->sendMessage($messageInfo['chatId'], $response);
