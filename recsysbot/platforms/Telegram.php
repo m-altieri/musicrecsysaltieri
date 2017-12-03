@@ -49,12 +49,21 @@ class Telegram implements Platform {
 				'resize_keyboard' => $resize_keyboard,
 				'one_time_keyboard' => $one_time_keyboard
 		]);
-		$this->$telegram->sendPhoto([
-				'chat_id' => $chat_id,
-				'photo' => $photo,
-				'caption' => $caption,
-				'reply_markup' => $markup
-		]);
+		
+		if (isset($reply_markup)) {
+			$this->$telegram->sendPhoto([
+					'chat_id' => $chat_id,
+					'photo' => $photo,
+					'caption' => $caption,
+					'reply_markup' => $markup
+			]);
+		} else {
+			$this->$telegram->sendPhoto([
+					'chat_id' => $chat_id,
+					'photo' => $photo,
+					'caption' => $photo
+			]);
+		}
 	}
 	
 

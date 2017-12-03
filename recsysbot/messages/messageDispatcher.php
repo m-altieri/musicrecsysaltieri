@@ -40,6 +40,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		file_put_contents("php://stderr", "chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'] . "\nkeyboard: " . $markup);
 		
 		if (isset ($message['photo'])) {
+			file_put_contents("php://stderr", "Ho rilevato una foto: " + $message['photo']);
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
 		} else {
 			$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
