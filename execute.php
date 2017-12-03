@@ -34,11 +34,12 @@
 	// This is suggested from Guzzle
 	date_default_timezone_set ( $config ['timezone'] );
 	
-	/***************
-	DEBUG: SERVER ATTIVO @193.204.187.192:8090 ?
-	***************/
-	$isServerOn = sayHi();
-	if (!$isServerOn) {
+	/*************
+	SERVER ATTIVO?
+	*************/
+	try {
+		sayHi();
+	} catch (Exception $e) {
 		file_put_contents("php://stderr", "Server off.");
 		exit();
 	}
