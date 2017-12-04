@@ -31,10 +31,13 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	foreach ($replyMessages as $message) {
 
 		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
-				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. "\nkeyboard: " . $markup . PHP_EOL);
+				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. 
+				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
 		
 		if (isset ($message['photo'])) {
 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+		} else if (isset ($message['link'])) {
+			$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
 		} else {
 			$platform->sendMessage($chatId, $message['text'], $markup);
 		}
