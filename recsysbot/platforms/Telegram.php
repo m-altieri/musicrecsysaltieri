@@ -28,12 +28,14 @@ class Telegram implements Platform {
 			$this->$telegram->sendMessage([
 					'chat_id' => $chat_id,
 					'text' => $text,
-					'reply_markup' => $markup
+					'reply_markup' => $markup,
+					'parse_mode' => 'Markdown'
 			]);
 		} else {
 			$this->$telegram->sendMessage([
 					'chat_id' => $chat_id,
-					'text' => $text
+					'text' => $text,
+					'parse_mode' => 'Markdown'
 			]);
 		}
 	}
