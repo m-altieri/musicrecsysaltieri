@@ -69,17 +69,21 @@ class Telegram implements Platform {
 	}
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
+		
 		$inline_keyboard[] = [
 				['text' => $text, 'url' => $url]
 		];
 		
-		$inlineKeyboardMarkup = $telegram->replyKeyboardMarkup(['inline_keyboard' => $inline_keyboard]);
+		$inlineKeyboardMarkup = $this->$telegram->replyKeyboardMarkup([
+				'inline_keyboard' => $inline_keyboard
+		]);
 		
-		$telegram->sendMessage(['chat_id' => $chatId,
+		$telegram->sendMessage([
+				'chat_id' => $chatId,
 				'text' => $text,
 				'reply_markup' => $inlineKeyboardMarkup,
-				'parse_mode' => 'Markdown']);
-		
+				'parse_mode' => 'Markdown'
+		]);
 	}
 
 	public function sendChatAction($array) {
