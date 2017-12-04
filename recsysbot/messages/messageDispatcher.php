@@ -34,9 +34,9 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. "\nkeyboard: " . $markup . PHP_EOL);
 		
 		if (isset ($message['photo'])) {
-			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $message['reply_markup']);
+			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
 		} else {
-			$platform->sendMessage($chatId, $message['text'], $message['reply_markup']);
+			$platform->sendMessage($chatId, $message['text'], $markup);
 		}
 	}
 		
