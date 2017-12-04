@@ -16,12 +16,29 @@ interface Platform {
 	
 	/**
 	 * Send a photo.
-	 * $array must contain 3 values:
-	 * 'chat_id' - the chat where to send the message to
-	 * 'photo' - the photo path
-	 * 'caption' - the caption to send alongside with the photo
+	 * @param $chat_id The chat where to send the message to.
+	 * @param $photo The photo URL.
+	 * @param $caption The caption to send alongside with the photo.
+	 * @param $reply_markup Array representing the keyboard provided to the users, 
+	 * must contain 3 values:
+	 * 'keyboard' - the keyboard structure as a multidimensional string array
+	 * 'resize_keyboard' - boolean flag to set the keyboard as resizable
+	 * 'one_time_keyboard' - boolean flag to set the keyboard as one time keyboard
 	 */
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup);
+	
+	/**
+	 * Send a platform-dependant representation of a button referencing and URL.
+	 * @param $chat_id The chat where to send the message to.
+	 * @param $text The text of the clickable object.
+	 * @param $url The URL where the link points to.
+	 * @param $reply_markup Array representing the keyboard provided to the users, 
+	 * must contain 3 values:
+	 * 'keyboard' - the keyboard structure as a multidimensional string array
+	 * 'resize_keyboard' - boolean flag to set the keyboard as resizable
+	 * 'one_time_keyboard' - boolean flag to set the keyboard as one time keyboard
+	 */
+	public function sendLink($chat_id, $text, $url, $reply_markup);
 	
 	/**
 	 *

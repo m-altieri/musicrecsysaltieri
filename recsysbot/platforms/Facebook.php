@@ -22,6 +22,10 @@ class Facebook implements Platform {
 		
 	}
 	
+	public function sendLink($chat_id, $text, $url, $reply_markup) {
+		
+	}
+	
 	public function sendChatAction($array) {
 		
 	}
