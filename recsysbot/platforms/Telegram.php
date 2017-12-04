@@ -53,7 +53,6 @@ class Telegram implements Platform {
 		]);
 		
 		if (isset($reply_markup)) {
-			file_put_contents("php://stderr", "DEBUG: trovata keyboard:\n" . $reply_markup . PHP_EOL);
 			$this->$telegram->sendPhoto([
 					'chat_id' => $chat_id,
 					'photo' => $photo,
@@ -61,7 +60,6 @@ class Telegram implements Platform {
 					'reply_markup' => $markup
 			]);
 		} else {
-			file_put_contents("php://stderr", "DEBUG: keyboard assente" . PHP_EOL);
 			$this->$telegram->sendPhoto([
 					'chat_id' => $chat_id,
 					'photo' => $photo,
