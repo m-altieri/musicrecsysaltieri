@@ -76,7 +76,7 @@ class Telegram implements Platform {
 				'inline_keyboard' => $inline_keyboard
 		]);
 		
-		$telegram->sendMessage([
+		$this->$telegram->sendMessage([
 				'chat_id' => $chatId,
 				'text' => $text,
 				'reply_markup' => $inlineKeyboardMarkup,
