@@ -1,7 +1,7 @@
 <?php
 	
 	require 'vendor/autoload.php';
-	$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
+	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
 	foreach ( glob ( "recsysbot/classes/*.php" ) as $file ) {
 		require $file;
@@ -55,8 +55,8 @@
 // 	$botName = checkUserAndBotNameFunction($messageInfo['chatId'], 
 // 			$messageInfo['firstname'], $messageInfo['lastname'], 
 // 			$messageInfo['username'], $messageInfo['date']);
-// 	$botName = $config['bot_name'];
-	$botName = "movierecsysbot";
+	$botName = $config['bot_name'];
+// 	$botName = "movierecsysbot";
 	file_put_contents("php://stderr", "Bot name: " . $botName . PHP_EOL);
 	
 	// pulisco il messaggio ricevuto
