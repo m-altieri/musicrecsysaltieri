@@ -25,9 +25,6 @@
 		require_once $file;
 	}
 	
-	// This is suggested from Guzzle
-	date_default_timezone_set ( $config ['timezone'] );
-	
 	/**
 	 * Change platform here.
 	 * To create a new platform, create its own php class in the platforms folder.
@@ -35,11 +32,9 @@
 	 */
 	$platform = new Telegram();
 	
-	// recupero il contenuto inviato dall'utente
 	$content = $platform->getWebhookUpdates();
 	$update = json_decode($content, true);
 	
-	// se la richiesta è null interrompo lo script
 	if (!$update) {
 		exit ();
 	}
@@ -52,28 +47,20 @@
 	if ($messageInfo['chatId'] == "") {
 		exit();
 	}
-// 	$botName = checkUserAndBotNameFunction($messageInfo['chatId'], 
-// 			$messageInfo['firstname'], $messageInfo['lastname'], 
-// 			$messageInfo['username'], $messageInfo['date']);
-	$botName = $config['bot_name'];
-// 	$botName = "movierecsysbot";
-	file_put_contents("php://stderr", "Bot name: " . $botName . PHP_EOL);
 	
-	// pulisco il messaggio ricevuto
 	$messageInfo['text'] = trim ($messageInfo['text']);
-	$messageInfo['text'] = strtoLower ($messageInfo['text']);	
+	$messageInfo['text'] = strtoLower ($messageInfo['text']);
+
+	$botName = "movierecsysbot";
 	
 	try {
 		if (isset($messageInfo['text'])) {
-			if ($messageInfo['text'] == "/start") {
-				putUserDetail($messageInfo['chatId'], $messageInfo['firstname'],
-						$messageInfo['lastname'], $messageInfo['username']);
-			}
 			messageDispatcher($platform, $messageInfo['chatId'], $messageInfo['messageId'], $messageInfo['date'], $messageInfo['text'], $messageInfo['firstname'], $botName);
 		} else {
 			$response = "I'm sorry. I received a message, but i can't unswer";
 			$platform->sendMessage($messageInfo['chatId'], $response);
 		}
+		
 	} catch ( Exception $e ) {
 		file_put_contents ( "php://stderr", "Exception chatId:" . $messageInfo['chatId'] . " - firstname:" . $messageInfo['firstname'] . " - botName" . $botName . " - Date:" . $messageInfo['globalDate'] . " - text:" . $messageInfo['text'] . PHP_EOL );
 		file_put_contents ( "php://stderr", "Exception chatId:" . $messageInfo['chatId'] . " Caught exception: " . print_r ( $e->getTraceAsString (), true ) . PHP_EOL );
