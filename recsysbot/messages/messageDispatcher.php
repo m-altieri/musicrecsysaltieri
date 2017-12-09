@@ -869,7 +869,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
                  
          profileReply($telegram, $chatId);
          break;      
-      case strpos($text, '📘'):
+      case strpos($text, '📘'): // rate movies -> Help
          $help = "rateMovieSelected";
          $context = "helpSelected";
          $replyText = "help, rateMovieSelected";
@@ -878,7 +878,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
                  
-         helpReply($telegram, $chatId, $help);
+         helpReply($telegram, $chatId, $help); // recommend movie -> help
          break;
       case strpos($text, '📗'):
          $help = "recMovieSelected";
@@ -891,7 +891,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
                  
          helpReply($telegram, $chatId, $help);
          break;
-      case strpos($text, '📙'):
+      case strpos($text, '📙'): // profile -> Help
          $help = "profileSelected";
          $context = "helpSelected";
          $replyText = "help,profileSelected";

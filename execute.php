@@ -1,14 +1,8 @@
 <?php
 	
-	/**
-	 * @author Francesco Baccaro
-	 */
-	use GuzzleHttp\Client;
-	
 	require 'vendor/autoload.php';
 	$config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 	
-	// richiedo tutti le funzioni, i messaggi di risposta e i servizi che mi servono per l'esecuzione
 	foreach ( glob ( "recsysbot/classes/*.php" ) as $file ) {
 		require $file;
 	}
