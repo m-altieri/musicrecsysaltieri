@@ -43,11 +43,6 @@
 	if (!$update) {
 		exit ();
 	}
-	
-// 	$platform->addCommand ( Recsysbot\Commands\HelpCommand::class );
-// 	$platform->addCommand ( Recsysbot\Commands\InfoCommand::class );
-// 	$platform->addCommand ( Recsysbot\Commands\ResetCommand::class );
-// 	$platform->addCommand ( Recsysbot\Commands\StartCommand::class );
 
 	$messageInfo = $platform->getMessageInfo($update);
 	
@@ -57,16 +52,17 @@
 	if ($messageInfo['chatId'] == "") {
 		exit();
 	}
-	$botName = checkUserAndBotNameFunction($messageInfo['chatId'], 
-			$messageInfo['firstname'], $messageInfo['lastname'], 
-			$messageInfo['username'], $messageInfo['date']);
+// 	$botName = checkUserAndBotNameFunction($messageInfo['chatId'], 
+// 			$messageInfo['firstname'], $messageInfo['lastname'], 
+// 			$messageInfo['username'], $messageInfo['date']);
+	$botName = $config['bot_name'];
 	
 	// pulisco il messaggio ricevuto
 	$messageInfo['text'] = trim ($messageInfo['text']);
 	$messageInfo['text'] = strtoLower ($messageInfo['text']);	
 	
 	try {
-		if (isset ( $messageInfo['text'] )) {
+		if (isset($messageInfo['text'])) {
 			if ($messageInfo['text'] == "/start") {
 				putUserDetail($messageInfo['chatId'], $messageInfo['firstname'],
 						$messageInfo['lastname'], $messageInfo['username']);
