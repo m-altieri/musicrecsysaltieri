@@ -56,6 +56,7 @@
 // 			$messageInfo['firstname'], $messageInfo['lastname'], 
 // 			$messageInfo['username'], $messageInfo['date']);
 	$botName = $config['bot_name'];
+	file_put_contents("php://stderr", "Bot name: " . $botName . PHP_EOL);
 	
 	// pulisco il messaggio ricevuto
 	$messageInfo['text'] = trim ($messageInfo['text']);
