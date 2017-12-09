@@ -55,7 +55,8 @@
 // 	$botName = checkUserAndBotNameFunction($messageInfo['chatId'], 
 // 			$messageInfo['firstname'], $messageInfo['lastname'], 
 // 			$messageInfo['username'], $messageInfo['date']);
-	$botName = $config['bot_name'];
+// 	$botName = $config['bot_name'];
+	$botName = "movierecsysbot";
 	file_put_contents("php://stderr", "Bot name: " . $botName . PHP_EOL);
 	
 	// pulisco il messaggio ricevuto
