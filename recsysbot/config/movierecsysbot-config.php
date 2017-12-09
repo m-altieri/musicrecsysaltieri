@@ -20,11 +20,12 @@ return [
 				"I need at least 3 preferences for generating recommendations 😉",
 		// Facebook payload returned from "Start" button
 		'getStartedPayload' => "get_started",
+		// Bot name
+		'bot_name' => "movierecsysbot",
         // Base URI (Altieri)
         'base_uri' => '193.204.187.192:8100', //MODIFICABILE
 		// Server application URI (Altieri)
-		'application_uri' => '/movierecsysservice', //MODIFICABILE
-		// Bot name
-		'bot_name' => 'movierecsysbot'
+		'application_uri' => '/movierecsysservice' //MODIFICABILE
+
 ];
 ?>
