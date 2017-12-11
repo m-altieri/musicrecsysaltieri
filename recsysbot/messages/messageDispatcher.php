@@ -3,7 +3,49 @@
 use Recsysbot\Classes\userMovieRecommendation;
 use Recsysbot\Classes\UserProfileAcquisitionByMovie;
 
-function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
+function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstname, $botName){
+	
+	$chatAction = array(
+			'chat_id' => $chatId,
+			'action' => 'typing'
+	);
+	$platform->sendChatAction($chatAction);
+	
+	file_put_contents("php://stderr", "[messageDispatcher] Sending message to server: " . 
+			"\nChat ID: " . $chatId . "\nText: " . $text . PHP_EOL);
+	
+	// Nome provvisorio
+	// Prende le informazioni sul messaggio inviato dall'utente e le manda al server
+	// $data è già un array; sendMessageToServer si occupa di fare il json_decode
+	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
+	
+	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
+	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
+	
+	// JSON Object containing the messages to send to the user.
+	$replyMessages = $data['messages'];
+	// JSON Object containing the keyboard to provide to the user.
+	$markup = $data['reply_markup'];
+	
+	// Invio i messaggi e la eventuale keyboard all'utente
+	foreach ($replyMessages as $message) {
+
+		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
+				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. 
+				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
+		
+		if (isset ($message['photo'])) {
+			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+		} else if (isset ($message['link'])) {
+			$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
+		} else {
+			$platform->sendMessage($chatId, $message['text'], $markup);
+		}
+	}
+		
+	return $data;
+}
+/*function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstname, $botName){
    
    $emojis = require '/app/recsysbot/variables/emojis.php';
 
@@ -827,7 +869,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          profileReply($telegram, $chatId);
          break;      
-      case strpos($text, '📘'):
+      case strpos($text, '📘'): // rate movies -> Help
          $help = "rateMovieSelected";
          $context = "helpSelected";
          $replyText = "help, rateMovieSelected";
@@ -836,7 +878,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
          $responseType = "button";
          $result = putChatMessage($chatId, $messageId, $context, $replyText, $replyFunctionCall, $pagerankCicle, $botName, $date, $responseType);
                  
-         helpReply($telegram, $chatId, $help);
+         helpReply($telegram, $chatId, $help); // recommend movie -> help
          break;
       case strpos($text, '📗'):
          $help = "recMovieSelected";
@@ -849,7 +891,7 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
                  
          helpReply($telegram, $chatId, $help);
          break;
-      case strpos($text, '📙'):
+      case strpos($text, '📙'): // profile -> Help
          $help = "profileSelected";
          $context = "helpSelected";
          $replyText = "help,profileSelected";
@@ -894,4 +936,4 @@ function messageDispatcher($telegram, $chatId, $messageId, $date, $text, $firstn
       default:
          break;
       }
-   }
+   }*/
