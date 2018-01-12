@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Francesco Baccaro
- */
-
-$emojis = require '/app/recsysbot/variables/emojis.php';
 
 return [ 
 		// Facebook Token Test movierecsys

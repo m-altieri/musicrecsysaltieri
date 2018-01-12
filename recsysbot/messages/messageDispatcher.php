@@ -1,8 +1,5 @@
 <?php
 
-use Recsysbot\Classes\userMovieRecommendation;
-use Recsysbot\Classes\UserProfileAcquisitionByMovie;
-
 function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstname, $botName){
 	
 	$chatAction = array(
