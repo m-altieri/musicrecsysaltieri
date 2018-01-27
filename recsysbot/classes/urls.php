@@ -10,3 +10,7 @@ function getServiceName() {
 function getApiAiBaseURL() {
 	return "https://api.dialogflow.com";
 }
+
+function getAccessToken() {
+	return "4ef6680948dc45ed8097591046388029";
+}
