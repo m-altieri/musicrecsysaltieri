@@ -74,8 +74,8 @@ class DialogManager
 	
 	public function handleResponse($data) {
 		$textResponse = $data['speech'];
-		/*$this->telegram->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
-		 $this->telegram->sendMessage(['chat_id' => $this->chatId, 'text' => $textResponse]);*/
+		/*$this->platform->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
+		 $this->platform->sendMessage(['chat_id' => $this->chatId, 'text' => $textResponse]);*/
 		$this->writeText($textResponse);
 		
 		//Controlla se c'Ã¨ un'immagine da visualizzare
@@ -140,14 +140,14 @@ class DialogManager
 	
 	public function sendImage($image, $caption) {
 		try {
-			$response = $this->telegram->sendPhoto([
+			$response = $this->platform->sendPhoto([
 					'chat_id' => $this->chatId,
 					'photo' => $image,
 					'caption' => $caption
 			]);
 		} catch (Exception $e) {
 			file_put_contents("php://stderr", "Image is not valid! Sending default image".PHP_EOL);
-			$this->telegram->sendPhoto([
+			$this->platform->sendPhoto([
 					'chat_id' => $this->chatId,
 					'photo' => "./recsysbot/images/default.jpg",
 					'caption' => $caption
