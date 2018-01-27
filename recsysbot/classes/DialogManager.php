@@ -133,14 +133,14 @@ class DialogManager
 		for ($i = 0; $i < sizeof($messages); $i++) {
 			if (strlen($messages[$i]) > 0) {
 				$this->platform->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
-				$this->platform->sendMessage($this->chatId, $messages[$i], []);
+				$this->platform->sendMessage($this->chatId, $messages[$i], null);
 			}
 		}
 	}
 	
 	public function sendImage($image, $caption) {
 		try {
-			$response = $this->platform->sendPhoto($this->chatId, $image, $caption, []);
+			$response = $this->platform->sendPhoto($this->chatId, $image, $caption, null);
 		} catch (Exception $e) {
 			file_put_contents("php://stderr", "Image is not valid!".PHP_EOL);
 		}
