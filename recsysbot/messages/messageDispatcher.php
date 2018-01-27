@@ -17,7 +17,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// Prende le informazioni sul messaggio inviato dall'utente e le manda al server
 	// $data è già un array; sendMessageToServer si occupa di fare il json_decode
 // 	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
-	$dialogManager = new \recsysbot\classes\DialogManager($telegram, $chatId);
+	$dialogManager = new \Recsysbot\Classes\DialogManager($telegram, $chatId);
 	$data = $dialogManager->sendMessage($text);
 	
 	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
