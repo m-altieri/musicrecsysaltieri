@@ -133,25 +133,16 @@ class DialogManager
 		for ($i = 0; $i < sizeof($messages); $i++) {
 			if (strlen($messages[$i]) > 0) {
 				$this->platform->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
-				$this->platform->sendMessage(['chat_id' => $this->chatId, 'text' => $messages[$i]]);
+				$this->platform->sendMessage($this->chatId, $messages[$i], array());
 			}
 		}
 	}
 	
 	public function sendImage($image, $caption) {
 		try {
-			$response = $this->platform->sendPhoto([
-					'chat_id' => $this->chatId,
-					'photo' => $image,
-					'caption' => $caption
-			]);
+			$response = $this->platform->sendPhoto($this->chatId, $image, $caption, array());
 		} catch (Exception $e) {
-			file_put_contents("php://stderr", "Image is not valid! Sending default image".PHP_EOL);
-			$this->platform->sendPhoto([
-					'chat_id' => $this->chatId,
-					'photo' => "./recsysbot/images/default.jpg",
-					'caption' => $caption
-			]);
+			file_put_contents("php://stderr", "Image is not valid!".PHP_EOL);
 		}
 	}
 
