@@ -132,8 +132,8 @@ class DialogManager
 		$messages = explode("\n\n", $text);
 		for ($i = 0; $i < sizeof($messages); $i++) {
 			if (strlen($messages[$i]) > 0) {
-				$this->telegram->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
-				$this->telegram->sendMessage(['chat_id' => $this->chatId, 'text' => $messages[$i]]);
+				$this->platform->sendChatAction(['chat_id' => $this->chatId, 'action' => 'typing']);
+				$this->platform->sendMessage(['chat_id' => $this->chatId, 'text' => $messages[$i]]);
 			}
 		}
 	}
