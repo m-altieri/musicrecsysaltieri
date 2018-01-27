@@ -24,25 +24,25 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
 	
 	// JSON Object containing the messages to send to the user.
-	$replyMessages = $data['messages'];
+// 	$replyMessages = $data['messages'];
 	// JSON Object containing the keyboard to provide to the user.
-	$markup = $data['reply_markup'];
+// 	$markup = $data['reply_markup'];
 	
 	// Invio i messaggi e la eventuale keyboard all'utente
-	foreach ($replyMessages as $message) {
+// 	foreach ($replyMessages as $message) {
 
-		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
-				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. 
-				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
+// 		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
+// 				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. 
+// 				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
 		
-		if (isset ($message['photo'])) {
-			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
-		} else if (isset ($message['link'])) {
-			$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
-		} else {
-			$platform->sendMessage($chatId, $message['text'], $markup);
-		}
-	}
+// 		if (isset ($message['photo'])) {
+// 			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+// 		} else if (isset ($message['link'])) {
+// 			$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
+// 		} else {
+// 			$platform->sendMessage($chatId, $message['text'], $markup);
+// 		}
+// 	}
 		
 	return $data;
 }
