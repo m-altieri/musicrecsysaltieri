@@ -10,8 +10,8 @@ class DialogManager
 	protected $chatId;
 	
 	public function __construct($platform, $chatId){
-		$this->$platform = $telegram;
-		$this->$chatId = $chatId;
+		$this->platform = $telegram;
+		$this->chatId = $chatId;
 	}
 	
 	public function sendMessage($text) {
@@ -49,7 +49,7 @@ class DialogManager
 	
 	public function sendRequestToWebService($data) {
 		$client = new Client();
-		$response = $client->post(getServiceBaseURL().'/'.getServiceName().'/restService/dialogMessage/', [
+		$response = $client->post('193.204.187.192:8090/movierecsysservice/restService/dialogMessage/', [
 				'json' => $data,
 				'connect_timeout' => 0
 		]);
@@ -64,7 +64,7 @@ class DialogManager
 		file_put_contents("php://stderr", "Called getContexts".PHP_EOL);
 		
 		$client = new Client();
-		$uri = '193.204.187.192:8090/movierecsysservice/restService/getContext?userID='.$this->chatId;
+		$uri = '193.204.187.192:8090/movierecsysservice/restService/getContext?userID=' . $this->chatId;
 		file_put_contents("php://stderr", "uri is ".$uri.PHP_EOL);
 		$response = $client->request('GET', $uri);
 		$responseDecoded = json_decode($response->getBody()->getContents(), true);
