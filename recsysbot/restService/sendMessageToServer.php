@@ -26,7 +26,7 @@ function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname,
 			'base_uri' => $base_uri
 	] );
 	$stringGetRequest = $config['application_uri'] . 
-	'/restService/?userID=' . $userID . 
+	'/restService/getReply?userID=' . $userID . 
 	'&messageID=' . $messageId . '&timeStamp=' . $timeStamp . 
 	'&text=' . urlencode($text) . '&firstname=' . $firstname . '&botName=' . $botName;
 	
