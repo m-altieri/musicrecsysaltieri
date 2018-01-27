@@ -10,7 +10,7 @@ class DialogManager
 	protected $chatId;
 	
 	public function __construct($platform, $chatId){
-		$this->platform = $telegram;
+		$this->platform = $platform;
 		$this->chatId = $chatId;
 	}
 	
