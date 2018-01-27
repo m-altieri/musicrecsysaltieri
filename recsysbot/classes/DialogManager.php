@@ -64,7 +64,7 @@ class DialogManager
 		file_put_contents("php://stderr", "Called getContexts".PHP_EOL);
 		
 		$client = new Client();
-		$uri = getServiceBaseURL().'/'.getServiceName().'/restService/getContext?userID='.$this->chatId;
+		$uri = '193.204.187.192:8090/movierecsysservice/restService/getContext?userID='.$this->chatId;
 		file_put_contents("php://stderr", "uri is ".$uri.PHP_EOL);
 		$response = $client->request('GET', $uri);
 		$responseDecoded = json_decode($response->getBody()->getContents(), true);
