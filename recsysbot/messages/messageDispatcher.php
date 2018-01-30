@@ -4,6 +4,8 @@ use Recsysbot\Classes\DialogManager;
 
 function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstname, $botName) {
 	
+	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
+	
 	$chatAction = array(
 			'chat_id' => $chatId,
 			'action' => 'typing'
@@ -38,7 +40,11 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
 		
 		if (isset ($message['photo'])) {
-			$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+			try {
+				$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+			} catch (Exception $e) {
+				$platform->sendPhoto($chatId, $config['default_photo'], $message['text'], $markup);
+			}
 		} else if (isset ($message['link'])) {
 			$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
 		} else {
