@@ -6,11 +6,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
-	$chatAction = array(
-			'chat_id' => $chatId,
-			'action' => 'typing'
-	);
-	$platform->sendChatAction($chatAction);
+	$platform->sendChatAction($chat_id, 'typing');
 	
 	file_put_contents("php://stderr", "[messageDispatcher] Sending message to server: " . 
 			"\nChat ID: " . $chatId . "\nText: " . $text . PHP_EOL);

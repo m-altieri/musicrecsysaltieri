@@ -26,7 +26,7 @@ class Facebook implements Platform {
 		
 	}
 	
-	public function sendChatAction($array) {
+	public function sendChatAction($chat_id, $action) {
 		
 	}
 	
