@@ -20,5 +20,4 @@ function sendChatAction($chat_id, $action) {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$result = curl_exec($ch);
 	curl_close($ch);
-	file_put_contents("php://stderr", "\nResult: " . $result . PHP_EOL);
 }
