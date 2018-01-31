@@ -5,5 +5,5 @@ function sendMessageURI() {
 }
 	
 function token() {
-	return 'https://graph.facebook.com/v2.6/1491368210953105?fields=first_name,last_name&access_token=EAAE0Lnad6ywBAMLSxgKrmpli3B3LbptyyC9p5RsE67ZAxqp1IEPaZALNHDrvhZAcNqhy9lnyjhu246w4ujfyg0LTmW8lEpdqwHGLprEXpAitcSppzdyztaWMtcMT3nZCowKEuHX4KtvCFiAZAZA8ayfe9ZAYz6oIFIFXYsNobXjwwZDZD';
+	return 'EAAE0Lnad6ywBAMLSxgKrmpli3B3LbptyyC9p5RsE67ZAxqp1IEPaZALNHDrvhZAcNqhy9lnyjhu246w4ujfyg0LTmW8lEpdqwHGLprEXpAitcSppzdyztaWMtcMT3nZCowKEuHX4KtvCFiAZAZA8ayfe9ZAYz6oIFIFXYsNobXjwwZDZD';
 }

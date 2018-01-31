@@ -2,14 +2,14 @@
 
 require_once '/app/recsysbot/facebook/utils.php';
 
-function sendMessage($chat_id, $text) {
-			
+function sendMarkupMessage($chat_id, $text, $replyMarkup) {
+	
 	$url = sendMessageURI();
 	
 	$req = [
-		'messaging_type' => 'RESPONSE',
-		'recipient' => [ 'id' => $chat_id ],
-		'message' => [ 'text' => $text ]
+			'messaging_type' => 'RESPONSE',
+			'recipient' => [ 'id' => $chat_id ],
+			'message' => [ 'text' => $text ]
 	];
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);

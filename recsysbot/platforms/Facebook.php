@@ -8,6 +8,7 @@ require "recsysbot/facebook/setGreeting.php";
 require "recsysbot/facebook/setPersistentMenu.php";
 require "recsysbot/facebook/getUserInfo.php";
 require "recsysbot/facebook/sendChatAction.php";
+require "recsysbot/facebook/sendMarkupMessage.php";
 $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 
@@ -18,10 +19,11 @@ class Facebook implements Platform {
 	}
 	
 	public function sendMessage($chat_id, $text, $reply_markup) {
-		sendMessage($chat_id, $text);
-		/*
-		 * Aggiungere l'invio dei quick reply
-		 */
+		if ($reply_markup == null) {
+			sendMessage($chat_id, $text);
+		} else {
+			sendMarkupMessage($chat_id, $text, $reply_markup);
+		}
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
