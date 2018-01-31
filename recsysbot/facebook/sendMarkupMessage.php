@@ -6,10 +6,29 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	
 	$url = sendMessageURI();
 	
+	$replyMarkupArray = array();
+	foreach ($replyMarkup as $row) {
+		foreach ($row as $item) {
+			$replyMarkupArray[] = $item;
+		}
+	}
+	
+	$quick_replies = [];
+	foreach ($replyMarkupArray as $item) {
+		$quick_replies[0][] = [
+			"content_type" => "text",
+			"title" => $item,
+			"payload" => $item
+		];
+	}
+	
 	$req = [
 			'messaging_type' => 'RESPONSE',
 			'recipient' => [ 'id' => $chat_id ],
-			'message' => [ 'text' => $text ]
+			'message' => [ 
+					'text' => $text,
+					'quick_replies' => $quick_replies
+			]
 	];
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);
