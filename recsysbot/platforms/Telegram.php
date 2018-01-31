@@ -83,7 +83,7 @@ class Telegram implements Platform {
 				'chat_id' => $chatId,
 				'action' => $action
 		);
-		$this->$telegram->sendChatAction($chatAction);
+		$this->telegram->sendChatAction($chatAction);
 	}
 	
 	private function replyKeyboardMarkup($keyboard) {
@@ -98,7 +98,7 @@ class Telegram implements Platform {
 	}
 	
 	public function getWebhookUpdates() {
-		return $this->$telegram->getWebhookUpdates();
+		return $this->telegram->getWebhookUpdates();
 	}
 	
 	public function getMessageInfo($json) {
