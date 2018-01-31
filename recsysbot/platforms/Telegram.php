@@ -79,10 +79,11 @@ class Telegram implements Platform {
 
 	public function sendChatAction($chat_id, $action) {
 		
-		$chatAction = array(
-				'chat_id' => $chat_id,
-				'action' => $action
-		);
+		$chatAction = [
+			'chat_id' => $chat_id,
+			'action' => $action
+		];
+		file_put_contents("php://stderr", "Sending chat action: " . print_r($chatAction, true) . PHP_EOL);
 		$this->$telegram->sendChatAction($chatAction);
 	}
 	
