@@ -4,6 +4,8 @@ require_once '/app/recsysbot/facebook/utils.php';
 
 function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	
+	$MAX_OPTIONS = 11;
+	
 	$url = sendMessageURI();
 	
 	$keyboard = $replyMarkup['keyboard'];
@@ -23,6 +25,7 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 			"payload" => $options[$i]
 		];
 	}
+	$quick_replies = array_slice($quick_replies, 0, $MAX_OPTIONS);
 	
 	$req = [
 			'messaging_type' => 'RESPONSE',
