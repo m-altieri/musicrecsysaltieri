@@ -13,7 +13,7 @@ class Telegram implements Platform {
 	
 	public function __construct() {
 		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-		$this->telegram = new Api($config['token']);
+		$this->$telegram = new Api($config['token']);
 	}
 	
 	public function sendMessage($chat_id, $text, $reply_markup) {
@@ -80,10 +80,10 @@ class Telegram implements Platform {
 	public function sendChatAction($chat_id, $action) {
 		
 		$chatAction = array(
-				'chat_id' => $chatId,
+				'chat_id' => $chat_id,
 				'action' => $action
 		);
-		$this->telegram->sendChatAction($chatAction);
+		$this->$telegram->sendChatAction($chatAction);
 	}
 	
 	private function replyKeyboardMarkup($keyboard) {
@@ -98,7 +98,7 @@ class Telegram implements Platform {
 	}
 	
 	public function getWebhookUpdates() {
-		return $this->telegram->getWebhookUpdates();
+		return $this->$telegram->getWebhookUpdates();
 	}
 	
 	public function getMessageInfo($json) {
