@@ -11,7 +11,9 @@ $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Facebook implements Platform {
 	
-	static $ACTION_TYPING = 'typing_on';
+	public function getTypingAction() {
+		return 'typing_on';
+	}
 	
 	public function sendMessage($chat_id, $text, $reply_markup) {
 		sendMessage($chat_id, $text);

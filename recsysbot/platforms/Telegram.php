@@ -5,7 +5,9 @@ require_once "recsysbot/platforms/Platform.php";
 
 class Telegram implements Platform {
 	
-	static $ACTION_TYPING = 'typing';
+	public function getTypingAction() {
+		return 'typing';
+	}
 	
 	var $telegram;
 	

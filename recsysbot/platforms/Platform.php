@@ -2,7 +2,7 @@
 
 interface Platform {
 	
-	static $ACTION_TYPING;
+	public function getTypingAction();
 	
 	/**
 	 * Send a message.
