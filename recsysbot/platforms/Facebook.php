@@ -9,6 +9,7 @@ require "recsysbot/facebook/setPersistentMenu.php";
 require "recsysbot/facebook/getUserInfo.php";
 require "recsysbot/facebook/sendChatAction.php";
 require "recsysbot/facebook/sendMarkupMessage.php";
+require "recsysbot/facebook/sendPhoto.php";
 $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 
@@ -27,7 +28,10 @@ class Facebook implements Platform {
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
-		
+		sendPhoto($chat_id, $photo, $reply_markup);
+		if ($caption != null) {
+			self::sendMessage($chat_id, $caption, $reply_markup);
+		}
 	}
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
