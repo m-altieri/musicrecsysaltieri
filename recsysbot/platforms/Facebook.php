@@ -6,6 +6,8 @@ require "recsysbot/facebook/setBotProfile.php";
 require "recsysbot/facebook/setGetStarted.php";
 require "recsysbot/facebook/setGreeting.php";
 require "recsysbot/facebook/setPersistentMenu.php";
+require "recsysbot/facebook/getUserInfo.php";
+require "recsysbot/facebook/sendChatAction.php";
 $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 
