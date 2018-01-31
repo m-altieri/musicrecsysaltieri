@@ -74,10 +74,13 @@ class Facebook implements Platform {
 				// Contiene il payload per i pulsanti nel caso vengano utilizzati
 				'postbackPayload' => isset ($message['postback']['payload']) ? $message['postback']['payload'] : ""
 		);
-		file_put_contents("php://stderr", $info['postbackPayload'] . PHP_EOL);
+		
 		if  ($info['postbackPayload'] != null) {
 			$info['text'] = $info['postbackPayload'];
 		}
+		
+		// chatId troppo lungo, prendo solo le ultime 9 cifre
+		$info['chatId'] = $info['chatId'] % 100000000;
 		
 		return $info;
 	}
