@@ -1,7 +1,7 @@
 <?php
 
 require_once '/app/recsysbot/facebook/utils.php';
-require '/app/recsysbot/facebook/extractMarkupArray.php';
+require_once '/app/recsysbot/facebook/extractMarkupArray.php';
 
 function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	

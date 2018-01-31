@@ -1,6 +1,6 @@
 <?php
 
-require '/app/recsysbot/facebook/extractMarkupArray.php';
+require_once '/app/recsysbot/facebook/extractMarkupArray.php';
 
 function sendPhoto($chat_id, $photo, $reply_markup) {
 	
