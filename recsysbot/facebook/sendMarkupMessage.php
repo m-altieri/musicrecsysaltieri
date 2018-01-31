@@ -7,18 +7,18 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	$url = sendMessageURI();
 	
 	$replyMarkupArray = array();
-	foreach ($replyMarkup as $row) {
-		foreach ($row as $item) {
-			$replyMarkupArray[] = $item;
+	for ($i = 0; $i < count($replyMarkup); $i++) {
+		for ($j = 0; $j < count($replyMarkup[$i]); $j++) {
+			$replyMarkupArray[] = $replyMarkup[$i][$j];
 		}
 	}
 	
 	$quick_replies = array();
-	foreach ($replyMarkupArray as $item) {
+	for ($i = 0; $i < count($replyMarkupArray); $i++) {
 		$quick_replies[] = [
 			"content_type" => "text",
-			"title" => $item,
-			"payload" => $item
+			"title" => $replyMarkupArray[$i],
+			"payload" => $replyMarkupArray[$i]
 		];
 	}
 	
