@@ -5,8 +5,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
 	// su facebook il chatId è troppo lungo per stare in un int, prendo solo le ultime 9 cifre
-	if ($chatId > PHP_INT_MAX) {
-		$chatId = $chatId % 100000000;
+	if (strlen($chatId) > 9) {
+		$chatId = substr($chatId, strlen($chatId) - 9);
 	}
 	
 	$platform->sendChatAction($chatId, $platform->getTypingAction());
