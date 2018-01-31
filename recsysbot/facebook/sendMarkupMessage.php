@@ -13,9 +13,9 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 		}
 	}
 	
-	$quick_replies = [];
+	$quick_replies = array();
 	foreach ($replyMarkupArray as $item) {
-		$quick_replies[0][] = [
+		$quick_replies[] = [
 			"content_type" => "text",
 			"title" => $item,
 			"payload" => $item
