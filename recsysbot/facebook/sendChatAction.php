@@ -1,10 +1,10 @@
 <?php
 
+require_once '/app/recsysbot/facebook/utils.php';
+
 function sendChatAction($chat_id, $action) {
-	
-	$utils = require '/app/recsysbot/facebook/utils.php';
-	
-	$url = $utils->sendMessageURI();
+		
+	$url = sendMessageURI();
 	
 	$json = [
 		'messaging_type' => 'RESPONSE',

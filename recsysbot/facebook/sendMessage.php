@@ -1,9 +1,10 @@
 <?php
+
+require_once '/app/recsysbot/facebook/utils.php';
+
 function sendMessage($user, $text) {
-		
-	$utils = require '/app/recsysbot/facebook/utils.php';
-	
-	$url = $utils->sendMessageURI();
+			
+	$url = sendMessageURI();
 	
 	$req = [
 		'messaging_type' => 'RESPONSE',
