@@ -1,6 +1,6 @@
 <?php
 
-public function getUserInfo($chat_id) {
+function getUserInfo($chat_id) {
 	
 	$utils = require '/app/recsysbot/facebook/utils.php';
 	
