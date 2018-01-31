@@ -79,9 +79,6 @@ class Facebook implements Platform {
 			$info['text'] = $info['postbackPayload'];
 		}
 		
-		// chatId troppo lungo, prendo solo le ultime 9 cifre
-		$info['chatId'] = $info['chatId'] % 100000000;
-		
 		return $info;
 	}
 	

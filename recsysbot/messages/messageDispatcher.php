@@ -4,7 +4,12 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
-	$platform->sendChatAction($chat_id, $platform->getTypingAction());
+	// su facebook il chatId è troppo lungo per stare in un int, prendo solo le ultime 9 cifre
+	if ($chatId > PHP_INT_MAX) {
+		$chatId = $chatId % 100000000;
+	}
+	
+	$platform->sendChatAction($chatId, $platform->getTypingAction());
 	
 	file_put_contents("php://stderr", "[messageDispatcher] Sending message to server: " . 
 			"\nChat ID: " . $chatId . "\nText: " . $text . PHP_EOL);
