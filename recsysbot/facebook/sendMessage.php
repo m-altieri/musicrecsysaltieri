@@ -17,5 +17,5 @@ function sendMessage($user, $text) {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$result = curl_exec($ch);
 	curl_close($ch);
-	file_put_contents("php://stderr", "\nResult: " . $result . PHP_EOL);
+	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
 }

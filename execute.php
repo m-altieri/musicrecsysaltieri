@@ -49,7 +49,6 @@
 	}
 	
 	$messageInfo['text'] = trim ($messageInfo['text']);
-// 	$messageInfo['text'] = strtoLower ($messageInfo['text']);
 
 	// Metterlo nel config
 	$botName = "movierecsysbot";
