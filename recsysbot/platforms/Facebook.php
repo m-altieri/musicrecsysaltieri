@@ -11,6 +11,8 @@ $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 class Facebook implements Platform {
 	
+	public $ACTION_TYPING = 'typing_on';
+	
 	public function sendMessage($chat_id, $text, $reply_markup) {
 		sendMessage($chat_id, $text);
 		/*
@@ -27,7 +29,7 @@ class Facebook implements Platform {
 	}
 	
 	public function sendChatAction($chat_id, $action) {
-		
+		sendChatAction($chat_id, $action);
 	}
 	
 	private function replyKeyboardMarkup($keyboard) {
@@ -51,13 +53,13 @@ class Facebook implements Platform {
 	//TODO Da testare
 	public function getMessageInfo($json) {
 		
-		$message = isset ($json['entry'][0]['messaging'][0]) ? $json['entry'][0]['messaging'][0] : "";
+		$message = $json['entry'][0]['messaging'][0];
+		$userInfo = getUserInfo($message['sender']['id']);
 
 		$info = array(
 				'message' => $message,
 				'messageId' => isset ($message['message']['mid']) ? $message['message']['mid'] : "",
 				'chatId' => isset ($message['sender']['id']) ? $message['sender']['id'] : "",
-				'userInfo' => isset ($message['sender']['id']) ? json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $message['sender']['id'] . "?access_token=" . $config['token']), true) : "",
 				'firstname' => isset ($userInfo) ? $userInfo['first_name'] : "",
 				'lastname' => isset ($userInfo) ? $userInfo['last_name'] : "",
 				'username' => "", //Non viene restituito dalla chiamata
@@ -74,6 +76,7 @@ class Facebook implements Platform {
 		
 		return $info;
 	}
+	
 }
 
 ?>

@@ -2,6 +2,8 @@
 
 interface Platform {
 	
+	public $ACTION_TYPING;
+	
 	/**
 	 * Send a message.
 	 * @param $chat_id The chat where to send the message to.
@@ -46,9 +48,6 @@ interface Platform {
 	 */
 	public function sendChatAction($chat_id, $action);
 	
-// 	public function commandsHandler() //credo già fatto con l'id profile
-// 	public function addCommand() //già fatto con l'id profile
-
 	public function getWebhookUpdates();
 	
 	/**
