@@ -6,6 +6,8 @@ function extractMarkupArray($reply_markup) {
 		
 	$keyboard = $replyMarkup['keyboard'];
 	
+	file_put_contents("php://stderr", "debug: keyboard: " . print_r($keyboard, true) . PHP_EOL);
+	
 	$options = array();
 	for ($i = 0; $i < count($keyboard); $i++) {
 		for ($j = 0; $j < count($keyboard[$i]); $j++) {
@@ -22,6 +24,8 @@ function extractMarkupArray($reply_markup) {
 		];
 	}
 	$quick_replies = array_slice($quick_replies, 0, $MAX_OPTIONS);
+	
+	file_put_contents("php://stderr", "debug: quick_replies: " . print_r($quick_replies, true) . PHP_EOL);
 	
 	return $quick_replies;
 }
