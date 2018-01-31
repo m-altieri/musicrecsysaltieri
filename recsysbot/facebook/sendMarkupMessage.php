@@ -30,6 +30,7 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 					'quick_replies' => $quick_replies
 			]
 	];
+	file_put_contents("php://stderr", "\nSto inviando questo markup: " . print_r($req, true) . PHP_EOL);
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($req));
