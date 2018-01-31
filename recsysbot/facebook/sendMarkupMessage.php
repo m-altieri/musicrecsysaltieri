@@ -6,19 +6,21 @@ function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	
 	$url = sendMessageURI();
 	
-	$replyMarkupArray = array();
-	for ($i = 0; $i < count($replyMarkup); $i++) {
-		for ($j = 0; $j < count($replyMarkup[$i]); $j++) {
-			$replyMarkupArray[] = $replyMarkup[$i][$j];
+	$keyboard = $replyMarkup['keyboard'];
+	
+	$options = array();
+	for ($i = 0; $i < count($keyboard); $i++) {
+		for ($j = 0; $j < count($keyboard[$i]); $j++) {
+			$options[] = $keyboard[$i][$j];
 		}
 	}
 	
 	$quick_replies = array();
-	for ($i = 0; $i < count($replyMarkupArray); $i++) {
+	for ($i = 0; $i < count($options); $i++) {
 		$quick_replies[] = [
 			"content_type" => "text",
-			"title" => $replyMarkupArray[$i],
-			"payload" => $replyMarkupArray[$i]
+			"title" => $options[$i],
+			"payload" => $options[$i]
 		];
 	}
 	
