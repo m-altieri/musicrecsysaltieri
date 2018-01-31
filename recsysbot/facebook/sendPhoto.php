@@ -1,6 +1,6 @@
 <?php
 
-require_once '/app/recsysbot/facebook/extractMarkupArray.php';
+require_once '/app/recsysbot/facebook/createQuickReplies.php';
 
 function sendPhoto($chat_id, $photo, $reply_markup) {
 	
@@ -18,7 +18,7 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 	$quickReplies = array();
 	
 	if ($replyMarkup != null) {
-		$quick_replies = extractMarkupArray($replyMarkup);
+		$quick_replies = createQuickReplies($replyMarkup);
 		$message['quick_replies'] = $quick_replies;
 	}
 	

@@ -1,10 +1,10 @@
 <?php
 
-function extractMarkupArray($reply_markup) {
+function createQuickReplies($reply_markup) {
 	
 	$MAX_OPTIONS = 11;
 		
-	$keyboard = $replyMarkup['keyboard'];
+	$keyboard = $reply_markup['keyboard'];
 	
 	file_put_contents("php://stderr", "debug: keyboard: " . print_r($keyboard, true) . PHP_EOL);
 	

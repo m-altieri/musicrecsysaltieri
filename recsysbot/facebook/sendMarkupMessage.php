@@ -1,13 +1,13 @@
 <?php
 
 require_once '/app/recsysbot/facebook/utils.php';
-require_once '/app/recsysbot/facebook/extractMarkupArray.php';
+require_once '/app/recsysbot/facebook/createQuickReplies.php';
 
 function sendMarkupMessage($chat_id, $text, $replyMarkup) {
 	
 	$url = sendMessageURI();
 	
-	$quick_replies = extractMarkupArray($replyMarkup);
+	$quick_replies = createQuickReplies($replyMarkup);
 	
 	$req = [
 			'messaging_type' => 'RESPONSE',
