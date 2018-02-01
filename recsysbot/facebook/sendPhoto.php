@@ -40,7 +40,7 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
 	
 	// Dovrebbe essere catturata da messageDispatcher, che manderà la foto di default
-	if ($result['error'] != null) {
+	if (json_decode($result)['error'] != null) {
 		throw new Exception();
 	}
 }
