@@ -49,9 +49,6 @@
 	}
 	
 	$messageInfo['text'] = trim ($messageInfo['text']);
-	if (strlen($messageInfo['date']) > 10) { // Se l'UNIX time è in millisecondi, lo converto in secondi
-		$messageInfo['date'] = substr($messageInfo['date'], 0, $messageInfo['date'] - 3);
-	}
 
 	// Metterlo nel config
 	$botName = "movierecsysbot";

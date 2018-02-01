@@ -85,6 +85,8 @@ class Facebook implements Platform {
 			$info['text'] = $info['postbackPayload'];
 		}
 		
+		$info['date'] = intdiv($info['date'], 1000); // Converto da millisecondi a secondi
+		
 		return $info;
 	}
 	
