@@ -33,6 +33,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			try {
 				$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
 			} catch (Exception $e) {
+				file_put_contents("php://stderr", "Foto non valida. Invio foto di default.");
 				$platform->sendPhoto($chatId, $config['default_photo'], $message['text'], $markup);
 			}
 		} else if (isset ($message['link'])) {

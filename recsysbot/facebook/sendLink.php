@@ -45,32 +45,4 @@ function sendLink($chat_id, $text, $link, $reply_markup) {
 	$result = curl_exec($ch);
 	curl_close($ch);
 	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
-	
-	// TODO
-	/*
-	 * Usare il "Modello con pulsante"
-	 * es.
-	 * {
-	"messaging_type": "RESPONSE",
-	"recipient": {
-		"id": "1491368210953105"
-	},
-	"message": {
-		"attachment": {
-			"type": "template",
-			"payload": {
-				"template_type": "button",
-				"text": "Trailer",
-				"buttons": [
-					{
-						"type": "web_url",
-						"url": "https://youtu.be/5DVw_AQgOuE",
-						"title": "https://youtu.be/5DVw_AQgOuE"
-					}
-				]
-			}
-		}
-	}
-}
-	 */
 }
