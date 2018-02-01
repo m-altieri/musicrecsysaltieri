@@ -2,7 +2,7 @@
 
 require_once '/app/recsysbot/facebook/createQuickReplies.php';
 
-function sendLink($chat_id, $text, $url, $reply_markup) {
+function sendLink($chat_id, $text, $link, $reply_markup) {
 	
 	$url = sendMessageURI();
 	
@@ -14,7 +14,7 @@ function sendLink($chat_id, $text, $url, $reply_markup) {
 				'text' => $text,
 				'buttons' => [
 					'type' => 'web_url',
-					'url' => $url,
+					'url' => $link,
 					'title' => $text
 				]
 			]
