@@ -39,6 +39,8 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 	curl_close($ch);
 	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
 	
+	// Se la risposta contiene 'error' significa che la foto non è valida, quindi l'eccezione viene gestita da
+	// messageDispatcher, che richiama sendPhoto mandando l'immagine di default
 	if (strpos($result, 'error')) {
 		throw new Exception();
 	}
