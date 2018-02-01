@@ -37,12 +37,5 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$result = curl_exec($ch);
 	curl_close($ch);
-	
-	$result = json_decode($result);
 	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
-	
-	// Dovrebbe essere catturata da messageDispatcher, che manderà la foto di default
-	if ($result['error'] != null) {
-		throw new Exception();
-	}
 }
