@@ -38,4 +38,8 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 	$result = curl_exec($ch);
 	curl_close($ch);
 	file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
+	
+	if (strpos($result, 'error')) {
+		throw new Exception();
+	}
 }
