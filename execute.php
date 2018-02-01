@@ -25,16 +25,6 @@
 		require_once $file;
 	}
 	
-	ignore_user_abort(true);
-	set_time_limit(0);
-	echo 'Webhook';
-	ob_start();
-	header('Connection: close');
-	header('Content-Length: ' . ob_get_length());
-	ob_end_flush();
-	ob_flush();
-	flush();
-	
 	/**
 	 * Change platform here.
 	 * To create a new platform, create its own php class in the platforms folder.
