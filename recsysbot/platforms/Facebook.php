@@ -6,28 +6,41 @@ require "recsysbot/facebook/setBotProfile.php";
 require "recsysbot/facebook/setGetStarted.php";
 require "recsysbot/facebook/setGreeting.php";
 require "recsysbot/facebook/setPersistentMenu.php";
+require "recsysbot/facebook/getUserInfo.php";
+require "recsysbot/facebook/sendChatAction.php";
+require "recsysbot/facebook/sendMarkupMessage.php";
+require "recsysbot/facebook/sendPhoto.php";
+require "recsysbot/facebook/sendLink.php";
 $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 
 class Facebook implements Platform {
 	
+	public function getTypingAction() {
+		return 'typing_on';
+	}
+	
 	public function sendMessage($chat_id, $text, $reply_markup) {
-		sendMessage($chat_id, $text);
-		/*
-		 * Aggiungere l'invio dei quick reply
-		 */
+		if ($reply_markup == null) {
+			sendMessage($chat_id, $text);
+		} else {
+			sendMarkupMessage($chat_id, $text, $reply_markup);
+		}
 	}
 	
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup) {
-		
+		sendPhoto($chat_id, $photo, $reply_markup);
+		if ($caption != null) {
+			self::sendMessage($chat_id, $caption, $reply_markup);
+		}
 	}
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
-		
+		sendLink($chat_id, $text, $url, $reply_markup);
 	}
 	
-	public function sendChatAction($array) {
-		
+	public function sendChatAction($chat_id, $action) {
+		sendChatAction($chat_id, $action);
 	}
 	
 	private function replyKeyboardMarkup($keyboard) {
@@ -48,16 +61,15 @@ class Facebook implements Platform {
 		return file_get_contents("php://input");
 	}
 	
-	//TODO Da testare
 	public function getMessageInfo($json) {
 		
-		$message = isset ($json['entry'][0]['messaging'][0]) ? $json['entry'][0]['messaging'][0] : "";
+		$message = $json['entry'][0]['messaging'][0];
+		$userInfo = getUserInfo($message['sender']['id']);
 
 		$info = array(
 				'message' => $message,
 				'messageId' => isset ($message['message']['mid']) ? $message['message']['mid'] : "",
 				'chatId' => isset ($message['sender']['id']) ? $message['sender']['id'] : "",
-				'userInfo' => isset ($message['sender']['id']) ? json_decode(file_get_contents("https://graph.facebook.com/v2.6/" . $message['sender']['id'] . "?access_token=" . $config['token']), true) : "",
 				'firstname' => isset ($userInfo) ? $userInfo['first_name'] : "",
 				'lastname' => isset ($userInfo) ? $userInfo['last_name'] : "",
 				'username' => "", //Non viene restituito dalla chiamata
@@ -68,12 +80,14 @@ class Facebook implements Platform {
 				// Contiene il payload per i pulsanti nel caso vengano utilizzati
 				'postbackPayload' => isset ($message['postback']['payload']) ? $message['postback']['payload'] : ""
 		);
-		if  (isset ($info['postbackPayload'])) {
+		
+		if  ($info['postbackPayload'] != null) {
 			$info['text'] = $info['postbackPayload'];
 		}
 		
 		return $info;
 	}
+	
 }
 
 ?>

@@ -2,6 +2,8 @@
 
 interface Platform {
 	
+	public function getTypingAction();
+	
 	/**
 	 * Send a message.
 	 * @param $chat_id The chat where to send the message to.
@@ -28,7 +30,7 @@ interface Platform {
 	public function sendPhoto($chat_id, $photo, $caption, $reply_markup);
 	
 	/**
-	 * Send a platform-dependant representation of a button referencing and URL.
+	 * Send a platform-dependant representation of a button referencing an URL.
 	 * @param $chat_id The chat where to send the message to.
 	 * @param $text The text of the clickable object.
 	 * @param $url The URL where the link points to.
@@ -44,11 +46,8 @@ interface Platform {
 	 *
 	 * @param unknown $array Array containing the chat_id and the action.
 	 */
-	public function sendChatAction($array);
+	public function sendChatAction($chat_id, $action);
 	
-// 	public function commandsHandler() //credo già fatto con l'id profile
-// 	public function addCommand() //già fatto con l'id profile
-
 	public function getWebhookUpdates();
 	
 	/**

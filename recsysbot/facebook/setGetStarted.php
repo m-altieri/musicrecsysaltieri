@@ -3,7 +3,7 @@
 function setGetStarted($payload) {
 	
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-	$url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" . $config['token'];
+	$url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" . $config['facebook_token'];
 	
 	$req = [
 		"get_started" => [ "payload" => $payload ]	

@@ -30,7 +30,7 @@
 	 * To create a new platform, create its own php class in the platforms folder.
 	 * It has to implement the Platform interface.
 	 */
-	$platform = new Telegram();
+	$platform = new Facebook();
 	
 	$content = $platform->getWebhookUpdates();
 	$update = json_decode($content, true);
@@ -49,7 +49,6 @@
 	}
 	
 	$messageInfo['text'] = trim ($messageInfo['text']);
-// 	$messageInfo['text'] = strtoLower ($messageInfo['text']);
 
 	// Metterlo nel config
 	$botName = "movierecsysbot";

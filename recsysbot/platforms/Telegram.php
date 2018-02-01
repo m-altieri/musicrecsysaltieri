@@ -5,11 +5,15 @@ require_once "recsysbot/platforms/Platform.php";
 
 class Telegram implements Platform {
 	
+	public function getTypingAction() {
+		return 'typing';
+	}
+	
 	var $telegram;
 	
 	public function __construct() {
 		$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-		$this->$telegram = new Api($config['token']);
+		$this->$telegram = new Api($config['telegram_token']);
 	}
 	
 	public function sendMessage($chat_id, $text, $reply_markup) {
@@ -69,27 +73,18 @@ class Telegram implements Platform {
 	}
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
-		
-// 		$inline_keyboard[] = [
-// 				['text' => $text, 'url' => $url]
-// 		];
-		
-// 		$inlineKeyboardMarkup = $this->$telegram->replyKeyboardMarkup([
-// 				'inline_keyboard' => $inline_keyboard
-// 		]);
-		
-// 		$this->$telegram->sendMessage([
-// 				'chat_id' => $chatId,
-// 				'text' => $text,
-// 				'reply_markup' => $inlineKeyboardMarkup,
-// 				'parse_mode' => 'Markdown'
-// 		]);
 
 		$this->sendMessage($chat_id, $url, $reply_markup);
 	}
 
-	public function sendChatAction($array) {
-		$this->$telegram->sendChatAction($array);
+	public function sendChatAction($chat_id, $action) {
+		
+		$chatAction = [
+			'chat_id' => $chat_id,
+			'action' => $action
+		];
+		file_put_contents("php://stderr", "Sending chat action: " . print_r($chatAction, true) . PHP_EOL);
+		$this->$telegram->sendChatAction($chatAction);
 	}
 	
 	private function replyKeyboardMarkup($keyboard) {
