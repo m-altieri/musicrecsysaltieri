@@ -27,6 +27,7 @@
 	
 	ignore_user_abort(true);
 	set_time_limit(0);
+	echo 'Webhook';
 	ob_start();
 	header('Connection: close');
 	header('Content-Length: ' . ob_get_length());
