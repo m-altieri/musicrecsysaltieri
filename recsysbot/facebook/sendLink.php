@@ -23,10 +23,10 @@ function sendLink($chat_id, $text, $link, $reply_markup) {
 		]	
 	];
 	
-	$quickReplies = array();
+	$quick_replies = array();
 	
 	if ($replyMarkup != null) {
-		$quick_replies = createQuickReplies($replyMarkup);
+		$quick_replies = createQuickReplies($reply_markup);
 		$message['quick_replies'] = $quick_replies;
 	}
 	

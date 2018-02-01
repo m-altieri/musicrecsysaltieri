@@ -17,9 +17,9 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
 	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
 	
-	// JSON Object containing the messages to send to the user.
+	// Array containing the messages to send to the user.
 	$messages = $data['messages'];
-	// JSON Object containing the keyboard to provide to the user.
+	// Array containing the keyboard to provide to the user.
 	$markup = $data['reply_markup'];
 	
 	// Invio i messaggi e la eventuale keyboard all'utente

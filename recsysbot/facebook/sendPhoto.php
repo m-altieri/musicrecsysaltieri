@@ -15,10 +15,10 @@ function sendPhoto($chat_id, $photo, $reply_markup) {
 		]
 	];
 	
-	$quickReplies = array();
+	$quick_replies = array();
 	
-	if ($replyMarkup != null) {
-		$quick_replies = createQuickReplies($replyMarkup);
+	if ($reply_markup != null) {
+		$quick_replies = createQuickReplies($reply_markup);
 		$message['quick_replies'] = $quick_replies;
 	}
 	
