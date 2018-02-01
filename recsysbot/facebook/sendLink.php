@@ -16,7 +16,7 @@ function sendLink($chat_id, $text, $link, $reply_markup) {
 					[
 						'type' => 'web_url',
 						'url' => $link,
-						'title' => $text
+						'title' => 'Watch Trailer'
 					]
 				]
 			]
@@ -37,7 +37,6 @@ function sendLink($chat_id, $text, $link, $reply_markup) {
 	];
 	
 	file_put_contents("php://stderr", "\nSto inviando questo link: " . print_r($req, true) . PHP_EOL);
-	file_put_contents("php://stderr", "JSON inviato: " . print_r(json_encode($req), true) . PHP_EOL); //DEBUG
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($req));
