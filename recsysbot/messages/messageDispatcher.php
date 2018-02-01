@@ -27,7 +27,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 
 		file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
 				"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo']. 
-				"\nlink: " . $message['link'] . "\nkeyboard: " . $markup . PHP_EOL);
+				"\nlink: " . $message['link'] . "\nkeyboard: " . print_r($markup, true) . PHP_EOL);
 		
 		if (isset ($message['photo'])) {
 			try {
