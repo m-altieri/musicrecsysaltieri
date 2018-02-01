@@ -10,6 +10,7 @@ require "recsysbot/facebook/getUserInfo.php";
 require "recsysbot/facebook/sendChatAction.php";
 require "recsysbot/facebook/sendMarkupMessage.php";
 require "recsysbot/facebook/sendPhoto.php";
+require "recsysbot/facebook/sendLink.php";
 $config = require_once '/app/recsysbot/config/movierecsysbot-config.php';
 
 
@@ -35,7 +36,7 @@ class Facebook implements Platform {
 	}
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
-		
+		sendLink($chat_id, $text, $url, $reply_markup);
 	}
 	
 	public function sendChatAction($chat_id, $action) {
@@ -60,7 +61,6 @@ class Facebook implements Platform {
 		return file_get_contents("php://input");
 	}
 	
-	//TODO Da testare
 	public function getMessageInfo($json) {
 		
 		$message = $json['entry'][0]['messaging'][0];
