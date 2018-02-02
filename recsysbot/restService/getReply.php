@@ -16,7 +16,7 @@ use GuzzleHttp\Client;
  * 			'text' - Testo di risposta del bot,
  * 			'keyboard' - Possibili opzioni di risposta dell'utente.
  */
-function sendMessageToServer($chatId, $messageId, $timeStamp, $text, $firstname, $botName) {
+function getReply($chatId, $messageId, $timeStamp, $text, $firstname, $botName) {
 	
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	

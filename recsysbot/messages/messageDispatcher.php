@@ -12,7 +12,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// Nome provvisorio
 	// Prende le informazioni sul messaggio inviato dall'utente e le manda al server
 	// $data è già un array; sendMessageToServer si occupa di fare il json_decode
-	$data = sendMessageToServer($chatId, $messageId, $date, $text, $firstname, $botName);
+	$data = getReply($chatId, $messageId, $date, $text, $firstname, $botName);
 	
 	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
 	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
@@ -42,6 +42,4 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			$platform->sendMessage($chatId, $message['text'], $markup);
 		}
 	}
-		
-	return $data;
 }
