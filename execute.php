@@ -1,5 +1,7 @@
 <?php
 	
+echo $_REQUEST['hub_challenge'];
+
 	require 'vendor/autoload.php';
 	$config = require '/app/recsysbot/config/movierecsysbot-config.php';
 	
