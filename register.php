@@ -18,5 +18,4 @@
 // $result = curl_exec ( $handle );
 // print_r ( $result );
 
-$update = json_decode(file_get_contents("php://input"), true);
-return $update['hub_challenge'];
+echo $_REQUEST['hub_challenge'];
