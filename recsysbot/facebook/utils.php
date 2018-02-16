@@ -5,5 +5,5 @@ function sendMessageURI() {
 }
 	
 function token() {
-	return 'EAAE0Lnad6ywBAMLSxgKrmpli3B3LbptyyC9p5RsE67ZAxqp1IEPaZALNHDrvhZAcNqhy9lnyjhu246w4ujfyg0LTmW8lEpdqwHGLprEXpAitcSppzdyztaWMtcMT3nZCowKEuHX4KtvCFiAZAZA8ayfe9ZAYz6oIFIFXYsNobXjwwZDZD';
+	return 'EAACkzauyGUUBAHEXDtYQebqbvQYgfp9b4VcCnvxQJyXUbw2fDqup7SS4BhT4yZCkNyJptyQAcxBq2UbnTtCCSozptTgnvUYH0Qa8Mmvq9Ryupdgt55eg2UWZAHKu9j9twI3JqurQyZAtuhrqnIknW9ZBRGc3ZCadQ1bkbZCGn2zwZDZD';
 }
