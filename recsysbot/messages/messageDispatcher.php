@@ -42,4 +42,11 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			$platform->sendMessage($chatId, $message['text'], $markup);
 		}
 	}
+	
+	$auxAPI = $data['auxAPI'];
+	if ($auxAPI) {
+		$platform->sendMessage($chatId, 'auxAPI ricevuta');
+	} else {
+		$platform->sendMessage($chatId, 'auxAPI NON ricevuta');
+	}
 }
