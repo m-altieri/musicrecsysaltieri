@@ -12,8 +12,9 @@ use GuzzleHttp\Client;
  * @param firstname Nome dell'utente.
  * @param botName Nome del bot.
  * @return Risposta del server già json-decodificata (array); attualmente contiene
- * 			'text' - Testo di risposta del bot,
- * 			'keyboard' - Possibili opzioni di risposta dell'utente.
+ * 			'messages' - Testo di risposta del bot,
+ * 			'reply_markup' - (Opzionale) Possibili opzioni di risposta dell'utente.
+ * 			'auxAPI' - (Opzionale) Indica l'URL che è necessario chiamare per completare la risposta.
  */
 function getReply($chatId, $messageId, $timeStamp, $text, $firstname, $botName) {
 	
