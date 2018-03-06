@@ -46,8 +46,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	$auxAPI = $data['auxAPI'];
 	if ($auxAPI) {
-		$platform->sendMessage($chatId, 'auxAPI ricevuta');
+		$platform->sendMessage($chatId, 'auxAPI ricevuta', array());
 	} else {
-		$platform->sendMessage($chatId, 'auxAPI NON ricevuta');
+		$platform->sendMessage($chatId, 'auxAPI NON ricevuta', [1 => 'Test']);
 	}
 }
