@@ -1,7 +1,6 @@
 <?php
 use GuzzleHttp\Client;
 
-// Nome provvisorio
 /**
  * Manda il messaggio dell'utente al server, in modo stateless.
  * La richiesta è in formato HTTP GET e contiene anche le seguenti informazioni

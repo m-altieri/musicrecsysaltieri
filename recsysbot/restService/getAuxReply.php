@@ -1,4 +1,6 @@
 <?php
+use GuzzleHttp\Client;
+
 function getAuxReply($chatId, $messageId, $url, $date, $firstname, $botName) {
 	
 	$client = new Client ( [
