@@ -45,8 +45,19 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	
 	$auxAPI = $data['auxAPI'];
+	$auxAPIMarkup = [
+			[
+					"Test1"
+			],
+			[
+					"Test2"
+			],
+			[
+					$auxAPI
+			]
+	];
 	if ($auxAPI) {
-		$platform->sendMessage($chatId, 'auxAPI ricevuta', array(array($auxAPI)));
+		$platform->sendMessage($chatId, 'auxAPI ricevuta', $auxAPIMarkup);
 	} else {
 		$platform->sendMessage($chatId, 'auxAPI NON ricevuta', null);
 	}
