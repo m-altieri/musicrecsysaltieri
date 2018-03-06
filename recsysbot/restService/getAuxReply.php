@@ -1,7 +1,7 @@
 <?php
 use GuzzleHttp\Client;
 
-function getAuxReply($chatId, $messageId, $url, $date, $firstname, $botName) {
+function getAuxReply($url) {
 	
 	$baseUrl = explode('?', $url)[0];
 	$stringGetRequest = '?' . explode('?', $url)[1];
