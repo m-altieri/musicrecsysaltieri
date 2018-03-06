@@ -43,21 +43,14 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		}
 	}
 	
-	
+	// Controllo per eventuale chiamata ausiliaria
 	$auxAPI = $data['auxAPI'];
-	$auxAPIMarkup = [
-			[
-					"Test1"
-			],
-			[
-					"Test2"
-			],
-			[
-					$auxAPI
-			]
-	];
 	if ($auxAPI) {
 		$platform->sendMessage($chatId, 'auxAPI ricevuta', $markup);
+		// Ottiene array già decodificato
+		$auxData = getAuxReply($chatId, $messageId, $auxAPI, $date, $firstname, $botName);
+		// Debug
+		file_put_contents("php://stderr", print_r($auxData, true) . PHP_EOL);
 	} else {
 		$platform->sendMessage($chatId, 'auxAPI NON ricevuta', null);
 	}
