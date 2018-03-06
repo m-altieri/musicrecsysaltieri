@@ -57,7 +57,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			]
 	];
 	if ($auxAPI) {
-		$platform->sendMessage($chatId, 'auxAPI ricevuta', $auxAPIMarkup);
+		$platform->sendMessage($chatId, 'auxAPI ricevuta', $markup);
 	} else {
 		$platform->sendMessage($chatId, 'auxAPI NON ricevuta', null);
 	}
