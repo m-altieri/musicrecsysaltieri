@@ -54,7 +54,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		// Debug
 		file_put_contents("php://stderr", "auxData: " . print_r($auxData, true) . PHP_EOL);
 		$messages = $auxData['messages'];
-		$markup = $auxData['markup'];
+		$markup = $auxData['reply_markup'];
 		
 		foreach ($messages as $message) {
 			
