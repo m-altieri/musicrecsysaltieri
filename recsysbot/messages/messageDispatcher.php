@@ -47,6 +47,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	$auxAPI = $data['auxAPI'];
 	if ($auxAPI) {
 		$platform->sendMessage($chatId, 'auxAPI ricevuta', null);
+		file_put_contents("php://stderr", "Invio richiesta aux a " . $auxAPI . PHP_EOL);
+		
 		// Ottiene array già decodificato
 		$auxData = getAuxReply($auxAPI);
 		// Debug
