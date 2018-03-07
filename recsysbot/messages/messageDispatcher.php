@@ -46,12 +46,27 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// Controllo per eventuale chiamata ausiliaria
 	$auxAPI = $data['auxAPI'];
 	if ($auxAPI) {
-		$platform->sendMessage($chatId, 'auxAPI ricevuta', $markup);
+		$platform->sendMessage($chatId, 'auxAPI ricevuta', null);
 		// Ottiene array già decodificato
 		$auxData = getAuxReply($auxAPI);
 		// Debug
 		file_put_contents("php://stderr", print_r($auxData, true) . PHP_EOL);
-	} else {
-		$platform->sendMessage($chatId, 'auxAPI NON ricevuta', null);
+		$messages = $auxData['messages'];
+		$markup = $auxData['markup'];
+		
+		foreach ($messages as $message) {
+			if (isset($message['photo'])) {
+				try {
+					$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+				} catch (Exception $e) {
+					file_put_contents("php://stderr", "auxAPI: foto non valida.");
+					$platform->sendPhoto($chatId, $config['default_photo'], $message['text'], $markup);
+				}
+			} else if (isset ($message['link'])) {
+				$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
+			} else {
+				$platform->sendMessage($chatId, $message['text'], $markup);
+			}
+		}
 	}
 }
