@@ -55,6 +55,11 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		$markup = $auxData['markup'];
 		
 		foreach ($messages as $message) {
+			
+			file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
+					"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'].
+					"\nlink: " . $message['link'] . "\nkeyboard: " . print_r($markup, true) . PHP_EOL);
+			
 			if (isset($message['photo'])) {
 				try {
 					$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
