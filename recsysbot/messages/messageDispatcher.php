@@ -50,7 +50,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 		// Ottiene array già decodificato
 		$auxData = getAuxReply($auxAPI);
 		// Debug
-		file_put_contents("php://stderr", print_r($auxData, true) . PHP_EOL);
+		file_put_contents("php://stderr", "auxData: " . print_r($auxData, true) . PHP_EOL);
 		$messages = $auxData['messages'];
 		$markup = $auxData['markup'];
 		
