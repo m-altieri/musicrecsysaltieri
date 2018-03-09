@@ -42,4 +42,37 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 			$platform->sendMessage($chatId, $message['text'], $markup);
 		}
 	}
+	
+	// Controllo per eventuale chiamata ausiliaria
+	$auxAPI = $data['auxAPI'];
+	if ($auxAPI) {
+		file_put_contents("php://stderr", "Invio richiesta aux a " . $auxAPI . PHP_EOL);
+		
+		// Ottiene array già decodificato
+		$auxData = getAuxReply($auxAPI);
+		// Debug
+		file_put_contents("php://stderr", "auxData: " . print_r($auxData, true) . PHP_EOL);
+		$messages = $auxData['messages'];
+		$markup = $auxData['reply_markup'];
+		
+		foreach ($messages as $message) {
+			
+			file_put_contents("php://stderr", "[messageDispatcher] Sending message to user:\n" .
+					"chat_id: " . $chatId . "\ntext: " . $message['text'] . "\nphoto: " . $message['photo'].
+					"\nlink: " . $message['link'] . "\nkeyboard: " . print_r($markup, true) . PHP_EOL);
+			
+			if (isset($message['photo'])) {
+				try {
+					$platform->sendPhoto($chatId, $message['photo'], $message['text'], $markup);
+				} catch (Exception $e) {
+					file_put_contents("php://stderr", "auxAPI: foto non valida.");
+					$platform->sendPhoto($chatId, $config['default_photo'], $message['text'], $markup);
+				}
+			} else if (isset ($message['link'])) {
+				$platform->sendLink($chatId, $message['text'], $message['link'], $markup);
+			} else {
+				$platform->sendMessage($chatId, $message['text'], $markup);
+			}
+		}
+	}
 }
