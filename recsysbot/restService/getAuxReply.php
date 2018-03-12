@@ -2,7 +2,7 @@
 use GuzzleHttp\Client;
 
 function getAuxReply($auxAPI) {
-	file_put_contents("php://stderr", print_r("auxAPI: \n" . $auxAPI, true) . PHP_EOL);
+	file_put_contents("php://stderr", "auxAPI: \n" . print_r($auxAPI, true) . PHP_EOL);
 	
 	$apiURL = $auxAPI['apiURL'];
 	

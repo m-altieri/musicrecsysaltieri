@@ -46,7 +46,7 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// Controllo per eventuale chiamata ausiliaria
 	$auxAPI = $data['auxAPI'];
 	if ($auxAPI) {		
-		file_put_contents("php://stderr", "Invio richiesta aux a " . $apiURL . PHP_EOL);
+		file_put_contents("php://stderr", "Invio richiesta aux a " . $auxAPI['apiURL'] . PHP_EOL);
 		
 		// Ottiene array già decodificato
 		$auxData = getAuxReply($auxAPI);
