@@ -24,6 +24,16 @@ function getAuxReply($auxAPI) {
 		
 		file_put_contents("php://stderr", '[auxAPI POST]' . $baseUrl . $stringGetRequest . PHP_EOL);
 		
+		$client = new Client ([
+				'base_uri' => $baseUrl
+		]);
+		
+		$response = $client->request('POST', $stringGetRequest, [
+				'json' => $auxAPI['parameters']
+		]);
+		
+		$bodyMsg = $response->getBody()->getContents();
+		$data = json_decode($bodyMsg, true);
 		// TODO
 	}
 	
