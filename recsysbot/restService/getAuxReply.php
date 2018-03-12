@@ -23,7 +23,8 @@ function getAuxReply($auxAPI) {
 	} else { // E' una richiesta POST
 		
 		file_put_contents("php://stderr", '[auxAPI POST] ' . $baseUrl . $stringGetRequest . PHP_EOL);
-		file_put_contents("php://stderr", print_r($auxAPI['parameters'], true) . PHP_EOL);
+		file_put_contents("php://stderr", print_r("auxAPI: \n" . $auxAPI, true) . PHP_EOL);
+		file_put_contents("php://stderr", print_r("auxAPI parameters: \n" . $auxAPI['parameters'], true) . PHP_EOL);
 		
 		$client = new Client ([
 				'base_uri' => $baseUrl
