@@ -1,20 +1,32 @@
 <?php
 use GuzzleHttp\Client;
 
-function getAuxReply($url) {
+function getAuxReply($auxAPI) {
 	
-	$baseUrl = explode('?', $url)[0];
-	$stringGetRequest = '?' . explode('?', $url)[1];
+	$apiURL = $auxAPI['apiURL'];
 	
-	$client = new Client ( [
-			'base_uri' => $baseUrl
-	] );
+	$baseUrl = explode('?', $apiURL)[0];
+	$stringGetRequest = '?' . explode('?', $apiURL)[1];
 	
-	file_put_contents ( "php://stderr", '[sendMessageToServer]' . $baseUrl . $stringGetRequest . PHP_EOL );
+	if ($auxAPI['parameters'] == null) { // E' una richiesta GET
+		
+		$client = new Client ([
+				'base_uri' => $baseUrl
+		]);
+		
+		file_put_contents("php://stderr", '[auxAPI GET]' . $baseUrl . $stringGetRequest . PHP_EOL);
+		
+		$response = $client->request('GET', $stringGetRequest);
+		$bodyMsg = $response->getBody()->getContents();
+		$data = json_decode($bodyMsg, true);
+		
+	} else { // E' una richiesta POST
+		
+		file_put_contents("php://stderr", '[auxAPI POST]' . $baseUrl . $stringGetRequest . PHP_EOL);
+		
+		// TODO
+	}
 	
-	$response = $client->request ( 'GET', $stringGetRequest );
-	$bodyMsg = $response->getBody ()->getContents ();
-	$data = json_decode ( $bodyMsg, true );
 	
 	return $data;
 }
