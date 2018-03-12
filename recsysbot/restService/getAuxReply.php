@@ -14,7 +14,7 @@ function getAuxReply($auxAPI) {
 				'base_uri' => $baseUrl
 		]);
 		
-		file_put_contents("php://stderr", '[auxAPI GET]' . $baseUrl . $stringGetRequest . PHP_EOL);
+		file_put_contents("php://stderr", '[auxAPI GET] ' . $baseUrl . $stringGetRequest . PHP_EOL);
 		
 		$response = $client->request('GET', $stringGetRequest);
 		$bodyMsg = $response->getBody()->getContents();
@@ -22,7 +22,8 @@ function getAuxReply($auxAPI) {
 		
 	} else { // E' una richiesta POST
 		
-		file_put_contents("php://stderr", '[auxAPI POST]' . $baseUrl . $stringGetRequest . PHP_EOL);
+		file_put_contents("php://stderr", '[auxAPI POST] ' . $baseUrl . $stringGetRequest . PHP_EOL);
+		file_put_contents("php://stderr", print_r($auxAPI['parameters'], true) . PHP_EOL);
 		
 		$client = new Client ([
 				'base_uri' => $baseUrl
