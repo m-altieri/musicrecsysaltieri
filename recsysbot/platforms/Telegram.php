@@ -14,7 +14,7 @@ class Telegram implements Platform {
 	
 	public function __construct() {
 		$this->$config = require '/app/recsysbot/config/movierecsysbot-config.php';
-		$this->$telegram = new Api($this->$config['telegram_token']);
+		$this->$telegram = new Api($this->config['telegram_token']);
 	}
 	
 	public function sendMessage($chat_id, $text, $reply_markup) {
@@ -75,7 +75,7 @@ class Telegram implements Platform {
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
 
-		$request_url = "https://api.telegram.org/bot" . $this->$config['telegram_token'] . "/sendMessage";
+		$request_url = "https://api.telegram.org/bot" . $this->config['telegram_token'] . "/sendMessage";
 		file_put_contents("php://stderr", "Text: " . $text . PHP_EOL);
 		$parameters = [
 				'chat_id' => $chat_id,
