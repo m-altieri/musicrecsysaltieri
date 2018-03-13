@@ -96,6 +96,8 @@ class Telegram implements Platform {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$result = curl_exec($ch);
 		curl_close($ch);
+		file_put_contents("php://stderr", "\nResult: " . print_r($result, true) . PHP_EOL);
+		
 	}
 
 	public function sendChatAction($chat_id, $action) {
