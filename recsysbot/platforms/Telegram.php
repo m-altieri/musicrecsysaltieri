@@ -78,11 +78,11 @@ class Telegram implements Platform {
 		file_put_contents("php://stderr", "Text: " . $text . PHP_EOL);
 		$parameters = [
 				'chat_id' => $chat_id,
-				'text' => 'Watch trailer',
+				'text' => $text,
 				'reply_markup' => [
 						'inline_keyboard' => array(
 								array(
-										['text' => 'Portami all\'URL', 'url' => 'http://youtube.com/watch?v=rpeoOwnx03I']
+										['text' => $text, 'url' => $url]
 								)
 						)
 				]
