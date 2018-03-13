@@ -74,7 +74,9 @@ class Telegram implements Platform {
 	
 	public function sendLink($chat_id, $text, $url, $reply_markup) {
 
-		$this->$telegram->sendMessage([
+		$url = "https://api.telegram.org/bot422658992:AAH1c7kkVvuAIIuVDbbek7Mo4Zd0pKSU8nM/sendMessage";
+		
+		$parameters = [
 				'chat_id' => $chat_id,
 				'text' => $text,
 				'reply_markup' => [
@@ -85,7 +87,15 @@ class Telegram implements Platform {
 								]
 						]
 				]
-		]);
+		];
+		$parameters = json_encode($parameters);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($parameters));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$result = curl_exec($ch);
+		curl_close($ch);
 	}
 
 	public function sendChatAction($chat_id, $action) {
