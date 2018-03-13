@@ -90,7 +90,7 @@ class Telegram implements Platform {
 		$parameters = json_encode($parameters);
 		$ch = curl_init($request_url);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($parameters));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$result = curl_exec($ch);
