@@ -82,8 +82,7 @@ class Telegram implements Platform {
 				'reply_markup' => [
 						'inline_keyboard' => [
 								[
-										'text' => $text,
-										'url' => $url
+										['text' => $text, 'url' => $url]
 								]
 						]
 				]
