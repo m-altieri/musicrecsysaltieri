@@ -14,8 +14,8 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	// $data è già un array; sendMessageToServer si occupa di fare il json_decode
 	$data = getReply($chatId, $messageId, $date, $text, $firstname, $botName);
 	
-	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: ");
-	file_put_contents("php://stderr", print_r($data, true) . PHP_EOL);
+	file_put_contents("php://stderr", "[messageDispatcher] Received message from server: " . 
+			"\n" . print_r($data, true) . PHP_EOL);
 	
 	// Array containing the messages to send to the user.
 	$messages = $data['messages'];
@@ -45,8 +45,9 @@ function messageDispatcher($platform, $chatId, $messageId, $date, $text, $firstn
 	
 	// Controllo per eventuale chiamata ausiliaria
 	$auxAPI = $data['auxAPI'];
-	if ($auxAPI) {
-		file_put_contents("php://stderr", "Invio richiesta aux a " . $auxAPI . PHP_EOL);
+
+	if ($auxAPI) {		
+		file_put_contents("php://stderr", "Invio richiesta aux a " . $auxAPI['apiURL'] . PHP_EOL);
 		
 		// Ottiene array già decodificato
 		$auxData = getAuxReply($auxAPI);
