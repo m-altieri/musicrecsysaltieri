@@ -1,7 +1,7 @@
 <?php
 
 // PARAMETRI DA MODIFICARE
-$WEBHOOK_URL = 'https://musicrecsystelegram.herokuapp.com/execute.php';
+$WEBHOOK_URL = 'https://musicrecsysaltieri.herokuapp.com/execute.php';
 $BOT_TOKEN = '503513204:AAFSJcwhmmzYYr6Xt3rxRusG8aPZpHmgsn4'; //Telegram
 
 // NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
